@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>СравниПлитку — плитка в готовых интерьерных сценах для салонов и поставщиков</title>
+<meta name="description" content="Продавец открывает готовую интерьерную сцену, применяет в ней коллекции и отдаёт клиенту изображение. Ничего не нужно моделировать и ждать. Работает в браузере, без установки.">
+<meta name="theme-color" content="#F2F3F0">
+
+<!-- TODO: подставить боевой домен перед публикацией -->
+<link rel="canonical" href="https://sravniplitku.ru/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="СравниПлитку">
+<meta property="og:title" content="СравниПлитку — плитка в готовых интерьерных сценах">
+<meta property="og:description" content="Клиент выбирает плитку за одну консультацию: готовые сцены, каталог коллекций и изображение для клиента на руки.">
+<meta property="og:url" content="https://sravniplitku.ru/">
+<!-- TODO: положить обложку 1200×630 в assets/img/og-cover.jpg -->
+<meta property="og:image" content="https://sravniplitku.ru/assets/img/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- TODO: заменить на локальные шрифты (font-display: swap) — быстрее
+     и не отдаёт IP посетителей стороннему сервису. См. README, раздел «Шрифты». -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<!-- Стили: токены → база → компоненты → секции → адаптив (порядок важен) -->
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/sections.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+
+<script type="module" src="assets/js/main.js"></script>
+</head>
+
+<body id="top" data-tile-layout="straight">
+
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+
+<!-- ============================================================
+     1. Шапка
+     ============================================================ -->
+<header class="header">
+  <div class="header__inner container">
+    <a class="header__logo" href="#top">СравниПлитку</a>
+
+    <nav class="header__nav" aria-label="Разделы страницы">
+      <a href="#how">Как работает</a>
+      <a href="#value">Возможности</a>
+      <a href="#suppliers">Поставщикам</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+
+    <div class="header__actions">
+      <!-- TODO: реальный телефон от клиента -->
+      <a class="header__phone" href="tel:+70000000000">+7 000 000-00-00</a>
+      <a class="btn btn--primary btn--xs" href="#demo" data-track="demo_click" data-track-place="header">Открыть демо</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="container">
+
+    <!-- ============================================================
+         2. Первый экран
+         ============================================================ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <span class="eyebrow hero__eyebrow">Для салонов плитки и поставщиков</span>
+        <h1 class="h1 hero__title" id="hero-title">Клиент выбирает плитку за одну консультацию</h1>
+        <p class="lead lead--hero hero__lead">Продавец открывает готовую интерьерную сцену, применяет в ней коллекции и отдаёт клиенту изображение. Ничего не нужно моделировать и ждать: сцены отрисованы заранее — вы выбираете из готовых.</p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--xl" href="#demo" data-track="demo_click" data-track-place="hero">Попробовать демо</a>
+          <a class="btn btn--secondary btn--xl" href="#lead" data-lead-source="hero-lead-magnet">Забрать «7 приёмов»</a>
+        </div>
+
+        <p class="mono-note hero__micro">работает в браузере · без установки · заявка — в тот же день</p>
+      </div>
+
+      <div>
+        <!-- Слот v2-hero-video · 16/10 · короткое видео, ~40 сек.
+             Замена: вместо .media__placeholder положить
+             <video class="hero-video" poster="assets/img/hero-poster.jpg" muted playsinline controls>
+               <source src="assets/video/hero.mp4" type="video/mp4">
+             </video> -->
+        <div class="media media--16x10" data-slot="v2-hero-video">
+          <div class="media__placeholder">
+            <span class="media__placeholder-label">Слот · v2-hero-video</span>
+            <span class="media__placeholder-text">Короткое видео первого экрана из присланных кусочков, ~40 секунд</span>
+          </div>
+          <div class="media__pill"><span class="media__pill-label">40 секунд</span></div>
+        </div>
+        <p class="mono-note hero__caption">Сцена → зона → плитка → готовое изображение</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. Полоса метрик
+         ============================================================ -->
+    <section class="slab metrics" aria-label="Ключевые цифры сервиса">
+      <div class="slab__cell metrics__cell">
+        <div class="metrics__value">5</div>
+        <div class="metrics__label">интерьерных сцен в каталоге</div>
+      </div>
+      <div class="slab__cell metrics__cell">
+        <div class="metrics__value">3–4</div>
+        <div class="metrics__label">зоны в одной сцене</div>
+      </div>
+      <div class="slab__cell metrics__cell">
+        <div class="metrics__value">минуты</div>
+        <div class="metrics__label">от открытия сцены до изображения</div>
+      </div>
+      <div class="slab__cell metrics__cell">
+        <div class="metrics__value">1 день</div>
+        <div class="metrics__label">от оплаты до коллекции в каталоге</div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============================================================
+       4. Большое видео
+       ============================================================ -->
+  <section class="band" aria-labelledby="video-title">
+    <div class="container section">
+      <h2 class="h2 video__title" id="video-title">Посмотрите, как проходит консультация</h2>
+      <p class="lead video__lead">Полная запись: продавец собирает раскладку при клиенте, меняет коллекции в одной сцене и отправляет готовый файл.</p>
+
+      <!-- Слот v2-main-video · 16/9 · полное видео о сервисе -->
+      <div class="media media--16x9 media--xl" data-slot="v2-main-video">
+        <div class="media__placeholder">
+          <span class="media__placeholder-label">Слот · v2-main-video</span>
+          <span class="media__placeholder-text">Полное видео о сервисе</span>
+        </div>
+        <div class="media__pill media__pill--lg"><span class="media__pill-label">Смотреть полностью</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. Рабочее демо
+       ============================================================ -->
+  <section class="container section" id="demo" aria-labelledby="demo-title" data-demo>
+    <div class="demo__head">
+      <h2 class="h2" id="demo-title">Рабочее демо</h2>
+      <span class="badge">часть функций отключена</span>
+    </div>
+    <p class="lead demo__lead">Это сам сервис, а не ролик: выберите зону кликом по сцене и примените коллекцию. В полной версии — все сцены, каталог целиком и скачивание файла без водяного знака.</p>
+
+    <div class="demo__grid">
+
+      <!-- Интерактивная сцена. Текстуры процедурные (см. README, «Текстуры»). -->
+      <div class="scene" data-scene>
+        <div class="scene__wall tile-surface tile-surface--wall tile--carrara" data-scene-wall></div>
+        <div class="scene__floor tile-surface tile-surface--floor tile--oak" data-scene-floor></div>
+
+        <button class="scene__zone scene__zone--wall" type="button" data-zone="wall" aria-pressed="true">
+          <span class="visually-hidden">Выбрать стену как активную зону</span>
+        </button>
+        <button class="scene__zone scene__zone--floor" type="button" data-zone="floor" aria-pressed="false">
+          <span class="visually-hidden">Выбрать пол как активную зону</span>
+        </button>
+
+        <div class="scene__label" data-zone-label aria-live="polite">Активная зона — стена</div>
+        <div class="scene__watermark" aria-hidden="true">СравниПлитку</div>
+      </div>
+
+      <div>
+        <span class="eyebrow eyebrow--muted demo__panel-title" id="swatches-title">Коллекции в демо</span>
+
+        <div class="swatches" role="group" aria-labelledby="swatches-title" data-swatches>
+          <button class="swatch" type="button" data-tile="carrara" aria-pressed="true">
+            <span class="tile-surface tile-surface--swatch tile--carrara" aria-hidden="true"></span>
+            <span class="swatch__text">
+              <span class="swatch__name">Каррара</span>
+              <span class="swatch__fmt">60×120</span>
+            </span>
+          </button>
+          <button class="swatch" type="button" data-tile="travertine" aria-pressed="false">
+            <span class="tile-surface tile-surface--swatch tile--travertine" aria-hidden="true"></span>
+            <span class="swatch__text">
+              <span class="swatch__name">Травертин</span>
+              <span class="swatch__fmt">60×60</span>
+            </span>
+          </button>
+          <button class="swatch" type="button" data-tile="concrete" aria-pressed="false">
+            <span class="tile-surface tile-surface--swatch tile--concrete" aria-hidden="true"></span>
+            <span class="swatch__text">
+              <span class="swatch__name">Бетон</span>
+              <span class="swatch__fmt">80×80</span>
+            </span>
+          </button>
+          <button class="swatch" type="button" data-tile="terracotta" aria-pressed="false">
+            <span class="tile-surface tile-surface--swatch tile--terracotta" aria-hidden="true"></span>
+            <span class="swatch__text">
+              <span class="swatch__name">Терракота</span>
+              <span class="swatch__fmt">30×30</span>
+            </span>
+          </button>
+          <button class="swatch" type="button" data-tile="graphite" aria-pressed="false">
+            <span class="tile-surface tile-surface--swatch tile--graphite" aria-hidden="true"></span>
+            <span class="swatch__text">
+              <span class="swatch__name">Графит</span>
+              <span class="swatch__fmt">60×60</span>
+            </span>
+          </button>
+          <button class="swatch" type="button" data-tile="oak" aria-pressed="false">
+            <span class="tile-surface tile-surface--swatch tile--oak" aria-hidden="true"></span>
+            <span class="swatch__text">
+              <span class="swatch__name">Дуб</span>
+              <span class="swatch__fmt">20×120</span>
+            </span>
+          </button>
+        </div>
+
+        <div class="layouts" role="group" aria-label="Раскладка плитки" data-layouts>
+          <button class="layouts__btn" type="button" data-layout="straight" aria-pressed="true">Прямая</button>
+          <button class="layouts__btn" type="button" data-layout="long" aria-pressed="false">Вытянутая</button>
+          <button class="layouts__btn" type="button" data-layout="diag" aria-pressed="false">Диагональ</button>
+        </div>
+
+        <div class="download-card">
+          <h3 class="download-card__title">Скачать изображение</h3>
+          <p class="download-card__text">В демо файл уходит с водяным знаком. В подписке — чистый JPG для клиента.</p>
+          <a class="btn btn--primary btn--sm" href="#pricing">Смотреть тарифы</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. Проблема со шторкой «до / после»
+       ============================================================ -->
+  <section class="band" aria-labelledby="problem-title">
+    <div class="container section">
+      <h2 class="h2 problem__title" id="problem-title">Клиент сравнивает не плитку, а картинки</h2>
+      <p class="lead problem__lead">У каждого фото из каталога свой свет, ракурс и масштаб. Разница, которую видит клиент, — это разница между съёмками, а не между коллекциями. Отсюда сомнение и «я подумаю».</p>
+
+      <div class="compare" data-compare>
+        <!-- «Было»: коллаж из трёх разнородных кадров -->
+        <div class="compare__before" aria-hidden="true">
+          <div class="compare__shot"></div>
+          <div class="compare__shot"></div>
+          <div class="compare__shot"></div>
+        </div>
+
+        <!-- «Стало»: одна сцена; плитка та же, что выбрана в демо выше -->
+        <div class="compare__after" aria-hidden="true">
+          <div class="compare__scene">
+            <div class="compare__wall tile-surface tile-surface--wall tile--carrara" data-compare-wall></div>
+            <div class="compare__floor tile-surface tile-surface--floor tile--oak" data-compare-floor></div>
+          </div>
+        </div>
+
+        <div class="compare__handle" aria-hidden="true"></div>
+
+        <button class="compare__knob" type="button"
+                role="slider"
+                aria-label="Положение шторки «было / стало»"
+                aria-valuemin="4" aria-valuemax="96" aria-valuenow="52"
+                aria-valuetext="52 процента"
+                data-compare-knob>↔</button>
+
+        <span class="compare__tag compare__tag--before">Было · фото из каталогов</span>
+        <span class="compare__tag compare__tag--after">Стало · одна сцена</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. Пять шагов
+       ============================================================ -->
+  <section class="container section" id="how" aria-labelledby="how-title">
+    <h2 class="h2 steps__title" id="how-title">Пять действий до готового изображения</h2>
+    <p class="lead steps__lead">Ничего не моделируется на ходу: сцены отрисованы заранее, поэтому результат появляется сразу.</p>
+
+    <div class="slab steps">
+      <article class="slab__cell step">
+        <div class="step__num">01</div>
+        <h3 class="step__title">Выберите сцену</h3>
+        <p class="step__text">Пять готовых интерьеров — ванная, санузел, зал, кухня-гостиная</p>
+        <div class="window">
+          <div class="window__bar" aria-hidden="true">
+            <span class="window__dot"></span><span class="window__dot"></span><span class="window__dot"></span>
+          </div>
+          <div class="window__body">
+            <div class="media__placeholder" data-slot="v2-step-1">
+              <span class="media__placeholder-label">Слот · v2-step-1</span>
+              <span class="media__placeholder-text">Скриншот: выбор сцены</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="slab__cell step">
+        <div class="step__num">02</div>
+        <h3 class="step__title">Укажите зону</h3>
+        <p class="step__text">В каждой сцене три-четыре размеченные поверхности</p>
+        <div class="window">
+          <div class="window__bar" aria-hidden="true">
+            <span class="window__dot"></span><span class="window__dot"></span><span class="window__dot"></span>
+          </div>
+          <div class="window__body">
+            <div class="media__placeholder" data-slot="v2-step-2">
+              <span class="media__placeholder-label">Слот · v2-step-2</span>
+              <span class="media__placeholder-text">Скриншот: выбор зоны</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="slab__cell step">
+        <div class="step__num">03</div>
+        <h3 class="step__title">Примените плитку</h3>
+        <p class="step__text">Каталог с поиском по цвету, формату и поверхности</p>
+        <div class="window">
+          <div class="window__bar" aria-hidden="true">
+            <span class="window__dot"></span><span class="window__dot"></span><span class="window__dot"></span>
+          </div>
+          <div class="window__body">
+            <div class="media__placeholder" data-slot="v2-step-3">
+              <span class="media__placeholder-label">Слот · v2-step-3</span>
+              <span class="media__placeholder-text">Скриншот: каталог коллекций</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="slab__cell step">
+        <div class="step__num">04</div>
+        <h3 class="step__title">Настройте свет</h3>
+        <p class="step__text">Тёплый или холодный — ближе к условиям объекта</p>
+        <div class="window">
+          <div class="window__bar" aria-hidden="true">
+            <span class="window__dot"></span><span class="window__dot"></span><span class="window__dot"></span>
+          </div>
+          <div class="window__body">
+            <div class="media__placeholder" data-slot="v2-step-4">
+              <span class="media__placeholder-label">Слот · v2-step-4</span>
+              <span class="media__placeholder-text">Скриншот: настройка света</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="slab__cell step">
+        <div class="step__num">05</div>
+        <h3 class="step__title">Отдайте файл</h3>
+        <p class="step__text">Готовое изображение уходит клиенту в переписку</p>
+        <div class="window">
+          <div class="window__bar" aria-hidden="true">
+            <span class="window__dot"></span><span class="window__dot"></span><span class="window__dot"></span>
+          </div>
+          <div class="window__body">
+            <div class="media__placeholder" data-slot="v2-step-5">
+              <span class="media__placeholder-label">Слот · v2-step-5</span>
+              <span class="media__placeholder-text">Скриншот: выгрузка файла</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       8. Возможности (тёмная секция)
+       ============================================================ -->
+  <section class="band band--dark" id="value" aria-labelledby="value-title">
+    <div class="container section--lg">
+      <h2 class="h2 h2--dark value__title" id="value-title">Что сервис меняет в работе салона</h2>
+      <p class="lead lead--dark value__lead">Одна и та же сцена работает на владельца, управляющего и продавца — каждому она решает свою задачу.</p>
+
+      <div class="value__grid">
+        <article class="value-card">
+          <span class="value-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 10.5h5M9.5 13.5h5"/></svg>
+          </span>
+          <div>
+            <span class="eyebrow eyebrow--light value-card__role">Владельцу</span>
+            <h3 class="h3 value-card__title">Решение принимается в зале, а не дома</h3>
+            <p class="value-card__text">Клиент видит раскладку целиком и соглашается на консультации. Продаётся комплект, а не один артикул, и меньше возвратов из-за «представляли иначе».</p>
+          </div>
+        </article>
+
+        <article class="value-card">
+          <span class="value-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 7h10M4 12h16M4 17h10"/><circle cx="18" cy="7" r="2"/><circle cx="18" cy="17" r="2"/></svg>
+          </span>
+          <div>
+            <span class="eyebrow eyebrow--light value-card__role">Управляющему</span>
+            <h3 class="h3 value-card__title">Один стандарт показа во всех точках</h3>
+            <p class="value-card__text">Сервис открывается в браузере — ничего не нужно ставить на кассовые компьютеры. Каждый продавец показывает коллекции одинаково хорошо.</p>
+          </div>
+        </article>
+
+        <article class="value-card">
+          <span class="value-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M6 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M9 11V4.5a1.5 1.5 0 0 1 3 0V11"/><path d="M12 11V6a1.5 1.5 0 0 1 3 0v6"/><path d="M15 9.5a1.5 1.5 0 0 1 3 0V15a5 5 0 0 1-5 5h-1a6 6 0 0 1-6-6v-3"/></svg>
+          </span>
+          <div>
+            <span class="eyebrow eyebrow--light value-card__role">Продавцу</span>
+            <h3 class="h3 value-card__title">Пять действий, обучение не нужно</h3>
+            <p class="value-card__text">Осваивается за одну смену. Есть чем ответить на «а как это будет выглядеть» — сразу, не отправляя клиента искать фото в интернете.</p>
+          </div>
+        </article>
+
+        <article class="value-card">
+          <span class="value-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M20 15a3 3 0 0 1-3 3H8l-4 3V6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3z"/><path d="M8 9h8M8 12.5h5"/></svg>
+          </span>
+          <div>
+            <span class="eyebrow eyebrow--light value-card__role">Клиенту салона</span>
+            <h3 class="h3 value-card__title">Уходит с изображением, а не с сомнением</h3>
+            <p class="value-card__text">Своя раскладка в интерьере — файл, который можно показать семье и мастеру. Обсуждение возвращается к вам, а не к конкуренту.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       9. Салонам / Поставщикам
+       ============================================================ -->
+  <section class="container section--md" id="suppliers" aria-labelledby="segment-title-salon" data-segment>
+    <div class="segment__tabs" role="tablist" aria-label="Кому подходит сервис">
+      <button class="segment__tab" type="button" role="tab"
+              id="tab-salon" aria-controls="panel-salon" aria-selected="true" data-seg="salon">Салонам</button>
+      <button class="segment__tab" type="button" role="tab"
+              id="tab-supplier" aria-controls="panel-supplier" aria-selected="false" tabindex="-1" data-seg="supplier">Поставщикам</button>
+    </div>
+
+    <!-- Салонам -->
+    <div class="segment__panel" id="panel-salon" role="tabpanel" aria-labelledby="tab-salon" data-seg-panel="salon">
+      <div>
+        <h2 class="h2 segment__title" id="segment-title-salon">Салону — показать разницу за одну встречу</h2>
+        <p class="lead segment__lead">Подписка на сервис: готовые сцены, каталог коллекций и изображения для клиентов. Начинаете с тестового доступа, дальше месяц или год.</p>
+        <a class="btn btn--primary btn--lg" href="#lead"
+           data-lead-source="segment-salon" data-track="trial_request" data-track-place="segment">Взять тестовый доступ</a>
+      </div>
+
+      <div class="slab segment__steps">
+        <div class="slab__cell segment-step">
+          <span class="segment-step__num">01</span>
+          <div>
+            <h3 class="segment-step__title">Тестовый доступ</h3>
+            <p class="segment-step__text">Оформляете на юрлицо по карточке компании — за минимальную сумму</p>
+          </div>
+        </div>
+        <div class="slab__cell segment-step">
+          <span class="segment-step__num">02</span>
+          <div>
+            <h3 class="segment-step__title">Показ на консультации</h3>
+            <p class="segment-step__text">Продавец собирает раскладку при клиенте и отдаёт изображение</p>
+          </div>
+        </div>
+        <div class="slab__cell segment-step">
+          <span class="segment-step__num">03</span>
+          <div>
+            <h3 class="segment-step__title">Подписка</h3>
+            <p class="segment-step__text">Месяц или год — со скидкой и фиксированной ценой</p>
+          </div>
+        </div>
+        <div class="slab__cell segment-step">
+          <span class="segment-step__num">04</span>
+          <div>
+            <h3 class="segment-step__title">Нужные коллекции</h3>
+            <p class="segment-step__text">Не хватает позиции в каталоге — добавляем вне очереди</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Поставщикам -->
+    <div class="segment__panel" id="panel-supplier" role="tabpanel" aria-labelledby="tab-supplier" data-seg-panel="supplier" hidden>
+      <div>
+        <h2 class="h2 segment__title">Поставщику — попасть в подбор на консультации</h2>
+        <p class="lead segment__lead">Ваши коллекции внутри сцен, которые салоны показывают клиентам. Продавец подбирает плитку из каталога — и ваш бренд оказывается в этом подборе.</p>
+        <a class="btn btn--primary btn--lg" href="#lead"
+           data-lead-source="segment-supplier" data-track="supplier_request" data-track-place="segment">Обсудить размещение</a>
+      </div>
+
+      <div class="slab segment__steps">
+        <div class="slab__cell segment-step">
+          <span class="segment-step__num">01</span>
+          <div>
+            <h3 class="segment-step__title">Заявка на коллекции</h3>
+            <p class="segment-step__text">Выбираете около пяти коллекций, которые хотите видеть в сценах</p>
+          </div>
+        </div>
+        <div class="slab__cell segment-step">
+          <span class="segment-step__num">02</span>
+          <div>
+            <h3 class="segment-step__title">Бесплатный тест</h3>
+            <p class="segment-step__text">Смотрите, как ваша плитка выглядит в интерьерных сценах сервиса</p>
+          </div>
+        </div>
+        <div class="slab__cell segment-step">
+          <span class="segment-step__num">03</span>
+          <div>
+            <h3 class="segment-step__title">Оплата размещения</h3>
+            <p class="segment-step__text">Платно или в счёт процента от оплат в фонд пополнения каталога</p>
+          </div>
+        </div>
+        <div class="slab__cell segment-step">
+          <span class="segment-step__num">04</span>
+          <div>
+            <h3 class="segment-step__title">Коллекции в каталоге</h3>
+            <p class="segment-step__text">От одного рабочего дня после оплаты — их видят все салоны сервиса</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       10. Возражения
+       ============================================================ -->
+  <section class="band" aria-labelledby="objections-title">
+    <div class="container section">
+      <h2 class="h2 objections__title" id="objections-title">Что обычно спрашивают до подписки</h2>
+
+      <div class="objections__grid">
+        <article class="objection">
+          <span class="eyebrow eyebrow--muted objection__eyebrow">Возражение</span>
+          <h3 class="h3 objection__title">«Не очень понятно, что это вообще такое»</h3>
+          <p class="objection__text">Это не 3D-редактор и не услуга визуализации под заказ. Готовые интерьерные сцены, в которых продавец за пару кликов подставляет коллекции из каталога и отдаёт клиенту картинку. Открывается в браузере, ставить ничего не нужно — посмотрите демо выше, там ровно то же, что увидит продавец.</p>
+        </article>
+
+        <article class="objection">
+          <span class="eyebrow eyebrow--muted objection__eyebrow">Возражение</span>
+          <h3 class="h3 objection__title">«Мало вариантов плитки, а сами добавить не можем»</h3>
+          <p class="objection__text">Это осознанный обмен на скорость. Сцены рендерит наша команда заранее — поэтому результат появляется сразу, а не через пять минут ожидания, как было бы с самозагрузкой плитки и нестандартными помещениями. Нужной коллекции нет в каталоге — добавляем вне очереди, от одного рабочего дня.</p>
+        </article>
+      </div>
+
+      <div class="notes">
+        <article class="note-card">
+          <h3 class="note-card__title">Своя коллекция в каталоге</h3>
+          <p class="note-card__text">Добавляем платно — или в счёт процента от оплат, который идёт в фонд пополнения каталога.</p>
+        </article>
+        <article class="note-card">
+          <h3 class="note-card__title">Голосование за поставщиков</h3>
+          <p class="note-card__text">Внутри сервиса можно голосовать за нужный бренд. Победитель месяца попадает в каталог следующим.</p>
+        </article>
+        <article class="note-card">
+          <h3 class="note-card__title">Ответ на заявку</h3>
+          <p class="note-card__text">Заявки приходят на почту, отвечаем быстро — в течение рабочего дня.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       11. Работы студии
+       ============================================================ -->
+  <section class="container section" aria-labelledby="works-title">
+    <h2 class="h2 works__title" id="works-title">Сцены и реализации, которые мы сделали</h2>
+    <p class="lead works__lead">Интерьерные сцены сервиса и проекты фасадной облицовки — та же команда, которая рендерит каталог.</p>
+
+    <div class="works__grid">
+      <article class="work">
+        <div class="media media--4x3" data-slot="v2-work-1">
+          <div class="media__placeholder">
+            <span class="media__placeholder-label">Слот · v2-work-1</span>
+            <span class="media__placeholder-text">Интерьерные сцены сервиса</span>
+          </div>
+        </div>
+        <h3 class="work__title">Интерьерные сцены сервиса</h3>
+        <p class="work__text">Каталог готовых интерьеров, в которых работают салоны</p>
+      </article>
+
+      <article class="work">
+        <div class="media media--4x3" data-slot="v2-work-2">
+          <div class="media__placeholder">
+            <span class="media__placeholder-label">Слот · v2-work-2</span>
+            <span class="media__placeholder-text">Реализация фасадов</span>
+          </div>
+        </div>
+        <h3 class="work__title">Реализация фасадов</h3>
+        <p class="work__text">Проект облицовки — та же команда визуализации</p>
+      </article>
+
+      <article class="work">
+        <div class="media media--4x3" data-slot="v2-work-3">
+          <div class="media__placeholder">
+            <span class="media__placeholder-label">Слот · v2-work-3</span>
+            <span class="media__placeholder-text">Предметные сцены коллекций</span>
+          </div>
+        </div>
+        <h3 class="work__title">Предметные сцены коллекций</h3>
+        <p class="work__text">Кадры для каталогов и презентаций производителей</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       12. Отзывы
+       Тексты — рыба до получения реальных отзывов пилотных салонов.
+       Отключается флагом sections.testimonials в assets/js/config.js
+       (надёжнее — удалить секцию целиком до появления настоящих цитат).
+       ============================================================ -->
+  <section class="band" aria-labelledby="testimonials-title" data-section="testimonials">
+    <div class="container section">
+      <h2 class="h2 testimonials__title" id="testimonials-title">Отзывы салонов</h2>
+
+      <div class="testimonials__grid">
+        <figure class="testimonial">
+          <blockquote class="testimonial__quote">«Клиент перестал уходить думать — решение принимаем при нём»</blockquote>
+          <figcaption class="testimonial__author">Управляющий салоном · город</figcaption>
+        </figure>
+        <figure class="testimonial">
+          <blockquote class="testimonial__quote">«Продавцы разобрались за смену, регламент писать не пришлось»</blockquote>
+          <figcaption class="testimonial__author">Владелец сети · город</figcaption>
+        </figure>
+        <figure class="testimonial">
+          <blockquote class="testimonial__quote">«Отправляем картинку в переписку — возвращаются с готовым решением»</blockquote>
+          <figcaption class="testimonial__author">Продавец-консультант · город</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       13. Лид-магнит
+       ============================================================ -->
+  <section class="container section" id="lead" aria-labelledby="lead-title">
+    <div class="lead-magnet">
+      <div>
+        <span class="eyebrow lead-magnet__eyebrow">Бесплатно</span>
+        <h2 class="h2 h2--card lead-magnet__title" id="lead-title">7 приёмов визуальных продаж плитки</h2>
+        <p class="lead-magnet__text">Короткий разбор приёмов, которые закрывают сделку на консультации: как показывать раскладку, что отдавать клиенту на руки и какие вопросы задавать до подбора. Пришлём файл на телефон в мессенджер.</p>
+        <div class="lead-magnet__points">
+          <p class="lead-magnet__point"><span class="lead-magnet__check" aria-hidden="true">✓</span>Практика салонов, а не теория</p>
+          <p class="lead-magnet__point"><span class="lead-magnet__check" aria-hidden="true">✓</span>Читается за десять минут</p>
+        </div>
+      </div>
+
+      <div>
+        <form class="lead-form" id="lead-form" method="post" action="api/lead.php" novalidate data-lead-form>
+          <input type="hidden" name="form_id" value="lead-magnet">
+          <input type="hidden" name="source" value="" data-lead-source-field>
+          <input type="hidden" name="segment" value="salon" data-lead-segment-field>
+          <input type="hidden" name="page_url" value="" data-page-url-field>
+
+          <!-- Ловушка для ботов: люди это поле не видят и не заполняют -->
+          <div class="honeypot" aria-hidden="true">
+            <label>Оставьте поле пустым
+              <input type="text" name="company_website" tabindex="-1" autocomplete="off">
+            </label>
+          </div>
+
+          <div class="lead-form__fields">
+            <label class="field" data-field>
+              <span class="field__label">Телефон</span>
+              <input class="field__control" type="tel" name="phone"
+                     inputmode="tel" autocomplete="tel"
+                     placeholder="+7 ___ ___-__-__" required
+                     data-validate="phone">
+              <span class="field__error" data-field-error hidden></span>
+            </label>
+
+            <div class="lead-form__row">
+              <label class="field" data-field>
+                <span class="field__label">Сеть или один магазин</span>
+                <select class="field__control" name="network" required>
+                  <option value="">Выберите</option>
+                  <option value="single">Один магазин</option>
+                  <option value="network">Сеть салонов</option>
+                </select>
+                <span class="field__error" data-field-error hidden></span>
+              </label>
+
+              <label class="field" data-field>
+                <span class="field__label">Точек продаж</span>
+                <select class="field__control" name="points" required>
+                  <option value="">1–2 · 3–5 · 6+</option>
+                  <option value="1-2">1–2</option>
+                  <option value="3-5">3–5</option>
+                  <option value="6+">6 и больше</option>
+                </select>
+                <span class="field__error" data-field-error hidden></span>
+              </label>
+            </div>
+
+            <div class="lead-form__row">
+              <!-- TODO: диапазоны среднего чека — предположение, подтвердить у клиента -->
+              <label class="field" data-field>
+                <span class="field__label">Средний чек</span>
+                <select class="field__control" name="check" required>
+                  <option value="">Диапазон</option>
+                  <option value="<50k">до 50 000 ₽</option>
+                  <option value="50-150k">50 000 – 150 000 ₽</option>
+                  <option value="150-400k">150 000 – 400 000 ₽</option>
+                  <option value=">400k">более 400 000 ₽</option>
+                </select>
+                <span class="field__error" data-field-error hidden></span>
+              </label>
+
+              <!-- TODO: формулировка поля и список ролей — открытый вопрос №3 -->
+              <label class="field" data-field>
+                <span class="field__label">Кто подписывает счёт</span>
+                <select class="field__control" name="decision_maker" required>
+                  <option value="">Роль</option>
+                  <option value="owner">Владелец</option>
+                  <option value="manager">Управляющий</option>
+                  <option value="accounting">Бухгалтерия</option>
+                  <option value="other">Другой</option>
+                </select>
+                <span class="field__error" data-field-error hidden></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- TODO: тексты согласий пишет клиент; ссылки ведут на документы -->
+          <div class="lead-form__consents">
+            <label class="consent" data-consent>
+              <input class="consent__box" type="checkbox" name="consent_personal" required>
+              <span>Согласие на обработку персональных данных — текст от клиента</span>
+            </label>
+            <label class="consent" data-consent>
+              <input class="consent__box" type="checkbox" name="consent_marketing" required>
+              <span>Согласие на получение сообщений о сервисе — текст от клиента</span>
+            </label>
+          </div>
+
+          <button class="btn btn--primary btn--xl btn--block" type="submit" data-submit>
+            <span data-submit-label>Получить файл</span>
+          </button>
+
+          <p class="form-status" role="status" data-form-status hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       14. Тарифы
+       Числа в разметке — значения по умолчанию. Скидка и «вместо»
+       пересчитываются в assets/js/modules/pricing.js из config.js,
+       чтобы проценты не расходились с ценами.
+       ============================================================ -->
+  <section class="band" id="pricing" aria-labelledby="pricing-title">
+    <div class="container section">
+      <h2 class="h2 pricing__title" id="pricing-title">Тарифы</h2>
+      <p class="lead pricing__lead">Бесплатного тарифа нет — так мы отсекаем нецелевые регистрации. Начать можно с тестового доступа за минимальную сумму.</p>
+
+      <div class="pricing__grid" data-pricing>
+        <article class="plan">
+          <div class="plan__head"><h3 class="plan__name">Тестовый</h3></div>
+          <div class="plan__price plan__price--text" data-price="trial">минимальная сумма</div>
+          <div class="plan__period">разовый платёж</div>
+          <ul class="plan__list">
+            <li>Все сцены и каталог целиком</li>
+            <li>Один пользователь</li>
+            <li>Лимит скачиваний — уточняется</li>
+            <li>Только для новых юрлиц, по карточке компании</li>
+          </ul>
+          <a class="btn btn--outline btn--md btn--block plan__cta" href="#lead"
+             data-lead-source="pricing-trial" data-track="trial_request" data-track-place="pricing">Взять тестовый</a>
+        </article>
+
+        <article class="plan plan--featured">
+          <span class="badge badge--pinned">Обычный выбор</span>
+          <div class="plan__head"><h3 class="plan__name">Месячный</h3></div>
+          <div class="plan__price" data-price="monthly">3&nbsp;000&nbsp;₽</div>
+          <div class="plan__period">в месяц</div>
+          <ul class="plan__list">
+            <li>Все сцены и коллекции каталога</li>
+            <li>До пяти пользователей салона</li>
+            <li>Скачивание без водяного знака</li>
+            <li>Добавление нужной коллекции вне очереди</li>
+          </ul>
+          <a class="btn btn--primary btn--md btn--block plan__cta" href="#lead"
+             data-lead-source="pricing-monthly" data-track="trial_request" data-track-place="pricing">Подключить</a>
+        </article>
+
+        <article class="plan">
+          <div class="plan__head">
+            <h3 class="plan__name">Годовой</h3>
+            <span class="badge badge--sm" data-price="discount">выгода 45&nbsp;%</span>
+          </div>
+          <div class="plan__price" data-price="annual">19&nbsp;800&nbsp;₽</div>
+          <div class="plan__period">в год · вместо <span data-price="annual-full">36&nbsp;000&nbsp;₽</span></div>
+          <ul class="plan__list">
+            <li>Всё из месячного тарифа</li>
+            <li>Фиксированная цена на год</li>
+            <li>Приоритет в добавлении коллекций</li>
+          </ul>
+          <a class="btn btn--outline btn--md btn--block plan__cta" href="#lead"
+             data-lead-source="pricing-annual" data-track="trial_request" data-track-place="pricing">Оплатить год</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       15. Частые вопросы + CTA
+       ============================================================ -->
+  <section class="container section" id="faq" aria-labelledby="faq-title">
+    <div class="faq__grid">
+      <div>
+        <h2 class="h2 faq__title" id="faq-title">Частые вопросы</h2>
+
+        <div class="faq__list">
+          <div class="faq__item">
+            <h3 class="faq__q">Это полноценная 3D-визуализация помещения?</h3>
+            <p class="faq__a">Нет. Сцены отрисованы заранее нашей командой, вы выбираете из готовых — поэтому картинка появляется сразу, а не через минуты ожидания.</p>
+          </div>
+          <div class="faq__item">
+            <h3 class="faq__q">Можно загрузить свою плитку или свою планировку?</h3>
+            <p class="faq__a">Своя загрузка означала бы ожидание рендера. Вместо этого добавляем нужную коллекцию в каталог вне очереди — от одного рабочего дня.</p>
+          </div>
+          <div class="faq__item">
+            <h3 class="faq__q">Продавцы разберутся?</h3>
+            <p class="faq__a">Пять действий, обучение не требуется — осваивается за смену.</p>
+          </div>
+          <div class="faq__item">
+            <h3 class="faq__q">Нужно ли что-то устанавливать?</h3>
+            <p class="faq__a">Нет, сервис работает в браузере на компьютере салона.</p>
+          </div>
+          <div class="faq__item">
+            <h3 class="faq__q">Есть ли бесплатный доступ?</h3>
+            <p class="faq__a">Нет. Тестовый доступ платный, за минимальную сумму, и оформляется на юрлицо по карточке компании — так мы защищаемся от нецелевых регистраций.</p>
+          </div>
+          <div class="faq__item">
+            <h3 class="faq__q">Что с водяными знаками?</h3>
+            <p class="faq__a">Изображения сервиса содержат встроенные водяные знаки. В подписке файл для клиента выгружается чистым.</p>
+          </div>
+          <div class="faq__item">
+            <h3 class="faq__q">Как быстро отвечаете на заявку?</h3>
+            <p class="faq__a">Заявки приходят на почту, отвечаем в течение рабочего дня.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="cta-card">
+        <h2 class="h2 h2--cta cta-card__title">Покажите плитку в интерьере уже на следующей консультации</h2>
+        <p class="cta-card__text">Откройте демо и соберите первое изображение — это займёт минуту. Останутся вопросы, напишите: отвечаем в течение рабочего дня.</p>
+        <a class="btn btn--primary btn--xl" href="#demo" data-track="demo_click" data-track-place="cta">Попробовать демо</a>
+        <!-- TODO: реальная почта от клиента -->
+        <a class="btn btn--ghost-dark btn--lg" href="mailto:hello@sravniplitku.ru">Написать нам</a>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     16. Футер
+     ============================================================ -->
+<footer class="footer">
+  <div class="footer__top container">
+    <div>
+      <div class="footer__brand">СравниПлитку</div>
+      <p class="footer__about">Сервис показа плитки в готовых интерьерных сценах для салонов и поставщиков.</p>
+    </div>
+
+    <div class="footer__col">
+      <span class="eyebrow eyebrow--dim">Контакты</span>
+      <!-- TODO: реальные контакты от клиента -->
+      <a href="tel:+70000000000">+7 000 000-00-00</a>
+      <a href="mailto:hello@sravniplitku.ru">hello@sravniplitku.ru</a>
+      <a href="https://t.me/" rel="noopener">Телеграм для заявок</a>
+      <span class="footer__hours">Пн–Пт, 10:00–19:00 МСК</span>
+    </div>
+
+    <div class="footer__col">
+      <span class="eyebrow eyebrow--dim">Документы</span>
+      <!-- TODO: тексты клиента; вёрстка отдельных страниц — наша -->
+      <a href="#privacy">Политика обработки данных</a>
+      <a href="#terms">Права использования изображений</a>
+      <a href="#requisites">Реквизиты</a>
+    </div>
+  </div>
+
+  <div class="footer__bottom container">
+    <div class="footer__legal">© 2026 СравниПлитку · Изображения сервиса содержат водяные знаки и защищены правами.</div>
+  </div>
+</footer>
+
+<!-- Липкая кнопка действия для узких экранов -->
+<div class="mobile-cta" data-mobile-cta>
+  <a class="btn btn--primary btn--lg" href="#demo" data-track="demo_click" data-track-place="mobile-bar">Попробовать демо</a>
+  <a class="btn btn--secondary btn--lg" href="#lead" data-lead-source="mobile-bar">«7 приёмов»</a>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Это полноценная 3D-визуализация помещения?", "acceptedAnswer": { "@type": "Answer", "text": "Нет. Сцены отрисованы заранее нашей командой, вы выбираете из готовых — поэтому картинка появляется сразу, а не через минуты ожидания." } },
+    { "@type": "Question", "name": "Можно загрузить свою плитку или свою планировку?", "acceptedAnswer": { "@type": "Answer", "text": "Своя загрузка означала бы ожидание рендера. Вместо этого добавляем нужную коллекцию в каталог вне очереди — от одного рабочего дня." } },
+    { "@type": "Question", "name": "Продавцы разберутся?", "acceptedAnswer": { "@type": "Answer", "text": "Пять действий, обучение не требуется — осваивается за смену." } },
+    { "@type": "Question", "name": "Нужно ли что-то устанавливать?", "acceptedAnswer": { "@type": "Answer", "text": "Нет, сервис работает в браузере на компьютере салона." } },
+    { "@type": "Question", "name": "Есть ли бесплатный доступ?", "acceptedAnswer": { "@type": "Answer", "text": "Нет. Тестовый доступ платный, за минимальную сумму, и оформляется на юрлицо по карточке компании — так мы защищаемся от нецелевых регистраций." } },
+    { "@type": "Question", "name": "Что с водяными знаками?", "acceptedAnswer": { "@type": "Answer", "text": "Изображения сервиса содержат встроенные водяные знаки. В подписке файл для клиента выгружается чистым." } },
+    { "@type": "Question", "name": "Как быстро отвечаете на заявку?", "acceptedAnswer": { "@type": "Answer", "text": "Заявки приходят на почту, отвечаем в течение рабочего дня." } }
+  ]
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,192 @@
+/* ============================================================
+   СравниПлитку — сброс, базовая типографика, контейнеры
+   ============================================================ */
+
+*,
+*::before,
+*::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+video,
+svg { display: block; max-width: 100%; }
+
+a { color: var(--c-accent); text-decoration: none; }
+a:hover { color: var(--c-accent-hover); }
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+input,
+select,
+textarea { font: inherit; color: inherit; }
+
+ul, ol { list-style: none; }
+
+[hidden] { display: none !important; }
+
+/* Якорные ссылки не должны уезжать под липкую шапку */
+[id] { scroll-margin-top: calc(var(--header-h) + 16px); }
+
+/* ---------- Фокус ---------- */
+
+:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.band--dark :focus-visible,
+.cta-card :focus-visible { outline-color: var(--c-accent-light); }
+
+/* ---------- Контейнер и полосы секций ---------- */
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+/* Полоса-секция: инверсный фон во всю ширину экрана */
+.band {
+  background: var(--c-surface);
+  border-top: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.band--dark {
+  background: var(--c-dark);
+  color: var(--c-on-dark);
+  border: 0;
+}
+
+.section    { padding-block: var(--section-y); }
+.section--lg { padding-block: var(--section-y-lg); }
+.section--md { padding-block: var(--section-y-md); }
+
+/* ---------- Типографика ---------- */
+
+.h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h1);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h2);
+  line-height: 1.15;
+  text-wrap: pretty;
+}
+
+/* H2 тёмной секции — крупнее и с трекингом */
+.h2--dark {
+  font-size: var(--fs-h2-dark);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+}
+
+.h2--card { font-size: var(--fs-h2-card); }
+.h2--cta  { font-size: var(--fs-h2-cta); line-height: 1.18; }
+
+.h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: pretty;
+}
+
+/* Надзаголовок-рубрика */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: var(--fs-mono);
+  line-height: 1.6;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+}
+
+.eyebrow--muted { font-size: var(--fs-mono-sm); letter-spacing: .1em; color: var(--c-ink-2); }
+.eyebrow--light { font-size: var(--fs-mono-sm); letter-spacing: .12em; color: var(--c-accent-light); }
+.eyebrow--dim   { font-size: var(--fs-mono-sm); letter-spacing: .12em; color: var(--c-on-dark-2); }
+
+.lead {
+  font-size: var(--fs-lead);
+  color: var(--c-ink-2);
+  text-wrap: pretty;
+}
+
+.lead--hero { font-size: var(--fs-lead-hero); }
+.lead--dark { font-size: var(--fs-lead-hero); color: var(--c-on-dark-2); }
+
+/* Подпись моноширинным под медиа и кнопками */
+.mono-note {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  color: var(--c-ink-2);
+}
+
+/* ---------- Утилиты ---------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 100;
+  background: var(--c-accent);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: var(--r-md);
+  transition: top var(--t-fast);
+}
+.skip-link:focus { top: 12px; color: #fff; }
+
+/* ---------- Уважаем системную настройку анимаций ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

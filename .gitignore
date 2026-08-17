@@ -1,0 +1,16 @@
+# Дизайн-бандл — внутренний материал студии: разбор созвона с цитатами
+# клиента, открытые вопросы, фото основателя. В публичный репозиторий не идёт.
+design_handoff_sravniplitku_landing/
+
+# Заявки с персональными данными и метки антифлуда
+api/logs/*.log
+api/logs/throttle-*.txt
+
+# Служебное
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+node_modules/
+.vscode/
+.idea/
