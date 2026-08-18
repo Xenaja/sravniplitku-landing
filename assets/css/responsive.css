@@ -82,6 +82,11 @@
   .segment__steps,
   .notes { grid-template-columns: repeat(2, 1fr); }
 
+  /* Шестиколоночная раскладка шагов — только на десктопе */
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .step,
+  .step:nth-child(4) { grid-column: auto; }
+
   /* Стрелка «было → стало» разворачивается вниз и держит зазор между карточками */
   .contrast__grid { grid-template-columns: 1fr; }
   .contrast__arrow { transform: rotate(90deg); margin-block: 16px; }
@@ -158,6 +163,7 @@
   .testimonials__grid,
   .notes,
   .segment__steps,
+  .steps,
   .lead-form__row { grid-template-columns: 1fr; }
 
   .compare { aspect-ratio: 16 / 9; }

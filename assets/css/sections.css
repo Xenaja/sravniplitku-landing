@@ -220,11 +220,18 @@
 .steps__title { margin-bottom: 12px; }
 .steps__lead  { margin-bottom: 36px; }
 
-/* Карточки перестраиваются, а не сжимаются в нечитаемые полоски */
-.steps { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+/* Пять карточек в ряд давали кадр шириной 168px — скриншот сервиса
+   в нём не читался. Три колонки дают кадр 344px (V1 требует от 320).
+   Сетка на шесть колонок по две на карточку: пять карточек иначе
+   оставляют дыру в правом нижнем углу, а так вторая строка
+   центрируется и ряд читается целым. */
+.steps { grid-template-columns: repeat(6, 1fr); }
+
+.step { grid-column: span 2; }
+.step:nth-child(4) { grid-column: 2 / span 2; }
 
 .step {
-  padding: 24px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
 }
