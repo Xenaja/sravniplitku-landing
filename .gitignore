@@ -6,6 +6,10 @@ design_handoff_sravniplitku_landing/
 # в assets/img/steps/, оригиналы лежат локально
 screenshots/
 
+# Пакеты ТЗ и дизайн-аудита — входной материал, а не продукт.
+# Лежат локально рядом с проектом.
+design_handoff_landing_fixes/
+
 # Заявки с персональными данными и метки антифлуда
 api/logs/*.log
 api/logs/throttle-*.txt
