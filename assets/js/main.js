@@ -16,6 +16,7 @@ import { initCompareSlider } from './modules/compare-slider.js';
 import { initSegmentTabs } from './modules/segment-tabs.js';
 import { initPricing } from './modules/pricing.js';
 import { initLeadForm } from './modules/lead-form.js';
+import { initLightbox } from './modules/lightbox.js';
 
 /** Ошибка модуля видна в консоли с именем — иначе её не найти на проде */
 function safe(name, init) {
@@ -35,3 +36,4 @@ safe('compare-slider', initCompareSlider);
 safe('segment-tabs', initSegmentTabs);
 safe('pricing', initPricing);
 safe('lead-form', initLeadForm);
+safe('lightbox', initLightbox);
