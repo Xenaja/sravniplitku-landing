@@ -71,6 +71,7 @@
 
   /* Сцена и панель управления встают друг под друга */
   .demo__grid,
+  .access,
   .value__grid,
   .objections__grid,
   .faq__grid,

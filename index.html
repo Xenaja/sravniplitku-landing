@@ -512,7 +512,7 @@
       <div class="segment__intro">
         <h2 class="h2 segment__title" id="segment-title-salon">Салону – показать разницу за одну встречу</h2>
         <p class="lead segment__lead">Подписка на сервис: готовые сцены, каталог коллекций и изображения для клиентов. Начинаете с тестового доступа, дальше месяц или год.</p>
-        <a class="btn btn--primary btn--lg" href="#lead"
+        <a class="btn btn--primary btn--lg" href="#access"
            data-lead-source="segment-salon" data-track="trial_request" data-track-place="segment">Взять тестовый</a>
       </div>
 
@@ -553,7 +553,7 @@
       <div class="segment__intro">
         <h2 class="h2 segment__title">Поставщику – попасть в подбор на консультации</h2>
         <p class="lead segment__lead">Ваши коллекции внутри сцен, которые салоны показывают клиентам. Продавец подбирает плитку из каталога – и ваш бренд оказывается в этом подборе.</p>
-        <a class="btn btn--primary btn--lg" href="#lead"
+        <a class="btn btn--primary btn--lg" href="#access"
            data-lead-source="segment-supplier" data-track="supplier_request" data-track-place="segment">Обсудить размещение</a>
       </div>
 
@@ -691,75 +691,32 @@
 
           <div class="lead-form__fields">
             <label class="field" data-field>
-              <span class="field__label">Телефон</span>
-              <input class="field__control" type="tel" name="phone"
-                     inputmode="tel" autocomplete="tel"
-                     placeholder="+7 ___ ___-__-__" required
-                     data-validate="phone">
+              <span class="field__label">Телефон или почта</span>
+              <input class="field__control" type="text" name="contact"
+                     inputmode="email" autocomplete="tel"
+                     placeholder="+7 999 123-45-67 или mail@salon.ru" required
+                     data-validate="contact">
               <span class="field__error" data-field-error hidden></span>
             </label>
-
-            <div class="lead-form__row">
-              <label class="field" data-field>
-                <span class="field__label">Сеть или один магазин</span>
-                <select class="field__control" name="network" required>
-                  <option value="">Выберите</option>
-                  <option value="single">Один магазин</option>
-                  <option value="network">Сеть салонов</option>
-                </select>
-                <span class="field__error" data-field-error hidden></span>
-              </label>
-
-              <label class="field" data-field>
-                <span class="field__label">Точек продаж</span>
-                <select class="field__control" name="points" required>
-                  <option value="">1–2 · 3–5 · 6+</option>
-                  <option value="1-2">1–2</option>
-                  <option value="3-5">3–5</option>
-                  <option value="6+">6 и больше</option>
-                </select>
-                <span class="field__error" data-field-error hidden></span>
-              </label>
-            </div>
-
-            <div class="lead-form__row">
-              <!-- TODO: диапазоны среднего чека — предположение, подтвердить у клиента -->
-              <label class="field" data-field>
-                <span class="field__label">Средний чек</span>
-                <select class="field__control" name="check" required>
-                  <option value="">Диапазон</option>
-                  <option value="<50k">до 50 000 ₽</option>
-                  <option value="50-150k">50 000 – 150 000 ₽</option>
-                  <option value="150-400k">150 000 – 400 000 ₽</option>
-                  <option value=">400k">более 400 000 ₽</option>
-                </select>
-                <span class="field__error" data-field-error hidden></span>
-              </label>
-
-              <!-- TODO: формулировка поля и список ролей — открытый вопрос №3 -->
-              <label class="field" data-field>
-                <span class="field__label">Кто подписывает счёт</span>
-                <select class="field__control" name="decision_maker" required>
-                  <option value="">Роль</option>
-                  <option value="owner">Владелец</option>
-                  <option value="manager">Управляющий</option>
-                  <option value="accounting">Бухгалтерия</option>
-                  <option value="other">Другой</option>
-                </select>
-                <span class="field__error" data-field-error hidden></span>
-              </label>
-            </div>
+            <fieldset class="field points" data-field>
+              <legend class="field__label">Точек продаж</legend>
+              <div class="points__group">
+                <label class="points__option"><input type="radio" name="points" value="1" required><span>1</span></label>
+                <label class="points__option"><input type="radio" name="points" value="2-5"><span>2–5</span></label>
+                <label class="points__option"><input type="radio" name="points" value="6+"><span>6+</span></label>
+              </div>
+              <span class="field__error" data-field-error hidden></span>
+            </fieldset>
           </div>
 
-          <!-- TODO: тексты согласий пишет клиент; ссылки ведут на документы -->
+          <!-- TODO: тексты и ссылки согласий от клиента.
+               Оставлен один чекбокс, а не мелкая строка: по ФЗ-152 согласие
+               должно быть активным действием, подразумеваемое рискованно.
+               Решение за юристом клиента. -->
           <div class="lead-form__consents">
             <label class="consent" data-consent>
-              <input class="consent__box" type="checkbox" name="consent_personal" required>
-              <span>Согласие на обработку персональных данных – текст от клиента</span>
-            </label>
-            <label class="consent" data-consent>
-              <input class="consent__box" type="checkbox" name="consent_marketing" required>
-              <span>Согласие на получение сообщений о сервисе – текст от клиента</span>
+              <input class="consent__box" type="checkbox" name="consent" required>
+              <span>Согласен на обработку персональных данных и получение сообщений о сервисе</span>
             </label>
           </div>
 
@@ -795,7 +752,7 @@
             <li>Лимит скачиваний – уточняется</li>
             <li>Только для новых юрлиц, по карточке компании</li>
           </ul>
-          <a class="btn btn--outline btn--md btn--block plan__cta" href="#lead"
+          <a class="btn btn--outline btn--md btn--block plan__cta" href="#access"
              data-lead-source="pricing-trial" data-track="trial_request" data-track-place="pricing">Взять тестовый</a>
         </article>
 
@@ -810,7 +767,7 @@
             <li>Скачивание без водяного знака</li>
             <li>Добавление нужной коллекции вне очереди</li>
           </ul>
-          <a class="btn btn--primary btn--md btn--block plan__cta" href="#lead"
+          <a class="btn btn--primary btn--md btn--block plan__cta" href="#access"
              data-lead-source="pricing-monthly" data-track="trial_request" data-track-place="pricing">Оплатить месяц</a>
         </article>
 
@@ -826,10 +783,117 @@
             <li>Фиксированная цена на год</li>
             <li>Приоритет в добавлении коллекций</li>
           </ul>
-          <a class="btn btn--outline btn--md btn--block plan__cta" href="#lead"
+          <a class="btn btn--outline btn--md btn--block plan__cta" href="#access"
              data-lead-source="pricing-annual" data-track="trial_request" data-track-place="pricing">Оплатить год</a>
         </article>
       </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Заявка на доступ
+       Отдельная форма: портрет салона заказчик просил собирать, но
+       в лид-магните он превращал обмен «файл за контакт» в анкету.
+       ============================================================ -->
+  <section data-type="B" class="container" id="access" aria-labelledby="access-title">
+    <div class="access">
+      <div>
+        <span class="eyebrow">Тестовый доступ</span>
+        <h2 class="h2 access__title" id="access-title">Оставьте заявку – откроем доступ</h2>
+        <p class="access__text">Ответим в течение рабочего дня и поможем оформить доступ на юрлицо.
+          Несколько вопросов о салоне нужны, чтобы сразу предложить подходящий тариф.</p>
+      </div>
+
+      <form class="lead-form" id="access-form" method="post" action="api/lead.php" novalidate data-lead-form>
+          <input type="hidden" name="form_id" value="access">
+          <input type="hidden" name="source" value="" data-lead-source-field>
+          <input type="hidden" name="segment" value="salon" data-lead-segment-field>
+          <input type="hidden" name="page_url" value="" data-page-url-field>
+
+          <!-- Ловушка для ботов: люди это поле не видят и не заполняют -->
+          <div class="honeypot" aria-hidden="true">
+            <label>Оставьте поле пустым
+              <input type="text" name="company_website" tabindex="-1" autocomplete="off">
+            </label>
+          </div>
+
+          <div class="lead-form__fields">
+            <label class="field" data-field>
+              <span class="field__label">Телефон или почта</span>
+              <input class="field__control" type="text" name="contact"
+                     inputmode="email" autocomplete="tel"
+                     placeholder="+7 999 123-45-67 или mail@salon.ru" required
+                     data-validate="contact">
+              <span class="field__error" data-field-error hidden></span>
+            </label>
+            <div class="lead-form__row">
+            <label class="field" data-field>
+              <span class="field__label">Сеть или один магазин</span>
+              <select class="field__control" name="network" required>
+                <option value="">Выберите</option>
+                <option value="single">Один магазин</option>
+                <option value="network">Сеть салонов</option>
+              </select>
+              <span class="field__error" data-field-error hidden></span>
+            </label>
+            <label class="field" data-field>
+              <span class="field__label">Точек продаж</span>
+              <select class="field__control" name="points" required>
+                <option value="">Выберите</option>
+                <option value="1">1</option>
+                <option value="2-5">2–5</option>
+                <option value="6+">6 и больше</option>
+              </select>
+              <span class="field__error" data-field-error hidden></span>
+            </label>
+            </div>
+
+            <div class="lead-form__row">
+            <!-- TODO: диапазоны среднего чека подтвердить у клиента -->
+            <label class="field" data-field>
+              <span class="field__label">Средний чек</span>
+              <select class="field__control" name="check" required>
+                <option value="">Диапазон</option>
+                <option value="&lt;50k">до 50 000 ₽</option>
+                <option value="50-150k">50 000 – 150 000 ₽</option>
+                <option value="150-400k">150 000 – 400 000 ₽</option>
+                <option value="&gt;400k">более 400 000 ₽</option>
+              </select>
+              <span class="field__error" data-field-error hidden></span>
+            </label>
+            <!-- TODO: формулировка поля и список ролей – открытый вопрос №3 -->
+            <label class="field" data-field>
+              <span class="field__label">Кто подписывает счёт</span>
+              <select class="field__control" name="decision_maker" required>
+                <option value="">Роль</option>
+                <option value="owner">Владелец</option>
+                <option value="manager">Управляющий</option>
+                <option value="accounting">Бухгалтерия</option>
+                <option value="other">Другой</option>
+              </select>
+              <span class="field__error" data-field-error hidden></span>
+            </label>
+            </div>
+          </div>
+
+          <!-- TODO: тексты и ссылки согласий от клиента.
+               Оставлен один чекбокс, а не мелкая строка: по ФЗ-152 согласие
+               должно быть активным действием, подразумеваемое рискованно.
+               Решение за юристом клиента. -->
+          <div class="lead-form__consents">
+            <label class="consent" data-consent>
+              <input class="consent__box" type="checkbox" name="consent" required>
+              <span>Согласен на обработку персональных данных и получение сообщений о сервисе</span>
+            </label>
+          </div>
+
+          <button class="btn btn--primary btn--xl btn--block" type="submit" data-submit>
+            <span data-submit-label>Отправить заявку</span>
+          </button>
+
+          <p class="form-status" role="status" data-form-status hidden></p>
+      </form>
     </div>
   </section>
 

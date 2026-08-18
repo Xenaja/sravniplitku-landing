@@ -1137,3 +1137,63 @@
 }
 
 .mobile-cta .btn { flex: 1; }
+
+/* ============================================================
+   Заявка на доступ
+   ============================================================ */
+
+.access {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: var(--col-gap);
+  align-items: start;
+}
+
+.access__title { margin: 16px 0; }
+
+.access__text { color: var(--c-ink-2); }
+
+/* Число точек — переключатель, а не список: вариантов три,
+   и выбор должен стоить одно касание */
+.points { border: 0; padding: 0; margin: 0; }
+
+.points__group {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--c-control-bg);
+  border-radius: 12px;
+}
+
+.points__option input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.points__option span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 8px;
+  color: var(--c-ink-3);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 140ms ease-out, color 140ms ease-out;
+}
+
+.points__option input:checked + span {
+  background: var(--c-surface);
+  color: var(--c-ink);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
+}
+
+.points__option input:focus-visible + span {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}

@@ -1,6 +1,6 @@
 <?php
 /**
- * Приём заявки с лид-магнита.
+ * Приём заявок с лендинга: лид-магнит и заявка на доступ.
  *
  * Отвечает JSON: {"ok": true} либо {"ok": false, "error": "текст"}.
  * Формат ожидает assets/js/modules/lead-form.js.
@@ -24,7 +24,12 @@ const MAIL_TO = 'hello@sravniplitku.ru';
 /** Обратный адрес. Домен должен совпадать с доменом сайта, иначе письма уйдут в спам. */
 const MAIL_FROM = 'no-reply@sravniplitku.ru';
 
-const MAIL_SUBJECT = 'Заявка с лендинга: 7 приёмов визуальных продаж';
+/** Тема письма зависит от формы: заявки не должны сливаться в одну кучу. */
+const MAIL_SUBJECTS = [
+    'lead-magnet' => 'Лид-магнит: запрос файла «7 приёмов»',
+    'access'      => 'Заявка на тестовый доступ',
+];
+const MAIL_SUBJECT_FALLBACK = 'Заявка с лендинга «СравниПлитку»';
 
 /** Минимальный интервал между заявками с одного адреса, секунды. */
 const THROTTLE_SECONDS = 20;
@@ -72,23 +77,34 @@ if (field('company_website') !== '') {
     respond(['ok' => true]);
 }
 
-$phoneDigits = preg_replace('/\D/', '', field('phone')) ?? '';
+// Контакт — одно поле: телефон или почта, что человеку удобнее.
+$contactRaw = field('contact', 120);
+$contact = '';
 
-if (strlen($phoneDigits) === 10) {
-    $phoneDigits = '7' . $phoneDigits;
-} elseif (strlen($phoneDigits) === 11 && $phoneDigits[0] === '8') {
-    $phoneDigits = '7' . substr($phoneDigits, 1);
+if (mb_strpos($contactRaw, '@') !== false) {
+    $email = filter_var($contactRaw, FILTER_VALIDATE_EMAIL);
+    if ($email === false) {
+        respond(['ok' => false, 'error' => 'Проверьте адрес почты'], 422);
+    }
+    $contact = $email;
+} else {
+    $digits = preg_replace('/\D/', '', $contactRaw) ?? '';
+
+    if (strlen($digits) === 10) {
+        $digits = '7' . $digits;
+    } elseif (strlen($digits) === 11 && $digits[0] === '8') {
+        $digits = '7' . substr($digits, 1);
+    }
+
+    if (!preg_match('/^7\d{10}$/', $digits)) {
+        respond(['ok' => false, 'error' => 'Проверьте телефон или почту'], 422);
+    }
+    $contact = '+' . $digits;
 }
 
-if (!preg_match('/^7\d{10}$/', $phoneDigits)) {
-    respond(['ok' => false, 'error' => 'Проверьте номер телефона'], 422);
-}
-
-$phone = '+' . $phoneDigits;
-
-// Оба согласия обязательны — без них обрабатывать данные нельзя.
-if (field('consent_personal') === '' || field('consent_marketing') === '') {
-    respond(['ok' => false, 'error' => 'Нужны оба согласия'], 422);
+// Без согласия обрабатывать данные нельзя.
+if (field('consent') === '') {
+    respond(['ok' => false, 'error' => 'Нужно согласие на обработку данных'], 422);
 }
 
 // ---------- Защита от повторов ----------
@@ -110,7 +126,8 @@ if (is_file($throttleFile) && (time() - (int) filemtime($throttleFile)) < THROTT
 // ---------- Сбор заявки ----------
 
 $lead = [
-    'Телефон'              => $phone,
+    'Контакт'              => $contact,
+    'Форма'                => field('form_id', 40),
     'Сеть или магазин'     => field('network', 60),
     'Точек продаж'         => field('points', 60),
     'Средний чек'          => field('check', 60),
@@ -124,7 +141,7 @@ $lead = [
     'utm_content'          => field('utm_content'),
     'utm_term'             => field('utm_term'),
     // Отметка согласия с временем и адресом — доказательство по ФЗ-152
-    'Согласия'             => 'обработка ПД + рассылка, ' . date('d.m.Y H:i:s'),
+    'Согласие'             => 'обработка ПД и сообщения о сервисе, ' . date('d.m.Y H:i:s'),
     'IP'                   => $ip,
 ];
 
@@ -153,7 +170,9 @@ $headers = [
     'MIME-Version: 1.0',
 ];
 
-$subject = '=?UTF-8?B?' . base64_encode(MAIL_SUBJECT) . '?=';
+$formId = field('form_id', 40);
+$subjectText = MAIL_SUBJECTS[$formId] ?? MAIL_SUBJECT_FALLBACK;
+$subject = '=?UTF-8?B?' . base64_encode($subjectText) . '?=';
 $sent = @mail(MAIL_TO, $subject, $body, implode("\r\n", $headers));
 
 if (!$sent) {
