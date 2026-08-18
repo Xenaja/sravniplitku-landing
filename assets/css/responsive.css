@@ -186,7 +186,7 @@
   /* Две кнопки в ряд требуют 486px и не сжимаются (nowrap
      у .btn), поэтому ниже 600 они распирали всю страницу до 510px
      и страница ехала вбок. Ставим столбиком. */
-  .cta-strip { gap: 24px; }
+  .cta-strip { gap: 24px; padding: 32px 24px; }
 
   .cta-strip__actions {
     flex-direction: column;

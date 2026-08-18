@@ -1280,6 +1280,8 @@
   justify-content: space-between;
   gap: 48px;
   flex-wrap: wrap;
+  padding: 48px 40px;
+  border-radius: var(--r-xl);
 }
 
 .cta-strip__title {
@@ -1301,9 +1303,12 @@
    17. Футер
    ============================================================ */
 
+/* Граница сверху — страховка на случай, если над футером когда-нибудь
+   окажется тёмная секция: без неё два тёмных поля сливаются в одно. */
 .footer {
   background: var(--c-dark);
   color: var(--c-on-dark-2);
+  border-top: 1px solid rgba(228, 231, 227, .12);
 }
 
 .footer__top {

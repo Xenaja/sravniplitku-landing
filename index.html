@@ -888,8 +888,12 @@
        сверху и снизу по ~470px пустоты. Стал горизонтальной полосой
        под блоком вопросов (FIX-01 F5).
        ============================================================ -->
-  <section data-type="C" class="band band--dark" aria-labelledby="cta-title">
-    <div class="container cta-strip">
+  <section data-type="C" class="container" aria-labelledby="cta-title">
+    <!-- Тёмная карточка на бумаге, а не полоса во всю ширину: сразу за ней
+         идёт тёмный футер того же цвета, и два блока читались как один.
+         band--dark остаётся меткой тёмного контекста — от неё зависят
+         цвета кнопок, текста и фокусной рамки. -->
+    <div class="cta-strip band--dark">
       <h2 class="h2 cta-strip__title" id="cta-title">Покажите плитку в интерьере
         уже на следующей консультации</h2>
       <div class="cta-strip__actions">
