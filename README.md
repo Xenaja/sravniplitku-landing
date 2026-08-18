@@ -98,6 +98,7 @@ php -S 127.0.0.1:8080
 | Вернуть шторку «до/после» | `assets/js/config.js` → `sections.comparison: true` |
 | Включить рабочее демо | `assets/js/config.js` → `sections.demo: true` |
 | Адрес приёма заявок | `assets/js/config.js` → `form.endpoint`, плюс `MAIL_TO` в `api/lead.php` |
+| Контакты в шапке и футере | `index.html`: телефон, WhatsApp, Telegram, почта |
 | Счётчик Метрики | `assets/js/config.js` → `analytics.yandexCounterId` |
 | Цвета, шрифты, отступы | `assets/css/tokens.css` |
 
@@ -159,7 +160,6 @@ php -S 127.0.0.1:8080
 
 **Остальное:**
 
-- реальные телефон, почта, телеграм (сейчас заглушки `+7 000 000-00-00`, `hello@sravniplitku.ru`);
 - логотип — пока текстовое начертание;
 - тексты двух согласий и документы «Политика обработки данных», «Права
   использования изображений», «Реквизиты» — ссылки в футере ведут на пустые якоря;
