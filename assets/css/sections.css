@@ -854,15 +854,12 @@
    13. Лид-магнит
    ============================================================ */
 
-/* Тип B: карточка на бумаге */
+/* Секция стала белой полосой, поэтому карточка-обёртка не нужна:
+   карточка внутри карточки — дефект (FIX-01 F9) */
 .lead-magnet {
   display: grid;
   grid-template-columns: 6fr 6fr;
   gap: var(--col-gap);
-  padding: 32px;
-  background: var(--c-surface);
-  border: 1px solid var(--c-line);
-  border-radius: var(--r-xl);
 }
 
 .lead-magnet__eyebrow { display: block; margin-bottom: 16px; }
@@ -908,23 +905,6 @@
    14. Тарифы
    ============================================================ */
 
-/* Тип C, зелёная заливка: единственный зелёный полноширинный блок
-   на странице. Роли остаются единственным тёмным. */
-.band--green {
-  background: var(--c-accent);
-  color: var(--c-on-dark);
-}
-
-.band--green .h2,
-.band--green .plan__name,
-.band--green .plan__price { color: var(--c-on-dark); }
-
-/* На зелёном --on-dark-2 даёт около 3.8:1 — ниже требуемых 4.5.
-   Тело текста берёт светлую ступень. */
-.band--green .lead,
-.band--green .plan__period,
-.band--green .plan__list { color: var(--c-on-dark); }
-
 .pricing__title { margin-bottom: 12px; }
 .pricing__lead  { margin-bottom: 36px; }
 
@@ -932,26 +912,34 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--col-gap);
-  align-items: start;
+  /* stretch, а не start: вместе с margin-top: auto у кнопок это ставит
+     цены и кнопки всех трёх тарифов на одни линии (FIX-01 F3) */
+  align-items: stretch;
 }
 
+/* Тарифы на бумаге: акцент даёт одна тёмная карточка, а не заливка
+   секции. Зелёный остаётся только в кнопке и бейдже (FIX-01 F3). */
 .plan {
-  border-radius: var(--r-xl);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--c-line);
+  border-radius: 12px;
   padding: 32px;
-  background: rgba(255, 255, 255, .05);
-}
-
-/* На зелёном рамка не читается — выделенный тариф берёт белую заливку */
-.plan--featured {
-  position: relative;
   background: var(--c-surface);
 }
 
-.plan--featured .plan__name,
-.plan--featured .plan__price { color: var(--c-ink); }
+/* Рекомендованный тариф — единственный акцент блока */
+.plan--dark {
+  position: relative;
+  background: var(--c-dark);
+  border-color: var(--c-dark);
+}
 
-.plan--featured .plan__period,
-.plan--featured .plan__list { color: var(--c-ink-2); }
+.plan--dark .plan__name,
+.plan--dark .plan__price { color: var(--c-on-dark); }
+
+.plan--dark .plan__period,
+.plan--dark .plan__list { color: var(--c-on-dark-2); }
 
 .plan__head {
   display: flex;
@@ -993,7 +981,8 @@
   color: var(--c-ink-2);
 }
 
-.plan__cta { margin-top: 24px; }
+/* Цены и кнопки становятся на одни линии */
+.plan__cta { margin-top: auto; padding-top: 24px; }
 
 /* ============================================================
    15. Частые вопросы + CTA

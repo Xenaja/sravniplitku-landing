@@ -105,13 +105,19 @@
 .band--green .btn--outline:hover,
 .band--dark .btn--outline:hover { background: rgba(255, 255, 255, .08); color: #fff; }
 
-/* Выделенный тариф — белая карточка, на ней кнопка снова зелёная */
-.plan--featured .btn--primary {
+/* Внутри тёмной карточки кнопка остаётся зелёной: это единственное
+   место, где бренд-цвет работает заливкой в этом блоке */
+.plan--dark .btn--primary {
   background: var(--c-accent);
   border-color: var(--c-accent);
   color: #fff;
 }
-.plan--featured .btn--primary:hover { background: var(--c-accent-hover); border-color: var(--c-accent-hover); }
+.plan--dark .btn--primary:hover { background: var(--c-accent-hover); border-color: var(--c-accent-hover); }
+
+.plan--dark .btn--outline {
+  border-color: rgba(255, 255, 255, .35);
+  color: var(--c-on-dark);
+}
 
 .btn[disabled],
 .btn[aria-disabled='true'] { opacity: .6; pointer-events: none; }
@@ -139,15 +145,15 @@
   border-radius: 3px;
 }
 
-/* Тёплый — только выгода, скидка, срок (CANON §1) */
+/* Тёплый — только выгода, скидка, срок. Приглушённый, а не плашка. */
 .badge--warm {
-  color: #fff;
-  background: var(--c-warm);
+  color: #8A5F1F;
+  background: rgba(169, 118, 42, .14);
 }
 
 .badge--sm { letter-spacing: .08em; padding: 3px 8px; }
 
-/* Бейдж «Обычный выбор» — приколот к рамке выделенного тарифа */
+/* Бейдж вынесен на верхнюю границу тёмной карточки */
 .badge--pinned {
   position: absolute;
   top: -11px;
@@ -490,7 +496,9 @@
   padding: 13px 15px;
   font-size: var(--fs-small);
   color: var(--c-ink);
-  background: var(--c-surface-2);
+  /* Поле на белом: на бумаге фон #F7F7F4 почти сливался с фоном секции
+     и инпут не читался как поле (FIX-01 F9) */
+  background: var(--c-surface);
   transition: border-color var(--t-fast);
 }
 

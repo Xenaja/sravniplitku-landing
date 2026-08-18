@@ -101,8 +101,8 @@
   .contrast__grid { grid-template-columns: 1fr; }
   .contrast__arrow { transform: rotate(90deg); margin-block: 16px; }
 
-  /* Выделенный тариф в одну колонку — бейдж не должен налезать */
-  .plan--featured { margin-top: 11px; }
+  /* Тёмный тариф в одну колонку — бейдж не должен налезать */
+  .plan--dark { margin-top: 11px; }
 
   /* 24/9 на узком экране превращается в щель — растим кадр */
   .compare { aspect-ratio: 21 / 9; }
