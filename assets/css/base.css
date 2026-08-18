@@ -143,10 +143,11 @@ main > section[data-type='hero'] { padding-block: 32px 48px; }
   line-height: var(--lh-label);
   letter-spacing: var(--tr-label);
   text-transform: uppercase;
-  color: var(--c-accent);
+  /* Рубрика — не действие, поэтому нейтральная (CANON §1) */
+  color: var(--c-ink-3);
 }
 
-.eyebrow--muted { color: var(--c-ink-2); }
+.eyebrow--muted { color: var(--c-ink-3); }
 .eyebrow--light { color: var(--c-accent-light); }
 .eyebrow--dim   { color: var(--c-on-dark-2); }
 

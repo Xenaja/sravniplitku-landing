@@ -132,7 +132,7 @@
   font-weight: 700;
   font-size: var(--fs-h3);
   line-height: 1;
-  color: var(--c-accent);
+  color: var(--c-ink);
 }
 
 .metrics__label {
@@ -229,12 +229,15 @@
   flex-direction: column;
 }
 
+/* Номер шага — ступень Label (CANON §2), и он не действие,
+   поэтому нейтральный */
 .step__num {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--fs-lead);
-  color: var(--c-accent);
-  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  color: var(--c-ink-3);
+  margin-bottom: 8px;
 }
 
 .step__title {
@@ -618,7 +621,7 @@
 
 .value-card__text {
   font-size: var(--fs-body);
-  color: var(--c-on-dark-3);
+  color: var(--c-on-dark-2);
   line-height: 1.65;
   text-wrap: pretty;
 }
@@ -688,7 +691,7 @@
 .segment-step__num {
   font-family: var(--font-mono);
   font-size: var(--fs-label);
-  color: var(--c-accent);
+  color: var(--c-ink-3);
 }
 
 .segment-step__title {
@@ -870,6 +873,21 @@
    14. Тарифы
    ============================================================ */
 
+/* Тип C, зелёная заливка: единственный зелёный полноширинный блок
+   на странице. Роли остаются единственным тёмным. */
+.band--green {
+  background: var(--c-accent);
+  color: var(--c-on-dark);
+}
+
+.band--green .h2,
+.band--green .plan__name,
+.band--green .plan__price { color: var(--c-on-dark); }
+
+.band--green .lead,
+.band--green .plan__period,
+.band--green .plan__list { color: var(--c-on-dark-2); }
+
 .pricing__title { margin-bottom: 12px; }
 .pricing__lead  { margin-bottom: 36px; }
 
@@ -881,17 +899,22 @@
 }
 
 .plan {
-  border: 1px solid var(--c-line);
   border-radius: var(--r-xl);
   padding: 32px;
+  background: rgba(255, 255, 255, .05);
+}
+
+/* На зелёном рамка не читается — выделенный тариф берёт белую заливку */
+.plan--featured {
+  position: relative;
   background: var(--c-surface);
 }
 
-/* Выделенный тариф — рамка 2px, без теней */
-.plan--featured {
-  border: 2px solid var(--c-accent);
-  position: relative;
-}
+.plan--featured .plan__name,
+.plan--featured .plan__price { color: var(--c-ink); }
+
+.plan--featured .plan__period,
+.plan--featured .plan__list { color: var(--c-ink-2); }
 
 .plan__head {
   display: flex;
