@@ -226,6 +226,10 @@
 
 .contrast-card__label { display: block; margin-bottom: 14px; }
 
+/* Рубрика карточки сервиса — зелёная: она называет решение,
+   а соседняя карточка описывает проблему и остаётся нейтральной */
+.contrast-card--service .contrast-card__label { color: var(--c-accent); }
+
 .contrast-card__text {
   font-size: var(--fs-body);
   color: var(--c-ink-2);
@@ -698,34 +702,33 @@
    9. Салонам / Поставщикам
    ============================================================ */
 
-/* Сегмент-контрол по CANON §5. Активный сегмент читается сам по себе —
-   белая плашка на серой обойме, — а не только в сравнении с соседом. */
-.segment__switch {
+/* Шапка блока: рубрика слева, сегмент-контрол справа, под ними общая
+   линия. Контрол теперь визуально принадлежит блоку, а не странице. */
+.segment__head {
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--c-line);
 }
 
-.segment__label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
-  letter-spacing: var(--tr-label);
-  text-transform: uppercase;
-  color: var(--c-ink-3);
-}
+.segment__eyebrow { display: block; }
 
+/* Активный сегмент читается сам по себе — белая плашка на серой обойме,
+   а не только в сравнении с соседом (CANON §5). */
 .segment__tabs {
   display: inline-flex;
   gap: 4px;
   padding: 4px;
   background: var(--c-control-bg);
   border-radius: 12px;
+  flex-shrink: 0;
 }
 
 .segment__tab {
-  min-height: 44px;
+  min-height: 40px;
   padding: 8px 24px;
   border: 0;
   border-radius: 8px;
@@ -733,6 +736,7 @@
   color: var(--c-ink-3);
   font-size: var(--fs-small);
   font-weight: 500;
+  white-space: nowrap;
   cursor: pointer;
   transition: background-color 140ms ease-out, color 140ms ease-out;
 }
@@ -744,52 +748,78 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
 }
 
-/* Было две колонки: слева заголовок с кнопкой, справа четыре шага.
-   Левая заканчивалась заметно выше правой и оставляла пустую половину.
-   Канон в таком случае предписывает одну колонку с мерой строки, а не
-   растягивание текста. Шаги уходят под текст во всю ширину. */
-.segment__panel { display: block; }
-
-/* Мера строки живёт на абзацах (base.css); заголовку она ни к чему */
-.segment__intro > p { max-width: var(--measure); }
-
-.segment__title { margin-bottom: 16px; }
-.segment__lead  { margin-bottom: 24px; }
-
-.segment__steps {
+.segment__panel {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--col-gap);
-  margin-top: 32px;
+  grid-template-columns: 5fr 7fr;
+  gap: 56px;
+  align-items: start;
 }
 
-/* Тип A: вместо подложки с зазорами — линия сверху у каждого шага */
-.segment-step {
-  border-top: 1px solid var(--c-line);
-  padding: 16px 0 0;
+/* 40px, а не каноничные 44: заголовок делит строку с семишаговой
+   колонкой справа и на 44 уходил в лишнюю строку (SEGMENT-BLOCK.md) */
+.segment__title {
+  max-width: 18ch;
+  margin-bottom: 20px;
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  text-wrap: balance;
 }
 
-.segment-step {
-  display: grid;
-  grid-template-columns: 34px 1fr;
-  gap: 14px;
-  align-items: baseline;
+.segment__lead {
+  max-width: 44ch;
+  margin-bottom: 28px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--c-ink-2);
 }
 
-.segment-step__num {
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
+.segment__cta { margin-bottom: 20px; }
+
+/* Не декор: без этих двух строк левая колонка на 60+px короче списка
+   справа, и под кнопкой образуется пустота. */
+.segment__meta {
+  font-size: 13px;
+  line-height: 1.6;
   color: var(--c-ink-3);
 }
 
+.segment__meta + .segment__meta { margin-top: 2px; }
+
+/* Список, а не карточки: белые плашки в бумажной секции давали карточку
+   внутри карточки, а текст в них обрезался по правому краю. Различитель —
+   линии, и обрезать нечему. */
+.segment__steps { display: block; }
+
+.segment-step {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 20px;
+  max-width: none;
+  padding: 20px 0;
+  border-top: 1px solid var(--c-line);
+}
+
+.segment-step:last-child { border-bottom: 1px solid var(--c-line); }
+
+.segment-step__num {
+  /* Оптическое выравнивание по первой строке заголовка шага */
+  padding-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--c-accent);
+}
+
 .segment-step__title {
-  font-size: var(--fs-body);
-  font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .segment-step__text {
-  font-size: var(--fs-small);
+  max-width: 56ch;
+  font-size: 16px;
+  line-height: 1.55;
   color: var(--c-ink-2);
 }
 

@@ -41,6 +41,30 @@
 
   /* Первая фраза письма — не заголовок канона, своя ступень */
   .founder__lead { font-size: 22px; }
+
+  /* Шапка блока в две строки: контрол во всю ширину, по половине
+     на сегмент. 44px вместо 40 — минимальная цель нажатия. */
+  .segment__head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .segment__tabs { display: grid; grid-template-columns: 1fr 1fr; }
+  .segment__tab { min-height: 44px; padding: 8px 12px; }
+
+  /* balance вместе с мобильным hyphens резал «пока-зать» ради
+     ровных строк, хотя слово целиком влезает. pretty держит
+     висячую строку, но не требует равной длины. */
+  /* Перенос по слогам здесь не нужен: строка длиннее колонки всего
+     на несколько пикселей, и hyphens резал первое же слово — «пока-зать».
+     Самое длинное слово блока — «консультации», оно влезает целиком
+     даже на 320px; overflow-wrap из общего правила остаётся сеткой. */
+  .segment__title { font-size: 30px; text-wrap: pretty; hyphens: manual; }
+  .segment__lead { font-size: 16px; }
+  .segment__cta { display: flex; width: 100%; }
+
+  .segment-step { grid-template-columns: 32px 1fr; gap: 14px; padding: 16px 0; }
 }
 
 /* ============================================================
@@ -82,7 +106,7 @@
   .metrics { margin-bottom: 56px; }
 
   .demo__grid    { gap: 24px; }
-  .segment__panel { gap: 32px; }
+  .segment__panel { gap: 40px; }
   .faq__grid     { gap: 32px; }
 
   .lead-magnet { padding: 32px; gap: 32px; }
@@ -110,8 +134,10 @@
 
   .works__grid,
   .testimonials__grid,
-  .segment__steps,
   .notes { grid-template-columns: repeat(2, 1fr); }
+
+  /* Заголовок с кнопкой над списком шагов, а не рядом */
+  .segment__panel { grid-template-columns: 1fr; gap: 32px; }
 
   /* Строка шага в одну колонку: кадр под текстом */
   .step { grid-template-columns: 1fr; gap: 24px; }
@@ -223,7 +249,6 @@
   .works__grid,
   .testimonials__grid,
   .notes,
-  .segment__steps,
   .lead-form__row { grid-template-columns: 1fr; }
 
   .compare { aspect-ratio: 16 / 9; }
@@ -241,7 +266,6 @@
   .cta-card    { padding: 28px; }
   .step        { padding: 18px; }
 
-  .segment-step { padding: 16px 18px; grid-template-columns: 28px 1fr; gap: 10px; }
 
 
   .footer__top { grid-template-columns: 1fr; gap: 32px; padding-block: 44px 32px; }

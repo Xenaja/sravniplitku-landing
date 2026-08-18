@@ -484,9 +484,12 @@
        9. Салонам / Поставщикам
        ============================================================ -->
   <section data-type="A" class="container" id="suppliers" aria-labelledby="segment-title-salon" data-segment>
-    <div class="segment__switch">
-      <span class="segment__label" id="segment-label">Показать для:</span>
-      <div class="segment__tabs" role="tablist" aria-labelledby="segment-label">
+    <!-- Шапка блока: рубрика и переключатель в одной строке под общей линией.
+         Раньше контрол висел над заголовком сам по себе, и было непонятно,
+         что он переключает: секцию или всю страницу. -->
+    <div class="segment__head">
+      <span class="eyebrow segment__eyebrow">Как начать</span>
+      <div class="segment__tabs" role="tablist" aria-label="Показать шаги для">
         <button class="segment__tab" type="button" role="tab"
                 id="tab-salon" aria-controls="panel-salon" aria-selected="true" data-seg="salon">Салонам</button>
         <button class="segment__tab" type="button" role="tab"
@@ -498,82 +501,87 @@
     <div class="segment__panel" id="panel-salon" role="tabpanel" aria-labelledby="tab-salon" data-seg-panel="salon">
       <div class="segment__intro">
         <h2 class="h2 segment__title" id="segment-title-salon">Салону – показать разницу за одну встречу</h2>
-        <p class="lead segment__lead">Подписка на сервис: готовые сцены, каталог коллекций и изображения для клиентов. Начинаете с тестового доступа, дальше месяц или год.</p>
-        <a class="btn btn--primary btn--lg" href="#lead"
-           data-lead-source="segment-salon" data-track="trial_request" data-track-place="segment">Протестировать</a>
+        <p class="segment__lead">Подписка на сервис: готовые сцены, каталог коллекций и изображения для клиентов. Начинаете с тестового доступа, дальше месяц или год.</p>
+        <a class="btn btn--primary btn--xl segment__cta" href="#demo"
+           data-track="demo_click" data-track-place="segment">Открыть демо</a>
+        <p class="mono-note segment__meta">оплата на юрлицо · счёт и закрывающие</p>
+        <p class="mono-note segment__meta">отвечаем в течение рабочего дня</p>
       </div>
 
-      <div class="segment__steps">
-        <div class="slab__cell segment-step">
+      <ol class="segment__steps">
+        <li class="segment-step">
           <span class="segment-step__num">01</span>
           <div>
             <h3 class="segment-step__title">Тестовый доступ</h3>
-            <p class="segment-step__text">Оформляете на юрлицо по карточке компании – за минимальную сумму</p>
+            <p class="segment-step__text">Оформляете на юрлицо по карточке компании – 490 ₽ разово</p>
           </div>
-        </div>
-        <div class="slab__cell segment-step">
+        </li>
+        <li class="segment-step">
           <span class="segment-step__num">02</span>
           <div>
             <h3 class="segment-step__title">Показ на консультации</h3>
             <p class="segment-step__text">Продавец собирает раскладку при клиенте и отдаёт изображение</p>
           </div>
-        </div>
-        <div class="slab__cell segment-step">
+        </li>
+        <li class="segment-step">
           <span class="segment-step__num">03</span>
           <div>
             <h3 class="segment-step__title">Подписка</h3>
             <p class="segment-step__text">Месяц или год – со скидкой и фиксированной ценой</p>
           </div>
-        </div>
-        <div class="slab__cell segment-step">
+        </li>
+        <li class="segment-step">
           <span class="segment-step__num">04</span>
           <div>
             <h3 class="segment-step__title">Нужные коллекции</h3>
-            <p class="segment-step__text">Не хватает позиции в каталоге – добавим по заявке</p>
+            <p class="segment-step__text">Не хватает позиции в каталоге – добавим по заявке от одного дня</p>
           </div>
-        </div>
-      </div>
+        </li>
+      </ol>
     </div>
 
-    <!-- Поставщикам -->
+    <!-- Поставщикам: та же раскладка. Глагол кнопки другой намеренно:
+         поставщику нужно размещение, а не демо сервиса. -->
     <div class="segment__panel" id="panel-supplier" role="tabpanel" aria-labelledby="tab-supplier" data-seg-panel="supplier" hidden>
       <div class="segment__intro">
         <h2 class="h2 segment__title">Поставщику – попасть в подбор на консультации</h2>
-        <p class="lead segment__lead">Ваши коллекции внутри сцен, которые салоны показывают клиентам. Продавец подбирает плитку из каталога – и ваш бренд оказывается в этом подборе.</p>
-        <a class="btn btn--primary btn--lg" href="#lead"
+        <p class="segment__lead">Ваши коллекции внутри сцен, которые салоны показывают клиентам. Продавец подбирает плитку из каталога – и ваш бренд оказывается в этом подборе.</p>
+        <a class="btn btn--primary btn--xl segment__cta" href="#lead"
            data-lead-source="segment-supplier" data-track="supplier_request" data-track-place="segment">Обсудить размещение</a>
+        <p class="mono-note segment__meta">оплата на юрлицо · счёт и закрывающие</p>
+        <p class="mono-note segment__meta">отвечаем в течение рабочего дня</p>
       </div>
 
-      <div class="segment__steps">
-        <div class="slab__cell segment-step">
+      <ol class="segment__steps">
+        <li class="segment-step">
           <span class="segment-step__num">01</span>
           <div>
             <h3 class="segment-step__title">Заявка на коллекции</h3>
             <p class="segment-step__text">Выбираете около пяти коллекций, которые хотите видеть в сценах</p>
           </div>
-        </div>
-        <div class="slab__cell segment-step">
+        </li>
+        <li class="segment-step">
           <span class="segment-step__num">02</span>
           <div>
             <h3 class="segment-step__title">Бесплатный тест</h3>
             <p class="segment-step__text">Смотрите, как ваша плитка выглядит в интерьерных сценах сервиса</p>
           </div>
-        </div>
-        <div class="slab__cell segment-step">
+        </li>
+        <li class="segment-step">
           <span class="segment-step__num">03</span>
           <div>
             <h3 class="segment-step__title">Оплата размещения</h3>
             <p class="segment-step__text">Платно или в счёт процента от оплат в фонд пополнения каталога</p>
           </div>
-        </div>
-        <div class="slab__cell segment-step">
+        </li>
+        <li class="segment-step">
           <span class="segment-step__num">04</span>
           <div>
             <h3 class="segment-step__title">Коллекции в каталоге</h3>
             <p class="segment-step__text">От одного рабочего дня после оплаты – их видят все салоны сервиса</p>
           </div>
-        </div>
-      </div>
+        </li>
+      </ol>
     </div>
   </section>
 

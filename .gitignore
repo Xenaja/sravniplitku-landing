@@ -14,6 +14,9 @@ design_handoff_landing_fixes/
 # В репозиторий идёт готовый блок и assets/img/founder.jpg
 founder_block/
 
+# ТЗ на блок «Салонам / Поставщикам»: эталон и описание
+segment_block/
+
 # Заявки с персональными данными и метки антифлуда
 api/logs/*.log
 api/logs/throttle-*.txt
