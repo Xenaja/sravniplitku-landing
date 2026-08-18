@@ -231,13 +231,6 @@
       transparent 10px 20px);
 }
 
-/* Заглушка и play-метка обе метят в центр кадра. Пока настоящего видео
-   нет, опускаем подпись вниз, чтобы метка её не накрывала. */
-.media:has(.play) .media__placeholder {
-  place-content: end center;
-  padding-bottom: 20px;
-}
-
 .media__placeholder-label {
   font-family: var(--font-mono);
   font-size: var(--fs-label);
@@ -250,35 +243,6 @@
   font-size: var(--fs-small);
   color: var(--c-ink-2);
   max-width: 32ch;
-}
-
-/* Play-метка по CANON §5: круг 56px, белый, тёмный треугольник, по центру
-   кадра. Длительность — подписью под кадром, не внутри метки. */
-.play {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 56px;
-  height: 56px;
-  margin: -28px 0 0 -28px;
-  border-radius: 50%;
-  background: #fff;
-  display: grid;
-  place-content: center;
-  pointer-events: none;
-}
-
-.play::before {
-  content: '';
-  display: block;
-  width: 0;
-  height: 0;
-  /* Треугольник смещён вправо: оптический центр круга не совпадает
-     с геометрическим */
-  margin-left: 4px;
-  border-left: 16px solid var(--c-ink);
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
 }
 
 /* Рамка-«окно» вокруг скриншота сервиса */

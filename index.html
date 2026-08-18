@@ -88,21 +88,20 @@
       </div>
 
       <div>
-        <!-- Слот v2-hero-video · 16/10 · короткое видео, ~40 сек.
-             Замена: вместо .media__placeholder положить
-             <video class="hero-video" poster="assets/img/hero-poster.jpg" muted playsinline controls>
-               <source src="assets/video/hero.mp4" type="video/mp4">
-             </video> -->
-        <div class="media media--16x10" data-slot="v2-hero-video">
-          <div class="media__placeholder">
-            <span class="media__placeholder-label">Слот · v2-hero-video</span>
-            <span class="media__placeholder-text">Короткое видео первого экрана из присланных кусочков, ~40 секунд</span>
-          </div>
-          <!-- Пока в слоте заглушка, метка декоративная. Когда приедет
-               настоящее видео, она станет кнопкой плеера. -->
-          <span class="play" aria-hidden="true"></span>
+        <!-- Слот 16/9, а не 16/10: исходник — запись экрана 1920×1080,
+             в 16/10 её пришлось бы обрезать сверху и снизу вместе с панелями
+             интерфейса. Звуковой дорожки у файла нет — это петля, не ролик. -->
+        <div class="media media--16x9" data-slot="v2-hero-video">
+          <video class="hero-video" data-video="hero" data-video-track="hero-demo"
+                 poster="assets/img/hero-poster.jpg" width="1280" height="720"
+                 muted loop playsinline autoplay preload="metadata"
+                 controls controlsList="nodownload">
+            <source src="assets/video/hero-demo.mp4" type="video/mp4">
+            Браузер не проигрывает видео –
+            <a href="assets/video/hero-demo.mp4">скачайте файл</a>.
+          </video>
         </div>
-        <p class="mono-note hero__caption">40 секунд · сцена → зона → плитка → готовое изображение</p>
+        <p class="mono-note hero__caption">20 секунд · сцена → зона → плитка → готовое изображение</p>
         </div>
       </div>
     </div>
@@ -282,15 +281,18 @@
       <h2 class="h2 video__title" id="video-title">Посмотрите, как проходит консультация</h2>
       <p class="lead video__lead">Вся консультация: продавец собирает раскладку при клиенте, меняет коллекции в одной сцене и отправляет готовый файл.</p>
 
-      <!-- Слот v2-main-video · 16/9 · полное видео о сервисе -->
+      <!-- Файл тяжёлый и со звуком, поэтому preload="none": до нажатия
+           видна только обложка, трафик не тратится. -->
       <div class="media media--16x9 media--xl" data-slot="v2-main-video">
-        <div class="media__placeholder">
-          <span class="media__placeholder-label">Слот · v2-main-video</span>
-          <span class="media__placeholder-text">Полное видео о сервисе</span>
-        </div>
-        <span class="play" aria-hidden="true"></span>
+        <video data-video-track="promo" poster="assets/img/promo-poster.jpg"
+               width="1600" height="900" playsinline preload="none"
+               controls controlsList="nodownload">
+          <source src="assets/video/promo.mp4" type="video/mp4">
+          Браузер не проигрывает видео –
+          <a href="assets/video/promo.mp4">скачайте файл</a>.
+        </video>
       </div>
-      <p class="mono-note video__caption">Полная запись консультации</p>
+      <p class="mono-note video__caption">1,5 минуты · полная запись консультации</p>
     </div>
   </section>
 
@@ -616,7 +618,43 @@
   </section>
 
   <!-- ============================================================
-       12. Отзывы
+       12. Кто сделал сервис
+       Белая карточка на бумажном фоне, а не полоса во всю ширину:
+       следом идёт белая полоса отзывов, и две белые секции встык
+       читались бы как одна (FIX-01 F9).
+       ============================================================ -->
+  <section data-type="A" class="container" aria-labelledby="founder-title">
+    <div class="founder">
+      <div class="founder__photo">
+        <img src="assets/img/founder.jpg"
+             alt="Артём Иванченко, основатель сервиса «СравниПлитку»"
+             width="636" height="870" loading="lazy" decoding="async">
+      </div>
+
+      <div class="founder__body">
+        <span class="eyebrow eyebrow--accent founder__label">Кто сделал сервис</span>
+
+        <h2 class="founder__lead" id="founder-title">Клиенту нечем показать разницу между коллекциями. Мы сделали инструмент, который решает ровно это.</h2>
+
+        <div class="founder__text">
+          <p>Десять лет я работаю с керамической плиткой – в продажах, в маркетинге, в производстве визуала для брендов. Задачу, из которой вырос сервис, я видел в каждом салоне.</p>
+          <p>Сцены рендерит наша команда заранее, коллекцию по заявке добавляем от одного рабочего дня. Если что-то не работает или не хватает позиции – пишите мне напрямую.</p>
+        </div>
+
+        <div class="founder__sign">
+          <div class="founder__who">
+            <span class="founder__name">Артём Иванченко</span>
+            <span class="founder__role">основатель СравниПлитку</span>
+          </div>
+          <a class="btn btn--secondary btn--lg founder__cta" href="https://t.me/emmiatrey" rel="noopener"
+             data-track="founder_contact">Написать основателю</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       13. Отзывы
        Тексты — рыба до получения реальных отзывов пилотных салонов.
        Отключается флагом sections.testimonials в assets/js/config.js
        (надёжнее — удалить секцию целиком до появления настоящих цитат).
@@ -643,7 +681,7 @@
   </section>
 
   <!-- ============================================================
-       13. Лид-магнит
+       14. Лид-магнит
        ============================================================ -->
   <section data-type="B" class="container band" id="lead" aria-labelledby="lead-title">
     <div class="lead-magnet">
@@ -713,7 +751,7 @@
   </section>
 
   <!-- ============================================================
-       14. Тарифы
+       15. Тарифы
        Числа в разметке — значения по умолчанию. Скидка и «вместо»
        пересчитываются в assets/js/modules/pricing.js из config.js,
        чтобы проценты не расходились с ценами.
@@ -774,7 +812,7 @@
 
 
   <!-- ============================================================
-       15. Частые вопросы + CTA
+       16. Частые вопросы + CTA
        ============================================================ -->
   <section data-type="A" class="container" id="faq" aria-labelledby="faq-title">
     <div class="faq__grid">

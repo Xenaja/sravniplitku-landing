@@ -148,6 +148,9 @@ main > section[data-type='hero'] { padding-block: 32px 48px; }
 }
 
 .eyebrow--muted { color: var(--c-ink-3); }
+/* Зелёная рубрика — исключение из §1 канона, его просит
+   только блок об основателе (FOUNDER-BLOCK.md) */
+.eyebrow--accent { color: var(--c-accent); }
 .eyebrow--light { color: var(--c-accent-light); }
 .eyebrow--dim   { color: var(--c-on-dark-2); }
 
