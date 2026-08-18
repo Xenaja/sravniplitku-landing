@@ -89,34 +89,77 @@
    2. Первый экран
    ============================================================ */
 
-/* Равные половины: кадр занимает ровно половину ширины, обе колонки
-   начинаются на одной верхней линии (FIX-01 F1). */
+/* Кадр во всю ширину контейнера, текст над ним в две колонки.
+   В половине экрана кадр был 649px и интерфейс в нём не читался,
+   а колонки обрывались со ступенькой в 77px. Сейчас кадр 1345px:
+   видны названия коллекций и кнопки каталога. */
 .hero {
   display: grid;
+  gap: 40px;
+}
+
+.hero__text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 48px;
+  align-items: start;
+}
+
+.hero__eyebrow {
+  display: block;
+  grid-column: 1;
+  grid-row: 1;
+  margin-bottom: 16px;
+}
+
+/* Заголовок держит две строки сетки: во второй лид, в третьей
+   кнопка. Не одна строка с выравниванием по краям: тогда более
+   длинный лид наехал бы на кнопку. */
+.hero__title {
+  grid-column: 1;
+  grid-row: 2 / span 2;
+  max-width: 18ch;
+  margin-bottom: 0;
+}
+
+.hero__lead {
+  grid-column: 2;
+  grid-row: 2;
+  margin-bottom: 24px;
+}
+
+.hero__actions {
+  grid-column: 2;
+  grid-row: 3;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hero__micro {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  margin-top: 24px;
+  font-size: var(--fs-label);
+}
+
+.hero__caption { margin-top: 10px; }
+
+/* Прежний геро дублём на время сравнения вариантов: ?hero=split.
+   Селектор завёрнут в :where(), чтобы не поднимать вес правил — иначе
+   дубль пересиливал бы адаптив и не складывался на узком экране. */
+:where([data-hero='split']) .hero {
   grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: start;
 }
 
-.hero__eyebrow { display: block; margin-bottom: 16px; }
-
-.hero__title {
-  max-width: 18ch;
-  margin-bottom: 24px;
-}
-.hero__lead    { margin-bottom: 32px; }
-
-.hero__actions {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 14px;
-}
-
-.hero__micro { font-size: var(--fs-label); }
-
-.hero__caption { margin-top: 10px; }
+:where([data-hero='split']) .hero__text { display: block; }
+:where([data-hero='split']) .hero__title { margin-bottom: 24px; }
+:where([data-hero='split']) .hero__lead { margin-bottom: 32px; }
+:where([data-hero='split']) .hero__actions { margin-bottom: 14px; }
+:where([data-hero='split']) .hero__micro { margin-top: 0; }
 
 /* ============================================================
    3. Полоса метрик

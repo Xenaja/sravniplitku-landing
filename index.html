@@ -35,6 +35,9 @@
 <link rel="stylesheet" href="assets/css/sections.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
 
+<!-- В <head> и без type="module": выбирает раскладку первого экрана
+     до отрисовки, иначе геро моргает -->
+<script src="assets/js/hero-layout.js"></script>
 <script type="module" src="assets/js/main.js"></script>
 </head>
 
@@ -72,7 +75,7 @@
   <section data-type="hero" aria-labelledby="hero-title">
     <div class="container">
       <div class="hero">
-      <div>
+      <div class="hero__text">
         <span class="eyebrow hero__eyebrow">Для салонов плитки и поставщиков</span>
         <!-- Мягкие переносы в длинном слове: на мобильной ступени 44px
              «консультацию» не вмещается ни в один телефон, а hyphens: auto
@@ -87,7 +90,7 @@
         <p class="mono-note hero__micro">работает в браузере · без установки · заявка – в тот же день</p>
       </div>
 
-      <div>
+      <div class="hero__media">
         <!-- Слот 16/9, а не 16/10: исходник — запись экрана 1920×1080,
              в 16/10 её пришлось бы обрезать сверху и снизу вместе с панелями
              интерфейса. Звуковой дорожки у файла нет — это петля, не ролик. -->

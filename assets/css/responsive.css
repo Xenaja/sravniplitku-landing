@@ -70,6 +70,15 @@
     padding: 40px 0 36px;
   }
 
+  /* Текст тоже в одну колонку: заголовок 56px в половине от 976
+     уходит в пять строк. display: block гасит расстановку по сетке
+     целиком — гасить каждое grid-column по отдельности не нужно. */
+  .hero__text { display: block; }
+  .hero__title { margin-bottom: 24px; }
+  .hero__lead { margin-bottom: 32px; }
+  .hero__actions { margin-bottom: 14px; }
+  .hero__micro { margin-top: 0; }
+
   .metrics { margin-bottom: 56px; }
 
   .demo__grid    { gap: 24px; }
