@@ -89,19 +89,22 @@
    2. Первый экран
    ============================================================ */
 
+/* Равные половины: кадр занимает ровно половину ширины, обе колонки
+   начинаются на одной верхней линии (FIX-01 F1). */
 .hero {
   display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: var(--col-gap);
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
 }
 
 .hero__eyebrow { display: block; margin-bottom: 16px; }
 
-/* Заголовок во всю ширину контейнера: на 88px «консультацию» требует
-   ~756px, в колонку 5/12 (466px) оно не влезает и рвётся по слогам */
-.hero__title { margin-bottom: 32px; }
-.hero__lead    { margin-bottom: 28px; }
+.hero__title {
+  max-width: 18ch;
+  margin-bottom: 24px;
+}
+.hero__lead    { margin-bottom: 32px; }
 
 .hero__actions {
   display: flex;
@@ -119,26 +122,33 @@
    3. Полоса метрик
    ============================================================ */
 
+/* Не таблица: внешней рамки нет, есть одна верхняя линия на всю ширину
+   и вертикальные разделители между ячейками (FIX-01 F2). */
 .metrics {
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--c-line);
 }
 
-.metrics__cell { padding: 16px 24px; }
+.metrics__cell { padding: 24px 24px 0 0; }
 
-/* Ступень H3, а не H2: на 44px «3 минуты» рвётся на две строки
-   и полоса метрик теряет ровный ряд */
+.metrics__cell + .metrics__cell {
+  border-left: 1px solid var(--c-line);
+  padding-left: 24px;
+}
+
 .metrics__value {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: var(--fs-h3);
+  font-size: var(--fs-stat);
   line-height: 1;
   color: var(--c-ink);
 }
 
 .metrics__label {
   font-size: var(--fs-small);
-  color: var(--c-ink-2);
-  margin-top: 4px;
+  color: var(--c-ink-3);
+  margin-top: 8px;
 }
 
 /* ============================================================
