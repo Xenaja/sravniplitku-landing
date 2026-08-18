@@ -230,46 +230,68 @@
 .steps__title { margin-bottom: 12px; }
 .steps__lead  { margin-bottom: 36px; }
 
-/* Пять карточек в ряд давали кадр шириной 168px — скриншот сервиса
-   в нём не читался. Три колонки дают кадр 344px (V1 требует от 320).
-   Сетка на шесть колонок по две на карточку: пять карточек иначе
-   оставляют дыру в правом нижнем углу, а так вторая строка
-   центрируется и ряд читается целым. */
-.steps { grid-template-columns: repeat(6, 1fr); }
-
-.step { grid-column: span 2; }
-.step:nth-child(4) { grid-column: 2 / span 2; }
+/* Вертикальный список, а не сетка: пять карточек в три колонки давали
+   сиротскую вторую строку, а серая подложка вокруг белых карточек —
+   карточку внутри карточки (FIX-01 F7). */
+.steps { display: block; }
 
 .step {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 40px;
+  align-items: center;
+  padding: 32px 0;
+  border-top: 1px solid var(--c-line);
 }
 
-/* Номер шага — ступень Label (CANON §2), и он не действие,
-   поэтому нейтральный */
 .step__num {
   font-family: var(--font-mono);
   font-weight: 500;
   font-size: var(--fs-label);
   letter-spacing: var(--tr-label);
-  color: var(--c-ink-3);
+  color: var(--c-accent);
   margin-bottom: 8px;
 }
 
-.step__title {
-  font-size: var(--fs-small);
-  font-weight: 600;
-  margin-bottom: 6px;
+.step__title { margin-bottom: 8px; }
+
+.step__text {
+  max-width: 36ch;
+  font-size: var(--fs-body);
+  color: var(--c-ink-2);
 }
 
-/* Описания у шагов разной длины. Пусть текст забирает лишнюю высоту —
-   тогда окна со скриншотами выстраиваются в один ряд, а не пляшут. */
-.step__text {
-  font-size: var(--fs-small);
-  color: var(--c-ink-2);
-  margin-bottom: 12px;
-  flex: 1 1 auto;
+/* Кадр той же пропорции, что слот первого экрана */
+.step__shot {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--c-line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--c-slot);
+}
+
+.step__shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Кнопка увеличения всегда в правом верхнем углу кадра */
+.step__shot .zoom-btn {
+  inset: auto;
+  top: 14px;
+  right: 14px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-content: center;
+}
+
+.step__shot .zoom-btn__icon {
+  position: static;
+  width: 36px;
+  height: 36px;
 }
 
 /* ============================================================
