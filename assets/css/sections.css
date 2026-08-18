@@ -63,6 +63,10 @@
 .header__nav a {
   color: inherit;
   white-space: nowrap;
+  /* Цель нажатия 44px по высоте: текста в 14px на это не хватает */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 .header__nav a:hover { color: var(--c-accent); }
 
@@ -251,6 +255,7 @@
    ============================================================ */
 
 .video__title { margin-bottom: 12px; max-width: 660px; }
+.video__caption { margin-top: 10px; }
 .video__lead  { max-width: 620px; margin-bottom: 32px; }
 
 /* ============================================================
@@ -359,6 +364,7 @@
 
 .swatch {
   display: flex;
+  min-height: 44px;
   align-items: center;
   gap: 9px;
   padding: 7px 10px 7px 7px;
@@ -399,6 +405,7 @@
 }
 
 .layouts__btn {
+  min-height: 44px;
   padding: 9px 15px;
   border: 1px solid var(--c-line);
   border-radius: var(--r-md);
@@ -625,6 +632,7 @@
 }
 
 .segment__tab {
+  min-height: 44px;
   padding: 12px 22px;
   border: 1px solid var(--c-line);
   border-radius: var(--r-md);
@@ -1002,9 +1010,16 @@
 
 .footer__col {
   display: grid;
-  gap: 10px;
   font-size: var(--fs-small);
   align-content: start;
+}
+
+/* Зазор заменён внутренними полями: ссылка становится целью 44px,
+   а расстояние между строками остаётся прежним */
+.footer__col a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 .footer__col a { color: var(--c-on-dark); }

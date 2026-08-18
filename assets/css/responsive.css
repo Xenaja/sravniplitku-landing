@@ -169,7 +169,6 @@
 
   .segment-step { padding: 16px 18px; grid-template-columns: 28px 1fr; gap: 10px; }
 
-  .media__pill--lg { left: 12px; bottom: 12px; padding: 9px 14px; }
 
   .footer__top { grid-template-columns: 1fr; gap: 32px; padding-block: 44px 32px; }
   .footer__bottom { padding-block: 0 32px; }

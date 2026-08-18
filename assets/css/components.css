@@ -84,8 +84,15 @@
 
 .btn--block { display: flex; width: 100%; }
 
+.btn:active { transform: translateY(1px); }
+
 .btn[disabled],
 .btn[aria-disabled='true'] { opacity: .6; pointer-events: none; }
+
+/* Минимальная цель нажатия 44×44 (CANON §6). Кнопкам размеров xs и sm
+   собственных полей на это не хватает. */
+.btn,
+.lightbox__close { min-height: 44px; }
 
 /* ============================================================
    Бейджи и плашки
@@ -183,6 +190,13 @@
       transparent 10px 20px);
 }
 
+/* Заглушка и play-метка обе метят в центр кадра. Пока настоящего видео
+   нет, опускаем подпись вниз, чтобы метка её не накрывала. */
+.media:has(.play) .media__placeholder {
+  place-content: end center;
+  padding-bottom: 20px;
+}
+
 .media__placeholder-label {
   font-family: var(--font-mono);
   font-size: var(--fs-mono-sm);
@@ -197,51 +211,34 @@
   max-width: 32ch;
 }
 
-/* Пилюля «▶ 40 секунд» / «▶ Смотреть полностью» */
-.media__pill {
+/* Play-метка по CANON §5: круг 56px, белый, тёмный треугольник, по центру
+   кадра. Длительность — подписью под кадром, не внутри метки. */
+.play {
   position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  background: var(--c-overlay-2);
-  color: #fff;
-  padding: 8px 13px;
-  border-radius: var(--r-pill);
+  top: 50%;
+  left: 50%;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-radius: 50%;
+  background: #fff;
+  display: grid;
+  place-content: center;
   pointer-events: none;
-  left: 14px;
-  bottom: 14px;
 }
 
-.media__pill--lg {
-  gap: 10px;
-  padding: 11px 18px;
-  left: 20px;
-  bottom: 20px;
-}
-
-/* Треугольник «play» — чистая геометрия, без иконочного шрифта */
-.media__pill::before {
+.play::before {
   content: '';
   display: block;
   width: 0;
   height: 0;
-  border-left: 9px solid #fff;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
+  /* Треугольник смещён вправо: оптический центр круга не совпадает
+     с геометрическим */
+  margin-left: 4px;
+  border-left: 16px solid var(--c-ink);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
 }
-.media__pill--lg::before {
-  border-left-width: 11px;
-  border-top-width: 7px;
-  border-bottom-width: 7px;
-}
-
-.media__pill-label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-mono-sm);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-.media__pill--lg .media__pill-label { font-size: var(--fs-mono); }
 
 /* Рамка-«окно» вокруг скриншота сервиса */
 .window {
@@ -494,6 +491,8 @@ select.field__control {
 
 .consent {
   display: grid;
+  min-height: 44px;
+  align-content: center;
   grid-template-columns: 18px 1fr;
   gap: 10px;
   font-size: 13px;

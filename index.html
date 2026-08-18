@@ -96,9 +96,11 @@
             <span class="media__placeholder-label">Слот · v2-hero-video</span>
             <span class="media__placeholder-text">Короткое видео первого экрана из присланных кусочков, ~40 секунд</span>
           </div>
-          <div class="media__pill"><span class="media__pill-label">40 секунд</span></div>
+          <!-- Пока в слоте заглушка, метка декоративная. Когда приедет
+               настоящее видео, она станет кнопкой плеера. -->
+          <span class="play" aria-hidden="true"></span>
         </div>
-        <p class="mono-note hero__caption">Сцена → зона → плитка → готовое изображение</p>
+        <p class="mono-note hero__caption">40 секунд · сцена → зона → плитка → готовое изображение</p>
       </div>
     </section>
 
@@ -297,8 +299,9 @@
           <span class="media__placeholder-label">Слот · v2-main-video</span>
           <span class="media__placeholder-text">Полное видео о сервисе</span>
         </div>
-        <div class="media__pill media__pill--lg"><span class="media__pill-label">Смотреть полностью</span></div>
+        <span class="play" aria-hidden="true"></span>
       </div>
+      <p class="mono-note video__caption">Полная запись консультации</p>
     </div>
   </section>
 
