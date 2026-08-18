@@ -51,6 +51,38 @@ export function initSegmentTabs() {
     event.preventDefault();
   });
 
-  const initial = tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') || tabs[0];
-  activate(initial.dataset.seg);
+  /**
+   * Состояние живёт в хэше как id панели (panel-salon / panel-supplier).
+   * Свой ключ вроде #segment=supplier сюда не годится: у секции уже есть
+   * якорь #suppliers из меню, и его нельзя затирать. Идентификаторы панелей
+   * заодно работают как обычные якоря.
+   */
+  function segFromHash() {
+    const id = window.location.hash.slice(1);
+    const panel = panels.find((p) => p.id === id);
+    return panel ? panel.dataset.segPanel : null;
+  }
+
+  function panelIdFor(segment) {
+    const panel = panels.find((p) => p.dataset.segPanel === segment);
+    return panel ? panel.id : null;
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const id = panelIdFor(tab.dataset.seg);
+      // replaceState, а не location.hash: иначе браузер прыгнет к панели
+      // и засорит историю на каждом переключении
+      if (id) window.history.replaceState(null, '', `#${id}`);
+    });
+  });
+
+  window.addEventListener('hashchange', () => {
+    const segment = segFromHash();
+    if (segment) activate(segment);
+  });
+
+  const initial = segFromHash()
+    || (tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') || tabs[0]).dataset.seg;
+  activate(initial);
 }

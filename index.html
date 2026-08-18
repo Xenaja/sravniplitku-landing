@@ -497,11 +497,14 @@
        9. Салонам / Поставщикам
        ============================================================ -->
   <section data-type="A" class="container" id="suppliers" aria-labelledby="segment-title-salon" data-segment>
-    <div class="segment__tabs" role="tablist" aria-label="Кому подходит сервис">
-      <button class="segment__tab" type="button" role="tab"
-              id="tab-salon" aria-controls="panel-salon" aria-selected="true" data-seg="salon">Салонам</button>
-      <button class="segment__tab" type="button" role="tab"
-              id="tab-supplier" aria-controls="panel-supplier" aria-selected="false" tabindex="-1" data-seg="supplier">Поставщикам</button>
+    <div class="segment__switch">
+      <span class="segment__label" id="segment-label">Показать для:</span>
+      <div class="segment__tabs" role="tablist" aria-labelledby="segment-label">
+        <button class="segment__tab" type="button" role="tab"
+                id="tab-salon" aria-controls="panel-salon" aria-selected="true" data-seg="salon">Салонам</button>
+        <button class="segment__tab" type="button" role="tab"
+                id="tab-supplier" aria-controls="panel-supplier" aria-selected="false" tabindex="-1" data-seg="supplier">Поставщикам</button>
+      </div>
     </div>
 
     <!-- Салонам -->
