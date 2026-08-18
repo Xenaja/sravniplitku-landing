@@ -802,53 +802,70 @@
 
         <div class="faq__list">
           <h3 class="faq__group">Продукт</h3>
-          <div class="faq__item">
-            <h4 class="faq__q">Это полноценная 3D-визуализация помещения?</h4>
+          <details class="faq__item" open>
+            <summary class="faq__q">Это полноценная 3D-визуализация помещения?</summary>
             <p class="faq__a">Нет. Вы выбираете из готовых сцен, а не собираете свою – поэтому картинка появляется сразу, а не через минуты ожидания. Это и не услуга визуализации под заказ: продавец за пару кликов подставляет коллекции из каталога и отдаёт клиенту готовый кадр.</p>
-          </div>
-          <div class="faq__item">
-            <h4 class="faq__q">Можно загрузить свою плитку или свою планировку?</h4>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">Можно загрузить свою плитку или свою планировку?</summary>
             <p class="faq__a">Нет, и это осознанный обмен на скорость: своя загрузка означала бы ожидание рендера. Нужную коллекцию добавляем в каталог вне очереди – от одного рабочего дня.</p>
-          </div>
-          <div class="faq__item">
-            <h4 class="faq__q">Нужно ли что-то устанавливать?</h4>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">Нужно ли что-то устанавливать?</summary>
             <p class="faq__a">Нет, сервис открывается в браузере на компьютере салона.</p>
-          </div>
-          <div class="faq__item">
-            <h4 class="faq__q">Продавцы разберутся?</h4>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">Продавцы разберутся?</summary>
             <p class="faq__a">Пять действий, обучение не требуется: осваивается за смену.</p>
-          </div>
+          </details>
           <h3 class="faq__group">Деньги</h3>
-          <div class="faq__item">
-            <h4 class="faq__q">Есть ли бесплатный доступ?</h4>
+          <details class="faq__item">
+            <summary class="faq__q">Есть ли бесплатный доступ?</summary>
             <p class="faq__a">Нет. Тестовый доступ платный – так мы отсекаем нецелевые регистрации.</p>
-          </div>
-          <div class="faq__item">
-            <h4 class="faq__q">Можно добавить свою коллекцию в каталог?</h4>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">Можно добавить свою коллекцию в каталог?</summary>
             <p class="faq__a">Да. Платно или в счёт процента от оплат, который идёт в фонд пополнения каталога.</p>
-          </div>
-          <div class="faq__item">
-            <h4 class="faq__q">Как выбираются новые поставщики?</h4>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">Как выбираются новые поставщики?</summary>
             <p class="faq__a">Внутри сервиса можно голосовать за нужный бренд. Победитель месяца попадает в каталог следующим.</p>
-          </div>
+          </details>
           <h3 class="faq__group">Ограничения</h3>
-          <div class="faq__item">
-            <h4 class="faq__q">Что с водяными знаками?</h4>
+          <details class="faq__item">
+            <summary class="faq__q">Что с водяными знаками?</summary>
             <p class="faq__a">Изображения сервиса содержат встроенные водяные знаки. В подписке файл для клиента выгружается чистым.</p>
-          </div>
-          <div class="faq__item">
-            <h4 class="faq__q">Как быстро отвечаете на заявку?</h4>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">Как быстро отвечаете на заявку?</summary>
             <p class="faq__a">Заявки приходят на почту, отвечаем в течение рабочего дня.</p>
-          </div>
+          </details>
         </div>
       </div>
 
-      <aside class="cta-card">
-        <h2 class="h2 cta-card__title">Покажите плитку в интерьере уже на следующей консультации</h2>
-        <p class="cta-card__text">Откройте демо и соберите первое изображение – это займёт минуту. Останутся вопросы, напишите: отвечаем в течение рабочего дня.</p>
-        <a class="btn btn--primary btn--xl" href="#demo" data-track="demo_click" data-track-place="cta">Посмотреть, как работает</a>
-        <a class="btn btn--ghost-dark btn--lg" href="https://t.me/emmiatrey" rel="noopener">Написать в Телеграм</a>
+      <aside class="faq-aside">
+        <span class="eyebrow eyebrow--muted">Остались вопросы</span>
+        <p class="faq-aside__text">Отвечаем в течение рабочего дня, Пн–Пт с 10:00 до 19:00 МСК.</p>
+        <a class="btn btn--secondary btn--md btn--block" href="https://t.me/emmiatrey" rel="noopener">Написать в Телеграм</a>
+        <a class="faq-aside__mail" href="mailto:info@vilraystudio.ru">info@vilraystudio.ru</a>
       </aside>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Финальный CTA
+       Был карточкой в колонке FAQ и тянулся на всю её высоту, оставляя
+       сверху и снизу по ~470px пустоты. Стал горизонтальной полосой
+       под блоком вопросов (FIX-01 F5).
+       ============================================================ -->
+  <section data-type="C" class="band band--dark" aria-labelledby="cta-title">
+    <div class="container cta-strip">
+      <h2 class="h2 cta-strip__title" id="cta-title">Покажите плитку в интерьере
+        уже на следующей консультации</h2>
+      <div class="cta-strip__actions">
+        <a class="btn btn--primary btn--lg" href="#demo" data-track="demo_click" data-track-place="cta">Посмотреть, как работает</a>
+        <a class="btn btn--ghost-dark btn--lg" href="https://t.me/emmiatrey" rel="noopener">Написать в Телеграм</a>
+      </div>
     </div>
   </section>
 

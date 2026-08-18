@@ -988,10 +988,12 @@
    15. Частые вопросы + CTA
    ============================================================ */
 
+/* 8 колонок под вопросы, 4 под карточку (FIX-01 F5) */
 .faq__grid {
   display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: var(--col-gap);
+  grid-template-columns: 8fr 4fr;
+  gap: 48px;
+  align-items: start;
 }
 
 .faq__title {
@@ -1011,51 +1013,97 @@
 
 .faq__group:first-child { margin-top: 0; }
 
+/* Аккордеон: открыт только первый вопрос, остальные свёрнуты */
 .faq__item {
-  padding: 16px 0;
   border-bottom: 1px solid var(--c-line);
 }
 
 .faq__q {
-  font-size: var(--fs-body);
-  font-weight: 600;
-  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 44px;
+  padding: 16px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq__q::-webkit-details-marker { display: none; }
+
+/* Знак справа: плюс у свёрнутого, минус у раскрытого */
+.faq__q::after {
+  content: '+';
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-lead);
+  line-height: 1;
+  color: var(--c-ink-3);
+}
+
+.faq__item[open] .faq__q::after { content: '\2212'; }
+
+.faq__item[open] .faq__a { padding-bottom: 16px; }
+
+.faq__q {
+  font-size: 18px;
+  font-weight: 700;
   text-wrap: pretty;
 }
 
 .faq__a {
-  font-size: var(--fs-small);
+  max-width: 64ch;
+  font-size: var(--fs-body);
   color: var(--c-ink-2);
-  line-height: 1.65;
+  line-height: var(--lh-body);
   text-wrap: pretty;
 }
 
-.cta-card {
-  background: var(--c-dark);
-  border-radius: var(--r-xl);
-  padding: 32px;
+/* Маленькая светлая карточка по содержимому, без растяжения
+   на всю высоту колонки (FIX-01 F5) */
+.faq-aside {
+  align-self: start;
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: 12px;
+}
+
+.faq-aside__text {
+  font-size: var(--fs-small);
+  color: var(--c-ink-2);
+}
+
+.faq-aside__mail {
+  font-size: var(--fs-small);
+  text-align: center;
+}
+
+/* Финальный CTA — горизонтальная полоса, а не карточка в колонке */
+.cta-strip {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  flex-wrap: wrap;
 }
 
-/* Заголовок карточки — ступень H3 (CANON §2). На H2 он рвался
-   на шесть строк в колонке 5/12 и подминал под себя всю секцию. */
-.cta-card__title {
-  font-size: var(--fs-h3);
-  line-height: var(--lh-h3);
-  letter-spacing: normal;
+.cta-strip__title {
+  /* База 0, иначе при flex-wrap браузер переносит кнопки на новую строку
+     вместо того, чтобы сжать заголовок */
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 20ch;
   color: var(--c-on-dark);
-  margin-bottom: 16px;
 }
 
-.cta-card__text {
-  font-size: var(--fs-body);
-  color: var(--c-on-dark-2);
-  margin-bottom: 26px;
+.cta-strip__actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
 }
-
-.cta-card .btn + .btn { margin-top: 10px; }
 
 /* ============================================================
    16. Футер
