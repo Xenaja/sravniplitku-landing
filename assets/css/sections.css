@@ -10,11 +10,20 @@
 .header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 100;
+  background: transparent;
+  /* Граница прозрачная, а не отсутствующая: появление цвета не меняет
+     высоту шапки, поэтому включение фона не сдвигает контент (CLS = 0) */
+  border-bottom: 1px solid transparent;
+  transition: background-color 160ms ease-out, border-color 160ms ease-out;
+}
+
+/* Ставится скриптом при scrollY > 24 */
+.header--scrolled {
   background: var(--c-glass);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--c-line);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: var(--c-line);
 }
 
 .header__inner {

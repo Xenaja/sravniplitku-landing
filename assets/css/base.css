@@ -9,6 +9,10 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* Канон §6 называет 80px, но при шапке 64px это даёт зазор 16px,
+     а критерий приёмки U1 требует минимум 24px. Считаем от высоты
+     шапки — тогда правило переживёт и двухэтажную мобильную шапку. */
+  scroll-padding-top: calc(var(--header-h) + 24px);
 }
 
 body {
@@ -45,7 +49,7 @@ ul, ol { list-style: none; }
 [hidden] { display: none !important; }
 
 /* Якорные ссылки не должны уезжать под липкую шапку */
-[id] { scroll-margin-top: calc(var(--header-h) + 16px); }
+[id] { scroll-margin-top: calc(var(--header-h) + 24px); }
 
 /* ---------- Фокус ---------- */
 
