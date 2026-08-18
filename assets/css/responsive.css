@@ -67,6 +67,10 @@
   .testimonials__grid,
   .notes { grid-template-columns: repeat(2, 1fr); }
 
+  /* Стрелка «было → стало» разворачивается вниз и держит зазор между карточками */
+  .contrast__grid { grid-template-columns: 1fr; }
+  .contrast__arrow { transform: rotate(90deg); margin-block: 16px; }
+
   /* Выделенный тариф в одну колонку — бейдж не должен налезать */
   .plan--featured { margin-top: 11px; }
 
@@ -155,6 +159,7 @@
   .compare__tag--after  { right: 10px; }
 
   .lead-magnet { padding: 24px; gap: 28px; }
+  .contrast-card { padding: 22px; }
   .value-card  { padding: 24px; }
   .objection   { padding: 24px; }
   .note-card   { padding: 20px; }
