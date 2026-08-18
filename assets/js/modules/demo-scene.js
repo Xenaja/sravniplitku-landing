@@ -11,8 +11,8 @@ import { applyTile } from './tiles.js';
 import { trackOnce } from './analytics.js';
 
 const ZONE_LABELS = {
-  wall: 'Активная зона — стена',
-  floor: 'Активная зона — пол',
+  wall: 'Активная зона – стена',
+  floor: 'Активная зона – пол',
 };
 
 export function initDemoScene() {

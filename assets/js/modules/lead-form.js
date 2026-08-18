@@ -13,7 +13,7 @@ import { track } from './analytics.js';
 import { isPreview } from './preview.js';
 
 const MESSAGES = {
-  phoneEmpty: 'Укажите телефон — на него придёт файл',
+  phoneEmpty: 'Укажите телефон – на него придёт файл',
   phoneInvalid: 'Похоже, номер неполный. Формат: +7 999 123-45-67',
   selectEmpty: 'Выберите вариант',
   consent: 'Без согласия мы не можем отправить файл',
