@@ -101,7 +101,7 @@
 /* Заголовок во всю ширину контейнера: на 88px «консультацию» требует
    ~756px, в колонку 5/12 (466px) оно не влезает и рвётся по слогам */
 .hero__title { margin-bottom: 32px; }
-.hero__lead    { margin-bottom: 28px; max-width: 540px; }
+.hero__lead    { margin-bottom: 28px; }
 
 .hero__actions {
   display: flex;
@@ -149,8 +149,8 @@
    ============================================================ */
 
 .contrast__badge { margin-bottom: 16px; }
-.contrast__title { margin-bottom: 12px; max-width: 620px; }
-.contrast__lead  { max-width: 640px; margin-bottom: 32px; }
+.contrast__title { margin-bottom: 12px; }
+.contrast__lead  { margin-bottom: 32px; }
 
 .contrast__grid {
   display: grid;
@@ -158,14 +158,15 @@
   gap: 0;
 }
 
+/* Тип A: карточек и рамок нет. Разницу между колонками держит
+   вертикальная линия слева — приглушённая у «как обычно»
+   и акцентная у «как у нас». */
 .contrast-card {
-  background: var(--c-surface);
-  border: 1px solid var(--c-line);
-  border-radius: var(--r-xl);
-  padding: 32px;
+  border-left: 2px solid var(--c-line);
+  padding: 0 0 0 24px;
 }
 
-.contrast-card--service { border: 2px solid var(--c-accent); }
+.contrast-card--service { border-left-color: var(--c-accent); }
 
 .contrast-card__label { display: block; margin-bottom: 14px; }
 
@@ -217,7 +218,7 @@
    ============================================================ */
 
 .steps__title { margin-bottom: 12px; }
-.steps__lead  { max-width: 620px; margin-bottom: 36px; }
+.steps__lead  { margin-bottom: 36px; }
 
 /* Карточки перестраиваются, а не сжимаются в нечитаемые полоски */
 .steps { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
@@ -255,9 +256,9 @@
    5. Большое видео
    ============================================================ */
 
-.video__title { margin-bottom: 12px; max-width: 660px; }
+.video__title { margin-bottom: 12px; }
 .video__caption { margin-top: 10px; }
-.video__lead  { max-width: 620px; margin-bottom: 32px; }
+.video__lead  { margin-bottom: 32px; }
 
 /* ============================================================
    6. Рабочее демо
@@ -271,7 +272,7 @@
   margin-bottom: 12px;
 }
 
-.demo__lead { max-width: 660px; margin-bottom: 32px; }
+.demo__lead { margin-bottom: 32px; }
 
 .demo__grid {
   display: grid;
@@ -446,8 +447,8 @@
    7. Проблема со шторкой «до / после»
    ============================================================ */
 
-.problem__title { margin-bottom: 12px; max-width: 640px; }
-.problem__lead  { max-width: 620px; margin-bottom: 32px; }
+.problem__title { margin-bottom: 12px; }
+.problem__lead  { margin-bottom: 32px; }
 
 .compare {
   --split: 52%;
@@ -566,7 +567,7 @@
    ============================================================ */
 
 /* Лид секции убран — отступ до карточек держит сам заголовок */
-.value__title { margin-bottom: 44px; max-width: 720px; }
+.value__title { margin-bottom: 44px; }
 
 .value__grid {
   display: grid;
@@ -574,9 +575,10 @@
   gap: var(--col-gap);
 }
 
+/* Тип C по CANON §4: карточки внутри акцентной секции без рамок,
+   только подложка */
 .value-card {
-  background: var(--c-dark-card);
-  border: 1px solid var(--c-dark-line);
+  background: rgba(255, 255, 255, .05);
   border-radius: var(--r-xl);
   padding: 32px;
   display: flex;
@@ -664,12 +666,19 @@
 .segment__lead  { margin-bottom: 24px; }
 
 .segment__steps {
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: var(--col-gap);
   margin-top: 32px;
 }
 
+/* Тип A: вместо подложки с зазорами — линия сверху у каждого шага */
 .segment-step {
-  padding: 24px;
+  border-top: 1px solid var(--c-line);
+  padding: 16px 0 0;
+}
+
+.segment-step {
   display: grid;
   grid-template-columns: 34px 1fr;
   gap: 14px;
@@ -756,7 +765,7 @@
    ============================================================ */
 
 .works__title { margin-bottom: 12px; }
-.works__lead  { max-width: 620px; margin-bottom: 32px; }
+.works__lead  { margin-bottom: 32px; }
 
 .works__grid {
   display: grid;
@@ -811,11 +820,8 @@
    13. Лид-магнит
    ============================================================ */
 
+/* Тип A: форма лежит на бумаге, без карточки-обёртки */
 .lead-magnet {
-  border: 1px solid var(--c-line);
-  background: var(--c-surface);
-  border-radius: var(--r-xl);
-  padding: 32px;
   display: grid;
   grid-template-columns: 6fr 6fr;
   gap: var(--col-gap);
@@ -865,7 +871,7 @@
    ============================================================ */
 
 .pricing__title { margin-bottom: 12px; }
-.pricing__lead  { max-width: 640px; margin-bottom: 36px; }
+.pricing__lead  { margin-bottom: 36px; }
 
 .pricing__grid {
   display: grid;
