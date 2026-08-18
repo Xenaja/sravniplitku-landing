@@ -12,7 +12,7 @@ export const config = {
   pricing: {
     monthly: 3000,
     annual: 19800,
-    trial: 0,
+    trial: 490,
   },
 
   /**
