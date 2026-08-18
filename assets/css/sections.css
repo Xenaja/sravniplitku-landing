@@ -584,35 +584,18 @@
   background: rgba(255, 255, 255, .05);
   border-radius: var(--r-xl);
   padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
   height: 100%;
 }
 
-/* Иконки — только контур, без заливок */
-.value-card__icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  border: 1px solid var(--c-dark-line);
-  background: var(--c-dark);
-  display: grid;
-  place-content: center;
-  flex-shrink: 0;
+/* Иконки убраны: якорем карточки стала сама роль. Короткая линия
+   над подписью занимает место бывшего глифа. */
+.value-card__role {
+  display: block;
+  margin-bottom: 16px;
+  padding-top: 16px;
+  border-top: 2px solid var(--c-accent-light);
+  width: fit-content;
 }
-
-.value-card__icon svg {
-  width: 22px;
-  height: 22px;
-  stroke: var(--c-accent-light);
-  stroke-width: 1.6;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.value-card__role { display: block; margin-bottom: 10px; }
 
 .value-card__title {
   font-size: var(--fs-h3);
@@ -884,9 +867,11 @@
 .band--green .plan__name,
 .band--green .plan__price { color: var(--c-on-dark); }
 
+/* На зелёном --on-dark-2 даёт около 3.8:1 — ниже требуемых 4.5.
+   Тело текста берёт светлую ступень. */
 .band--green .lead,
 .band--green .plan__period,
-.band--green .plan__list { color: var(--c-on-dark-2); }
+.band--green .plan__list { color: var(--c-on-dark); }
 
 .pricing__title { margin-bottom: 12px; }
 .pricing__lead  { margin-bottom: 36px; }

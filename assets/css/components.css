@@ -337,10 +337,10 @@
    и иначе о кликабельности никто не догадается */
 .zoom-btn__icon {
   position: absolute;
-  right: 6px;
-  bottom: 6px;
-  width: 24px;
-  height: 24px;
+  right: 8px;
+  bottom: 8px;
+  width: 32px;
+  height: 32px;
   display: grid;
   place-content: center;
   border-radius: var(--r-sm);
@@ -352,12 +352,13 @@
 .zoom-btn:hover .zoom-btn__icon,
 .zoom-btn:focus-visible .zoom-btn__icon { opacity: 1; }
 
+/* Единый стиль иконок (CANON §6): контур 1.5px, размер 20px */
 .zoom-btn__icon svg {
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
   fill: none;
   stroke: #fff;
-  stroke-width: 1.8;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -506,10 +507,10 @@ select.field__control option { color: var(--c-ink); }
 select.field__control {
   appearance: none;
   padding-right: 40px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235C645F' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235C635D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
-  background-size: 16px 16px;
+  background-size: 20px 20px;
 }
 
 /* Ошибка валидации */
