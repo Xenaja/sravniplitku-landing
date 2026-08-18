@@ -187,8 +187,4 @@
 
   .lead-magnet { padding: 20px; }
   .btn--xl { padding: 14px 20px; font-size: 15px; }
-
-  /* Две кнопки с nowrap перестают помещаться в полосу — ужимаем поля */
-  .mobile-cta { gap: 8px; padding-inline: 12px; }
-  .mobile-cta .btn { padding: 13px 10px; font-size: 14px; }
 }
