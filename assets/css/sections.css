@@ -199,14 +199,53 @@
 }
 
 /* ============================================================
-   4. Большое видео
+   4. Пять шагов
+   ============================================================ */
+
+.steps__title { margin-bottom: 12px; }
+.steps__lead  { max-width: 620px; margin-bottom: 36px; }
+
+/* Карточки перестраиваются, а не сжимаются в нечитаемые полоски */
+.steps { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+
+.step {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.step__num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--c-accent);
+  margin-bottom: 10px;
+}
+
+.step__title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* Описания у шагов разной длины. Пусть текст забирает лишнюю высоту —
+   тогда окна со скриншотами выстраиваются в один ряд, а не пляшут. */
+.step__text {
+  font-size: var(--fs-xs);
+  color: var(--c-ink-2);
+  margin-bottom: 12px;
+  flex: 1 1 auto;
+}
+
+/* ============================================================
+   5. Большое видео
    ============================================================ */
 
 .video__title { margin-bottom: 12px; max-width: 660px; }
 .video__lead  { max-width: 620px; margin-bottom: 32px; }
 
 /* ============================================================
-   5. Рабочее демо
+   6. Рабочее демо
    ============================================================ */
 
 .demo__head {
@@ -387,7 +426,7 @@
 }
 
 /* ============================================================
-   6. Проблема со шторкой «до / после»
+   7. Проблема со шторкой «до / после»
    ============================================================ */
 
 .problem__title { margin-bottom: 12px; max-width: 640px; }
@@ -504,45 +543,6 @@
 
 .compare__tag--before { left: 14px; }
 .compare__tag--after  { right: 14px; background: var(--c-accent); }
-
-/* ============================================================
-   7. Пять шагов
-   ============================================================ */
-
-.steps__title { margin-bottom: 12px; }
-.steps__lead  { max-width: 620px; margin-bottom: 36px; }
-
-/* Карточки перестраиваются, а не сжимаются в нечитаемые полоски */
-.steps { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
-
-.step {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.step__num {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--c-accent);
-  margin-bottom: 10px;
-}
-
-.step__title {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-/* Описания у шагов разной длины. Пусть текст забирает лишнюю высоту —
-   тогда окна со скриншотами выстраиваются в один ряд, а не пляшут. */
-.step__text {
-  font-size: var(--fs-xs);
-  color: var(--c-ink-2);
-  margin-bottom: 12px;
-  flex: 1 1 auto;
-}
 
 /* ============================================================
    8. Возможности (тёмная секция)
