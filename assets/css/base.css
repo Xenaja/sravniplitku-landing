@@ -83,9 +83,25 @@ ul, ol { list-style: none; }
   border: 0;
 }
 
-.section    { padding-block: var(--section-y); }
-.section--lg { padding-block: var(--section-y-lg); }
-.section--md { padding-block: var(--section-y-md); }
+/* Вертикальный ритм CANON §3.
+   Между секциями встречаются ровно два значения: 96 при одном типе
+   и 128 на смене типа. Половина лежит на каждой секции, поэтому
+   соседние селекторы добирают верхнюю половину до 80 там, где тип
+   меняется. Полосы-фоны при этом остаются встык, без зазоров. */
+main > section { padding-block: var(--rhythm-half); }
+
+main > section[data-type='A'] + section[data-type='B'],
+main > section[data-type='A'] + section[data-type='C'],
+main > section[data-type='B'] + section[data-type='A'],
+main > section[data-type='B'] + section[data-type='C'],
+main > section[data-type='C'] + section[data-type='A'],
+main > section[data-type='C'] + section[data-type='B'],
+main > section[data-type='hero'] + section {
+  padding-top: var(--rhythm-switch);
+}
+
+/* Первый экран прижат к шапке — своя пара значений */
+main > section[data-type='hero'] { padding-block: 32px 48px; }
 
 /* ---------- Типографика (CANON §2) ----------
    Ступеней ровно семь, размеров вне шкалы быть не должно.
@@ -100,11 +116,7 @@ ul, ol { list-style: none; }
   text-wrap: balance;
 }
 
-/* Unbounded — широкая гарнитура: «консультацию» на мобильной ступени 44px
-   требует ~380px, а в контент 375-го экрана влезает 343. Канон между 88 и 44
-   промежуточных ступеней не даёт, поэтому спасаемся переносом по слогам,
-   а не третьим кеглем. Работает благодаря lang="ru" у документа. */
-.h1, .h2, .h3 { hyphens: auto; }
+
 
 .h2 {
   font-family: var(--font-display);

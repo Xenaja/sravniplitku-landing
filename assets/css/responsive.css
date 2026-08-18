@@ -16,6 +16,12 @@
    ============================================================ */
 
 @media (max-width: 768px) {
+  /* Unbounded широкая: «консультацию» на ступени 44px требует ~380px,
+     а в контент 375-го экрана влезает 343. Промежуточной ступени канон
+     не даёт, поэтому спасаемся переносом по слогам. На десктопе переносы
+     не нужны и мешают: там заголовки идут во всю ширину. */
+  .h1, .h2, .h3 { hyphens: auto; }
+
   :root {
     --fs-display: 44px;
     --fs-h2:      30px;
@@ -31,10 +37,8 @@
 
 @media (max-width: 1024px) {
   :root {
+    --gutter: 24px;   /* CANON §3: поля 40px только от 1024 и выше */
 
-    --section-y:    56px;
-    --section-y-lg: 64px;
-    --section-y-md: 60px;
   }
 
   /* Display 88px в половине колонки рвётся на пять строк —
@@ -67,7 +71,6 @@
 
   /* Сцена и панель управления встают друг под друга */
   .demo__grid,
-  .segment__panel,
   .value__grid,
   .objections__grid,
   .faq__grid,
@@ -76,6 +79,7 @@
 
   .works__grid,
   .testimonials__grid,
+  .segment__steps,
   .notes { grid-template-columns: repeat(2, 1fr); }
 
   /* Стрелка «было → стало» разворачивается вниз и держит зазор между карточками */
@@ -119,10 +123,7 @@
     --header-h:     96px;
 
 
-    --gutter:       16px;
-    --section-y:    44px;
-    --section-y-lg: 52px;
-    --section-y-md: 48px;
+    --gutter:       24px;   /* CANON §3 */
   }
 
   /* Навигация переезжает на свой этаж: в один ряд с логотипом и кнопкой
@@ -156,6 +157,7 @@
   .works__grid,
   .testimonials__grid,
   .notes,
+  .segment__steps,
   .lead-form__row { grid-template-columns: 1fr; }
 
   .compare { aspect-ratio: 16 / 9; }

@@ -67,15 +67,16 @@
 
 <main id="main">
 
-  <div class="container">
-
-    <!-- ============================================================
+  <!-- ============================================================
          2. Первый экран
          ============================================================ -->
-    <section class="hero" aria-labelledby="hero-title">
+  <section data-type="hero" aria-labelledby="hero-title">
+    <div class="container">
+      <span class="eyebrow hero__eyebrow">Для салонов плитки и поставщиков</span>
+      <h1 class="h1 hero__title" id="hero-title">Клиент выбирает плитку за одну консультацию</h1>
+
+      <div class="hero">
       <div>
-        <span class="eyebrow hero__eyebrow">Для салонов плитки и поставщиков</span>
-        <h1 class="h1 hero__title" id="hero-title">Клиент выбирает плитку за одну консультацию</h1>
         <p class="lead hero__lead">Продавец открывает готовую интерьерную сцену, применяет в ней коллекции и отдаёт клиенту изображение. Ничего не нужно моделировать и ждать: сцены отрисованы заранее, вы выбираете из готовых.</p>
 
         <div class="hero__actions">
@@ -101,13 +102,17 @@
           <span class="play" aria-hidden="true"></span>
         </div>
         <p class="mono-note hero__caption">40 секунд · сцена → зона → плитка → готовое изображение</p>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <!-- ============================================================
          3. Полоса метрик
          ============================================================ -->
-    <section class="slab metrics" aria-label="Ключевые цифры сервиса">
+  <section data-type="B" aria-label="Ключевые цифры сервиса">
+    <div class="container">
+      <div class="slab metrics">
       <div class="slab__cell metrics__cell">
         <div class="metrics__value">5+</div>
         <div class="metrics__label">интерьерных сцен в каталоге</div>
@@ -123,15 +128,18 @@
       <div class="slab__cell metrics__cell">
         <div class="metrics__value">1 день</div>
         <div class="metrics__label">от оплаты до коллекции в каталоге</div>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <!-- ============================================================
          3.1 Проблема и решение
          Довод в двух колонках. Плюс и минус переданы рамкой и приглушённым
          знаком: второго акцентного цвета в системе нет.
          ============================================================ -->
-    <section class="contrast" aria-labelledby="contrast-title">
+  <section data-type="B" aria-labelledby="contrast-title">
+    <div class="container contrast">
       <span class="badge contrast__badge">Проблема и решение</span>
       <h2 class="h2 contrast__title" id="contrast-title">Плитку сложно сравнивать по разным фотографиям</h2>
       <p class="lead contrast__lead">На сайтах производителей и поставщиков изображения отличаются по свету, ракурсу и качеству. Клиент смотрит не только на плитку, но и на разницу между картинками.</p>
@@ -161,14 +169,13 @@
           </ul>
         </article>
       </div>
-    </section>
-
-  </div>
+    </div>
+  </section>
 
   <!-- ============================================================
        4. Пять шагов
        ============================================================ -->
-  <section class="container section" id="how" aria-labelledby="how-title">
+  <section data-type="A" class="container" id="how" aria-labelledby="how-title">
     <h2 class="h2 steps__title" id="how-title">Пять действий до готового изображения</h2>
     <p class="lead steps__lead">Сцены отрисованы заранее, поэтому результат появляется сразу.</p>
 
@@ -288,8 +295,8 @@
   <!-- ============================================================
        5. Большое видео
        ============================================================ -->
-  <section class="band" id="demo" aria-labelledby="video-title">
-    <div class="container section">
+  <section data-type="A" class="band" id="demo" aria-labelledby="video-title">
+    <div class="container">
       <h2 class="h2 video__title" id="video-title">Посмотрите, как проходит консультация</h2>
       <p class="lead video__lead">Вся консультация: продавец собирает раскладку при клиенте, меняет коллекции в одной сцене и отправляет готовый файл.</p>
 
@@ -312,7 +319,7 @@
        на который уже ведут все кнопки «Посмотреть, как работает».
        Вернуть: sections.demo в config.js.
        ============================================================ -->
-  <section class="container section" aria-labelledby="demo-title" data-demo data-section="demo">
+  <section data-type="B" class="container" aria-labelledby="demo-title" data-demo data-section="demo">
     <div class="demo__head">
       <h2 class="h2" id="demo-title">Рабочее демо</h2>
       <span class="badge">часть функций отключена</span>
@@ -407,8 +414,8 @@
        оставлены — вернуть можно флагом sections.comparison в config.js.
        Тезис секции теперь несёт блок «Проблема и решение» выше.
        ============================================================ -->
-  <section class="band" aria-labelledby="problem-title" data-section="comparison">
-    <div class="container section">
+  <section data-type="A" class="band" aria-labelledby="problem-title" data-section="comparison">
+    <div class="container">
       <h2 class="h2 problem__title" id="problem-title">Клиент сравнивает не плитку, а картинки</h2>
       <p class="lead problem__lead">У каждого фото из каталога свой свет, ракурс и масштаб. Разница, которую видит клиент, – это разница между съёмками, а не между коллекциями. Отсюда сомнение и «я подумаю».</p>
 
@@ -446,8 +453,8 @@
   <!-- ============================================================
        8. Возможности (тёмная секция)
        ============================================================ -->
-  <section class="band band--dark" id="value" aria-labelledby="value-title">
-    <div class="container section--lg">
+  <section data-type="C" class="band band--dark" id="value" aria-labelledby="value-title">
+    <div class="container">
       <h2 class="h2 value__title" id="value-title">Что сервис меняет в работе салона</h2>
 
       <div class="value__grid">
@@ -501,7 +508,7 @@
   <!-- ============================================================
        9. Салонам / Поставщикам
        ============================================================ -->
-  <section class="container section--md" id="suppliers" aria-labelledby="segment-title-salon" data-segment>
+  <section data-type="B" class="container" id="suppliers" aria-labelledby="segment-title-salon" data-segment>
     <div class="segment__tabs" role="tablist" aria-label="Кому подходит сервис">
       <button class="segment__tab" type="button" role="tab"
               id="tab-salon" aria-controls="panel-salon" aria-selected="true" data-seg="salon">Салонам</button>
@@ -511,7 +518,7 @@
 
     <!-- Салонам -->
     <div class="segment__panel" id="panel-salon" role="tabpanel" aria-labelledby="tab-salon" data-seg-panel="salon">
-      <div>
+      <div class="segment__intro">
         <h2 class="h2 segment__title" id="segment-title-salon">Салону – показать разницу за одну встречу</h2>
         <p class="lead segment__lead">Подписка на сервис: готовые сцены, каталог коллекций и изображения для клиентов. Начинаете с тестового доступа, дальше месяц или год.</p>
         <a class="btn btn--primary btn--lg" href="#lead"
@@ -552,7 +559,7 @@
 
     <!-- Поставщикам -->
     <div class="segment__panel" id="panel-supplier" role="tabpanel" aria-labelledby="tab-supplier" data-seg-panel="supplier" hidden>
-      <div>
+      <div class="segment__intro">
         <h2 class="h2 segment__title">Поставщику – попасть в подбор на консультации</h2>
         <p class="lead segment__lead">Ваши коллекции внутри сцен, которые салоны показывают клиентам. Продавец подбирает плитку из каталога – и ваш бренд оказывается в этом подборе.</p>
         <a class="btn btn--primary btn--lg" href="#lead"
@@ -595,8 +602,8 @@
   <!-- ============================================================
        10. Возражения
        ============================================================ -->
-  <section class="band" aria-labelledby="objections-title">
-    <div class="container section">
+  <section data-type="B" class="band" aria-labelledby="objections-title">
+    <div class="container">
       <h2 class="h2 objections__title" id="objections-title">Что обычно спрашивают до подписки</h2>
 
       <div class="objections__grid">
@@ -633,7 +640,7 @@
   <!-- ============================================================
        11. Работы студии
        ============================================================ -->
-  <section class="container section" aria-labelledby="works-title">
+  <section data-type="A" class="container" aria-labelledby="works-title">
     <h2 class="h2 works__title" id="works-title">Сцены и реализации, которые мы сделали</h2>
     <p class="lead works__lead">Интерьерные сцены сервиса и проекты фасадной облицовки – та же команда, которая рендерит каталог.</p>
 
@@ -679,8 +686,8 @@
        Отключается флагом sections.testimonials в assets/js/config.js
        (надёжнее — удалить секцию целиком до появления настоящих цитат).
        ============================================================ -->
-  <section class="band" aria-labelledby="testimonials-title" data-section="testimonials">
-    <div class="container section">
+  <section data-type="B" class="band" aria-labelledby="testimonials-title" data-section="testimonials">
+    <div class="container">
       <h2 class="h2 testimonials__title" id="testimonials-title">Отзывы салонов</h2>
 
       <div class="testimonials__grid">
@@ -703,7 +710,7 @@
   <!-- ============================================================
        13. Лид-магнит
        ============================================================ -->
-  <section class="container section" id="lead" aria-labelledby="lead-title">
+  <section data-type="B" class="container" id="lead" aria-labelledby="lead-title">
     <div class="lead-magnet">
       <div>
         <span class="eyebrow lead-magnet__eyebrow">Бесплатно</span>
@@ -819,8 +826,8 @@
        пересчитываются в assets/js/modules/pricing.js из config.js,
        чтобы проценты не расходились с ценами.
        ============================================================ -->
-  <section class="band" id="pricing" aria-labelledby="pricing-title">
-    <div class="container section">
+  <section data-type="B" class="band" id="pricing" aria-labelledby="pricing-title">
+    <div class="container">
       <h2 class="h2 pricing__title" id="pricing-title">Тарифы</h2>
       <p class="lead pricing__lead">Бесплатного тарифа нет – так мы отсекаем нецелевые регистрации. Начать можно с тестового доступа за минимальную сумму.</p>
 
@@ -876,7 +883,7 @@
   <!-- ============================================================
        15. Частые вопросы + CTA
        ============================================================ -->
-  <section class="container section" id="faq" aria-labelledby="faq-title">
+  <section data-type="B" class="container" id="faq" aria-labelledby="faq-title">
     <div class="faq__grid">
       <div>
         <h2 class="h2 faq__title" id="faq-title">Частые вопросы</h2>
