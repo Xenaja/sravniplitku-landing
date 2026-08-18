@@ -48,23 +48,19 @@
   --font-body:    'Golos Text', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
 
-  /* ---------- Размер шрифта ---------- */
-  --fs-h1:        46px;
-  --fs-h2-dark:   40px;
-  --fs-h2:        32px;
-  --fs-h2-card:   30px;
-  --fs-h2-cta:    27px;
-  --fs-h3-value:  23px;
-  --fs-h3-obj:    22px;
-  --fs-num-lg:    30px;
-  --fs-num-md:    26px;
-  --fs-lead-hero: 18px;
-  --fs-lead:      17px;
-  --fs-body:      16px;
-  --fs-small:     14.5px;
-  --fs-xs:        13.5px;
-  --fs-mono:      11px;
-  --fs-mono-sm:   10.5px;
+  /* ---------- Типографическая шкала (CANON §2) ----------
+     Размеров вне этого списка на странице быть не должно. */
+  --fs-display: 88px;  --lh-display: 1.02;  --tr-display: -.02em;
+  --fs-h2:      44px;  --lh-h2:      1.08;  --tr-h2:      -.015em;
+  --fs-h3:      24px;  --lh-h3:      1.25;
+  --fs-lead:    20px;  --lh-lead:    1.55;
+  --fs-body:    17px;  --lh-body:    1.6;
+  --fs-small:   15px;  --lh-small:   1.5;
+  --fs-label:   12px;  --lh-label:   1;     --tr-label:   .1em;
+
+  /* Мера строки: канон требует 62ch, на тёмном — 56ch */
+  --measure:      62ch;
+  --measure-dark: 56ch;
 
   /* ---------- Сетка и ритм ---------- */
   --container:    1180px;

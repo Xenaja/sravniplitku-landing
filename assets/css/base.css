@@ -87,72 +87,85 @@ ul, ol { list-style: none; }
 .section--lg { padding-block: var(--section-y-lg); }
 .section--md { padding-block: var(--section-y-md); }
 
-/* ---------- Типографика ---------- */
+/* ---------- Типографика (CANON §2) ----------
+   Ступеней ровно семь, размеров вне шкалы быть не должно.
+   Мера строки задана в ch, а не в px: она должна следовать за кеглем. */
 
 .h1 {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: var(--fs-h1);
-  line-height: 1.1;
-  letter-spacing: -.02em;
-  text-wrap: pretty;
+  font-weight: 700;
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tr-display);
+  text-wrap: balance;
 }
+
+/* Unbounded — широкая гарнитура: «консультацию» на мобильной ступени 44px
+   требует ~380px, а в контент 375-го экрана влезает 343. Канон между 88 и 44
+   промежуточных ступеней не даёт, поэтому спасаемся переносом по слогам,
+   а не третьим кеглем. Работает благодаря lang="ru" у документа. */
+.h1, .h2, .h3 { hyphens: auto; }
 
 .h2 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: var(--fs-h2);
-  line-height: 1.15;
-  text-wrap: pretty;
+  line-height: var(--lh-h2);
+  letter-spacing: var(--tr-h2);
+  text-wrap: balance;
 }
-
-/* H2 тёмной секции — крупнее и с трекингом */
-.h2--dark {
-  font-size: var(--fs-h2-dark);
-  line-height: 1.1;
-  letter-spacing: -.02em;
-}
-
-.h2--card { font-size: var(--fs-h2-card); }
-.h2--cta  { font-size: var(--fs-h2-cta); line-height: 1.18; }
 
 .h3 {
   font-family: var(--font-display);
   font-weight: 600;
-  line-height: 1.2;
-  text-wrap: pretty;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  text-wrap: balance;
 }
 
-/* Надзаголовок-рубрика */
+/* Надзаголовок-рубрика, тег, номер шага */
 .eyebrow {
   font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: var(--fs-mono);
-  line-height: 1.6;
-  letter-spacing: .14em;
+  font-weight: 500;
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  letter-spacing: var(--tr-label);
   text-transform: uppercase;
   color: var(--c-accent);
 }
 
-.eyebrow--muted { font-size: var(--fs-mono-sm); letter-spacing: .1em; color: var(--c-ink-2); }
-.eyebrow--light { font-size: var(--fs-mono-sm); letter-spacing: .12em; color: var(--c-accent-light); }
-.eyebrow--dim   { font-size: var(--fs-mono-sm); letter-spacing: .12em; color: var(--c-on-dark-2); }
+.eyebrow--muted { color: var(--c-ink-2); }
+.eyebrow--light { color: var(--c-accent-light); }
+.eyebrow--dim   { color: var(--c-on-dark-2); }
 
 .lead {
   font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
   color: var(--c-ink-2);
-  text-wrap: pretty;
 }
-
-.lead--hero { font-size: var(--fs-lead-hero); }
-.lead--dark { font-size: var(--fs-lead-hero); color: var(--c-on-dark-2); }
 
 /* Подпись моноширинным под медиа и кнопками */
 .mono-note {
   font-family: var(--font-mono);
-  font-size: var(--fs-mono);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
   color: var(--c-ink-2);
 }
+
+/* Мера строки и перенос — на все абзацы разом, а не поштучно */
+p, li {
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+
+.band--dark p,
+.band--dark li,
+.cta-card p { max-width: var(--measure-dark); }
+
+/* Цифры в статистике и тарифах не должны прыгать по ширине */
+.metrics__value,
+.plan__price,
+.plan__period { font-variant-numeric: tabular-nums; }
 
 /* ---------- Утилиты ---------- */
 

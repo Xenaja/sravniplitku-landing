@@ -10,24 +10,41 @@
    ============================================================ */
 
 /* ============================================================
-   ≤ 1024px — планшет-альбом: ужимаем шкалу и вертикальный ритм
+   ≤ 768px — шкала CANON §2 для узких экранов.
+   Единственная точка перелома кегля: промежуточных значений
+   канон не допускает.
+   ============================================================ */
+
+@media (max-width: 768px) {
+  :root {
+    --fs-display: 44px;
+    --fs-h2:      30px;
+    --fs-h3:      20px;
+    --fs-lead:    18px;
+    --fs-body:    16px;
+  }
+}
+
+/* ============================================================
+   ≤ 1024px — планшет-альбом: ужимаем вертикальный ритм
    ============================================================ */
 
 @media (max-width: 1024px) {
   :root {
-    --fs-h1:        40px;
-    --fs-h2-dark:   34px;
-    --fs-h2:        28px;
-    --fs-h2-card:   26px;
-    --fs-h2-cta:    24px;
-    --fs-h3-value:  21px;
 
     --section-y:    56px;
     --section-y-lg: 64px;
     --section-y-md: 60px;
   }
 
-  .hero { gap: 36px; }
+  /* Display 88px в половине колонки рвётся на пять строк —
+     первый экран становится одноколоночным раньше остальных сеток */
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 40px 0 36px;
+  }
+
   .metrics { margin-bottom: 56px; }
 
   .demo__grid    { gap: 24px; }
@@ -46,12 +63,6 @@
    ============================================================ */
 
 @media (max-width: 860px) {
-  .hero {
-    grid-template-columns: 1fr;
-    padding: 40px 0 36px;
-  }
-  .hero__lead { max-width: none; }
-
   .metrics { grid-template-columns: repeat(2, 1fr); }
 
   /* Сцена и панель управления встают друг под друга */
@@ -82,13 +93,18 @@
 }
 
 /* ============================================================
-   ≤ 720px — шапка: телефон уезжает, остаются лого, скролл-навигация
-              и кнопка демо
+   ≤ 720px — шапка: уезжает кнопка, остаются логотип, телефон
+              и скролл-навигация
    ============================================================ */
 
 @media (max-width: 720px) {
-  .header__inner  { gap: 14px; }
-  .header__phone  { display: none; }
+  .header__inner { gap: 14px; }
+
+  /* Кнопка с длинной подписью не помещается в один ряд с логотипом
+     и телефоном. Действие не теряется: до 600px его держит первый
+     экран, ниже — липкая полоса внизу. А телефон, наоборот, остаётся:
+     аудит требовал контакт на входе. */
+  .header__actions .btn { display: none; }
   .header__actions { gap: 10px; }
 }
 
@@ -102,17 +118,6 @@
        от него считается scroll-margin у якорей */
     --header-h:     96px;
 
-    --fs-h1:        30px;
-    --fs-h2-dark:   26px;
-    --fs-h2:        24px;
-    --fs-h2-card:   23px;
-    --fs-h2-cta:    22px;
-    --fs-h3-value:  19px;
-    --fs-h3-obj:    19px;
-    --fs-num-lg:    26px;
-    --fs-num-md:    22px;
-    --fs-lead-hero: 16px;
-    --fs-lead:      16px;
 
     --gutter:       16px;
     --section-y:    44px;
@@ -138,6 +143,7 @@
   .header__logo   { grid-area: logo; }
   .header__actions { grid-area: actions; justify-self: end; margin-left: 0; }
   .header__nav    { grid-area: nav; }
+  .header__phone  { font-size: var(--fs-small); }
 
   /* Место под липкую кнопку действия — добираем тёмным футером,
      чтобы под ним не оставалось светлой полосы */
@@ -154,7 +160,7 @@
 
   .compare { aspect-ratio: 16 / 9; }
   .compare__before { gap: 6px; padding: 6px; }
-  .compare__tag { font-size: 9px; padding: 5px 8px; bottom: 10px; }
+  .compare__tag { padding: 5px 8px; bottom: 10px; }
   .compare__tag--before { left: 10px; }
   .compare__tag--after  { right: 10px; }
 
@@ -185,5 +191,5 @@
   :root { --fs-h1: 27px; }
 
   .lead-magnet { padding: 20px; }
-  .btn--xl { padding: 14px 20px; font-size: 15px; }
+  .btn--xl { padding: 14px 20px; }
 }
