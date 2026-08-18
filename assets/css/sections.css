@@ -548,8 +548,8 @@
    8. Возможности (тёмная секция)
    ============================================================ */
 
-.value__title { margin-bottom: 14px; max-width: 720px; }
-.value__lead  { max-width: 640px; margin-bottom: 44px; }
+/* Лид секции убран — отступ до карточек держит сам заголовок */
+.value__title { margin-bottom: 44px; max-width: 720px; }
 
 .value__grid {
   display: grid;
