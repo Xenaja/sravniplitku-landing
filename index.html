@@ -80,7 +80,6 @@
 
         <div class="hero__actions">
           <a class="btn btn--primary btn--xl" href="#demo" data-track="demo_click" data-track-place="hero">Попробовать демо</a>
-          <a class="btn btn--secondary btn--xl" href="#lead" data-lead-source="hero-lead-magnet">Забрать «7 приёмов»</a>
         </div>
 
         <p class="mono-note hero__micro">работает в браузере · без установки · заявка — в тот же день</p>
@@ -108,7 +107,7 @@
          ============================================================ -->
     <section class="slab metrics" aria-label="Ключевые цифры сервиса">
       <div class="slab__cell metrics__cell">
-        <div class="metrics__value">5</div>
+        <div class="metrics__value">&gt;5</div>
         <div class="metrics__label">интерьерных сцен в каталоге</div>
       </div>
       <div class="slab__cell metrics__cell">
@@ -116,7 +115,7 @@
         <div class="metrics__label">зоны в одной сцене</div>
       </div>
       <div class="slab__cell metrics__cell">
-        <div class="metrics__value">минуты</div>
+        <div class="metrics__value">3 минуты</div>
         <div class="metrics__label">от открытия сцены до изображения</div>
       </div>
       <div class="slab__cell metrics__cell">
@@ -167,7 +166,7 @@
   <!-- ============================================================
        4. Большое видео
        ============================================================ -->
-  <section class="band" aria-labelledby="video-title">
+  <section class="band" id="demo" aria-labelledby="video-title">
     <div class="container section">
       <h2 class="h2 video__title" id="video-title">Посмотрите, как проходит консультация</h2>
       <p class="lead video__lead">Полная запись: продавец собирает раскладку при клиенте, меняет коллекции в одной сцене и отправляет готовый файл.</p>
@@ -185,8 +184,12 @@
 
   <!-- ============================================================
        5. Рабочее демо
+       ВЫКЛЮЧЕНА: демо ещё не готово технически. Когда будет — заменит
+       собой секцию большого видео и заберёт у неё id="demo",
+       на который уже ведут все кнопки «Попробовать демо».
+       Вернуть: sections.demo в config.js.
        ============================================================ -->
-  <section class="container section" id="demo" aria-labelledby="demo-title" data-demo>
+  <section class="container section" aria-labelledby="demo-title" data-demo data-section="demo">
     <div class="demo__head">
       <h2 class="h2" id="demo-title">Рабочее демо</h2>
       <span class="badge">часть функций отключена</span>
@@ -334,8 +337,8 @@
             <span class="window__dot"></span><span class="window__dot"></span><span class="window__dot"></span>
           </div>
           <div class="window__body">
-            <img src="assets/img/steps/step-1-scene.jpg" alt="Интерфейс сервиса: открыта сцена ванной, внизу каталог готовых интерьеров"
-                 width="800" height="730" loading="lazy" decoding="async">
+            <img src="assets/img/steps/step-1-scene.jpg" alt="Каталог сервиса: готовые интерьерные сцены на выбор, одна выделена"
+                 width="420" height="315" loading="lazy" decoding="async">
           </div>
         </div>
       </article>
@@ -349,8 +352,8 @@
             <span class="window__dot"></span><span class="window__dot"></span><span class="window__dot"></span>
           </div>
           <div class="window__body">
-            <img src="assets/img/steps/step-2-zone.jpg" alt="Интерфейс сервиса: зона стены выделена пунктиром и готова к подбору"
-                 width="800" height="730" loading="lazy" decoding="async">
+            <img src="assets/img/steps/step-2-zone.jpg" alt="Выбранная зона обведена пунктиром прямо на рендере"
+                 width="460" height="345" loading="lazy" decoding="async">
           </div>
         </div>
       </article>
@@ -364,8 +367,8 @@
             <span class="window__dot"></span><span class="window__dot"></span><span class="window__dot"></span>
           </div>
           <div class="window__body">
-            <img src="assets/img/steps/step-3-tile.jpg" alt="Интерфейс сервиса: к выделенной зоне применена коллекция серого мрамора"
-                 width="800" height="722" loading="lazy" decoding="async">
+            <img src="assets/img/steps/step-3-tile.jpg" alt="Одна стена сцены: слева исходная плитка, справа применённая коллекция"
+                 width="520" height="390" loading="lazy" decoding="async">
           </div>
         </div>
       </article>
@@ -379,8 +382,8 @@
             <span class="window__dot"></span><span class="window__dot"></span><span class="window__dot"></span>
           </div>
           <div class="window__body">
-            <img src="assets/img/steps/step-4-light.jpg" alt="Интерфейс сервиса: температура освещения сцены выставлена на 6049 К"
-                 width="800" height="718" loading="lazy" decoding="async">
+            <img src="assets/img/steps/step-4-light.jpg" alt="Панель сервиса: ползунок температуры света выставлен на 6049 К"
+                 width="480" height="360" loading="lazy" decoding="async">
           </div>
         </div>
       </article>
