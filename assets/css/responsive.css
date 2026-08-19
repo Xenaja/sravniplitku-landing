@@ -120,10 +120,13 @@
     --fs-h3:      20px;
     --fs-lead:    18px;
     --fs-body:    16px;
-  }
 
-  /* Первая фраза письма — не заголовок канона, своя ступень */
-  .founder__lead { font-size: 22px; }
+    /* Ступени блоков живут там же, где канонические: правило с кеглем
+       на узком экране больше не нужно, хватает переопределения токена */
+    --fs-block:      30px;
+    --fs-block-lead: 16px;
+    --fs-letter:     22px;
+  }
 
   /* Шапка блока в две строки: контрол во всю ширину, по половине
      на сегмент. 44px вместо 40 — минимальная цель нажатия. */
@@ -136,15 +139,11 @@
   .segment__tabs { display: grid; grid-template-columns: 1fr 1fr; }
   .segment__tab { min-height: 44px; padding: 8px 12px; }
 
-  /* balance вместе с мобильным hyphens резал «пока-зать» ради
-     ровных строк, хотя слово целиком влезает. pretty держит
-     висячую строку, но не требует равной длины. */
   /* Перенос по слогам здесь не нужен: строка длиннее колонки всего
      на несколько пикселей, и hyphens резал первое же слово — «пока-зать».
      Самое длинное слово блока — «консультации», оно влезает целиком
      даже на 320px; overflow-wrap из общего правила остаётся сеткой. */
-  .segment__title { font-size: 30px; text-wrap: pretty; hyphens: manual; }
-  .segment__lead { font-size: 16px; }
+  .segment__title { text-wrap: pretty; hyphens: manual; }
   .segment__cta { display: flex; width: 100%; }
 
   .segment-step { grid-template-columns: 32px 1fr; gap: 14px; padding: 16px 0; }

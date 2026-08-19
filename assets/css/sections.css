@@ -280,7 +280,7 @@
   position: relative;
   aspect-ratio: 16 / 10;
   border: 1px solid var(--c-line);
-  border-radius: 12px;
+  border-radius: var(--r-2xl);
   overflow: hidden;
   background: var(--c-slot);
 }
@@ -383,7 +383,7 @@
   gap: 4px;
   padding: 4px;
   background: var(--c-control-bg);
-  border-radius: 12px;
+  border-radius: var(--r-2xl);
   flex-shrink: 0;
 }
 
@@ -391,7 +391,7 @@
   min-height: 40px;
   padding: 8px 24px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--r-xl);
   background: transparent;
   color: var(--c-ink-3);
   font-size: var(--fs-small);
@@ -420,7 +420,7 @@
 .segment__title {
   max-width: 18ch;
   margin-bottom: 20px;
-  font-size: 40px;
+  font-size: var(--fs-block);
   line-height: 1.1;
   letter-spacing: -.02em;
   text-wrap: balance;
@@ -429,7 +429,7 @@
 .segment__lead {
   max-width: 44ch;
   margin-bottom: 28px;
-  font-size: 18px;
+  font-size: var(--fs-block-lead);
   line-height: 1.6;
   color: var(--c-ink-2);
 }
@@ -439,7 +439,7 @@
 /* Не декор: без этих двух строк левая колонка на 60+px короче списка
    справа, и под кнопкой образуется пустота. */
 .segment__meta {
-  font-size: 13px;
+  font-size: var(--fs-meta);
   line-height: 1.6;
   color: var(--c-ink-3);
 }
@@ -466,19 +466,19 @@
   /* Оптическое выравнивание по первой строке заголовка шага */
   padding-top: 3px;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: var(--fs-meta);
   color: var(--c-accent);
 }
 
 .segment-step__title {
   margin-bottom: 6px;
-  font-size: 18px;
+  font-size: var(--fs-sub);
   font-weight: 700;
 }
 
 .segment-step__text {
   max-width: 56ch;
-  font-size: 16px;
+  font-size: var(--fs-note);
   line-height: 1.55;
   color: var(--c-ink-2);
 }
@@ -536,14 +536,14 @@
   padding: 64px 40px;
   background: var(--c-surface);
   border: 1px solid var(--c-line);
-  border-radius: 12px;
+  border-radius: var(--r-2xl);
 }
 
 /* Квадрат, а не 4/5: при 4/5 фото короче письма и справа
    остаётся дыра */
 .founder__photo {
   aspect-ratio: 1 / 1;
-  border-radius: 12px;
+  border-radius: var(--r-2xl);
   overflow: hidden;
   background: var(--c-slot);
 }
@@ -567,7 +567,7 @@
   margin-bottom: 24px;
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: 26px;
+  font-size: var(--fs-letter);
   line-height: 1.35;
   letter-spacing: -.015em;
   color: var(--c-ink);
@@ -594,7 +594,7 @@
 .founder__name {
   display: block;
   font-weight: 700;
-  font-size: 18px;
+  font-size: var(--fs-sub);
   color: var(--c-ink);
 }
 
@@ -706,7 +706,7 @@
   display: flex;
   flex-direction: column;
   border: 1px solid var(--c-line);
-  border-radius: 12px;
+  border-radius: var(--r-2xl);
   padding: 32px;
   background: var(--c-surface);
 }
@@ -836,7 +836,7 @@
 .faq__item[open] .faq__a { padding-bottom: 16px; }
 
 .faq__q {
-  font-size: 18px;
+  font-size: var(--fs-sub);
   font-weight: 700;
   text-wrap: pretty;
 }
@@ -858,7 +858,7 @@
   padding: 24px;
   background: var(--c-surface);
   border: 1px solid var(--c-line);
-  border-radius: 12px;
+  border-radius: var(--r-2xl);
 }
 
 .faq-aside__text {
@@ -993,7 +993,7 @@
   gap: 4px;
   padding: 4px;
   background: var(--c-control-bg);
-  border-radius: 12px;
+  border-radius: var(--r-2xl);
 }
 
 .points__option input {
@@ -1010,7 +1010,7 @@
   min-width: 56px;
   min-height: 44px;
   padding: 0 16px;
-  border-radius: 8px;
+  border-radius: var(--r-xl);
   color: var(--c-ink-3);
   font-size: var(--fs-small);
   font-weight: 500;
