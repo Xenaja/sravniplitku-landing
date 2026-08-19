@@ -77,7 +77,7 @@
 /* --- Размеры (значения из макета) --- */
 
 .btn--xs { font-size: var(--fs-small);   padding: 10px 18px; border-radius: var(--r-sm); }
-.btn--sm { font-size: var(--fs-small); padding: 11px 18px; border-radius: var(--r-sm); }
+
 .btn--md { font-size: var(--fs-small);   padding: 13px 20px; }
 .btn--lg { font-size: var(--fs-body); padding: 14px 24px; }
 .btn--xl { font-size: var(--fs-body);   padding: 15px 28px; }
@@ -87,22 +87,18 @@
 .btn:active { transform: translateY(1px); }
 .btn--primary:active { background: var(--c-accent-press); border-color: var(--c-accent-press); }
 
-/* На акцентном фоне зелёные кнопки не читаются — CANON §5 */
-.band--green .btn--primary,
+/* На тёмном фоне зелёные кнопки не читаются — CANON §5 */
 .band--dark .btn--primary {
   background: #fff;
   border-color: #fff;
   color: var(--c-ink);
 }
-.band--green .btn--primary:hover,
 .band--dark .btn--primary:hover { background: var(--c-on-dark); border-color: var(--c-on-dark); }
 
-.band--green .btn--outline,
 .band--dark .btn--outline {
   border-color: rgba(255, 255, 255, .35);
   color: var(--c-on-dark);
 }
-.band--green .btn--outline:hover,
 .band--dark .btn--outline:hover { background: rgba(255, 255, 255, .08); color: #fff; }
 
 /* Внутри тёмной карточки кнопка остаётся зелёной: это единственное
@@ -172,19 +168,6 @@
    Это не тени, а линии-зазоры.
    ============================================================ */
 
-.slab {
-  display: grid;
-  gap: var(--grid-gap);
-  background: var(--c-line);
-  border: var(--grid-gap) solid var(--c-line);
-  border-radius: var(--r-lg);
-}
-
-.slab__cell {
-  background: var(--c-surface);
-  border-radius: var(--r-xs);
-}
-
 /* ============================================================
    Медиа-слоты
    Заглушки под видео и скриншоты сервиса. Пропорции и размеры
@@ -201,12 +184,10 @@
   border-radius: var(--r-lg);
 }
 
-.media--flat  { border-radius: 0; border: 0; }
 .media--xl    { border-radius: var(--r-xl); }
 
-.media--16x10 { aspect-ratio: 16 / 10; }
 .media--16x9  { aspect-ratio: 16 / 9; }
-.media--4x3   { aspect-ratio: 4 / 3; }
+
 .media--3x2   { aspect-ratio: 3 / 2; }  /* кейсы, CANON §5 */
 
 .media > img,
@@ -245,45 +226,9 @@
   max-width: 32ch;
 }
 
-/* Рамка-«окно» вокруг скриншота сервиса */
-.window {
-  border: 1px solid var(--c-line);
-  border-radius: var(--r-sm);
-  overflow: hidden;
-  background: var(--c-surface);
-}
-
-.window__bar {
-  display: flex;
-  gap: 5px;
-  padding: 7px 9px;
-  background: #F0F1ED;
-  border-bottom: 1px solid var(--c-line);
-}
-
-.window__dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #C9CCC5;
-}
-
-.window__body {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  background: var(--c-surface-2);
-}
-
 /* Кропы шагов подготовлены ровно в 4/3, поэтому кадр заполняется целиком.
    contain оставлен намеренно: если подложат картинку других пропорций,
    она впишется, а не обрежется по краям. */
-.window__body img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
 
 /* ============================================================
    Увеличение скриншота
@@ -394,52 +339,6 @@
 .lightbox__close:hover {
   background: var(--c-surface-2);
   border-color: var(--c-line-field);
-}
-
-/* ============================================================
-   Процедурные текстуры плитки
-   Времянка вместо настоящих рендеров (см. «Fidelity»).
-   Геометрия задаётся переменными, цвет — классом .tile--*,
-   раскладка — атрибутом [data-tile-layout] на <body>.
-   Заменяется на реальные рендеры без правки разметки.
-   ============================================================ */
-
-.tile-surface {
-  --pat-a: 0deg;
-  --pat-b: 90deg;
-  --pat-w: 26px;
-  --pat-h: 26px;
-  background-color: var(--tile-c);
-  background-image:
-    repeating-linear-gradient(var(--pat-a), var(--tile-g) 0 1.5px, transparent 1.5px var(--pat-h)),
-    repeating-linear-gradient(var(--pat-b), var(--tile-g) 0 1.5px, transparent 1.5px var(--pat-w)),
-    linear-gradient(160deg, rgba(255, 255, 255, .34), rgba(0, 0, 0, .14));
-}
-
-/* Палитра образцов каталога */
-.tile--carrara    { --tile-c: #ECE8E1; --tile-g: #D8D2C7; }
-.tile--travertine { --tile-c: #DED3C0; --tile-g: #C9BCA6; }
-.tile--concrete   { --tile-c: #C6C2BA; --tile-g: #B0ACA4; }
-.tile--terracotta { --tile-c: #C18868; --tile-g: #A97354; }
-.tile--graphite   { --tile-c: #6F6B67; --tile-g: #585450; }
-.tile--oak        { --tile-c: #C6A176; --tile-g: #AE8A62; }
-
-/* Стена: раскладка переключается пользователем */
-.tile-surface--wall  { --pat-w: 26px; --pat-h: 26px; }
-[data-tile-layout='long'] .tile-surface--wall { --pat-w: 52px; }
-[data-tile-layout='diag'] .tile-surface--wall { --pat-a: 45deg; --pat-b: -45deg; }
-
-/* Пол: всегда вытянутый формат, масштаб мельче */
-.tile-surface--floor { --pat-w: 40px; --pat-h: 20px; }
-
-/* Образец в карточке коллекции */
-.tile-surface--swatch {
-  --pat-w: 9px;
-  --pat-h: 9px;
-  width: 32px;
-  height: 32px;
-  border-radius: 3px;
-  flex-shrink: 0;
 }
 
 /* ============================================================

@@ -1,13 +1,96 @@
 /* ============================================================
    СравниПлитку — адаптив
    Макет свёрстан под ≈1180px и выше; ниже этой ширины работают
-   правила отсюда. Точки внимания взяты из раздела «Адаптив»
-   хендоффа: двухколоночные сетки в одну колонку, интерактивная
-   сцена и лента образцов на узком экране, шторка по касанию,
-   липкая кнопка действия, горизонтальный скролл навигации.
+   правила отсюда: двухколоночные сетки становятся одной колонкой,
+   появляется липкая кнопка действия, навигация уезжает в скролл.
 
    Подключается последним — переопределяет sections.css.
+   Блоки идут от широкого к узкому: при max-width побеждает тот,
+   что ниже в файле, поэтому обратный порядок молча ломал бы
+   правила, объявленные сразу в двух брейкпоинтах.
    ============================================================ */
+
+/* ============================================================
+   ≤ 1024px — планшет-альбом: ужимаем вертикальный ритм
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  /* Поля карточки основателя уменьшаются вместе с полями страницы.
+     Колонка фото шире 4/12: на 1024 квадрат сжимался до 285px
+     и под ним оставалась дыра в 200px до низа письма */
+  .founder { padding: 48px 32px; gap: 40px; grid-template-columns: 5fr 7fr; }
+
+  /* Фото тянется по высоте письма: исходник вертикальный,
+     кадру есть что показать ниже квадрата */
+  .founder__photo { align-self: stretch; aspect-ratio: auto; }
+
+  :root {
+    --gutter: 24px;   /* CANON §3: поля 40px только от 1024 и выше */
+
+  }
+
+  /* Заголовок первого экрана в половине колонки рвётся на пять строк —
+     геро становится одноколоночным раньше остальных сеток */
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 40px 0 36px;
+  }
+
+  .metrics { margin-bottom: 56px; }
+
+  
+  .segment__panel { gap: 40px; }
+  .faq__grid     { gap: 32px; }
+
+  .lead-magnet { padding: 32px; gap: 32px; }
+  .value-card  { padding: 28px; }
+  
+  
+  .plan        { padding: 26px; }
+}
+
+/* ============================================================
+   ≤ 860px — двухколоночные сетки в одну колонку
+   ============================================================ */
+
+@media (max-width: 860px) {
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+
+  /* Сцена и панель управления встают друг под друга */
+  .value__grid,
+.faq__grid,
+.lead-magnet,
+.pricing__grid { grid-template-columns: 1fr; }
+
+  .works__grid,
+.testimonials__grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Заголовок с кнопкой над списком шагов, а не рядом */
+  .segment__panel { grid-template-columns: 1fr; gap: 32px; }
+
+  /* Строка шага в одну колонку: кадр под текстом */
+  .step { grid-template-columns: 1fr; gap: 24px; }
+
+  /* Стрелка «было → стало» разворачивается вниз и держит зазор между карточками */
+  .contrast__grid { grid-template-columns: 1fr; }
+  .contrast__arrow { transform: rotate(90deg); margin-block: 16px; }
+
+  /* Тёмный тариф в одну колонку — бейдж не должен налезать */
+  .plan--dark { margin-top: 11px; }
+
+  /* 24/9 на узком экране превращается в щель — растим кадр */
+  
+
+  .footer__top { grid-template-columns: 1fr 1fr; }
+  .footer__about { max-width: none; }
+
+  /* Одна колонка раньше 768: на 4/12 от 860 фото сжимается
+     до ~225px и лицо уже не читается. Квадрат меняется на 4/3:
+     во всю ширину квадрат съедает целый экран. */
+  .founder { grid-template-columns: 1fr; gap: 32px; }
+  .founder__photo { aspect-ratio: 4 / 3; }
+}
 
 /* ============================================================
    ≤ 768px — шкала CANON §2 для узких экранов.
@@ -68,92 +151,6 @@
 }
 
 /* ============================================================
-   ≤ 1024px — планшет-альбом: ужимаем вертикальный ритм
-   ============================================================ */
-
-@media (max-width: 1024px) {
-  /* Поля карточки основателя уменьшаются вместе с полями страницы.
-     Колонка фото шире 4/12: на 1024 квадрат сжимался до 285px
-     и под ним оставалась дыра в 200px до низа письма */
-  .founder { padding: 48px 32px; gap: 40px; grid-template-columns: 5fr 7fr; }
-
-  /* Фото тянется по высоте письма: исходник вертикальный,
-     кадру есть что показать ниже квадрата */
-  .founder__photo { align-self: stretch; aspect-ratio: auto; }
-
-  :root {
-    --gutter: 24px;   /* CANON §3: поля 40px только от 1024 и выше */
-
-  }
-
-  /* Display 88px в половине колонки рвётся на пять строк —
-     первый экран становится одноколоночным раньше остальных сеток */
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 36px;
-    padding: 40px 0 36px;
-  }
-
-  .metrics { margin-bottom: 56px; }
-
-  .demo__grid    { gap: 24px; }
-  .segment__panel { gap: 40px; }
-  .faq__grid     { gap: 32px; }
-
-  .lead-magnet { padding: 32px; gap: 32px; }
-  .value-card  { padding: 28px; }
-  .objection   { padding: 28px; }
-  .cta-card    { padding: 32px; }
-  .plan        { padding: 26px; }
-}
-
-/* ============================================================
-   ≤ 860px — двухколоночные сетки в одну колонку
-   ============================================================ */
-
-@media (max-width: 860px) {
-  .metrics { grid-template-columns: repeat(2, 1fr); }
-
-  /* Сцена и панель управления встают друг под друга */
-  .demo__grid,
-  .access,
-  .value__grid,
-  .objections__grid,
-  .faq__grid,
-  .lead-magnet,
-  .pricing__grid { grid-template-columns: 1fr; }
-
-  .works__grid,
-  .testimonials__grid,
-  .notes { grid-template-columns: repeat(2, 1fr); }
-
-  /* Заголовок с кнопкой над списком шагов, а не рядом */
-  .segment__panel { grid-template-columns: 1fr; gap: 32px; }
-
-  /* Строка шага в одну колонку: кадр под текстом */
-  .step { grid-template-columns: 1fr; gap: 24px; }
-
-  /* Стрелка «было → стало» разворачивается вниз и держит зазор между карточками */
-  .contrast__grid { grid-template-columns: 1fr; }
-  .contrast__arrow { transform: rotate(90deg); margin-block: 16px; }
-
-  /* Тёмный тариф в одну колонку — бейдж не должен налезать */
-  .plan--dark { margin-top: 11px; }
-
-  /* 24/9 на узком экране превращается в щель — растим кадр */
-  .compare { aspect-ratio: 21 / 9; }
-
-  .footer__top { grid-template-columns: 1fr 1fr; }
-  .footer__about { max-width: none; }
-
-  /* Одна колонка раньше 768: на 4/12 от 860 фото сжимается
-     до ~225px и лицо уже не читается. Квадрат меняется на 4/3:
-     во всю ширину квадрат съедает целый экран. */
-  .founder { grid-template-columns: 1fr; gap: 32px; }
-  .founder__photo { aspect-ratio: 4 / 3; }
-}
-
-/* ============================================================
    ≤ 720px — шапка: уезжает кнопка, остаются логотип, телефон
               и скролл-навигация
    ============================================================ */
@@ -205,7 +202,6 @@
        от него считается scroll-margin у якорей */
     --header-h:     96px;
 
-
     --gutter:       24px;   /* CANON §3 */
   }
 
@@ -238,26 +234,22 @@
   .metrics { margin-bottom: 44px; }
 
   .works__grid,
-  .testimonials__grid,
-  .notes,
-  .lead-form__row { grid-template-columns: 1fr; }
+.testimonials__grid { grid-template-columns: 1fr; }
 
-  .compare { aspect-ratio: 16 / 9; }
-  .compare__before { gap: 6px; padding: 6px; }
-  .compare__tag { padding: 5px 8px; bottom: 10px; }
-  .compare__tag--before { left: 10px; }
-  .compare__tag--after  { right: 10px; }
+  
+  
+  
+  
+  
 
   .lead-magnet { padding: 24px; gap: 28px; }
   .contrast-card { padding: 22px; }
   .value-card  { padding: 24px; }
-  .objection   { padding: 24px; }
-  .note-card   { padding: 20px; }
+  
+  
   .plan        { padding: 24px; }
-  .cta-card    { padding: 28px; }
+  
   .step        { padding: 18px; }
-
-
 
   .footer__top { grid-template-columns: 1fr; gap: 32px; padding-block: 44px 32px; }
   .footer__bottom { padding-block: 0 32px; }

@@ -4,6 +4,11 @@
  * так они не разъезжаются, когда клиент поменяет суммы.
  * В разметке лежат те же значения по умолчанию: страница читается
  * без скриптов, скрипт лишь пересчитывает.
+ *
+ * Ищем по всей странице, а не внутри блока тарифов: та же цена стоит
+ * в шаге «Тестовый доступ» блока «Как начать». Пока модуль смотрел
+ * только в [data-pricing], смена суммы в конфиге обновляла карточку
+ * тарифа и оставляла соседний блок с прежним числом.
  */
 
 import { config } from '../config.js';
@@ -19,41 +24,35 @@ export function money(amount) {
   return `${grouped}${NBSP}₽`;
 }
 
-export function initPricing() {
-  const root = document.querySelector('[data-pricing]');
-  if (!root) return;
+/** Проставляет текст во все узлы с этим ключом цены */
+function fill(key, text) {
+  document.querySelectorAll(`[data-price="${key}"]`).forEach((node) => {
+    node.textContent = text;
+  });
+}
 
+export function initPricing() {
   const { monthly, annual, trial } = config.pricing;
   const annualFull = monthly * 12;
   const discount = annualFull > 0 ? Math.round((1 - annual / annualFull) * 100) : 0;
 
-  const nodes = {
-    trial: root.querySelector('[data-price="trial"]'),
-    monthly: root.querySelector('[data-price="monthly"]'),
-    annual: root.querySelector('[data-price="annual"]'),
-    annualFull: root.querySelector('[data-price="annual-full"]'),
-    discount: root.querySelector('[data-price="discount"]'),
-  };
-
   // Цена тестового не публикуется, пока клиент не назвал сумму
-  if (nodes.trial) {
-    const hasPrice = trial > 0;
-    nodes.trial.textContent = hasPrice ? money(trial) : 'минимальная сумма';
-    // Текст набирается легче и мельче, чем число, — см. макет
-    nodes.trial.classList.toggle('plan__price--text', !hasPrice);
-  }
+  const hasTrialPrice = trial > 0;
+  fill('trial', hasTrialPrice ? money(trial) : 'минимальная сумма');
 
-  if (nodes.monthly) nodes.monthly.textContent = money(monthly);
-  if (nodes.annual) nodes.annual.textContent = money(annual);
-  if (nodes.annualFull) nodes.annualFull.textContent = money(annualFull);
+  // Текст набирается легче и мельче, чем число, — см. макет.
+  // Только в карточке тарифа: в строке шага размер задаёт сама строка.
+  document.querySelectorAll('.plan__price[data-price="trial"]').forEach((node) => {
+    node.classList.toggle('plan__price--text', !hasTrialPrice);
+  });
 
-  if (nodes.discount) {
-    // Скидки нет — бейдж «выгода N %» врал бы, поэтому убираем
-    if (discount > 0) {
-      nodes.discount.textContent = `выгода ${discount}${NBSP}%`;
-      nodes.discount.hidden = false;
-    } else {
-      nodes.discount.hidden = true;
-    }
-  }
+  fill('monthly', money(monthly));
+  fill('annual', money(annual));
+  fill('annual-full', money(annualFull));
+
+  // Скидки нет — бейдж «выгода N %» врал бы, поэтому убираем
+  document.querySelectorAll('[data-price="discount"]').forEach((node) => {
+    node.textContent = `выгода ${discount}${NBSP}%`;
+    node.hidden = discount <= 0;
+  });
 }

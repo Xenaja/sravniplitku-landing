@@ -59,8 +59,7 @@ ul, ol { list-style: none; }
   border-radius: 2px;
 }
 
-.band--dark :focus-visible,
-.cta-card :focus-visible { outline-color: var(--c-accent-light); }
+.band--dark :focus-visible { outline-color: var(--c-accent-light); }
 
 /* ---------- Контейнер и полосы секций ---------- */
 
@@ -115,8 +114,6 @@ main > section[data-type='hero'] { padding-block: 32px 48px; }
   letter-spacing: var(--tr-display);
   text-wrap: balance;
 }
-
-
 
 .h2 {
   font-family: var(--font-display);
@@ -175,8 +172,7 @@ p, li {
 }
 
 .band--dark p,
-.band--dark li,
-.cta-card p { max-width: var(--measure-dark); }
+.band--dark li { max-width: var(--measure-dark); }
 
 /* Цифры в статистике и тарифах не должны прыгать по ширине */
 .metrics__value,
@@ -184,19 +180,6 @@ p, li {
 .plan__period { font-variant-numeric: tabular-nums; }
 
 /* ---------- Утилиты ---------- */
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
 
 .skip-link {
   position: absolute;

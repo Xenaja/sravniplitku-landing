@@ -317,309 +317,7 @@
 .video__lead  { margin-bottom: 32px; }
 
 /* ============================================================
-   6. Рабочее демо
-   ============================================================ */
-
-.demo__head {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 12px;
-}
-
-.demo__lead { margin-bottom: 32px; }
-
-.demo__grid {
-  display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: var(--col-gap);
-  align-items: start;
-}
-
-/* --- Интерактивная сцена --- */
-
-.scene {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  background: var(--c-scene);
-  border: 1px solid var(--c-line);
-}
-
-.scene__wall { position: absolute; inset: 0; }
-
-/* Трапеция пола — та же геометрия у поверхности и у кликабельной зоны */
-.scene__floor {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 42%;
-  clip-path: polygon(0 100%, 100% 100%, 86% 0, 14% 0);
-}
-
-.scene__zone {
-  position: absolute;
-  cursor: pointer;
-  transition: box-shadow var(--t-fast);
-  background: none;
-  border: 0;
-  padding: 0;
-}
-
-.scene__zone--wall  { left: 0; right: 0; top: 0; bottom: 42%; }
-.scene__zone--floor {
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 42%;
-  clip-path: polygon(0 100%, 100% 100%, 86% 0, 14% 0);
-}
-
-/* Активная зона обводится изумрудом изнутри */
-.scene__zone[aria-pressed='true'] { box-shadow: inset 0 0 0 2px var(--c-accent); }
-
-.scene__label {
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  background: var(--c-overlay);
-  color: #fff;
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  padding: 6px 10px;
-  border-radius: var(--r-sm);
-  pointer-events: none;
-}
-
-/* Имитация водяного знака */
-.scene__watermark {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--c-watermark);
-  pointer-events: none;
-}
-
-/* --- Панель управления демо --- */
-
-.demo__panel-title { display: block; margin-bottom: 10px; }
-
-.swatches {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.swatch {
-  display: flex;
-  min-height: 44px;
-  align-items: center;
-  gap: 9px;
-  padding: 7px 10px 7px 7px;
-  border: 1px solid var(--c-line);
-  border-radius: var(--r-md);
-  background: var(--c-surface);
-  color: var(--c-ink);
-  cursor: pointer;
-  text-align: left;
-  transition: background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
-}
-
-.swatch[aria-pressed='true'] {
-  border-color: var(--c-accent);
-  background: var(--c-accent);
-  color: #fff;
-}
-
-.swatch__text { display: grid; gap: 1px; }
-
-.swatch__name {
-  font-size: var(--fs-label);
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.swatch__fmt {
-  font-size: var(--fs-label);
-  line-height: 1.2;
-  opacity: .65;
-}
-
-.layouts {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-
-.layouts__btn {
-  min-height: 44px;
-  padding: 9px 15px;
-  border: 1px solid var(--c-line);
-  border-radius: var(--r-md);
-  background: var(--c-surface);
-  color: var(--c-ink-2);
-  font-size: var(--fs-small);
-  cursor: pointer;
-  transition: background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
-}
-
-.layouts__btn[aria-pressed='true'] {
-  border-color: var(--c-accent);
-  background: var(--c-accent);
-  color: #fff;
-}
-
-.download-card {
-  border: 1px solid var(--c-line);
-  background: var(--c-surface);
-  border-radius: var(--r-md);
-  padding: 16px;
-}
-
-.download-card__title {
-  font-size: var(--fs-small);
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.download-card__text {
-  font-size: var(--fs-small);
-  color: var(--c-ink-2);
-  margin-bottom: 12px;
-}
-
-/* ============================================================
-   7. Проблема со шторкой «до / после»
-   ============================================================ */
-
-.problem__title { margin-bottom: 12px; }
-.problem__lead  { margin-bottom: 32px; }
-
-.compare {
-  --split: 52%;
-  position: relative;
-  aspect-ratio: 24 / 9;
-  overflow: hidden;
-  border-radius: var(--r-lg);
-  cursor: ew-resize;
-  touch-action: none;
-  user-select: none;
-  -webkit-user-select: none;
-  background: var(--c-before);
-}
-
-/* «Было» — коллаж из трёх разнородных, слегка повёрнутых кадров */
-.compare__before {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  padding: 10px;
-}
-
-.compare__shot:nth-child(1) {
-  background: #D8CEBF;
-  background-image: linear-gradient(15deg, rgba(255, 255, 255, .5), rgba(0, 0, 0, .24));
-  transform: rotate(-1.2deg);
-}
-.compare__shot:nth-child(2) {
-  background: #C7C2B9;
-  background-image: linear-gradient(200deg, rgba(255, 255, 255, .16), rgba(0, 0, 0, .36));
-  transform: rotate(.9deg) scale(.94);
-}
-.compare__shot:nth-child(3) {
-  background: #E4D6C2;
-  background-image: linear-gradient(90deg, rgba(255, 255, 255, .6), rgba(0, 0, 0, .12));
-  transform: rotate(.5deg) scale(1.03);
-}
-
-/* «Стало» — одна сцена; состояние плитки общее с демо выше */
-.compare__after {
-  position: absolute;
-  inset: 0;
-  clip-path: inset(0 0 0 var(--split));
-}
-
-.compare__scene {
-  position: absolute;
-  inset: 0;
-  background: var(--c-scene);
-}
-
-.compare__wall { position: absolute; inset: 0; }
-
-.compare__floor {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 42%;
-  clip-path: polygon(0 100%, 100% 100%, 86% 0, 14% 0);
-}
-
-.compare__handle {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: var(--split);
-  width: 2px;
-  background: var(--c-bg);
-  box-shadow: 0 0 0 1px rgba(30, 36, 34, .35);
-  pointer-events: none;
-}
-
-.compare__knob {
-  position: absolute;
-  top: 50%;
-  left: var(--split);
-  width: 40px;
-  height: 40px;
-  margin: -20px 0 0 -20px;
-  border-radius: 50%;
-  background: var(--c-bg);
-  color: var(--c-ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--fs-small);
-  box-shadow: 0 4px 14px rgba(30, 36, 34, .3);
-  cursor: inherit; /* кнопка не должна ломать ew-resize над кадром */
-}
-
-/* Ручка получает фокус с клавиатуры, дальше — стрелками */
-.compare__knob:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 3px; }
-
-.compare__tag {
-  position: absolute;
-  bottom: 14px;
-  background: var(--c-overlay);
-  color: #fff;
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  padding: 6px 10px;
-  border-radius: var(--r-sm);
-  pointer-events: none;
-}
-
-.compare__tag--before { left: 14px; }
-.compare__tag--after  { right: 14px; background: var(--c-accent); }
-
-/* ============================================================
-   8. Возможности (тёмная секция)
+   6. Возможности (тёмная секция)
    ============================================================ */
 
 /* Лид секции убран — отступ до карточек держит сам заголовок */
@@ -661,7 +359,7 @@
 }
 
 /* ============================================================
-   9. Салонам / Поставщикам
+   7. Салонам / Поставщикам
    ============================================================ */
 
 /* Шапка блока: рубрика слева, сегмент-контрол справа, под ними общая
@@ -786,65 +484,7 @@
 }
 
 /* ============================================================
-   10. Возражения
-   ============================================================ */
-
-.objections__title { margin-bottom: 36px; }
-
-.objections__grid {
-  display: grid;
-  grid-template-columns: 6fr 6fr;
-  gap: var(--col-gap);
-}
-
-.objection {
-  border: 1px solid var(--c-line);
-  border-radius: var(--r-xl);
-  padding: 32px;
-}
-
-.objection__eyebrow { display: block; margin-bottom: 12px; }
-
-.objection__title {
-  font-size: var(--fs-h3);
-  line-height: 1.25;
-  margin-bottom: 16px;
-}
-
-.objection__text {
-  font-size: var(--fs-body);
-  color: var(--c-ink-2);
-  line-height: 1.7;
-  text-wrap: pretty;
-}
-
-.notes {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--col-gap);
-  margin-top: var(--col-gap);
-}
-
-.note-card {
-  background: var(--c-surface-2);
-  border: 1px solid var(--c-line);
-  border-radius: var(--r-xl);
-  padding: 24px;
-}
-
-.note-card__title {
-  font-size: var(--fs-body);
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.note-card__text {
-  font-size: var(--fs-small);
-  color: var(--c-ink-2);
-}
-
-/* ============================================================
-   11. Работы студии
+   8. Работы студии
    ============================================================ */
 
 .works__title { margin-bottom: 12px; }
@@ -879,7 +519,7 @@
 }
 
 /* ============================================================
-   12. Кто сделал сервис
+   9. Кто сделал сервис
    ============================================================ */
 
 /* Белая карточка на бумаге, а не полоса .band: следом идёт
@@ -968,7 +608,7 @@
 .founder__cta { margin-left: auto; }
 
 /* ============================================================
-   13. Отзывы
+   10. Отзывы
    ============================================================ */
 
 .testimonials__title { margin-bottom: 32px; }
@@ -1000,7 +640,7 @@
 }
 
 /* ============================================================
-   14. Лид-магнит
+   11. Лид-магнит
    ============================================================ */
 
 /* Секция стала белой полосой, поэтому карточка-обёртка не нужна:
@@ -1038,12 +678,6 @@
   margin-bottom: 16px;
 }
 
-.lead-form__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
 .lead-form__consents {
   display: grid;
   gap: 9px;
@@ -1051,7 +685,7 @@
 }
 
 /* ============================================================
-   15. Тарифы
+   12. Тарифы
    ============================================================ */
 
 .pricing__title { margin-bottom: 12px; }
@@ -1141,7 +775,7 @@
 .plan__cta { margin-top: auto; }
 
 /* ============================================================
-   16. Частые вопросы + CTA
+   13. Частые вопросы + CTA
    ============================================================ */
 
 /* 8 колонок под вопросы, 4 под карточку (FIX-01 F5) */
@@ -1264,7 +898,7 @@
 }
 
 /* ============================================================
-   17. Футер
+   14. Футер
    ============================================================ */
 
 /* Граница сверху — страховка на случай, если над футером когда-нибудь
@@ -1349,17 +983,6 @@
 /* ============================================================
    Заявка на доступ
    ============================================================ */
-
-.access {
-  display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: var(--col-gap);
-  align-items: start;
-}
-
-.access__title { margin: 16px 0; }
-
-.access__text { color: var(--c-ink-2); }
 
 /* Число точек — переключатель, а не список: вариантов три,
    и выбор должен стоить одно касание */

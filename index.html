@@ -38,7 +38,7 @@
 <script type="module" src="assets/js/main.js"></script>
 </head>
 
-<body id="top" data-tile-layout="straight">
+<body id="top">
 
 <a class="skip-link" href="#main">Перейти к содержанию</a>
 
@@ -173,7 +173,7 @@
   </section>
 
   <!-- ============================================================
-       4. Пять шагов
+       1. Пять шагов
        ============================================================ -->
   <section data-type="B" class="container" id="how" aria-labelledby="how-title">
     <h2 class="h2 steps__title" id="how-title">Пять действий до готового изображения</h2>
@@ -274,7 +274,7 @@
   </section>
 
   <!-- ============================================================
-       5. Большое видео
+       2. Большое видео
        ============================================================ -->
   <section data-type="A" class="band" id="demo" aria-labelledby="video-title">
     <div class="container">
@@ -297,145 +297,7 @@
   </section>
 
   <!-- ============================================================
-       6. Рабочее демо
-       ВЫКЛЮЧЕНА: демо ещё не готово технически. Когда будет — заменит
-       собой секцию большого видео и заберёт у неё id="demo",
-       на который уже ведут все кнопки «Посмотреть, как работает».
-       Вернуть: sections.demo в config.js.
-       ============================================================ -->
-  <section data-type="B" class="container" aria-labelledby="demo-title" data-demo data-section="demo">
-    <div class="demo__head">
-      <h2 class="h2" id="demo-title">Рабочее демо</h2>
-      <span class="badge">часть функций отключена</span>
-    </div>
-    <p class="lead demo__lead">Это сам сервис, а не ролик: выберите зону кликом по сцене и примените коллекцию. В полной версии – все сцены, каталог целиком и скачивание файла без водяного знака.</p>
-
-    <div class="demo__grid">
-
-      <!-- Интерактивная сцена. Текстуры процедурные (см. README, «Текстуры»). -->
-      <div class="scene" data-scene>
-        <div class="scene__wall tile-surface tile-surface--wall tile--carrara" data-scene-wall></div>
-        <div class="scene__floor tile-surface tile-surface--floor tile--oak" data-scene-floor></div>
-
-        <button class="scene__zone scene__zone--wall" type="button" data-zone="wall" aria-pressed="true">
-          <span class="visually-hidden">Выбрать стену как активную зону</span>
-        </button>
-        <button class="scene__zone scene__zone--floor" type="button" data-zone="floor" aria-pressed="false">
-          <span class="visually-hidden">Выбрать пол как активную зону</span>
-        </button>
-
-        <div class="scene__label" data-zone-label aria-live="polite">Активная зона – стена</div>
-        <div class="scene__watermark" aria-hidden="true">СравниПлитку</div>
-      </div>
-
-      <div>
-        <span class="eyebrow eyebrow--muted demo__panel-title" id="swatches-title">Коллекции в демо</span>
-
-        <div class="swatches" role="group" aria-labelledby="swatches-title" data-swatches>
-          <button class="swatch" type="button" data-tile="carrara" aria-pressed="true">
-            <span class="tile-surface tile-surface--swatch tile--carrara" aria-hidden="true"></span>
-            <span class="swatch__text">
-              <span class="swatch__name">Каррара</span>
-              <span class="swatch__fmt">60×120</span>
-            </span>
-          </button>
-          <button class="swatch" type="button" data-tile="travertine" aria-pressed="false">
-            <span class="tile-surface tile-surface--swatch tile--travertine" aria-hidden="true"></span>
-            <span class="swatch__text">
-              <span class="swatch__name">Травертин</span>
-              <span class="swatch__fmt">60×60</span>
-            </span>
-          </button>
-          <button class="swatch" type="button" data-tile="concrete" aria-pressed="false">
-            <span class="tile-surface tile-surface--swatch tile--concrete" aria-hidden="true"></span>
-            <span class="swatch__text">
-              <span class="swatch__name">Бетон</span>
-              <span class="swatch__fmt">80×80</span>
-            </span>
-          </button>
-          <button class="swatch" type="button" data-tile="terracotta" aria-pressed="false">
-            <span class="tile-surface tile-surface--swatch tile--terracotta" aria-hidden="true"></span>
-            <span class="swatch__text">
-              <span class="swatch__name">Терракота</span>
-              <span class="swatch__fmt">30×30</span>
-            </span>
-          </button>
-          <button class="swatch" type="button" data-tile="graphite" aria-pressed="false">
-            <span class="tile-surface tile-surface--swatch tile--graphite" aria-hidden="true"></span>
-            <span class="swatch__text">
-              <span class="swatch__name">Графит</span>
-              <span class="swatch__fmt">60×60</span>
-            </span>
-          </button>
-          <button class="swatch" type="button" data-tile="oak" aria-pressed="false">
-            <span class="tile-surface tile-surface--swatch tile--oak" aria-hidden="true"></span>
-            <span class="swatch__text">
-              <span class="swatch__name">Дуб</span>
-              <span class="swatch__fmt">20×120</span>
-            </span>
-          </button>
-        </div>
-
-        <div class="layouts" role="group" aria-label="Раскладка плитки" data-layouts>
-          <button class="layouts__btn" type="button" data-layout="straight" aria-pressed="true">Прямая</button>
-          <button class="layouts__btn" type="button" data-layout="long" aria-pressed="false">Вытянутая</button>
-          <button class="layouts__btn" type="button" data-layout="diag" aria-pressed="false">Диагональ</button>
-        </div>
-
-        <div class="download-card">
-          <h3 class="download-card__title">Скачать изображение</h3>
-          <p class="download-card__text">В демо файл уходит с водяным знаком. В подписке – чистый JPG для клиента.</p>
-          <a class="btn btn--primary btn--sm" href="#pricing">Смотреть тарифы</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ============================================================
-       7. Проблема со шторкой «до / после»
-       ВЫКЛЮЧЕНА: идея шторки не понравилась заказчику. Разметка и стили
-       оставлены — вернуть можно флагом sections.comparison в config.js.
-       Тезис секции теперь несёт блок «Проблема и решение» выше.
-       ============================================================ -->
-  <section data-type="A" class="band" aria-labelledby="problem-title" data-section="comparison">
-    <div class="container">
-      <h2 class="h2 problem__title" id="problem-title">Клиент сравнивает не плитку, а картинки</h2>
-      <p class="lead problem__lead">У каждого фото из каталога свой свет, ракурс и масштаб. Разница, которую видит клиент, – это разница между съёмками, а не между коллекциями. Отсюда сомнение и «я подумаю».</p>
-
-      <div class="compare" data-compare>
-        <!-- «Было»: коллаж из трёх разнородных кадров -->
-        <div class="compare__before" aria-hidden="true">
-          <div class="compare__shot"></div>
-          <div class="compare__shot"></div>
-          <div class="compare__shot"></div>
-        </div>
-
-        <!-- «Стало»: одна сцена; плитка та же, что выбрана в демо выше -->
-        <div class="compare__after" aria-hidden="true">
-          <div class="compare__scene">
-            <div class="compare__wall tile-surface tile-surface--wall tile--carrara" data-compare-wall></div>
-            <div class="compare__floor tile-surface tile-surface--floor tile--oak" data-compare-floor></div>
-          </div>
-        </div>
-
-        <div class="compare__handle" aria-hidden="true"></div>
-
-        <button class="compare__knob" type="button"
-                role="slider"
-                aria-label="Положение шторки «было / стало»"
-                aria-valuemin="4" aria-valuemax="96" aria-valuenow="52"
-                aria-valuetext="52 процента"
-                data-compare-knob>↔</button>
-
-        <span class="compare__tag compare__tag--before">Было · фото из каталогов</span>
-        <span class="compare__tag compare__tag--after">Стало · одна сцена</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       8. Возможности (тёмная секция)
+       3. Возможности (тёмная секция)
        ============================================================ -->
   <section data-type="C" class="band band--dark" id="value" aria-labelledby="value-title">
     <div class="container">
@@ -478,7 +340,7 @@
   </section>
 
   <!-- ============================================================
-       9. Салонам / Поставщикам
+       4. Салонам / Поставщикам
        ============================================================ -->
   <section data-type="A" class="container" id="suppliers" aria-labelledby="segment-title-salon" data-segment>
     <!-- Шапка блока: рубрика и переключатель в одной строке под общей линией.
@@ -510,7 +372,10 @@
           <span class="segment-step__num">01</span>
           <div>
             <h3 class="segment-step__title">Тестовый доступ</h3>
-            <p class="segment-step__text">Оформляете на юрлицо по карточке компании – 490 ₽ разово</p>
+            <!-- Цена живёт в config.pricing.trial и подставляется скриптом во все
+                 [data-price] на странице. В разметке — запасной текст без скриптов. -->
+            <p class="segment-step__text">Оформляете на юрлицо по карточке компании –
+              <span data-price="trial">490 ₽</span> разово</p>
           </div>
         </li>
         <li class="segment-step">
@@ -583,7 +448,7 @@
   </section>
 
   <!-- ============================================================
-       11. Работы студии
+       5. Работы студии
        ============================================================ -->
   <section data-type="B" class="container" aria-labelledby="works-title">
     <h2 class="h2 works__title" id="works-title">Сцены и реализации, которые мы сделали</h2>
@@ -626,7 +491,7 @@
   </section>
 
   <!-- ============================================================
-       12. Кто сделал сервис
+       6. Кто сделал сервис
        Белая карточка на бумажном фоне, а не полоса во всю ширину:
        следом идёт белая полоса отзывов, и две белые секции встык
        читались бы как одна (FIX-01 F9).
@@ -662,7 +527,7 @@
   </section>
 
   <!-- ============================================================
-       13. Отзывы
+       7. Отзывы
        Тексты — рыба до получения реальных отзывов пилотных салонов.
        Отключается флагом sections.testimonials в assets/js/config.js
        (надёжнее — удалить секцию целиком до появления настоящих цитат).
@@ -689,7 +554,7 @@
   </section>
 
   <!-- ============================================================
-       14. Лид-магнит
+       8. Лид-магнит
        ============================================================ -->
   <section data-type="B" class="container band" id="lead" aria-labelledby="lead-title">
     <div class="lead-magnet">
@@ -759,7 +624,7 @@
   </section>
 
   <!-- ============================================================
-       15. Тарифы
+       9. Тарифы
        Числа в разметке — значения по умолчанию. Скидка и «вместо»
        пересчитываются в assets/js/modules/pricing.js из config.js,
        чтобы проценты не расходились с ценами.
@@ -820,7 +685,7 @@
 
 
   <!-- ============================================================
-       16. Частые вопросы + CTA
+       10. Частые вопросы + CTA
        ============================================================ -->
   <section data-type="A" class="container" id="faq" aria-labelledby="faq-title">
     <div class="faq__grid">
