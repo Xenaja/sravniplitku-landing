@@ -302,3 +302,60 @@
   /* Длительность уступает место дорожке */
   .video-bar__time--total { display: none; }
 }
+
+/* ============================================================
+   Низкие экраны — первый экран вместе с полосой статистики
+
+   Ось высоты, а не ширины: на ноутбуке 1440×768 места по вертикали
+   меньше, чем на 1440×900, при той же раскладке.
+
+   Высоту первого экрана держит не текст, а кадр: при 713px ширины
+   и пропорции 737/570 он ровно 551px. Поэтому главный рычаг —
+   ограничение кадра по высоте окна, а не кегль заголовка. Внутри
+   кадра object-fit: cover, так что ограничение подрезает кадр снизу,
+   а не искажает его.
+
+   330px — постоянная часть первого экрана: шапка, поля секций,
+   подпись под кадром и сама полоса статистики.
+
+   Только для двухколоночного первого экрана: ниже 1025 он идёт
+   в одну колонку и выше любого экрана — там полоса под сгибом
+   по определению.
+   ============================================================ */
+
+/* Вычитаемое — постоянная часть первого экрана: шапка, поля секций,
+   подпись под кадром и полоса статистики. Полоса не одной высоты:
+   на 1280 подписи под цифрами переносятся на две строки и она
+   вырастает со 105 до 166px — отсюда две ступени по ширине. */
+@media (min-width: 1367px) and (max-height: 900px) {
+  .hero-media { max-height: calc(100dvh - 340px); }
+}
+
+@media (min-width: 1025px) and (max-width: 1366px) and (max-height: 900px) {
+  .hero-media { max-height: calc(100dvh - 390px); }
+}
+
+@media (min-width: 1025px) and (max-height: 860px) {
+  main > section[data-type='hero'] { padding-block: 20px; }
+  main > section[data-type='hero'] + section { padding-top: 24px; padding-bottom: 28px; }
+
+  .hero__kicker { margin-bottom: 12px; }
+  .hero__title { margin-bottom: 14px; }
+  .hero__lead { margin-bottom: 18px; }
+  .hero__actions { margin-bottom: 10px; }
+  .metrics__cell { padding-top: 18px; }
+}
+
+/* Ниже 760 текстовая колонка начинает спорить с кадром за высоту */
+@media (min-width: 1025px) and (max-height: 760px) {
+  :root { --fs-display: 48px; --fs-lead: 18px; }
+}
+
+@media (min-width: 1025px) and (max-height: 680px) {
+  :root { --fs-display: 40px; --fs-stat: 36px; }
+
+  main > section[data-type='hero'] { padding-block: 14px; }
+  main > section[data-type='hero'] + section { padding-top: 18px; padding-bottom: 20px; }
+  .hero { gap: 40px; }
+  .hero__kicker { margin-bottom: 8px; }
+}
