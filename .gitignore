@@ -21,6 +21,8 @@ segment_block/
 energy_pilot/
 fix02/
 compare_block/
+video_block/
+motion/
 
 # Заявки с персональными данными и метки антифлуда
 api/logs/*.log

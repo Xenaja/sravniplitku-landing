@@ -378,20 +378,44 @@
   <section data-type="A" class="band" id="demo" aria-labelledby="video-title">
     <div class="container">
       <h2 class="h2 video__title" id="video-title">Посмотрите, как проходит консультация</h2>
-      <p class="lead video__lead">Вся консультация: продавец собирает раскладку при клиенте, меняет коллекции в одной сцене и отправляет готовый файл.</p>
+      <p class="video__lead">Возможности сервиса: как собрать раскладку при клиенте, сменить коллекции в одной сцене и отправить готовый файл.</p>
 
-      <!-- Файл тяжёлый и со звуком, поэтому preload="none": до нажатия
-           видна только обложка, трафик не тратится. -->
-      <div class="media media--16x9 media--xl" data-slot="v2-main-video">
-        <video data-video-track="promo" poster="assets/img/promo-poster.jpg"
-               width="1600" height="900" playsinline preload="none"
-               controls controlsList="nodownload">
-          <source src="assets/video/promo.mp4" type="video/mp4">
-          Браузер не проигрывает видео –
-          <a href="assets/video/promo.mp4">скачайте файл</a>.
-        </video>
+      <!-- Тёмная обойма вокруг кадра: белый интерфейс сервиса иначе
+           растворяется в бумажном фоне. Она же даёт место собственным
+           контролам — они живут в обойме, а не поверх продукта.
+           Полноширинной тёмной секции при этом не появляется: обойма —
+           10px по периметру (VIDEO-BLOCK).
+
+           Файл тяжёлый и со звуком, поэтому preload="none": до нажатия
+           виден только постер, трафик не тратится. Постер снят выше
+           нативной панели плеера, чтобы она не легла на кадр. -->
+      <div class="video-shell" data-player>
+        <div class="video-frame">
+          <video class="video-frame__video" data-video-track="promo"
+                 poster="assets/img/video-poster.jpg" width="1620" height="820"
+                 playsinline preload="none">
+            <source src="assets/video/promo.mp4" type="video/mp4">
+            Браузер не проигрывает видео –
+            <a href="assets/video/promo.mp4">скачайте файл</a>.
+          </video>
+
+          <button class="video-frame__toggle" type="button" data-player-toggle
+                  aria-label="Запустить видео">
+            <span class="video-frame__play" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <div class="video-bar">
+          <span class="video-bar__time" data-player-current>0:00</span>
+          <input class="video-bar__range" type="range" min="0" max="1000" value="0" step="1"
+                 data-player-seek aria-label="Позиция воспроизведения">
+          <span class="video-bar__time video-bar__time--total" data-player-total>1:30</span>
+          <button class="video-bar__full" type="button" data-player-full
+                  aria-label="Развернуть во весь экран">⤢</button>
+        </div>
       </div>
-      <p class="mono-note video__caption">1,5 минуты · полная запись консультации</p>
+
+      <p class="mono-note video__caption">1,5 минуты · презентация возможностей от основателей · визуал: Вилрэй Студио</p>
     </div>
   </section>
 
@@ -694,7 +718,7 @@
     <div class="container">
     <div>
       <h2 class="h2 pricing__title" id="pricing-title">Тарифы</h2>
-      <p class="lead pricing__lead">Бесплатного тарифа нет – так мы отсекаем нецелевые регистрации. Начать можно с тестового доступа за минимальную сумму.</p>
+      <p class="lead pricing__lead">Начать можно с тестового доступа за минимальную сумму.</p>
 
       <div class="pricing__grid" data-pricing>
         <article class="plan">

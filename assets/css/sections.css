@@ -540,8 +540,173 @@
    ============================================================ */
 
 .video__title { margin-bottom: 12px; }
-.video__caption { margin-top: 10px; }
-.video__lead  { margin-bottom: 32px; }
+
+/* Единственный текст блока — он несёт всю подводку, поэтому крупнее body */
+.video__lead {
+  max-width: 62ch;
+  margin-bottom: 32px;
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+}
+
+.video__caption {
+  margin-top: 16px;
+  font-size: var(--fs-meta);
+}
+
+/* Обойма: отделяет белый интерфейс от бумаги и держит контролы вне кадра */
+.video-shell {
+  padding: 10px;
+  background: var(--c-dark);
+  border-radius: var(--r-2xl);
+  box-shadow: var(--shadow-shell);
+}
+
+.video-frame {
+  position: relative;
+  aspect-ratio: 1620 / 820;
+  overflow: hidden;
+  background: var(--c-surface);
+  border-radius: var(--r-xl);
+}
+
+.video-frame__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Кнопка на весь кадр: она же вуаль, она же цель нажатия */
+.video-frame__toggle {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  border: 0;
+  cursor: pointer;
+  background: rgba(27, 33, 29, .14);
+  transition: background 160ms cubic-bezier(.2, .7, .3, 1);
+}
+
+.video-frame__toggle:hover { background: rgba(27, 33, 29, .06); }
+
+/* Пока идёт воспроизведение, кадр не закрыт ничем */
+.video-shell[data-playing] .video-frame__toggle { background: none; }
+.video-shell[data-playing] .video-frame__play { opacity: 0; }
+
+.video-frame__play {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: 0 6px 28px rgba(27, 33, 29, .3);
+  display: grid;
+  place-content: center;
+  transition: opacity 160ms linear;
+}
+
+/* Треугольник смещён вправо: оптический центр круга не совпадает
+   с геометрическим */
+.video-frame__play::before {
+  content: '';
+  width: 0;
+  height: 0;
+  margin-left: 7px;
+  border-left: 26px solid var(--c-accent);
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+}
+
+/* Строка прогресса живёт в обойме — никогда поверх продукта */
+.video-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 8px 6px;
+}
+
+.video-bar__time {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--c-on-dark-3);
+}
+
+.video-bar__range {
+  flex: 1;
+  min-width: 0;
+  height: 20px;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.video-bar__range::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(to right,
+    var(--c-accent) calc(var(--played, 0) * 1%),
+    rgba(255, 255, 255, .18) calc(var(--played, 0) * 1%));
+}
+
+.video-bar__range::-moz-range-track {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, .18);
+}
+
+.video-bar__range::-moz-range-progress {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--c-accent);
+}
+
+/* Бегунок появляется по наведению и с клавиатуры: в покое дорожка
+   остаётся тонкой линией, как в макете */
+.video-bar__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -4.5px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0;
+  transition: opacity 140ms linear;
+}
+
+.video-bar__range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0;
+}
+
+.video-bar__range:hover::-webkit-slider-thumb,
+.video-bar__range:focus-visible::-webkit-slider-thumb { opacity: 1; }
+.video-bar__range:hover::-moz-range-thumb,
+.video-bar__range:focus-visible::-moz-range-thumb { opacity: 1; }
+
+.video-bar__full {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-content: center;
+  border: 0;
+  border-radius: var(--r-lg);
+  background: none;
+  color: var(--c-on-dark-3);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 140ms linear;
+}
+
+.video-bar__full:hover { background: var(--c-dark-card); }
 
 /* ============================================================
    6. Возможности (тёмная секция)

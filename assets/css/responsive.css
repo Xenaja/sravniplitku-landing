@@ -139,6 +139,20 @@
   /* Медиа-области блока сравнения ниже: колонки идут друг под другом */
   .sources,
   .split { height: 180px; }
+
+  /* Обойма тоньше, кадр — 16/10 с прижатием влево: каталог уходит
+     за край, сцена остаётся крупной (VIDEO-BLOCK) */
+  .video-shell { padding: 6px; border-radius: var(--r-2xl); }
+  .video-frame { aspect-ratio: 16 / 10; }
+  .video-frame__video { object-position: left center; }
+  .video-frame__play { width: 64px; height: 64px; }
+  .video-frame__play::before {
+    margin-left: 5px;
+    border-left-width: 19px;
+    border-top-width: 12px;
+    border-bottom-width: 12px;
+  }
+  .video-bar { gap: 12px; }
   .segment__cta { display: flex; width: 100%; }
 
   .segment-step { grid-template-columns: 32px 1fr; gap: 14px; padding: 16px 0; }
@@ -278,4 +292,13 @@
 
 @media (max-width: 400px) {
   .btn--xl { padding: 14px 20px; }
+}
+
+/* ============================================================
+   ≤ 360px — самые узкие экраны
+   ============================================================ */
+
+@media (max-width: 360px) {
+  /* Длительность уступает место дорожке */
+  .video-bar__time--total { display: none; }
 }
