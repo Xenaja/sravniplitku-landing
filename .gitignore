@@ -23,6 +23,8 @@ fix02/
 compare_block/
 video_block/
 motion/
+steps_block/
+hero_fit/
 
 # Заявки с персональными данными и метки антифлуда
 api/logs/*.log

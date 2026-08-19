@@ -466,74 +466,127 @@
    ============================================================ */
 
 .steps__title { margin-bottom: 12px; }
-.steps__lead  { margin-bottom: 36px; }
 
-/* Вертикальный список, а не сетка: пять карточек в три колонки давали
-   сиротскую вторую строку, а серая подложка вокруг белых карточек —
-   карточку внутри карточки (FIX-01 F7). */
-.steps { display: block; }
+.steps__lead {
+  max-width: 60ch;
+  margin-bottom: 40px;
+  font-size: var(--fs-block-lead);
+}
 
-.step {
+.steps {
   display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: 40px;
-  align-items: center;
-  padding: 32px 0;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: 56px;
+  align-items: start;
+}
+
+/* Шаг — строка списка с линией сверху и акцентной чертой слева */
+.step {
+  max-width: none;
+  padding: 26px 0 26px 22px;
   border-top: 1px solid var(--c-line);
+  border-left: 2px solid rgba(27, 33, 29, .16);
+  /* 0.75, не ниже: на 0.42 описание даёт контраст ~2.2:1 и не читается */
+  opacity: .75;
+  transition: opacity 200ms var(--ease), border-color 200ms var(--ease);
+}
+
+.step:last-child { border-bottom: 1px solid var(--c-line); }
+
+.step[data-active] {
+  opacity: 1;
+  border-left-color: var(--c-accent);
 }
 
 .step__num {
+  display: block;
+  margin-bottom: 6px;
   font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: var(--fs-label);
-  letter-spacing: var(--tr-label);
+  font-size: var(--fs-meta);
   color: var(--c-accent);
-  margin-bottom: 8px;
 }
 
-.step__title { margin-bottom: 8px; }
+.step__title {
+  margin-bottom: 6px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.2;
+}
 
 .step__text {
-  max-width: 36ch;
-  font-size: var(--fs-body);
+  max-width: 40ch;
+  font-size: var(--fs-note);
   color: var(--c-ink-2);
 }
 
-/* 4/3 — почти пропорция самих скриншотов (1280×1168). На 16/10 кадр
-   приходилось вырезать вдвое уже исходника, и вырезка в 560px тянулась
-   до 762px ширины кадра: интерфейс мылился. Теперь в кадр идёт полная
-   ширина исходника, обрезается только высота. */
-.step__shot {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  border: 1px solid var(--c-line);
-  border-radius: var(--r-2xl);
-  overflow: hidden;
-  background: var(--c-slot);
+/* Кадр внутри шага нужен только на узком экране, где sticky не работает */
+.step__shot { display: none; }
+
+/* Кадр стоит на месте, мимо него скроллится список. Отступ сверху
+   считается от высоты шапки — иначе кадр уезжает под неё. */
+.steps__media {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
 }
 
-.step__shot img {
+.steps__frame {
+  position: relative;
+  aspect-ratio: 737 / 570;
+  overflow: hidden;
+  background: var(--c-slot);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-2xl);
+}
+
+/* Пять кадров лежат стопкой: меняется только прозрачность, кадр
+   не двигается и не масштабируется */
+.steps__shot {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity 240ms var(--ease);
 }
 
-/* Кнопка увеличения всегда в правом верхнем углу кадра */
-.step__shot .zoom-btn {
-  inset: auto;
-  top: 14px;
-  right: 14px;
-  width: 44px;
-  height: 44px;
+.steps__shot[data-active] { opacity: 1; }
+
+.steps__tag {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: var(--r-lg);
+  background: var(--c-overlay);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Полоски показывают заодно, сколько шагов осталось */
+.steps__bar {
   display: grid;
-  place-content: center;
+  grid-auto-flow: column;
+  gap: 6px;
+  margin-top: 12px;
 }
 
-.step__shot .zoom-btn__icon {
-  position: static;
-  width: 36px;
-  height: 36px;
+.steps__bar-item {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--c-line);
+  transition: background-color 200ms var(--ease);
 }
+
+.steps__bar-item[data-active] { background: var(--c-accent); }
 
 /* ============================================================
    5. Большое видео

@@ -70,8 +70,21 @@
   /* Заголовок с кнопкой над списком шагов, а не рядом */
   .segment__panel { grid-template-columns: 1fr; gap: 32px; }
 
-  /* Строка шага в одну колонку: кадр под текстом */
-  .step { grid-template-columns: 1fr; gap: 24px; }
+  /* Sticky при узкой колонке занял бы весь экран: ниже 860 это обычный
+     список — у каждого шага свой кадр под текстом, без смены по скроллу */
+  .steps { grid-template-columns: 1fr; gap: 0; }
+  .steps__media { display: none; }
+
+  .step { border-left-width: 0; padding-left: 0; opacity: 1; }
+  .step__shot {
+    display: block;
+    width: 100%;
+    height: 200px;
+    margin-top: 16px;
+    object-fit: cover;
+    border: 1px solid var(--c-line);
+    border-radius: var(--r-2xl);
+  }
 
   .contrast__grid { grid-template-columns: 1fr; }
 
@@ -261,7 +274,6 @@
 
   .plan        { padding: 24px; }
   
-  .step        { padding: 18px; }
 
   .footer__top { grid-template-columns: 1fr; gap: 32px; padding-block: 44px 32px; }
   .footer__bottom { padding-block: 0 32px; }
