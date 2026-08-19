@@ -20,6 +20,7 @@ segment_block/
 # ТЗ на энергию первого экрана и на четыре блока
 energy_pilot/
 fix02/
+compare_block/
 
 # Заявки с персональными данными и метки антифлуда
 api/logs/*.log

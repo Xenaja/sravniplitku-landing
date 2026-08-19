@@ -73,9 +73,7 @@
   /* Строка шага в одну колонку: кадр под текстом */
   .step { grid-template-columns: 1fr; gap: 24px; }
 
-  /* Стрелка «было → стало» разворачивается вниз и держит зазор между карточками */
   .contrast__grid { grid-template-columns: 1fr; }
-  .contrast__arrow { transform: rotate(90deg); margin-block: 16px; }
 
   /* Тёмный тариф в одну колонку — бейдж не должен налезать */
   .plan--dark { margin-top: 11px; }
@@ -137,6 +135,10 @@
      Самое длинное слово блока — «консультации», оно влезает целиком
      даже на 320px; overflow-wrap из общего правила остаётся сеткой. */
   .segment__title { text-wrap: pretty; hyphens: manual; }
+
+  /* Медиа-области блока сравнения ниже: колонки идут друг под другом */
+  .sources,
+  .split { height: 180px; }
   .segment__cta { display: flex; width: 100%; }
 
   .segment-step { grid-template-columns: 32px 1fr; gap: 14px; padding: 16px 0; }

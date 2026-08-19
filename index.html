@@ -110,7 +110,6 @@
             <span class="hero-media__play" aria-hidden="true"></span>
           </button>
 
-          <span class="hero-media__tag">20 секунд</span>
         </div>
         <p class="mono-note hero__caption">сцена → зона → плитка → готовое изображение</p>
         </div>
@@ -156,27 +155,73 @@
       <p class="lead contrast__lead">На сайтах производителей и поставщиков изображения отличаются по свету, ракурсу и качеству. Клиент смотрит не только на плитку, но и на разницу между картинками.</p>
 
       <div class="contrast__grid">
-        <article class="contrast-card">
-          <span class="eyebrow eyebrow--muted contrast-card__label">Обычный подбор</span>
+        <!-- Слева схема, а не фотографии: показывать чужие неудачные снимки
+             значит спорить с поставщиками, чьи каталоги салон же и использует.
+             Разнородность источников читается по разным размерам, наклонам
+             и тонам пустых рамок. Файлы здесь не нужны — это графика. -->
+        <article class="contrast-card contrast-card--before">
+          <span class="eyebrow contrast-card__label">Обычный подбор</span>
+
+          <div class="sources" aria-hidden="true">
+            <span class="sources__frame sources__frame--site"><span class="sources__tag">Сайт производителя</span></span>
+            <span class="sources__frame sources__frame--catalog"><span class="sources__tag">Каталог</span></span>
+            <span class="sources__frame sources__frame--chat"><span class="sources__tag">Переписка</span></span>
+          </div>
+
           <p class="contrast-card__text">Продавец показывает фото из каталогов, сайтов и переписок. У каждой картинки свой интерьер, освещение и масштаб – сравнение получается неточным.</p>
+
           <ul class="contrast-card__list">
-            <li class="contrast-card__item"><span class="contrast-card__mark" aria-hidden="true">×</span>Разные фото и ракурсы</li>
-            <li class="contrast-card__item"><span class="contrast-card__mark" aria-hidden="true">×</span>Разный свет и масштаб</li>
-            <li class="contrast-card__item"><span class="contrast-card__mark" aria-hidden="true">×</span>Сравнение зависит от качества картинки</li>
-            <li class="contrast-card__item"><span class="contrast-card__mark" aria-hidden="true">×</span>Продавец объясняет словами</li>
+          <li class="contrast-card__item">
+            <span class="contrast-card__mark" aria-hidden="true">—</span>Разные фото и ракурсы
+          </li>
+          <li class="contrast-card__item">
+            <span class="contrast-card__mark" aria-hidden="true">—</span>Разный свет и масштаб
+          </li>
+          <li class="contrast-card__item">
+            <span class="contrast-card__mark" aria-hidden="true">—</span>Сравнение зависит от качества картинки
+          </li>
+          <li class="contrast-card__item">
+            <span class="contrast-card__mark" aria-hidden="true">—</span>Продавец объясняет словами
+          </li>
           </ul>
         </article>
 
-        <div class="contrast__arrow" aria-hidden="true">→</div>
-
         <article class="contrast-card contrast-card--service">
           <span class="eyebrow contrast-card__label">Подбор через СравниПлитку</span>
+
+          <!-- ТРЕБУЕТСЯ ФАЙЛ: правая половина сейчас — тот же рендер с цветовым
+               сдвигом, то есть мок. В прод нужен второй настоящий рендер той же
+               сцены с другой коллекцией; тогда фильтр с .split__half--b снимается,
+               а сюда подставляется свой src. -->
+          <div class="split">
+            <span class="split__half">
+              <img src="assets/img/compare-scene.jpg" alt="Интерьерная сцена с первой коллекцией"
+                   width="900" height="674" loading="lazy" decoding="async">
+            </span>
+            <span class="split__half split__half--b">
+              <img src="assets/img/compare-scene.jpg" alt="Та же сцена со второй коллекцией"
+                   width="900" height="674" loading="lazy" decoding="async">
+            </span>
+            <span class="split__seam" aria-hidden="true"></span>
+            <span class="split__tag split__tag--a">Коллекция A</span>
+            <span class="split__tag split__tag--b">Коллекция B</span>
+          </div>
+
           <p class="contrast-card__text">Варианты плитки подставляются в одну и ту же сцену. Клиент видит их в одинаковых условиях, а продавец получает изображение, которое можно отправить после консультации.</p>
+
           <ul class="contrast-card__list">
-            <li class="contrast-card__item"><span class="contrast-card__mark contrast-card__mark--yes" aria-hidden="true">✓</span>Один интерьер для всех вариантов</li>
-            <li class="contrast-card__item"><span class="contrast-card__mark contrast-card__mark--yes" aria-hidden="true">✓</span>Одинаковые свет и ракурс</li>
-            <li class="contrast-card__item"><span class="contrast-card__mark contrast-card__mark--yes" aria-hidden="true">✓</span>Понятный визуальный результат</li>
-            <li class="contrast-card__item"><span class="contrast-card__mark contrast-card__mark--yes" aria-hidden="true">✓</span>Готовый JPG для клиента</li>
+          <li class="contrast-card__item">
+            <span class="contrast-card__mark" aria-hidden="true">✓</span>Один интерьер для всех вариантов
+          </li>
+          <li class="contrast-card__item">
+            <span class="contrast-card__mark" aria-hidden="true">✓</span>Одинаковые свет и ракурс
+          </li>
+          <li class="contrast-card__item">
+            <span class="contrast-card__mark" aria-hidden="true">✓</span>Понятный визуальный результат
+          </li>
+          <li class="contrast-card__item">
+            <span class="contrast-card__mark" aria-hidden="true">✓</span>Готовый JPG для клиента
+          </li>
           </ul>
         </article>
       </div>
@@ -271,7 +316,7 @@
         </div>
         <div class="step__shot">
           <img src="assets/img/steps/step-5-file.jpg" alt="Готовое изображение 4000×3000 пикселей – файл, который уходит клиенту"
-               width="1280" height="960" loading="lazy" decoding="async">
+               width="1119" height="838" loading="lazy" decoding="async">
           <button class="zoom-btn" type="button"
                   data-zoom="assets/img/steps/step-5-full.jpg"
                   data-zoom-alt="Готовое изображение 4000×3000 пикселей – файл, который уходит клиенту"
