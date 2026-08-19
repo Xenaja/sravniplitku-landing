@@ -233,8 +233,10 @@ main > section[data-type='hero'] {
   border-bottom: 13px solid transparent;
 }
 
+/* Круг показывается только на паузе и при фокусе с клавиатуры.
+   На наведении его нет: петля и так крутится, и значок «плей» поверх
+   идущего видео вводит в заблуждение. */
 .hero-media__toggle[aria-pressed='true'] .hero-media__play,
-.hero-media__toggle:hover .hero-media__play,
 .hero-media__toggle:focus-visible .hero-media__play { opacity: 1; }
 
 
