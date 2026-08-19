@@ -15,6 +15,10 @@
    ============================================================ */
 
 @media (max-width: 1024px) {
+  /* Заголовок с полом в 480px и колонка кнопок в ~510px вместе шире
+     контейнера — ниже 1024 они встают в стопку (FIX-02 G4) */
+  .cta-strip { grid-template-columns: 1fr; gap: 28px; }
+
   /* Поля карточки основателя уменьшаются вместе с полями страницы.
      Колонка фото шире 4/12: на 1024 квадрат сжимался до 285px
      и под ним оставалась дыра в 200px до низа письма */
@@ -39,14 +43,12 @@
 
   .metrics { margin-bottom: 56px; }
 
-  
   .segment__panel { gap: 40px; }
-  .faq__grid     { gap: 32px; }
 
-  .lead-magnet { padding: 32px; gap: 32px; }
+  .lead-magnet { gap: 32px; }
+  .lead-panel { padding: 24px; }
   .value-card  { padding: 28px; }
-  
-  
+
   .plan        { padding: 26px; }
 }
 
@@ -59,9 +61,8 @@
 
   /* Сцена и панель управления встают друг под друга */
   .value__grid,
-.faq__grid,
-.lead-magnet,
-.pricing__grid { grid-template-columns: 1fr; }
+  .lead-magnet,
+  .pricing__grid { grid-template-columns: 1fr; }
 
   .works__grid,
 .testimonials__grid { grid-template-columns: repeat(2, 1fr); }
@@ -80,7 +81,6 @@
   .plan--dark { margin-top: 11px; }
 
   /* 24/9 на узком экране превращается в щель — растим кадр */
-  
 
   .footer__top { grid-template-columns: 1fr 1fr; }
   .footer__about { max-width: none; }
@@ -115,7 +115,7 @@
   }
 
   :root {
-    --fs-display: 44px;
+    --fs-display: 34px;
     --fs-h2:      30px;
     --fs-h3:      20px;
     --fs-lead:    18px;
@@ -128,16 +128,9 @@
     --fs-letter:     22px;
   }
 
-  /* Шапка блока в две строки: контрол во всю ширину, по половине
-     на сегмент. 44px вместо 40 — минимальная цель нажатия. */
-  .segment__head {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
-  }
-
+  /* Контрол во всю ширину, по половине на сегмент */
   .segment__tabs { display: grid; grid-template-columns: 1fr 1fr; }
-  .segment__tab { min-height: 44px; padding: 8px 12px; }
+  .segment__tab { padding: 10px 12px; }
 
   /* Перенос по слогам здесь не нужен: строка длиннее колонки всего
      на несколько пикселей, и hyphens резал первое же слово — «пока-зать».
@@ -147,6 +140,12 @@
   .segment__cta { display: flex; width: 100%; }
 
   .segment-step { grid-template-columns: 32px 1fr; gap: 14px; padding: 16px 0; }
+
+  /* Полоса контакта под вопросами разворачивается вертикально */
+  .faq-aside { flex-direction: column; align-items: stretch; gap: 20px; }
+  .faq-aside__actions { flex-direction: column; align-items: stretch; }
+  .faq-aside__actions .btn { display: flex; width: 100%; }
+  .faq-aside__mail { text-align: center; }
 }
 
 /* ============================================================
@@ -173,7 +172,7 @@
   /* Две кнопки в ряд требуют 486px и не сжимаются (nowrap
      у .btn), поэтому ниже 600 они распирали всю страницу до 510px
      и страница ехала вбок. Ставим столбиком. */
-  .cta-strip { gap: 24px; padding: 32px 24px; }
+  .cta-strip { grid-template-columns: 1fr; gap: 24px; }
 
   .cta-strip__actions {
     flex-direction: column;
@@ -236,16 +235,14 @@
 .testimonials__grid { grid-template-columns: 1fr; }
 
   
-  
-  
-  
+
   
 
-  .lead-magnet { padding: 24px; gap: 28px; }
+  .lead-magnet { gap: 28px; }
+  .lead-panel { padding: 20px; }
   .contrast-card { padding: 22px; }
   .value-card  { padding: 24px; }
-  
-  
+
   .plan        { padding: 24px; }
   
   .step        { padding: 18px; }
@@ -278,8 +275,5 @@
    ============================================================ */
 
 @media (max-width: 400px) {
-  :root { --fs-h1: 27px; }
-
-  .lead-magnet { padding: 20px; }
   .btn--xl { padding: 14px 20px; }
 }

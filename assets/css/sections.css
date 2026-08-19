@@ -89,41 +89,152 @@
    2. Первый экран
    ============================================================ */
 
-/* Обе колонки заканчиваются на одной линии: подпись под кадром
-   встаёт вровень со строкой «работает в браузере…». Раньше правая
-   колонка обрывалась на 77px выше левой.
-
-   Сдвиг 1.1 в пользу кадра — не украшение: при ровных половинах
-   кадр на 77px ниже верха текста, а на 1.1 — всего на 32px ниже
-   заголовка. Больше нельзя: уже на 1.15 текстовая колонка сжимается
-   до 603px и заголовок уходит в четвёртую строку. */
+/* Текст в колонке 620px, кадр — во всё остальное и до правого края
+   страницы. Правый отступ контейнера кадр забирает себе: так он шире
+   и читается как приём, а не как вставленный в рамку скриншот
+   (ENERGY E1). Выравнивание по центру, а не по низу: колонки теперь
+   разной природы — текстовый блок и один кадр. */
 .hero {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 48px;
-  align-items: end;
+  /* 660, а не 620 из ТЗ: «Клиент выбирает» на кегле 58 требует 642px,
+     и в 620 заголовок рвался на «Клиент» / «выбирает» — два одиноких
+     слова подряд. ТЗ само велит перепроверять разбивку при смене
+     геометрии; кегль оставлен, подвинута колонка. */
+  grid-template-columns: minmax(0, 660px) minmax(0, 1fr);
+  gap: 52px;
+  align-items: center;
 }
 
-.hero__eyebrow { display: block; margin-bottom: 16px; }
-
-.hero__title {
-  max-width: 18ch;
-  margin-bottom: 24px;
+/* Рубрика в плашке с точкой: изумруд выходит из кнопок в контент
+   (ENERGY E3). Цвет тот же --c-accent, новых оттенков не появляется. */
+.hero__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 7px 12px;
+  border-radius: var(--r-xl);
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+  letter-spacing: .14em;
 }
 
-.hero__lead { margin-bottom: 32px; }
+.hero__kicker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-accent);
+}
+
+.hero__title { margin-bottom: 22px; }
+
+/* nowrap обязателен: без него фраза рвётся переносом и вместо одного
+   акцента получаются два зелёных слова в разных строках (ENERGY E2) */
+.hero__accent {
+  color: var(--c-accent);
+  white-space: nowrap;
+}
+
+.hero__lead {
+  max-width: 52ch;
+  margin-bottom: 30px;
+}
 
 .hero__actions {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
-.hero__micro { font-size: var(--fs-label); }
+.hero__micro { font-size: var(--fs-meta); }
 
-.hero__caption { margin-top: 10px; }
+/* Кадр упирается в правый край страницы: забирает себе отступ
+   контейнера, справа ни рамки, ни скругления. */
+.hero-media {
+  position: relative;
+  margin-right: calc(-1 * var(--gutter));
+  aspect-ratio: 737 / 570;
+  overflow: hidden;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-right: 0;
+  border-radius: var(--r-2xl) 0 0 var(--r-2xl);
+  box-shadow: var(--shadow-media);
+}
+
+.hero-media__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+}
+
+/* Кнопка на весь кадр: и способ остановить петлю, и цель нажатия
+   заведомо больше 44px */
+.hero-media__toggle {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.hero-media__play {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .94);
+  box-shadow: var(--shadow-media);
+  display: grid;
+  place-content: center;
+  /* Пока петля идёт, круг не нужен — он появляется на паузе */
+  opacity: 0;
+  transition: opacity var(--t-fast);
+}
+
+/* Треугольник смещён вправо: оптический центр круга не совпадает
+   с геометрическим */
+.hero-media__play::before {
+  content: '';
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  border-left: 20px solid var(--c-accent);
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+}
+
+.hero-media__toggle[aria-pressed='true'] .hero-media__play,
+.hero-media__toggle:hover .hero-media__play,
+.hero-media__toggle:focus-visible .hero-media__play { opacity: 1; }
+
+.hero-media__tag {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--r-xl);
+  background: var(--c-overlay);
+  color: var(--c-on-dark);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hero__caption {
+  margin-top: 14px;
+  font-size: var(--fs-meta);
+}
 
 /* ============================================================
    3. Полоса метрик
@@ -147,12 +258,16 @@
   padding-left: 24px;
 }
 
+/* Цифры — самый яркий контент страницы, поэтому изумрудные и крупные.
+   tabular-nums держит колонки ровными: «5+» и «3 минуты» не пляшут
+   по ширине знака (ENERGY E3). */
 .metrics__value {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--fs-stat);
   line-height: 1;
-  color: var(--c-ink);
+  color: var(--c-accent);
+  font-variant-numeric: tabular-nums;
 }
 
 .metrics__label {
@@ -365,50 +480,44 @@
    7. Салонам / Поставщикам
    ============================================================ */
 
-/* Шапка блока: рубрика слева, сегмент-контрол справа, под ними общая
-   линия. Контрол теперь визуально принадлежит блоку, а не странице. */
+/* В шапке блока осталась одна рубрика с линией под ней. */
 .segment__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
   padding-bottom: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
   border-bottom: 1px solid var(--c-line);
 }
 
 .segment__eyebrow { display: block; }
 
-/* Активный сегмент читается сам по себе — белая плашка на серой обойме,
-   а не только в сравнении с соседом (CANON §5). */
+/* Контрол без обоймы: активный сегмент — тёмная заливка, она читается
+   сама по себе. Тёмная, а не изумрудная: заливная изумрудная кнопка
+   в секции должна остаться одна — «Открыть демо» (FIX-02 G1). */
 .segment__tabs {
   display: inline-flex;
-  gap: 4px;
-  padding: 4px;
-  background: var(--c-control-bg);
-  border-radius: var(--r-2xl);
-  flex-shrink: 0;
+  gap: 6px;
+  margin-bottom: 24px;
 }
 
 .segment__tab {
-  min-height: 40px;
-  padding: 8px 24px;
-  border: 0;
+  min-height: 44px;
+  padding: 10px 22px;
+  box-sizing: border-box;
+  border: 1px solid var(--c-line-field);
   border-radius: var(--r-xl);
   background: transparent;
-  color: var(--c-ink-3);
+  color: var(--c-ink-2);
   font-size: var(--fs-small);
   font-weight: 500;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color 140ms ease-out, color 140ms ease-out;
+  transition: background-color 140ms ease-out, color 140ms ease-out, border-color 140ms ease-out;
 }
 
 .segment__tab[aria-selected='true'] {
-  background: var(--c-surface);
-  color: var(--c-ink);
-  /* Единственная тень в системе — её требует канон именно здесь */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
+  background: var(--c-dark);
+  border-color: var(--c-dark);
+  color: var(--c-on-dark);
+  font-weight: 600;
 }
 
 .segment__panel {
@@ -650,8 +759,18 @@
    карточка внутри карточки — дефект (FIX-01 F9) */
 .lead-magnet {
   display: grid;
-  grid-template-columns: 6fr 6fr;
-  gap: var(--col-gap);
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* Утопленная бумажная панель на белом фоне секции: граница формы видна,
+   и она не читается как продолжение текста слева (FIX-02 G2). */
+.lead-panel {
+  padding: 28px;
+  background: var(--c-bg);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-2xl);
 }
 
 .lead-magnet__eyebrow { display: block; margin-bottom: 16px; }
@@ -782,17 +901,14 @@
    ============================================================ */
 
 /* 8 колонок под вопросы, 4 под карточку (FIX-01 F5) */
-.faq__grid {
-  display: grid;
-  grid-template-columns: 8fr 4fr;
-  gap: 48px;
-  align-items: start;
-}
-
+/* Список во всю ширину секции, а не в узкой колонке рядом с плашкой
+   контакта. Мера строки держится не колонкой, а max-width (FIX-02 G3). */
 .faq__title {
   font-size: var(--fs-h2);
   margin-bottom: 24px;
 }
+
+.faq__list { max-width: 820px; }
 
 /* Три группы: продукт / деньги / ограничения */
 .faq__group {
@@ -854,43 +970,59 @@
 
 /* Маленькая светлая карточка по содержимому, без растяжения
    на всю высоту колонки (FIX-01 F5) */
+/* Горизонтальная полоса под последним вопросом, а не карточка в углу */
 .faq-aside {
-  align-self: start;
-  display: grid;
-  gap: 16px;
-  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  max-width: 820px;
+  margin-top: 28px;
+  padding: 24px 28px;
   background: var(--c-surface);
   border: 1px solid var(--c-line);
   border-radius: var(--r-2xl);
 }
 
-.faq-aside__text {
+.faq-aside__lead { flex: 1 1 260px; }
+
+.faq-aside__hours {
+  margin-top: 8px;
   font-size: var(--fs-small);
   color: var(--c-ink-2);
 }
 
-.faq-aside__mail {
-  font-size: var(--fs-small);
-  text-align: center;
-}
-
-/* Финальный CTA — горизонтальная полоса, а не карточка в колонке */
-.cta-strip {
+.faq-aside__actions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 48px;
+  gap: 20px;
   flex-wrap: wrap;
-  padding: 48px 40px;
-  border-radius: var(--r-xl);
+}
+
+/* Единственное заливное действие секции — раньше кнопка была белой
+   на белой карточке и терялась (FIX-02 G3) */
+.faq-aside__mail {
+  font-size: var(--fs-small);
+  color: var(--c-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Своё поле вместо ритма секций: полоса примыкает к футеру вплотную.
+   Селектор с data-type — чтобы перебить парное правило ритма из base.css. */
+main > section[data-type='C'].cta-band { padding-block: 56px; }
+
+/* Пол в 480px обязателен: с minmax(0, 1fr) колонка кнопок (две подписи
+   в nowrap) отбирает ширину, и заголовок рассыпается на семь строк. */
+.cta-strip {
+  display: grid;
+  grid-template-columns: minmax(480px, 1fr) minmax(0, auto);
+  align-items: center;
+  gap: 48px;
 }
 
 .cta-strip__title {
-  /* База 0, иначе при flex-wrap браузер переносит кнопки на новую строку
-     вместо того, чтобы сжать заголовок */
-  flex: 1 1 0;
-  min-width: 0;
-  max-width: 20ch;
+  max-width: 22ch;
   color: var(--c-on-dark);
 }
 
@@ -900,23 +1032,44 @@
   flex-shrink: 0;
 }
 
+/* На тёмном primary остаётся изумрудной, а не белой, как в остальных
+   тёмных блоках: в финальном действии цвет важнее контраста плашки
+   с фоном (FIX-02 G4). */
+.cta-band .btn--primary {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: #fff;
+}
+
+.cta-band .btn--primary:hover {
+  background: var(--c-accent-hover);
+  border-color: var(--c-accent-hover);
+}
+
+/* Вторая кнопка была тёмной на тёмном и почти не читалась */
+.cta-band .btn--ghost-dark {
+  border-color: rgba(255, 255, 255, .34);
+  color: #fff;
+}
+
 /* ============================================================
    14. Футер
    ============================================================ */
 
-/* Граница сверху — страховка на случай, если над футером когда-нибудь
-   окажется тёмная секция: без неё два тёмных поля сливаются в одно. */
+/* Футер — нижняя зона того же тёмного массива, что и финальный CTA.
+   Волосяная линия делит зоны внутри массива; светлой полосы между
+   ними нет (FIX-02 G4). */
 .footer {
   background: var(--c-dark);
   color: var(--c-on-dark-2);
-  border-top: 1px solid rgba(228, 231, 227, .12);
+  border-top: 1px solid var(--c-dark-line);
 }
 
 .footer__top {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
+  grid-template-columns: 1.4fr 1fr 1fr;
   gap: 40px;
-  padding-block: 56px 40px;
+  padding-block: 40px 32px;
 }
 
 .footer__brand {
@@ -951,7 +1104,7 @@
 
 .footer__hours { font-size: var(--fs-small); }
 
-.footer__bottom { padding-block: 0 40px; }
+.footer__bottom { padding-block: 0 44px; }
 
 .footer__legal {
   border-top: 1px solid var(--c-dark-line);
@@ -1024,7 +1177,7 @@
 .points__option input:checked + span {
   background: var(--c-surface);
   color: var(--c-ink);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
+  box-shadow: var(--shadow-control);
 }
 
 .points__option input:focus-visible + span {

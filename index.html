@@ -26,7 +26,7 @@
      и не отдаёт IP посетителей стороннему сервису. См. README, раздел «Шрифты». -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 
 <!-- Стили: токены → база → компоненты → секции → адаптив (порядок важен) -->
 <link rel="stylesheet" href="assets/css/tokens.css">
@@ -74,11 +74,11 @@
     <div class="container">
       <div class="hero">
       <div class="hero__text">
-        <span class="eyebrow hero__eyebrow">Для салонов плитки и поставщиков</span>
+        <span class="eyebrow hero__kicker"><span class="hero__kicker-dot" aria-hidden="true"></span>Для салонов плитки и поставщиков</span>
         <!-- Мягкие переносы в длинном слове: на мобильной ступени 44px
              «консультацию» не вмещается ни в один телефон, а hyphens: auto
              работает только там, где у браузера есть русский словарь. -->
-        <h1 class="h1 hero__title" id="hero-title">Клиент выбирает плитку за одну кон&shy;суль&shy;та&shy;цию</h1>
+        <h1 class="h1 hero__title" id="hero-title">Клиент выбирает плитку <span class="hero__accent">за одну</span> кон&shy;суль&shy;та&shy;цию</h1>
         <p class="lead hero__lead">Продавец открывает готовую интерьерную сцену, применяет в ней коллекции и отдаёт клиенту изображение. Ничего не нужно моделировать и ждать: сцены отрисованы заранее, вы выбираете из готовых.</p>
 
         <div class="hero__actions">
@@ -89,20 +89,30 @@
       </div>
 
       <div class="hero__media">
-        <!-- Слот 16/9, а не 16/10: исходник — запись экрана 1920×1080,
-             в 16/10 её пришлось бы обрезать сверху и снизу вместе с панелями
-             интерфейса. Звуковой дорожки у файла нет — это петля, не ролик. -->
-        <div class="media media--16x9" data-slot="v2-hero-video">
-          <video class="hero-video" data-video="hero" data-video-track="hero-demo"
-                 poster="assets/img/hero-poster.jpg" width="1280" height="720"
-                 muted loop playsinline autoplay preload="metadata"
-                 controls controlsList="nodownload">
+        <!-- Кадр обрезан до сцены и одной колонки плиток: в исходнике
+             40% площади занимал каталог с подписями в 7px — шум вместо
+             доказательства. Обрезано в самом файле, а не контейнером,
+             чтобы не гонять невидимые пиксели (ENERGY E1). -->
+        <div class="hero-media">
+          <video class="hero-media__video" data-video="hero" data-video-track="hero-demo"
+                 poster="assets/img/hero-poster.jpg" width="1396" height="1080"
+                 muted loop playsinline autoplay preload="metadata">
             <source src="assets/video/hero-demo.mp4" type="video/mp4">
             Браузер не проигрывает видео –
             <a href="assets/video/hero-demo.mp4">скачайте файл</a>.
           </video>
+
+          <!-- Кнопка на весь кадр — она же механизм паузы: петля заводится
+               сама, а по канону доступности у автоплея дольше пяти секунд
+               должен быть способ его остановить. -->
+          <button class="hero-media__toggle" type="button" data-video-toggle
+                  aria-label="Поставить видео на паузу">
+            <span class="hero-media__play" aria-hidden="true"></span>
+          </button>
+
+          <span class="hero-media__tag">20 секунд</span>
         </div>
-        <p class="mono-note hero__caption">20 секунд · сцена → зона → плитка → готовое изображение</p>
+        <p class="mono-note hero__caption">сцена → зона → плитка → готовое изображение</p>
         </div>
       </div>
     </div>
@@ -111,7 +121,7 @@
     <!-- ============================================================
          3. Полоса метрик
          ============================================================ -->
-  <section data-type="B" aria-label="Ключевые цифры сервиса">
+  <section data-type="B" class="band" aria-label="Ключевые цифры сервиса">
     <div class="container">
       <div class="metrics">
       <div class="metrics__cell">
@@ -344,17 +354,19 @@
        4. Салонам / Поставщикам
        ============================================================ -->
   <section data-type="A" class="container" id="suppliers" aria-labelledby="segment-title-salon" data-segment>
-    <!-- Шапка блока: рубрика и переключатель в одной строке под общей линией.
-         Раньше контрол висел над заголовком сам по себе, и было непонятно,
-         что он переключает: секцию или всю страницу. -->
+    <!-- В шапке остаётся только рубрика с разделителем под ней. -->
     <div class="segment__head">
       <span class="eyebrow segment__eyebrow">Как начать</span>
-      <div class="segment__tabs" role="tablist" aria-label="Показать шаги для">
-        <button class="segment__tab" type="button" role="tab"
-                id="tab-salon" aria-controls="panel-salon" aria-selected="true" data-seg="salon">Салонам</button>
-        <button class="segment__tab" type="button" role="tab"
-                id="tab-supplier" aria-controls="panel-supplier" aria-selected="false" tabindex="-1" data-seg="supplier">Поставщикам</button>
-      </div>
+    </div>
+
+    <!-- Переключатель стоит вплотную над заголовком, который он подменяет.
+         В правом верхнем углу секции он был в тысяче пикселей от текста,
+         и глаз не связывал контрол с содержанием (FIX-02 G1). -->
+    <div class="segment__tabs" role="tablist" aria-label="Показать шаги для">
+      <button class="segment__tab" type="button" role="tab"
+              id="tab-salon" aria-controls="panel-salon" aria-selected="true" data-seg="salon">Салонам</button>
+      <button class="segment__tab" type="button" role="tab"
+              id="tab-supplier" aria-controls="panel-supplier" aria-selected="false" tabindex="-1" data-seg="supplier">Поставщикам</button>
     </div>
 
     <!-- Салонам -->
@@ -533,7 +545,7 @@
        Отключается флагом sections.testimonials в assets/js/config.js
        (надёжнее — удалить секцию целиком до появления настоящих цитат).
        ============================================================ -->
-  <section data-type="A" class="band" aria-labelledby="testimonials-title" data-section="testimonials">
+  <section data-type="A" aria-labelledby="testimonials-title" data-section="testimonials">
     <div class="container">
       <h2 class="h2 testimonials__title" id="testimonials-title">Отзывы салонов</h2>
 
@@ -569,7 +581,10 @@
         </div>
       </div>
 
-      <div>
+      <!-- Форма собрана в утопленную бумажную панель: на белом фоне она
+           сразу читается как «здесь заполняют», а не как продолжение
+           текста слева (FIX-02 G2). -->
+      <div class="lead-panel">
         <form class="lead-form" id="lead-form" method="post" action="api/lead.php" novalidate data-lead-form>
           <input type="hidden" name="form_id" value="lead-magnet">
           <input type="hidden" name="source" value="" data-lead-source-field>
@@ -630,7 +645,8 @@
        пересчитываются в assets/js/modules/pricing.js из config.js,
        чтобы проценты не расходились с ценами.
        ============================================================ -->
-  <section data-type="B" class="container" id="pricing" aria-labelledby="pricing-title">
+  <section data-type="B" class="band" id="pricing" aria-labelledby="pricing-title">
+    <div class="container">
     <div>
       <h2 class="h2 pricing__title" id="pricing-title">Тарифы</h2>
       <p class="lead pricing__lead">Бесплатного тарифа нет – так мы отсекаем нецелевые регистрации. Начать можно с тестового доступа за минимальную сумму.</p>
@@ -682,6 +698,7 @@
         </article>
       </div>
     </div>
+    </div>
   </section>
 
 
@@ -689,85 +706,86 @@
        10. Частые вопросы + CTA
        ============================================================ -->
   <section data-type="A" class="container" id="faq" aria-labelledby="faq-title">
-    <div class="faq__grid">
-      <div>
-        <h2 class="h2 faq__title" id="faq-title">Вопросы</h2>
+    <h2 class="h2 faq__title" id="faq-title">Вопросы</h2>
 
-        <!-- Тексты вопросов и ответов продублированы в JSON-LD внизу файла:
-             правку нужно вносить в обоих местах. Микроразметку не собираем
-             скриптом намеренно — структурированные данные надёжнее статикой. -->
-        <div class="faq__list">
-          <h3 class="faq__group">Продукт</h3>
-          <details class="faq__item" open>
-            <summary class="faq__q">Это полноценная 3D-визуализация помещения?</summary>
-            <p class="faq__a">Нет. Вы выбираете из готовых сцен, а не собираете свою – поэтому картинка появляется сразу, а не через минуты ожидания. Это и не услуга визуализации под заказ: продавец за пару кликов подставляет коллекции из каталога и отдаёт клиенту готовый кадр.</p>
-          </details>
-          <details class="faq__item">
-            <summary class="faq__q">Можно загрузить свою плитку или свою планировку?</summary>
-            <p class="faq__a">Нет, и это осознанный обмен на скорость: своя загрузка означала бы ожидание рендера. Нужную коллекцию добавляем в каталог вне очереди – от одного рабочего дня.</p>
-          </details>
-          <details class="faq__item">
-            <summary class="faq__q">Нужно ли что-то устанавливать?</summary>
-            <p class="faq__a">Нет, сервис открывается в браузере на компьютере салона.</p>
-          </details>
-          <details class="faq__item">
-            <summary class="faq__q">Продавцы разберутся?</summary>
-            <p class="faq__a">Пять действий, обучение не требуется: осваивается за смену.</p>
-          </details>
-          <h3 class="faq__group">Деньги</h3>
-          <details class="faq__item">
-            <summary class="faq__q">Есть ли бесплатный доступ?</summary>
-            <p class="faq__a">Нет. Тестовый доступ платный – так мы отсекаем нецелевые регистрации.</p>
-          </details>
-          <details class="faq__item">
-            <summary class="faq__q">Можно добавить свою коллекцию в каталог?</summary>
-            <p class="faq__a">Да. Платно или в счёт процента от оплат, который идёт в фонд пополнения каталога.</p>
-          </details>
-          <details class="faq__item">
-            <summary class="faq__q">Как выбираются новые поставщики?</summary>
-            <p class="faq__a">Внутри сервиса можно голосовать за нужный бренд. Победитель месяца попадает в каталог следующим.</p>
-          </details>
-          <h3 class="faq__group">Ограничения</h3>
-          <details class="faq__item">
-            <summary class="faq__q">Что с водяными знаками?</summary>
-            <p class="faq__a">Изображения сервиса содержат встроенные водяные знаки. В подписке файл для клиента выгружается чистым.</p>
-          </details>
-          <details class="faq__item">
-            <summary class="faq__q">Как быстро отвечаете на заявку?</summary>
-            <p class="faq__a">Заявки приходят на почту, отвечаем в течение рабочего дня.</p>
-          </details>
-        </div>
-      </div>
+    <!-- Тексты вопросов и ответов продублированы в JSON-LD внизу файла:
+         правку нужно вносить в обоих местах. Микроразметку не собираем
+         скриптом намеренно — структурированные данные надёжнее статикой. -->
+    <div class="faq__list">
+      <h3 class="faq__group">Продукт</h3>
+      <details class="faq__item" open>
+        <summary class="faq__q">Это полноценная 3D-визуализация помещения?</summary>
+        <p class="faq__a">Нет. Вы выбираете из готовых сцен, а не собираете свою – поэтому картинка появляется сразу, а не через минуты ожидания. Это и не услуга визуализации под заказ: продавец за пару кликов подставляет коллекции из каталога и отдаёт клиенту готовый кадр.</p>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Можно загрузить свою плитку или свою планировку?</summary>
+        <p class="faq__a">Нет, и это осознанный обмен на скорость: своя загрузка означала бы ожидание рендера. Нужную коллекцию добавляем в каталог вне очереди – от одного рабочего дня.</p>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Нужно ли что-то устанавливать?</summary>
+        <p class="faq__a">Нет, сервис открывается в браузере на компьютере салона.</p>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Продавцы разберутся?</summary>
+        <p class="faq__a">Пять действий, обучение не требуется: осваивается за смену.</p>
+      </details>
+      <h3 class="faq__group">Деньги</h3>
+      <details class="faq__item">
+        <summary class="faq__q">Есть ли бесплатный доступ?</summary>
+        <p class="faq__a">Нет. Тестовый доступ платный – так мы отсекаем нецелевые регистрации.</p>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Можно добавить свою коллекцию в каталог?</summary>
+        <p class="faq__a">Да. Платно или в счёт процента от оплат, который идёт в фонд пополнения каталога.</p>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Как выбираются новые поставщики?</summary>
+        <p class="faq__a">Внутри сервиса можно голосовать за нужный бренд. Победитель месяца попадает в каталог следующим.</p>
+      </details>
+      <h3 class="faq__group">Ограничения</h3>
+      <details class="faq__item">
+        <summary class="faq__q">Что с водяными знаками?</summary>
+        <p class="faq__a">Изображения сервиса содержат встроенные водяные знаки. В подписке файл для клиента выгружается чистым.</p>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Как быстро отвечаете на заявку?</summary>
+        <p class="faq__a">Заявки приходят на почту, отвечаем в течение рабочего дня.</p>
+      </details>
+    </div>
 
-      <aside class="faq-aside">
+    <!-- Контакт стоит после последнего вопроса — там, где вопрос
+         действительно мог остаться. В правом верхнем углу секции он спорил
+         с заголовком за внимание и сжимал список в узкую колонку (G3). -->
+    <aside class="faq-aside">
+      <div class="faq-aside__lead">
         <span class="eyebrow eyebrow--muted">Остались вопросы</span>
-        <p class="faq-aside__text">Отвечаем в течение рабочего дня, Пн–Пт с 10:00 до 19:00 МСК.</p>
-        <a class="btn btn--secondary btn--md btn--block" href="https://t.me/emmiatrey" rel="noopener"
+        <p class="faq-aside__hours">Отвечаем в течение рабочего дня, Пн–Пт с 10:00 до 19:00 МСК.</p>
+      </div>
+      <div class="faq-aside__actions">
+        <a class="btn btn--primary btn--md" href="https://t.me/emmiatrey" rel="noopener"
            data-contact="telegram">Написать в Телеграм</a>
         <a class="faq-aside__mail" href="mailto:info@vilraystudio.ru"
            data-contact="email" data-contact-text>info@vilraystudio.ru</a>
-      </aside>
-    </div>
+      </div>
+    </aside>
   </section>
 
   <!-- ============================================================
        Финальный CTA
-       Был карточкой в колонке FAQ и тянулся на всю её высоту, оставляя
-       сверху и снизу по ~470px пустоты. Стал горизонтальной полосой
-       под блоком вопросов (FIX-01 F5).
+       Вместе с футером образует один тёмный массив: раньше тёмная карточка
+       лежала на бумаге, под ней 48px бумаги, дальше тёмный футер — два
+       тёмных поля с узкой светлой щелью между ними (FIX-02 G4). Границу
+       между зонами держит волосяная линия внутри массива.
        ============================================================ -->
-  <section data-type="C" class="container" aria-labelledby="cta-title">
-    <!-- Тёмная карточка на бумаге, а не полоса во всю ширину: сразу за ней
-         идёт тёмный футер того же цвета, и два блока читались как один.
-         band--dark остаётся меткой тёмного контекста — от неё зависят
-         цвета кнопок, текста и фокусной рамки. -->
-    <div class="cta-strip band--dark">
+  <section data-type="C" class="band band--dark cta-band" aria-labelledby="cta-title">
+    <div class="container cta-strip">
       <h2 class="h2 cta-strip__title" id="cta-title">Покажите плитку в интерьере
         уже на следующей консультации</h2>
       <div class="cta-strip__actions">
-        <a class="btn btn--primary btn--lg" href="#demo" data-track="demo_click" data-track-place="cta">Посмотреть, как работает</a>
+        <a class="btn btn--primary btn--lg" href="#lead"
+           data-lead-source="cta" data-track="trial_request" data-track-place="cta">Протестировать</a>
         <a class="btn btn--ghost-dark btn--lg" href="https://t.me/emmiatrey" rel="noopener"
-           data-contact="telegram">Написать в Телеграм</a>
+           data-contact="telegram">Задать вопрос</a>
       </div>
     </div>
   </section>

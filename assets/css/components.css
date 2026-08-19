@@ -354,9 +354,11 @@
 
 .field__control {
   width: 100%;
+  box-sizing: border-box;
+  height: 52px;
   border: 1px solid var(--c-line);
-  border-radius: var(--r-md);
-  padding: 13px 15px;
+  border-radius: var(--r-xl);
+  padding: 0 15px;
   font-size: var(--fs-small);
   color: var(--c-ink);
   /* Поле на белом: на бумаге фон #F7F7F4 почти сливался с фоном секции

@@ -108,7 +108,8 @@ main > section[data-type='hero'] { padding-block: 32px 48px; }
 
 .h1 {
   font-family: var(--font-display);
-  font-weight: 700;
+  /* 800, а не 700: на первом экране нужен разрыв с H2 (ENERGY E2) */
+  font-weight: 800;
   font-size: var(--fs-display);
   line-height: var(--lh-display);
   letter-spacing: var(--tr-display);
