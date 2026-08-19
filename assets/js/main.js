@@ -18,6 +18,7 @@ import { initPricing } from './modules/pricing.js';
 import { initLeadForm } from './modules/lead-form.js';
 import { initLightbox } from './modules/lightbox.js';
 import { initVideo } from './modules/video.js';
+import { initMotion } from './modules/motion.js';
 
 /** Ошибка модуля видна в консоли с именем — иначе её не найти на проде */
 function safe(name, init) {
@@ -39,3 +40,4 @@ safe('pricing', initPricing);
 safe('lead-form', initLeadForm);
 safe('lightbox', initLightbox);
 safe('video', initVideo);
+safe('motion', initMotion);

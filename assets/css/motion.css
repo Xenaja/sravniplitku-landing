@@ -1,0 +1,164 @@
+/* ============================================================
+   СравниПлитку — движение (MOTION.md)
+
+   Движение обслуживает понимание, а не украшает. Отсюда три правила,
+   которым подчинён весь файл:
+   1. анимируются только opacity и transform — всё остальное вызывает
+      перерисовку слоя и на слабых машинах даёт фризы;
+   2. одновременно движется не больше одного объекта в поле зрения;
+   3. первый экран не анимируется — он на месте в первом кадре.
+
+   Подключается последним, после responsive.css.
+   Общий выключатель для prefers-reduced-motion живёт в base.css.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   M2. Появление секции при скролле
+
+   Прячем только когда скрипт готов: без него страница остаётся
+   полностью видимой. Сдвиг ровно 14px — заметно, но текст
+   не «уезжает». Задержка идёт цепочкой не длиннее трёх шагов:
+   четвёртый элемент и дальше появляются вместе с третьим.
+   ------------------------------------------------------------ */
+
+[data-reveal-ready] .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+[data-reveal-ready] .reveal--in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-slow) var(--ease) calc(var(--reveal-step, 0) * 60ms),
+    transform var(--dur-slow) var(--ease) calc(var(--reveal-step, 0) * 60ms);
+}
+
+/* ------------------------------------------------------------
+   M3. Линии вместо счётчиков
+
+   Разделитель над цифрой выезжает слева направо. Сами цифры
+   не анимируются: накрутка чисел в B2B читается как реклама,
+   и пока число скачет, его нельзя прочитать.
+   ------------------------------------------------------------ */
+
+.metrics { border-top: 0; }
+
+.metrics__cell::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: var(--c-line);
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+[data-reveal-ready] .metrics__cell::before { transform: scaleX(0); }
+
+[data-reveal-ready] .metrics__cell.reveal--in::before {
+  transform: scaleX(1);
+  transition: transform var(--dur-slow) var(--ease) calc(var(--reveal-step, 0) * 60ms);
+}
+
+/* ------------------------------------------------------------
+   M5. Аккордеон в вопросах
+
+   grid-template-rows, а не max-height: высоту не нужно угадывать,
+   и в конце перехода текст не прыгает. Закрытие доигрывает скрипт —
+   он снимает open уже после перехода.
+   ------------------------------------------------------------ */
+
+.faq__body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-base) var(--ease);
+}
+
+.faq__item[open] .faq__body,
+.faq__item[data-closing] .faq__body { grid-template-rows: 1fr; }
+
+.faq__item[data-closing] .faq__body { grid-template-rows: 0fr; }
+
+.faq__body > * {
+  overflow: hidden;
+  opacity: 0;
+  /* 40ms задержки: иначе текст виден сквозь ещё не раскрытую область */
+  transition: opacity var(--dur-base) var(--ease) 40ms;
+}
+
+.faq__item[open] .faq__body > * { opacity: 1; }
+.faq__item[data-closing] .faq__body > * { opacity: 0; transition-delay: 0ms; }
+
+/* Знак поворачивается, а не подменяется другим глифом: подмена мигает */
+.faq__q::after {
+  content: '+';
+  transition: transform 160ms var(--ease);
+}
+
+.faq__item[open] .faq__q::after { transform: rotate(45deg); }
+.faq__item[data-closing] .faq__q::after { transform: none; }
+
+/* ------------------------------------------------------------
+   M6. Наведение
+
+   Только там, где есть настоящий курсор: на тач-экранах hover
+   залипает после касания.
+   ------------------------------------------------------------ */
+
+@media (hover: hover) {
+  .plan,
+  .work {
+    transition: transform 160ms var(--ease), box-shadow 160ms var(--ease);
+  }
+
+  /* Ровно 2px: карточка отвечает, но не подпрыгивает. Тень приходит
+     вместе с подъёмом, иначе элемент выглядит приклеенным. */
+  .plan:hover,
+  .work:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(27, 33, 29, .10);
+  }
+
+  /* M8: единственная подсказка «кадр кликабелен» — курсора мало */
+  .video-frame__play { transition: opacity 160ms linear, transform 160ms var(--ease); }
+  .video-frame__toggle:hover .video-frame__play { transform: scale(1.06); }
+}
+
+/* ------------------------------------------------------------
+   Форма
+   ------------------------------------------------------------ */
+
+.field__control:focus-visible {
+  border-color: var(--c-accent);
+  box-shadow: 0 0 0 3px var(--c-accent-soft);
+  outline: none;
+}
+
+/* Единственная бесконечная анимация на странице — и та живёт только
+   пока идёт запрос */
+.lead-form[aria-busy='true'] [data-submit-label]::after {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-left: 10px;
+  vertical-align: -2px;
+  border: 2px solid rgba(255, 255, 255, .4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 900ms linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(1turn); } }
+
+.form-status:not([hidden]) {
+  animation: status-in 240ms var(--ease);
+}
+
+@keyframes status-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}

@@ -234,7 +234,7 @@
 /* min-width: 0 гасит автоматический минимум ячейки: без него
    колонка 1fr не может стать уже цифры в 34px, и на 375px строка
    «3 минуты» выталкивала сетку за контейнер */
-.metrics__cell { padding: 24px 24px 0 0; min-width: 0; }
+.metrics__cell { position: relative; padding: 24px 24px 0 0; min-width: 0; }
 
 .metrics__cell + .metrics__cell {
   border-left: 1px solid var(--c-line);
@@ -647,6 +647,7 @@
 .video-bar__range::-webkit-slider-runnable-track {
   height: 3px;
   border-radius: 2px;
+  transition: background 100ms linear;
   background: linear-gradient(to right,
     var(--c-accent) calc(var(--played, 0) * 1%),
     rgba(255, 255, 255, .18) calc(var(--played, 0) * 1%));
