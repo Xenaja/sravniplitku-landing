@@ -432,7 +432,8 @@
     <!-- Переключатель стоит вплотную над заголовком, который он подменяет.
          В правом верхнем углу секции он был в тысяче пикселей от текста,
          и глаз не связывал контрол с содержанием (FIX-02 G1). -->
-    <div class="segment__tabs" role="tablist" aria-label="Показать шаги для">
+    <div class="segment__tabs" role="tablist" aria-label="Показать шаги для" data-thumb="0">
+      <span class="segment__thumb" aria-hidden="true"></span>
       <button class="segment__tab" type="button" role="tab"
               id="tab-salon" aria-controls="panel-salon" aria-selected="true" data-seg="salon">Салонам</button>
       <button class="segment__tab" type="button" role="tab"

@@ -58,7 +58,7 @@
 
 [data-reveal-ready] .metrics__cell::before { transform: scaleX(0); }
 
-[data-reveal-ready] .metrics__cell.reveal--in::before {
+[data-reveal-ready] .metrics__cell[data-line-in]::before {
   transform: scaleX(1);
   transition: transform var(--dur-slow) var(--ease) calc(var(--reveal-step, 0) * 60ms);
 }
@@ -100,6 +100,43 @@
 
 .faq__item[open] .faq__q::after { transform: rotate(45deg); }
 .faq__item[data-closing] .faq__q::after { transform: none; }
+
+/* ------------------------------------------------------------
+   M4. Переключатель: подложка едет
+
+   Движение подложки — единственное, что объясняет «это один контрол
+   с двумя состояниями», а не две кнопки рядом. Контент под ним
+   меняется мгновенно, без затухания: ждать перерисовку текста
+   никто не должен.
+   ------------------------------------------------------------ */
+
+.segment__tabs { position: relative; }
+
+.segment__thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc((100% - 6px) / 2);
+  height: 100%;
+  border-radius: var(--r-xl);
+  background: var(--c-dark);
+  transition: transform var(--dur-base) var(--ease);
+}
+
+.segment__tabs[data-thumb='1'] .segment__thumb { transform: translateX(calc(100% + 6px)); }
+
+/* Кнопки лежат над подложкой; у активной граница прозрачная, чтобы
+   не обводить тёмную плашку второй раз */
+.segment__tab {
+  position: relative;
+  z-index: 1;
+  transition: color var(--dur-fast) linear, border-color var(--dur-fast) linear;
+}
+
+.segment__tab[aria-selected='true'] {
+  background: transparent;
+  border-color: transparent;
+}
 
 /* ------------------------------------------------------------
    M6. Наведение

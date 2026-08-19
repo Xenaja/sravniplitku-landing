@@ -38,10 +38,18 @@ function initReveal() {
   document.querySelectorAll('main > section').forEach((section) => {
     if (SKIP.some((sel) => section.matches(sel))) return;
 
-    // Полоса статистики появляется линиями, а не блоками (M3)
+    // Полоса статистики появляется линиями, а не блоками (M3). Наблюдатель
+    // ей не нужен: после HERO-FIT она стоит в первом экране, то есть видна
+    // сразу. Линии рисуются на загрузке — данные при этом читаемы с первого
+    // кадра, задержки контента нет.
     const cells = section.querySelectorAll('.metrics__cell');
     if (cells.length) {
-      groups.push([...cells]);
+      // Своя метка, а не .reveal: цифры не должны прятаться даже на кадр —
+      // едет только линия над ними
+      cells.forEach((cell, i) => cell.style.setProperty('--reveal-step', String(i)));
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        cells.forEach((cell) => cell.setAttribute('data-line-in', ''));
+      }));
       return;
     }
 
@@ -60,7 +68,10 @@ function initReveal() {
       // перечитывать и раздражает
       observer.unobserve(entry.target);
     });
-  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.01 });
+    // -22%: при -12% блок проявлялся, едва задев нижнюю кромку экрана,
+    // и переход доигрывал раньше, чем человек до него доскроллит —
+    // движение фактически было не видно
+  }, { rootMargin: '0px 0px -22% 0px', threshold: 0.01 });
 
   document.documentElement.setAttribute('data-reveal-ready', '');
 

@@ -28,6 +28,11 @@ export function initSegmentTabs() {
       panel.hidden = panel.dataset.segPanel !== segment;
     });
 
+    // Подложка едет к выбранному сегменту (MOTION M4)
+    const tabs_root = tabs[0].parentElement;
+    const index = tabs.findIndex((tab) => tab.dataset.seg === segment);
+    if (tabs_root && index >= 0) tabs_root.dataset.thumb = String(index);
+
     if (segmentField) segmentField.value = segment;
   }
 
