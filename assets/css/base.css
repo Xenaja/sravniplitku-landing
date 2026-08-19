@@ -98,13 +98,13 @@ main > section[data-type='C'] + section[data-type='B'] {
   padding-top: var(--rhythm-switch);
 }
 
-/* Полоса статистики — часть первого экрана: вместе с геро она обязана
-   помещаться в один экран, поэтому шаг после геро укорочен вдвое.
-   На 1440×900 низ полосы приходится на 870 из 900. */
-main > section[data-type='hero'] + section { padding-top: 40px; }
+/* Полоса статистики — часть первого экрана. Её высота вместе с полями
+   заложена в расчёт min-height геро (sections.css): 65 шапки + 656 геро
+   + 178 полосы = 899 из 900 на эталонном экране. */
+main > section[data-type='hero'] + section { padding-block: 32px 44px; }
 
 /* Первый экран прижат к шапке — своя пара значений */
-main > section[data-type='hero'] { padding-block: 32px 32px; }
+main > section[data-type='hero'] { padding-block: 30px; }
 
 /* ---------- Типографика (CANON §2) ----------
    Ступеней ровно семь, размеров вне шкалы быть не должно.
