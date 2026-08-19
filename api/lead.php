@@ -78,29 +78,39 @@ if (field('company_website') !== '') {
     respond(['ok' => true]);
 }
 
-// Контакт — одно поле: телефон или почта, что человеку удобнее.
-$contactRaw = field('contact', 120);
-$contact = '';
+// Телефон нужен всегда — по нему можно позвонить, и на него же уходят
+// сообщения в Telegram и WhatsApp (форма отправляет отдельный номер,
+// а не комбинированный контакт).
+$phoneRaw = field('phone', 32);
+$digits = preg_replace('/\D/', '', $phoneRaw) ?? '';
 
-if (mb_strpos($contactRaw, '@') !== false) {
-    $email = filter_var($contactRaw, FILTER_VALIDATE_EMAIL);
-    if ($email === false) {
+if (strlen($digits) === 10) {
+    $digits = '7' . $digits;
+} elseif (strlen($digits) === 11 && $digits[0] === '8') {
+    $digits = '7' . substr($digits, 1);
+}
+
+if (!preg_match('/^7\d{10}$/', $digits)) {
+    respond(['ok' => false, 'error' => 'Проверьте телефон'], 422);
+}
+$phone = '+' . $digits;
+
+// Канал доставки гайда. Неизвестное или пустое значение — Telegram,
+// он выбран в разметке по умолчанию.
+$channelValue = field('channel', 20);
+$channelLabels = ['telegram' => 'Telegram', 'whatsapp' => 'WhatsApp', 'email' => 'Почта'];
+$channel = $channelLabels[$channelValue] ?? $channelLabels['telegram'];
+
+// Почта обязательна, только если выбран этот канал — в остальных
+// случаях поле в разметке скрыто и приходит пустым.
+$email = '';
+if ($channelValue === 'email') {
+    $emailRaw = field('email', 120);
+    $validEmail = filter_var($emailRaw, FILTER_VALIDATE_EMAIL);
+    if ($validEmail === false) {
         respond(['ok' => false, 'error' => 'Проверьте адрес почты'], 422);
     }
-    $contact = $email;
-} else {
-    $digits = preg_replace('/\D/', '', $contactRaw) ?? '';
-
-    if (strlen($digits) === 10) {
-        $digits = '7' . $digits;
-    } elseif (strlen($digits) === 11 && $digits[0] === '8') {
-        $digits = '7' . substr($digits, 1);
-    }
-
-    if (!preg_match('/^7\d{10}$/', $digits)) {
-        respond(['ok' => false, 'error' => 'Проверьте телефон или почту'], 422);
-    }
-    $contact = '+' . $digits;
+    $email = $validEmail;
 }
 
 // Без согласия обрабатывать данные нельзя.
@@ -127,7 +137,9 @@ if (is_file($throttleFile) && (time() - (int) filemtime($throttleFile)) < THROTT
 // ---------- Сбор заявки ----------
 
 $lead = [
-    'Контакт'              => $contact,
+    'Телефон'              => $phone,
+    'Куда прислать'        => $channel,
+    'Почта'                => $email,
     'Форма'                => field('form_id', 40),
     'Сеть или магазин'     => field('network', 60),
     'Точек продаж'         => field('points', 60),

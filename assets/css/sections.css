@@ -560,6 +560,12 @@ main > section[data-type='hero'] {
 
 .steps__frame {
   position: relative;
+  /* Ширина колонки на низких широких экранах давала кадр выше окна:
+     sticky держит верх на месте, а низ уезжал под нижнюю кромку.
+     160px — запас под верхний отступ и воздух снизу; формула переводит
+     доступную высоту обратно в ширину через ту же пропорцию 737/570,
+     min(100%, ...) не даёт кадру стать шире своей колонки (STEPS-BLOCK). */
+  width: min(100%, calc((100svh - 160px) * 737 / 570));
   aspect-ratio: 737 / 570;
   overflow: hidden;
   background: var(--c-slot);
@@ -1182,6 +1188,10 @@ main > section[data-type='hero'] {
   align-items: stretch;
 }
 
+.pricing__note { margin-top: 28px; }
+
+.pricing__note a { color: var(--c-accent); text-decoration: underline; text-underline-offset: 3px; }
+
 /* Тарифы на бумаге: акцент даёт одна тёмная карточка, а не заливка
    секции. Зелёный остаётся только в кнопке и бейдже (FIX-01 F3). */
 .plan {
@@ -1541,6 +1551,51 @@ main > section[data-type='C'].cta-band { padding-block: 56px; }
 }
 
 .points__option input:focus-visible + span {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+/* «Куда прислать гайд» — тот же переключатель-обойма, что у точек
+   продаж, но своя пара классов: у него другой набор значений и
+   к нему привязана логика показа поля почты (lead-form.js). */
+.channel { border: 0; padding: 0; margin: 0; }
+
+.channel__group {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--c-control-bg);
+  border-radius: var(--r-2xl);
+}
+
+.channel__option input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.channel__option span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: var(--r-xl);
+  color: var(--c-ink-3);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 140ms ease-out, color 140ms ease-out;
+}
+
+.channel__option input:checked + span {
+  background: var(--c-surface);
+  color: var(--c-ink);
+  box-shadow: var(--shadow-control);
+}
+
+.channel__option input:focus-visible + span {
   outline: 2px solid var(--c-accent);
   outline-offset: 2px;
 }
