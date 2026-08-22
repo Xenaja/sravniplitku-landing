@@ -89,51 +89,51 @@
    2. Первый экран
    ============================================================ */
 
-/* Текст в колонке 620px, кадр — во всё остальное и до правого края
-   страницы. Правый отступ контейнера кадр забирает себе: так он шире
-   и читается как приём, а не как вставленный в рамку скриншот
-   (ENERGY E1). Выравнивание по центру, а не по низу: колонки теперь
-   разной природы — текстовый блок и один кадр. */
-/* Высота первого экрана считается от окна, а не подгоняется масштабом:
-   кегли и пропорция кадра — фиксированные значения, под экран
-   подстраивается только раскладка (HERO-FIT).
+/* Первый экран по HERO_FIXES.md.
 
-   svh, а не vh: на мобиле панель браузера иначе съедает низ.
-   Вычитаются шапка и полоса статистики; пол в 560px не даёт герою
-   сжаться ниже читаемого — ниже этого полоса просто уходит за сгиб,
-   и обрезанная кромка работает как приглашение листать. */
-main > section[data-type='hero'] {
-  min-height: max(560px, calc(100svh - var(--header-h) - 180px));
-  display: grid;
-  align-content: center;
-}
+   Верх кадра совпадает с нижней границей шапки: секция больше не тянется
+   на высоту окна и не центрирует содержимое по вертикали — раньше от этого
+   над кадром висело ~95px пустоты, а общей горизонтали у колонок не было
+   (§1, §7). Текстовая колонка опускается на 48px, кадр — на 0.
+
+   Ширина текстовой колонки 580px, а не 420px из ТЗ: ТЗ считан по макету,
+   где заголовочный шрифт заменён на Rubik. Фирменный Unbounded заметно
+   шире — «консультацию» при кегле 52px занимает 473px, и в колонке 485px
+   заголовок разваливался на пять строк. 580px — минимум, при котором он
+   читается в три.
+
+   Правого поля у контейнера нет: кадр уходит в край страницы и получает
+   ширину под полные 16:9 (§2, §14). */
+main > section[data-type='hero'] > .container { padding-right: 0; }
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 600px) minmax(0, 1fr);
-  gap: 52px;
-  /* Колонки не центрируются, а прижимаются к низу: текстовая короче
-     медийной, и при центрировании кнопка висит в воздухе, ни с чем
-     не выровненная. */
-  align-items: stretch;
+  grid-template-columns: minmax(0, 580px) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
 }
 
-.hero__text,
-.hero__media {
+.hero__text {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  padding-top: 48px;
 }
 
-/* Рубрика в плашке с точкой: изумруд выходит из кнопок в контент
-   (ENERGY E3). Цвет тот же --c-accent, новых оттенков не появляется. */
+/* Кадр начинается ровно под шапкой */
+.hero__media { padding-top: 0; }
+
+/* Бейдж по ширине контента: в колонке-флексе он растягивался на всю
+   ширину и читался как незакрашенная полоса (§5). Растягиваться должны
+   заголовок и лид, поэтому гасим не align-items у колонки, а align-self
+   у самого бейджа. */
 .hero__kicker {
+  align-self: flex-start;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 20px;
-  padding: 7px 12px;
-  border-radius: var(--r-xl);
+  margin-bottom: 24px;
+  padding: 9px 16px;
+  border-radius: var(--r-sm);
   background: var(--c-accent-soft);
   color: var(--c-accent);
   letter-spacing: .14em;
@@ -146,6 +146,9 @@ main > section[data-type='hero'] {
   background: var(--c-accent);
 }
 
+/* Кегль 52px вместо канонических 58px — по ТЗ. Значение живёт в токене
+   --fs-display, а не здесь: иначе мобильная ступень канона (34px) до H1
+   не доходит, и на 320px заголовок распирал страницу вбок. */
 .hero__title { margin-bottom: 22px; }
 
 /* nowrap обязателен: без него фраза рвётся переносом и вместо одного
@@ -156,8 +159,11 @@ main > section[data-type='hero'] {
 }
 
 .hero__lead {
-  max-width: 52ch;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--c-ink-2);
+  text-wrap: pretty;
 }
 
 .hero__actions {
@@ -167,26 +173,32 @@ main > section[data-type='hero'] {
   flex-wrap: wrap;
 }
 
-/* Кадр упирается в правый край страницы: забирает себе отступ
-   контейнера, справа ни рамки, ни скругления. */
+/* Кадр упирается в правый край страницы и в шапку: скругление остаётся
+   только у того угла, который никуда не упирается (§13). Рамки нет —
+   она спорила бы с линией шапки. */
 .hero-media {
   position: relative;
-  margin-right: calc(-1 * var(--gutter));
-  aspect-ratio: 737 / 570;
+  width: 100%;
+  /* Потолок = нативная ширина файла: дальше кадр пришлось бы растягивать.
+     Упирается он только за 3720px вьюпорта, то есть на практике никогда,
+     и до этой ширины зазора справа не появляется. */
+  max-width: 1920px;
+  margin-left: auto;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: var(--c-surface);
-  border: 1px solid var(--c-line);
-  border-right: 0;
-  border-radius: var(--r-2xl) 0 0 var(--r-2xl);
+  background: var(--c-dark);
+  border-radius: 0 0 0 var(--r-lg);
   box-shadow: var(--shadow-media);
 }
 
+/* contain, а не cover: кадр обязан показываться целиком. Раньше здесь
+   стоял cover с пропорцией 737/570, и интерфейс сервиса срезался
+   посередине карточек каталога (§14). */
 .hero-media__video {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: left top;
+  object-fit: contain;
 }
 
 /* Кнопка на весь кадр: и способ остановить петлю, и цель нажатия
@@ -239,35 +251,42 @@ main > section[data-type='hero'] {
 
 /* Не таблица: внешней рамки нет, есть одна верхняя линия на всю ширину
    и вертикальные разделители между ячейками (FIX-01 F2). */
+/* Вертикальные разделители убраны: они не дотягивались ни до верхней
+   линии блока, ни до низа подписей и висели в воздухе (HERO_FIXES §4).
+   Колонки разводит шаг сетки, границу блока держит одна верхняя линия. */
 .metrics {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  column-gap: 20px;
   border-top: 1px solid var(--c-line);
 }
 
-/* min-width: 0 гасит автоматический минимум ячейки: без него
-   колонка 1fr не может стать уже цифры в 34px, и на 375px строка
-   «3 минуты» выталкивала сетку за контейнер */
-.metrics__cell { position: relative; padding: 24px 24px 0 0; min-width: 0; }
-
-.metrics__cell + .metrics__cell {
-  border-left: 1px solid var(--c-line);
-  padding-left: 24px;
-}
+/* Поле одинаковое у всех четырёх ячеек: раньше у первой не было левого,
+   и шаги между разделителями расходились на десяток пикселей (§3).
+   min-width: 0 гасит автоматический минимум колонки 1fr. */
+.metrics__cell { padding-top: 26px; min-width: 0; }
 
 /* Цифры — самый яркий контент страницы, поэтому изумрудные и крупные.
    tabular-nums держит колонки ровными: «5+» и «3 минуты» не пляшут
    по ширине знака (ENERGY E3). */
+/* Число и единица — разные кегли на общей базовой линии: «3 минуты»
+   целиком крупным кеглем делало колонку втрое шире соседних (§10). */
 .metrics__value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--fs-stat);
   line-height: 1;
+  letter-spacing: -.02em;
   /* Тёмный изумруд, а не основной: цифры крупные, на такой площади
      светлый оттенок начинает спорить с кнопкой (HERO-FIT) */
   color: var(--c-accent-press);
   font-variant-numeric: tabular-nums;
 }
+
+.metrics__unit { font-size: var(--fs-sub); }
 
 .metrics__label {
   font-size: var(--fs-small);
