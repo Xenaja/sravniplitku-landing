@@ -236,93 +236,53 @@
     <h2 class="h2 steps__title" id="how-title">Пять действий до готового изображения</h2>
     <p class="lead steps__lead">Сцены отрисованы заранее, поэтому результат появляется сразу.</p>
 
-    <!-- Кадр закреплён, список шагов скроллится мимо него: пять кадров
-         во всю ширину друг под другом занимали около 4000px на пять
-         коротких фраз. Активный шаг определяется по близости к центру
-         экрана — см. modules/steps.js (STEPS-BLOCK). -->
-    <div class="steps" data-steps>
-      <ol class="steps__list">
-        <li class="step" data-step="1" data-active>
-          <span class="step__num">01</span>
-          <h3 class="step__title">Выберите сцену</h3>
-          <p class="step__text">Пять готовых интерьеров: ванные в разных ракурсах, зал, кухня-гостиная. Каталог сцен пополняется</p>
-          <!-- Тот же файл, что в закреплённом кадре: на узком экране
-               кадр живёт внутри шага, на широком — в общей рамке. -->
-          <img class="step__shot" src="assets/img/steps/step-1-scene.jpg" alt="Каталог сервиса: готовые интерьерные сцены на выбор, одна выделена"
-               width="1280" height="960" loading="lazy" decoding="async">
-        </li>
-        <li class="step" data-step="2">
-          <span class="step__num">02</span>
-          <h3 class="step__title">Укажите зону</h3>
-          <p class="step__text">В каждой сцене три-шесть размеченных зон</p>
-          <!-- Тот же файл, что в закреплённом кадре: на узком экране
-               кадр живёт внутри шага, на широком — в общей рамке. -->
-          <img class="step__shot" src="assets/img/steps/step-2-zone.jpg" alt="Выбранная зона обведена пунктиром прямо на рендере"
-               width="1280" height="960" loading="lazy" decoding="async">
-        </li>
-        <li class="step" data-step="3">
-          <span class="step__num">03</span>
-          <h3 class="step__title">Примените плитку</h3>
-          <p class="step__text">Каталог с поиском по цвету, формату и фактуре; варианты можно сохранить в избранное</p>
-          <!-- Тот же файл, что в закреплённом кадре: на узком экране
-               кадр живёт внутри шага, на широком — в общей рамке. -->
-          <img class="step__shot" src="assets/img/steps/step-3-tile.jpg" alt="Одна стена сцены: слева исходная плитка, справа применённая коллекция"
-               width="1280" height="960" loading="lazy" decoding="async">
-        </li>
-        <li class="step" data-step="4">
-          <span class="step__num">04</span>
-          <h3 class="step__title">Настройте свет</h3>
-          <p class="step__text">Тёплый или холодный свет, ярче или темнее</p>
-          <!-- Тот же файл, что в закреплённом кадре: на узком экране
-               кадр живёт внутри шага, на широком — в общей рамке. -->
-          <img class="step__shot" src="assets/img/steps/step-4-light.jpg" alt="Панель сервиса: ползунок температуры света выставлен на 6049 К"
-               width="1280" height="960" loading="lazy" decoding="async">
-        </li>
-        <li class="step" data-step="5">
-          <span class="step__num">05</span>
+    <!-- Пять карточек со стрелками: ряды 1-2 и 3-4, пятый шаг во всю
+         ширину как результат (FIXES_ROUND2 3.2). Прежний аккордеон
+         с закреплённым кадром удалён вместе с modules/steps.js.
+         Скриншотов в карточках нет — по решению заказчика.
+
+         role="list" на div, а не ol: стрелки должны быть элементами
+         сетки, а внутри ol допустимы только li. Порядковые номера
+         несёт сам текст карточки. -->
+    <div class="steps" role="list">
+      <div class="step" role="listitem">
+        <span class="step__num">01</span>
+        <h3 class="step__title">Выберите сцену</h3>
+        <p class="step__text">Пять готовых интерьеров: ванные в разных ракурсах, зал, кухня-гостиная. Каталог сцен пополняется</p>
+      </div>
+
+      <span class="steps__arrow" aria-hidden="true"></span>
+
+      <div class="step" role="listitem">
+        <span class="step__num">02</span>
+        <h3 class="step__title">Укажите зону</h3>
+        <p class="step__text">В каждой сцене три-шесть размеченных зон</p>
+      </div>
+
+      <span class="steps__arrow steps__arrow--down" aria-hidden="true"></span>
+
+      <div class="step" role="listitem">
+        <span class="step__num">03</span>
+        <h3 class="step__title">Примените плитку</h3>
+        <p class="step__text">Каталог с поиском по цвету, формату и фактуре; варианты можно сохранить в избранное</p>
+      </div>
+
+      <span class="steps__arrow" aria-hidden="true"></span>
+
+      <div class="step" role="listitem">
+        <span class="step__num">04</span>
+        <h3 class="step__title">Настройте свет</h3>
+        <p class="step__text">Тёплый или холодный свет, ярче или темнее</p>
+      </div>
+
+      <div class="step step--result" role="listitem">
+        <span class="step__num">05</span>
+        <div class="step__body">
           <h3 class="step__title">Отдайте файл</h3>
           <p class="step__text">Готовое изображение уходит клиенту в переписку</p>
-          <!-- Тот же файл, что в закреплённом кадре: на узком экране
-               кадр живёт внутри шага, на широком — в общей рамке. -->
-          <img class="step__shot" src="assets/img/steps/step-5-file.jpg" alt="Готовое изображение 4000×3000 пикселей – файл, который уходит клиенту"
-               width="1119" height="838" loading="lazy" decoding="async">
-        </li>
-      </ol>
-
-      <div class="steps__media">
-        <div class="steps__frame">
-          <img class="steps__shot" src="assets/img/steps/step-1-scene.jpg" alt="Каталог сервиса: готовые интерьерные сцены на выбор, одна выделена"
-               width="1280" height="960" decoding="async"
-               data-shot="1" data-full="assets/img/steps/step-1-full.jpg" data-caption="Выберите сцену – скриншот сервиса" data-active>
-          <img class="steps__shot" src="assets/img/steps/step-2-zone.jpg" alt="Выбранная зона обведена пунктиром прямо на рендере"
-               width="1280" height="960" loading="lazy" decoding="async"
-               data-shot="2" data-full="assets/img/steps/step-2-full.jpg" data-caption="Укажите зону – скриншот сервиса">
-          <img class="steps__shot" src="assets/img/steps/step-3-tile.jpg" alt="Одна стена сцены: слева исходная плитка, справа применённая коллекция"
-               width="1280" height="960" loading="lazy" decoding="async"
-               data-shot="3" data-full="assets/img/steps/step-3-full.jpg" data-caption="Примените плитку – скриншот сервиса">
-          <img class="steps__shot" src="assets/img/steps/step-4-light.jpg" alt="Панель сервиса: ползунок температуры света выставлен на 6049 К"
-               width="1280" height="960" loading="lazy" decoding="async"
-               data-shot="4" data-full="assets/img/steps/step-4-full.jpg" data-caption="Настройте свет – скриншот сервиса">
-          <img class="steps__shot" src="assets/img/steps/step-5-file.jpg" alt="Готовое изображение 4000×3000 пикселей – файл, который уходит клиенту"
-               width="1119" height="838" loading="lazy" decoding="async"
-               data-shot="5" data-full="assets/img/steps/step-5-full.jpg" data-caption="Отдайте файл – скриншот сервиса">
-          <span class="steps__tag" data-steps-tag>Шаг 01</span>
-          <button class="zoom-btn" type="button" data-steps-zoom
-                  data-zoom="assets/img/steps/step-1-full.jpg"
-                  data-zoom-alt="Каталог сервиса: готовые интерьерные сцены на выбор, одна выделена"
-                  data-zoom-caption="Выберите сцену – скриншот сервиса"
-                  aria-label="Открыть кадр текущего шага крупнее">
-            <span class="zoom-btn__icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg></span>
-          </button>
         </div>
-
-        <div class="steps__bar" aria-hidden="true">
-        <span class="steps__bar-item" data-active></span>
-        <span class="steps__bar-item"></span>
-        <span class="steps__bar-item"></span>
-        <span class="steps__bar-item"></span>
-        <span class="steps__bar-item"></span>
-        </div>
+        <a class="btn btn--primary btn--lg step__cta" href="#pricing"
+           data-track="demo_click" data-track-place="steps">Протестировать</a>
       </div>
     </div>
   </section>

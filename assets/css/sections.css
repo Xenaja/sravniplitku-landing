@@ -533,126 +533,87 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
   font-size: var(--fs-block-lead);
 }
 
+/* Пять карточек со стрелками. Стрелка — самостоятельный элемент сетки,
+   а не декор на фоне: при смене раскладки она переезжает вместе
+   с карточками и поворачивается одним правилом (FIXES_ROUND2 3.2).
+
+   Раскладка задана явно, а не автопотоком: ряды 1-2 и 3-4, между ними
+   вертикальная стрелка по центру, пятый шаг во всю ширину. */
 .steps {
   display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-  gap: 56px;
-  align-items: start;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
+  align-items: stretch;
 }
 
-/* Шаг — строка списка с линией сверху и акцентной чертой слева */
+.steps > :nth-child(1) { grid-area: 1 / 1; }
+.steps > :nth-child(2) { grid-area: 1 / 2; }
+.steps > :nth-child(3) { grid-area: 1 / 3; }
+.steps > :nth-child(4) { grid-area: 2 / 2; }
+.steps > :nth-child(5) { grid-area: 3 / 1; }
+.steps > :nth-child(6) { grid-area: 3 / 2; }
+.steps > :nth-child(7) { grid-area: 3 / 3; }
+.steps > :nth-child(8) { grid-area: 4 / 1 / auto / -1; }
+
 .step {
+  display: flex;
+  flex-direction: column;
   max-width: none;
-  padding: 26px 0 26px 22px;
-  border-top: 1px solid var(--c-line);
-  border-left: 2px solid rgba(27, 33, 29, .16);
-  /* 0.75, не ниже: на 0.42 описание даёт контраст ~2.2:1 и не читается */
-  opacity: .75;
-  transition: opacity 200ms var(--ease), border-color 200ms var(--ease);
-}
-
-.step:last-child { border-bottom: 1px solid var(--c-line); }
-
-.step[data-active] {
-  opacity: 1;
-  border-left-color: var(--c-accent);
+  padding: 28px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-card);
 }
 
 .step__num {
-  display: block;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
   font-family: var(--font-mono);
   font-size: var(--fs-meta);
   color: var(--c-accent);
 }
 
 .step__title {
-  margin-bottom: 6px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 1.2;
+  margin-bottom: 8px;
+  font-size: var(--fs-sub);
+  font-weight: 700;
 }
 
 .step__text {
-  max-width: 40ch;
-  font-size: var(--fs-note);
+  max-width: none;
+  font-size: var(--fs-small);
+  line-height: 1.55;
   color: var(--c-ink-2);
 }
 
-/* Кадр внутри шага нужен только на узком экране, где sticky не работает */
-.step__shot { display: none; }
-
-/* Кадр стоит на месте, мимо него скроллится список. Отступ сверху
-   считается от высоты шапки — иначе кадр уезжает под неё. */
-.steps__media {
-  position: sticky;
-  top: calc(var(--header-h) + 24px);
+/* Шеврон: вправо между карточками ряда, вниз между рядами.
+   Отличие — ровно один поворот. */
+.steps__arrow {
+  align-self: center;
+  justify-self: center;
+  width: 11px;
+  height: 11px;
+  border-right: 2px solid var(--c-accent);
+  border-bottom: 2px solid var(--c-accent);
+  transform: rotate(-45deg);
 }
 
-.steps__frame {
-  position: relative;
-  /* Ширина колонки на низких широких экранах давала кадр выше окна:
-     sticky держит верх на месте, а низ уезжал под нижнюю кромку.
-     160px — запас под верхний отступ и воздух снизу; формула переводит
-     доступную высоту обратно в ширину через ту же пропорцию 737/570,
-     min(100%, ...) не даёт кадру стать шире своей колонки (STEPS-BLOCK). */
-  width: min(100%, calc((100svh - 160px) * 737 / 570));
-  aspect-ratio: 737 / 570;
-  overflow: hidden;
-  background: var(--c-slot);
-  border: 1px solid var(--c-line);
-  border-radius: var(--r-media);
-}
+.steps__arrow--down { transform: rotate(45deg); }
 
-/* Пять кадров лежат стопкой: меняется только прозрачность, кадр
-   не двигается и не масштабируется */
-.steps__shot {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 240ms var(--ease);
-}
-
-.steps__shot[data-active] { opacity: 1; }
-
-.steps__tag {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  display: inline-flex;
+/* Пятый шаг — результат: во всю ширину и тёмный */
+.step--result {
+  flex-direction: row;
   align-items: center;
-  height: 28px;
-  padding: 0 10px;
-  border-radius: var(--r-media);
-  background: var(--c-overlay);
-  color: #fff;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  white-space: nowrap;
+  gap: 24px;
+  background: var(--c-dark);
+  border-color: var(--c-dark);
 }
 
-/* Полоски показывают заодно, сколько шагов осталось */
-.steps__bar {
-  display: grid;
-  grid-auto-flow: column;
-  gap: 6px;
-  margin-top: 12px;
-}
+.step--result .step__num   { margin-bottom: 0; color: var(--c-accent-light); }
+.step--result .step__title { margin-bottom: 6px; color: var(--c-on-dark); }
+.step--result .step__text  { color: var(--c-on-dark-2); }
 
-.steps__bar-item {
-  height: 3px;
-  border-radius: var(--r-control);
-  background: var(--c-line);
-  transition: background-color 200ms var(--ease);
-}
-
-.steps__bar-item[data-active] { background: var(--c-accent); }
+.step__body { flex: 1; min-width: 0; }
+.step__cta  { margin-left: auto; flex-shrink: 0; }
 
 /* ============================================================
    5. Большое видео
@@ -742,8 +703,12 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
   right: 0;
   bottom: 0;
   z-index: 1;
-  padding: 44px 22px 18px;
-  background: linear-gradient(to top, rgba(14, 58, 43, .82), rgba(14, 58, 43, 0));
+  padding: 28px 22px 16px;
+  /* Градиента нет: сплошной слой поверх кадра над светлой лентой сцен
+     читался прямоугольной плашкой, а над тёмным баннером справа
+     растворялся — асимметрия бросалась в глаза (FIXES_ROUND2 1.1).
+     Контраст держит не общий слой, а собственная тёмная подложка
+     у каждого контрола: она ровно под ним и кадр не закрывает. */
   transition: opacity 200ms ease, visibility 0s linear 0s;
   /* Пустое место панели кликов не перехватывает. Иначе на телефоне,
      где кадр 192px, а панель 113px, градиент накрывает середину кадра
@@ -785,13 +750,13 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
   transition: background 100ms linear;
   background: linear-gradient(to right,
     var(--c-accent-light) calc(var(--played, 0) * 1%),
-    rgba(255, 255, 255, .28) calc(var(--played, 0) * 1%));
+    var(--c-control-dark) calc(var(--played, 0) * 1%));
 }
 
 .player__seek::-moz-range-track {
   height: 4px;
   border-radius: var(--r-control);
-  background: rgba(255, 255, 255, .28);
+  background: var(--c-control-dark);
 }
 
 .player__seek::-moz-range-progress {
@@ -844,12 +809,12 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
   place-content: center;
   border: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, .16);
+  background: var(--c-control-dark);
   cursor: pointer;
   transition: background 150ms ease;
 }
 
-.player__pp:hover { background: rgba(255, 255, 255, .28); }
+.player__pp:hover { background: var(--c-control-dark-hover); }
 
 /* Глиф собран бордерами, чтобы ради двух состояний не тянуть
    иконочный шрифт: треугольник на паузе... */
@@ -875,6 +840,9 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
 
 .player__time {
   flex-shrink: 0;
+  padding: 5px 9px;
+  border-radius: var(--r-control);
+  background: var(--c-control-dark);
   font-family: var(--font-mono);
   font-size: var(--fs-meta);
   letter-spacing: .04em;
@@ -892,7 +860,7 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
   padding: 8px 14px;
   border: 0;
   border-radius: var(--r-control);
-  background: rgba(255, 255, 255, .14);
+  background: var(--c-control-dark);
   color: var(--c-on-dark);
   font-family: var(--font-mono);
   font-size: var(--fs-label);
@@ -903,7 +871,7 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
   transition: background 150ms ease;
 }
 
-.player__btn:hover { background: rgba(255, 255, 255, .26); }
+.player__btn:hover { background: var(--c-control-dark-hover); }
 
 /* В полном экране кадр перестаёт быть карточкой: пропорция снимается,
    иначе она спорит с пропорцией монитора и оставляет поля не там, где
