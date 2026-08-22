@@ -160,17 +160,27 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
 /* Каждая строка заголовка — свой блок: группировка задана вручную */
 .hero__line { display: block; }
 
+/* Первое слово вдвое крупнее остальных строк — на нём держится
+   весь первый экран */
+.hero__line--lead {
+  font-size: 2em;
+  line-height: 1;
+  margin-bottom: .06em;
+}
+
 /* Цифра обыграна кеглем и цветом. line-height меньше единицы, чтобы
    увеличенный знак не растягивал строку и третья строка осталась
    на том же шаге, что первые две. */
-.hero__accent {
-  color: var(--c-accent);
+.hero__accent { color: var(--c-accent); }
+
+/* Цифра обыграна кеглем. line-height меньше единицы, чтобы увеличенный
+   знак не растягивал строку, а трекинг сброшен: отрицательный трекинг
+   заголовка прижимал его к соседним словам вплотную. */
+.hero__one {
   font-size: 1.28em;
   line-height: .62;
-  /* Отрицательный трекинг заголовка прижимает увеличенный знак
-     к соседним словам — возвращаем воздух вокруг цифры */
   letter-spacing: normal;
-  margin-inline: .06em .08em;
+  margin-inline: .06em .04em;
 }
 
 .hero__lead {
@@ -207,15 +217,21 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
      Первая строка — запасная для браузеров без svh: там остаётся прежнее
      поведение, а не сломанная вёрстка. */
   width: 100%;
-  width: min(100%, calc(clamp(464px, 46vh, 520px) * 16 / 9));
-  width: min(100%, calc(clamp(464px, 46svh, 520px) * 16 / 9));
+  width: min(100%, calc(clamp(464px, 46vh, 520px) * 16 / 9 + 24px));
+  width: min(100%, calc(clamp(464px, 46svh, 520px) * 16 / 9 + 24px));
   margin-left: auto;
-  aspect-ratio: 16 / 9;
+  /* Обойма: тёмное поле по периметру отделяет белый интерфейс сервиса
+     от бумажного фона. Пропорция живёт на самом видео, а не на обойме:
+     при aspect-ratio у обоймы поле съедало бы кадр и ломало 16/9.
+     Высоту обоймы задаёт содержимое. */
+  padding: 12px;
   overflow: hidden;
   background: var(--c-dark);
-  border-radius: 0 0 0 var(--r-media);
+  border-radius: var(--r-media) 0 0 var(--r-media);
   box-shadow: var(--shadow-media);
 }
+
+.hero-media__video { border-radius: var(--r-control); }
 
 /* contain, а не cover: кадр обязан показываться целиком. Раньше здесь
    стоял cover с пропорцией 737/570, и интерфейс сервиса срезался
@@ -223,7 +239,8 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
 .hero-media__video {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   object-fit: contain;
 }
 
@@ -293,6 +310,7 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
 /* position: relative обязателен: линию над цифрой рисует ::before ячейки
    из motion.css (паттерн M3), и без системы координат она уезжает. */
 .metrics__cell { position: relative; padding-top: 26px; min-width: 0; }
+
 
 /* Цифры — самый яркий контент страницы, поэтому изумрудные и крупные.
    tabular-nums держит колонки ровными: «5+» и «3 минуты» не пляшут
