@@ -34,6 +34,9 @@ design_handoff_hero_video_player/
 # как и остальные пакеты ТЗ выше
 HERO_FIXES.md
 
+# ТЗ на блок «Пять действий»: эталон рельса и описание
+steps_rail/
+
 # Заявки с персональными данными и метки антифлуда
 api/logs/*.log
 api/logs/throttle-*.txt

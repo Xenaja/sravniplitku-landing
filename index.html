@@ -242,57 +242,50 @@
        1. Пять шагов
        ============================================================ -->
   <section data-type="B" class="container" id="how" aria-labelledby="how-title">
+    <span class="eyebrow eyebrow--section steps__eyebrow">Как это работает</span>
     <h2 class="h2 steps__title" id="how-title">Пять действий до готового изображения</h2>
     <p class="lead steps__lead">Сцены отрисованы заранее, поэтому результат появляется сразу.</p>
 
-    <!-- Пять карточек со стрелками: ряды 1-2 и 3-4, пятый шаг во всю
-         ширину как результат (FIXES_ROUND2 3.2). Прежний аккордеон
-         с закреплённым кадром удалён вместе с modules/steps.js.
-         Скриншотов в карточках нет — по решению заказчика.
+    <!-- Рельс из пяти: пять отрезков линии подряд сами читаются как шкала
+         процесса, направление задаёт порядок слева направо — стрелки не
+         нужны. Карточек нет: текст занимал в них около трети площади,
+         остальное было воздухом (STEPS-RAIL.md).
 
-         role="list" на div, а не ol: стрелки должны быть элементами
-         сетки, а внутри ol допустимы только li. Порядковые номера
-         несёт сам текст карточки. -->
-    <div class="steps" role="list">
-      <div class="step" role="listitem">
+         Пятый шаг остаётся шагом того же вида, только его линия и заголовок
+         изумрудные — он виден как результат, а не как отдельный баннер.
+         Действие вынесено под рельс за разделитель: кнопка внутри шага
+         читалась как «оплатить пятый шаг». -->
+    <ol class="steps">
+      <li class="step">
         <span class="step__num">01</span>
         <h3 class="step__title">Выберите сцену</h3>
         <p class="step__text">Пять готовых интерьеров: ванные в разных ракурсах, зал, кухня-гостиная. Каталог сцен пополняется</p>
-      </div>
-
-      <span class="steps__arrow" aria-hidden="true"></span>
-
-      <div class="step" role="listitem">
+      </li>
+      <li class="step">
         <span class="step__num">02</span>
         <h3 class="step__title">Укажите зону</h3>
         <p class="step__text">В каждой сцене три-шесть размеченных зон</p>
-      </div>
-
-      <span class="steps__arrow steps__arrow--down" aria-hidden="true"></span>
-
-      <div class="step" role="listitem">
+      </li>
+      <li class="step">
         <span class="step__num">03</span>
         <h3 class="step__title">Примените плитку</h3>
         <p class="step__text">Каталог с поиском по цвету, формату и фактуре; варианты можно сохранить в избранное</p>
-      </div>
-
-      <span class="steps__arrow" aria-hidden="true"></span>
-
-      <div class="step" role="listitem">
+      </li>
+      <li class="step">
         <span class="step__num">04</span>
         <h3 class="step__title">Настройте свет</h3>
         <p class="step__text">Тёплый или холодный свет, ярче или темнее</p>
-      </div>
-
-      <div class="step step--result" role="listitem">
+      </li>
+      <li class="step step--final">
         <span class="step__num">05</span>
-        <div class="step__body">
-          <h3 class="step__title">Отдайте файл</h3>
-          <p class="step__text">Готовое изображение уходит клиенту в переписку</p>
-        </div>
-        <a class="btn btn--primary btn--lg step__cta" href="#pricing"
-           data-track="demo_click" data-track-place="steps">Протестировать</a>
-      </div>
+        <h3 class="step__title">Отдайте файл</h3>
+        <p class="step__text">Готовое изображение уходит клиенту в переписку</p>
+      </li>
+    </ol>
+
+    <div class="steps__action">
+      <a class="btn btn--primary btn--lg" href="#pricing"
+         data-track="demo_click" data-track-place="steps">Протестировать</a>
     </div>
   </section>
 
