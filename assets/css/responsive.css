@@ -334,6 +334,19 @@
 
   .lead-magnet { gap: 28px; }
   .lead-panel { padding: 20px; }
+
+  /* Обойма «Куда прислать гайд» — inline-flex, и её минимальная ширина
+     равна сумме трёх вариантов, около 300px. Колонка 1fr не может стать
+     уже своего min-content, поэтому этот пол поднимался до всей секции
+     и ниже 368px распирал страницу вбок (тот же класс дефекта, что
+     у ячеек полосы метрик). Тремя равными долями контрол ужимается
+     вместе с экраном; поля вариантов при этом уступают тексту. */
+  .channel__group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .channel__option span { padding: 0 8px; }
   .contrast-card { padding: 22px; }
   .value-card  { padding: 24px; }
 
