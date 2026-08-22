@@ -120,6 +120,10 @@ main > section[data-type='C'] + section[data-type='B'] {
    720 выбрано так, чтобы эталонные 1440×900 остались нетронутыми: там
    расчёт даёт 719 и потолок не срабатывает. */
 main > section[data-type='hero'] {
+  /* Первая строка — запасная: где нет svh, всё правило с ним браузер
+     отбрасывает целиком, и первый экран остался бы без высоты вовсе —
+     контент схлопнулся бы к шапке, а низ окна опустел. */
+  min-height: min(calc(100vh - var(--header-h) - 116px), 720px);
   min-height: min(calc(100svh - var(--header-h) - 116px), 720px);
   display: grid;
   align-content: center;

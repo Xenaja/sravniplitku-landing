@@ -195,6 +195,7 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
      Первая строка — запасная для браузеров без svh: там остаётся прежнее
      поведение, а не сломанная вёрстка. */
   width: 100%;
+  width: min(100%, calc(clamp(439px, 46vh, 520px) * 16 / 9));
   width: min(100%, calc(clamp(439px, 46svh, 520px) * 16 / 9));
   margin-left: auto;
   aspect-ratio: 16 / 9;
