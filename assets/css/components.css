@@ -76,14 +76,10 @@
 .btn:active { transform: translateY(1px); }
 .btn--primary:active { background: var(--c-accent-press); border-color: var(--c-accent-press); }
 
-/* На тёмном фоне зелёные кнопки не читаются — CANON §5 */
-.band--dark .btn--primary {
-  background: #fff;
-  border-color: #fff;
-  color: var(--c-ink);
-}
-.band--dark .btn--primary:hover { background: var(--c-on-dark); border-color: var(--c-on-dark); }
-
+/* Вид кнопки определяет её роль, а не фон секции: основное действие
+   везде зелёное, иначе на странице появляется третий вид главной кнопки
+   (FIXES_ROUND2 3.1). Прежнее правило CANON §5 красило её на тёмном
+   в белый — при том, что финальный CTA всё равно возвращал зелёный. */
 .band--dark .btn--outline {
   border-color: rgba(255, 255, 255, .35);
   color: var(--c-on-dark);
@@ -142,6 +138,13 @@
 /* Бейдж живёт внутри карточки первым элементом потока: посаженный
    на верхнюю границу, он срезал угол и читался наклейкой
    (LANDING_FIXES H2). Никаких absolute и отрицательных отступов. */
+/* Пустой бейдж-заглушка резервирует место в карточках без него: иначе
+   название, цена и список средней карточки опускались на 45px, и три
+   тарифа переставали читаться как одна таблица (FIXES_ROUND2 1.4).
+   visibility, а не display: место должно занимать. */
+.badge--pinned[data-badge-slot] { visibility: hidden; }
+.badge--pinned[data-badge-slot]::before { content: '\a0'; }
+
 .badge--pinned {
   align-self: flex-start;
   margin-bottom: 16px;

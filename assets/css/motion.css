@@ -93,13 +93,11 @@
 .faq__item[data-closing] .faq__body > * { opacity: 0; transition-delay: 0ms; }
 
 /* Знак поворачивается, а не подменяется другим глифом: подмена мигает */
-.faq__q::after {
-  content: '+';
-  transition: transform 160ms var(--ease);
-}
-
-.faq__item[open] .faq__q::after { transform: rotate(45deg); }
-.faq__item[data-closing] .faq__q::after { transform: none; }
+/* Только длительность перехода: сам знак — шеврон из бордеров, он живёт
+   в sections.css. Раньше здесь стоял content: '+' и поворот на 45deg,
+   и они перебивали шеврон — раскрытый вопрос выглядел как закрытый. */
+.faq__q::after { transition: transform 160ms var(--ease); }
+.faq__item[data-closing] .faq__q::after { transform: rotate(45deg); }
 
 /* ------------------------------------------------------------
    M4. Переключатель: подложка едет
