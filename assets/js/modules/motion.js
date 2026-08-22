@@ -79,6 +79,17 @@ function initReveal() {
     items.forEach((el, i) => {
       el.classList.add('reveal');
       el.style.setProperty('--reveal-step', String(Math.min(i, MAX_STEP)));
+
+      // Всё, что попало в окно уже на загрузке, показываем сразу и без
+      // наблюдателя. Иначе на высоком экране запас в -22% снизу оставлял
+      // начало следующей секции прозрачным: место она занимала, но под
+      // первым экраном человек видел пустую полосу и решал, что страница
+      // кончилась.
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        requestAnimationFrame(() => el.classList.add('reveal--in'));
+        return;
+      }
+
       observer.observe(el);
     });
   });
