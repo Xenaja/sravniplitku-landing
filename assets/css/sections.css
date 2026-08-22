@@ -633,9 +633,9 @@ main > section[data-type='hero'] {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: var(--c-dark);
+  background: var(--c-accent-deep);
   border-radius: var(--r-xl);
-  box-shadow: var(--shadow-shell);
+  box-shadow: var(--shadow-player);
 }
 
 .player__video {
@@ -671,7 +671,7 @@ main > section[data-type='hero'] {
   height: 104px;
   border-radius: 50%;
   background: rgba(255, 255, 255, .94);
-  box-shadow: 0 10px 30px rgba(14, 18, 15, .28);
+  box-shadow: 0 10px 30px rgba(14, 58, 43, .28);
   display: grid;
   place-content: center;
   transition: opacity 160ms linear;
@@ -699,7 +699,7 @@ main > section[data-type='hero'] {
   bottom: 0;
   z-index: 1;
   padding: 44px 22px 18px;
-  background: linear-gradient(to top, rgba(14, 18, 15, .78), rgba(14, 18, 15, 0));
+  background: linear-gradient(to top, rgba(14, 58, 43, .82), rgba(14, 58, 43, 0));
   transition: opacity 200ms ease, visibility 0s linear 0s;
   /* Пустое место панели кликов не перехватывает. Иначе на телефоне,
      где кадр 192px, а панель 113px, градиент накрывает середину кадра
@@ -874,7 +874,7 @@ main > section[data-type='hero'] {
   aspect-ratio: auto;
   border-radius: 0;
   box-shadow: none;
-  background: #0B0E0C;
+  background: var(--c-accent-deep);
 }
 
 .player:-webkit-full-screen {
@@ -883,7 +883,7 @@ main > section[data-type='hero'] {
   aspect-ratio: auto;
   border-radius: 0;
   box-shadow: none;
-  background: #0B0E0C;
+  background: var(--c-accent-deep);
 }
 
 /* ============================================================
