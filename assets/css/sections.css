@@ -1009,18 +1009,27 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
   display: grid;
   grid-template-columns: 5fr 7fr;
   gap: 56px;
-  /* start, а не растягивание: правый список длиннее левой колонки
-     примерно на 70px, и честная разная высота честнее подпорок (D2) */
-  align-items: start;
+  /* Колонки одной высоты, а кнопка прижата к низу: так её нижний край
+     совпадает с нижним краем списка справа. */
+  align-items: stretch;
   padding-top: 32px;
   border-top: 1px solid var(--c-line);
 }
 
 /* 40px, а не каноничные 44: заголовок делит строку с семишаговой
    колонкой справа и на 44 уходил в лишнюю строку (SEGMENT-BLOCK.md) */
+/* Левая колонка — флекс, чтобы кнопка ушла на низ по margin-top: auto */
+.segment__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.segment__cta { margin-top: auto; }
+
 .segment__title {
   max-width: 18ch;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
   font-size: var(--fs-block);
   line-height: 1.1;
   letter-spacing: -.02em;
@@ -1274,6 +1283,13 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
   border-radius: var(--r-card);
 }
 
+.lead-magnet__label {
+  align-self: flex-start;
+  margin-bottom: 14px;
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+}
+
 .lead-magnet__title   { margin-bottom: 14px; }
 
 .lead-magnet__text {
@@ -1427,8 +1443,9 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
 .pricing__note {
   margin-top: 24px;
   font-family: var(--font-body);
-  font-size: var(--fs-small);
-  color: var(--c-ink-2);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  color: var(--c-ink);
 }
 
 .pricing__note a {
@@ -1539,26 +1556,26 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
    (LANDING_FIXES J1). Акцентная линия сверху остаётся. */
 .faq-aside {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 28px;
   flex-wrap: wrap;
   padding: 24px 0 0;
   border-top: 2px solid var(--c-ink);
 }
 
-.faq-aside__lead { flex: 1 1 260px; }
+/* Строка не тянется на всю ширину: кнопка и почта должны стоять
+   рядом с текстом, а не в другом конце секции. */
+.faq-aside__lead { flex: 0 1 auto; }
 
-.faq-aside__actions { margin-left: auto; }
-
+/* Вопрос и график — одной строкой */
 .faq-aside__title {
-  display: block;
   font-size: var(--fs-sub);
   font-weight: 700;
   color: var(--c-ink);
 }
 
 .faq-aside__hours {
-  margin-top: 6px;
+  margin-left: 10px;
   font-size: var(--fs-small);
   color: var(--c-ink-2);
 }
@@ -1587,10 +1604,12 @@ main > section[data-type='C'].cta-band { padding-block: 56px; }
    в nowrap) отбирает ширину, и заголовок рассыпается на семь строк. */
 .cta-strip {
   display: grid;
-  grid-template-columns: minmax(480px, 1fr) minmax(0, auto);
-  /* end, а не center: заголовок в три строки, и по центру кнопки висели
-     напротив его середины ни с чем не выровненные (LANDING_FIXES K1) */
-  align-items: end;
+  /* max-content, а не 1fr: заголовок ограничен 22ch, и колонка в 1fr
+     отбрасывала кнопки к правому краю секции. Теперь они стоят сразу
+     за текстом и выровнены по его середине. */
+  grid-template-columns: minmax(0, max-content) minmax(0, auto);
+  justify-content: start;
+  align-items: center;
   gap: 48px;
 }
 
