@@ -309,7 +309,12 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
    min-width: 0 гасит автоматический минимум колонки 1fr. */
 /* position: relative обязателен: линию над цифрой рисует ::before ячейки
    из motion.css (паттерн M3), и без системы координат она уезжает. */
-.metrics__cell { position: relative; padding-top: 26px; min-width: 0; }
+.metrics__cell {
+  position: relative;
+  padding-top: 26px;
+  min-width: 0;
+  text-align: center;
+}
 
 
 /* Цифры — самый яркий контент страницы, поэтому изумрудные и крупные.
@@ -320,6 +325,7 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
 .metrics__value {
   display: flex;
   align-items: baseline;
+  justify-content: center;
   gap: 6px;
   font-family: var(--font-display);
   font-weight: 700;
@@ -1341,13 +1347,15 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
 
 /* Тарифы на бумаге: акцент даёт одна тёмная карточка, а не заливка
    секции. Зелёный остаётся только в кнопке и бейдже (FIX-01 F3). */
+/* Бумажный тон, а не белый: секция сама белая, и белая карточка на ней
+   держалась только за счёт рамки. */
 .plan {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--c-line);
   border-radius: var(--r-card);
   padding: 32px;
-  background: var(--c-surface);
+  background: var(--c-bg);
 }
 
 /* Рекомендованный тариф — единственный акцент блока */
