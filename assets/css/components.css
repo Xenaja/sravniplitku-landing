@@ -21,7 +21,7 @@
   text-align: center;
   white-space: nowrap;
   border: 1px solid transparent;
-  border-radius: var(--r-md);
+  border-radius: var(--r-control);
   cursor: pointer;
   transition: background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
 }
@@ -37,17 +37,6 @@
   background: var(--c-accent-hover);
   border-color: var(--c-accent-hover);
   color: #fff;
-}
-
-.btn--secondary {
-  background: var(--c-surface);
-  border-color: var(--c-line);
-  color: var(--c-ink);
-}
-.btn--secondary:hover {
-  background: var(--c-surface-2);
-  border-color: var(--c-line-field);
-  color: var(--c-ink);
 }
 
 /* Контурная кнопка акцентом — боковые тарифы */
@@ -76,7 +65,7 @@
 
 /* --- Размеры (значения из макета) --- */
 
-.btn--xs { font-size: var(--fs-small);   padding: 10px 18px; border-radius: var(--r-sm); }
+.btn--xs { font-size: var(--fs-small);   padding: 10px 18px; border-radius: var(--r-control); }
 
 .btn--md { font-size: var(--fs-small);   padding: 13px 20px; }
 .btn--lg { font-size: var(--fs-body); padding: 14px 24px; }
@@ -138,27 +127,30 @@
   color: var(--c-ink-3);
   background: rgba(27, 33, 29, .06);
   padding: 5px 10px;
-  border-radius: var(--r-chip);
+  border-radius: var(--r-control);
 }
 
-/* Тёплый — только выгода, скидка, срок. Приглушённый, а не плашка. */
+/* Выгода набирается той же зеленью, что бейдж первого экрана: бежевый
+   был единственным тёплым пятном на странице (LANDING_FIXES H1). */
 .badge--warm {
-  color: #8A5F1F;
-  background: rgba(169, 118, 42, .14);
+  color: #28503D;
+  background: var(--c-accent-soft);
 }
 
 .badge--sm { letter-spacing: .08em; padding: 3px 8px; }
 
-/* Бейдж вынесен на верхнюю границу тёмной карточки */
+/* Бейдж живёт внутри карточки первым элементом потока: посаженный
+   на верхнюю границу, он срезал угол и читался наклейкой
+   (LANDING_FIXES H2). Никаких absolute и отрицательных отступов. */
 .badge--pinned {
-  position: absolute;
-  top: -11px;
-  left: 30px;
+  align-self: flex-start;
+  margin-bottom: 16px;
   background: var(--c-accent);
-  color: #fff;
-  font-size: var(--fs-label);
-  padding: 4px 10px;
-  border-radius: var(--r-chip);
+  color: #F6FBF8;
+  font-size: 11px;
+  letter-spacing: .08em;
+  padding: 6px 10px;
+  border-radius: var(--r-control);
 }
 
 /* ============================================================
@@ -181,10 +173,10 @@
   overflow: hidden;
   background: var(--c-slot);
   border: 1px solid var(--c-line);
-  border-radius: var(--r-lg);
+  border-radius: var(--r-media);
 }
 
-.media--xl    { border-radius: var(--r-xl); }
+.media--xl    { border-radius: var(--r-media); }
 
 .media--16x9  { aspect-ratio: 16 / 9; }
 
@@ -259,7 +251,7 @@
   height: 32px;
   display: grid;
   place-content: center;
-  border-radius: var(--r-sm);
+  border-radius: var(--r-control);
   background: var(--c-overlay);
   opacity: .85;
   transition: opacity var(--t-fast);
@@ -295,7 +287,7 @@
   max-width: min(1200px, 94vw);
   max-height: 92vh;
   background: var(--c-surface);
-  border-radius: var(--r-xl);
+  border-radius: var(--r-media);
   overflow: hidden;
   color: var(--c-ink);
 }
@@ -328,7 +320,7 @@
   flex-shrink: 0;
   padding: 8px 14px;
   border: 1px solid var(--c-line);
-  border-radius: var(--r-md);
+  border-radius: var(--r-control);
   background: var(--c-surface);
   color: var(--c-ink);
   font-size: var(--fs-small);
@@ -349,7 +341,7 @@
 
 .field__label {
   font-size: var(--fs-small);
-  color: var(--c-ink-2);
+  color: var(--c-ink-3);
 }
 
 .field__control {
@@ -357,9 +349,9 @@
   box-sizing: border-box;
   height: 52px;
   border: 1px solid var(--c-line);
-  border-radius: var(--r-xl);
-  padding: 0 15px;
-  font-size: var(--fs-small);
+  border-radius: var(--r-control);
+  padding: 0 16px;
+  font-size: var(--fs-body);
   color: var(--c-ink);
   /* Поле на белом: на бумаге фон #F7F7F4 почти сливался с фоном секции
      и инпут не читался как поле (FIX-01 F9) */
@@ -376,7 +368,13 @@ select.field__control:invalid { color: var(--c-ink-3); }
 select.field__control option { color: var(--c-ink); }
 
 .field__control:hover { border-color: var(--c-line-field); }
-.field__control:focus { outline: none; border-color: var(--c-accent); }
+/* Фокус видно не только по цвету рамки: кольцо в 3px отрабатывает
+   и при слабом контрасте монитора (LANDING_FIXES G1) */
+.field__control:focus {
+  outline: none;
+  border-color: var(--c-accent);
+  box-shadow: 0 0 0 3px var(--c-accent-soft);
+}
 
 select.field__control {
   appearance: none;
@@ -402,21 +400,25 @@ select.field__control {
   display: grid;
   min-height: 44px;
   align-content: center;
-  grid-template-columns: 18px 1fr;
-  gap: 10px;
+  grid-template-columns: 20px 1fr;
+  gap: 12px;
+  /* Строка согласия не тянется на всю ширину карточки: иначе «сервисе»
+     падало одно на вторую строку (LANDING_FIXES G4) */
+  max-width: 640px;
   font-size: var(--fs-small);
   color: var(--c-ink-2);
   line-height: 1.5;
+  text-wrap: pretty;
   cursor: pointer;
 }
 
 .consent__box {
   appearance: none;
-  width: 16px;
-  height: 16px;
-  margin-top: 2px;
-  border: 1.5px solid var(--c-line-field);
-  border-radius: var(--r-chip);
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border: 1px solid #C9C8C0;
+  border-radius: var(--r-control);
   background: var(--c-surface);
   cursor: pointer;
   display: grid;
@@ -449,7 +451,7 @@ select.field__control {
   line-height: 1.5;
   margin-top: 12px;
   padding: 12px 14px;
-  border-radius: var(--r-md);
+  border-radius: var(--r-control);
   border: 1px solid var(--c-line);
   background: var(--c-surface-2);
   color: var(--c-ink-2);

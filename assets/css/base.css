@@ -56,7 +56,7 @@ ul, ol { list-style: none; }
 :focus-visible {
   outline: 2px solid var(--c-accent);
   outline-offset: 2px;
-  border-radius: var(--r-xs);
+  border-radius: var(--r-control);
 }
 
 .band--dark :focus-visible { outline-color: var(--c-accent-light); }
@@ -156,7 +156,12 @@ main > section[data-type='hero'] + section { padding-block: 0 44px; }
    для мелких подписей (LABELS). Фон на странице есть ровно у двух
    надписей: кикер первого экрана и теги поверх изображений — там
    подложка нужна для читаемости на кадре. */
+/* Надзаголовок живёт только на смысловой границе страницы и выглядит
+   везде одинаково — вид и отступ до H2 заданы здесь, а не посекционно
+   (LANDING_FIXES A2). */
 .eyebrow--section {
+  display: block;
+  margin-bottom: 12px;
   color: var(--c-accent);
   letter-spacing: .14em;
 }
@@ -204,7 +209,7 @@ p, li {
   background: var(--c-accent);
   color: #fff;
   padding: 12px 18px;
-  border-radius: var(--r-md);
+  border-radius: var(--r-control);
   transition: top var(--t-fast);
 }
 .skip-link:focus { top: 12px; color: #fff; }

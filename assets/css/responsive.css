@@ -71,7 +71,7 @@
   main > section[data-type='hero'] > .container { padding-right: var(--gutter); }
 
   .hero__text { padding-top: 40px; }
-  .hero-media { border-radius: var(--r-lg); }
+  .hero-media { border-radius: var(--r-media); }
 
   .metrics { margin-bottom: 56px; }
 
@@ -115,10 +115,14 @@
     margin-top: 16px;
     object-fit: cover;
     border: 1px solid var(--c-line);
-    border-radius: var(--r-2xl);
+    border-radius: var(--r-media);
   }
 
   .contrast__grid { grid-template-columns: 1fr; }
+
+  /* Ниже 860 вопросы возвращаются в одну колонку (LANDING_FIXES I1) */
+  .faq__list { grid-template-columns: 1fr; }
+  .faq__col:first-child > .faq__item:last-child { border-bottom: 0; }
 
   /* Тёмный тариф в одну колонку — бейдж не должен налезать */
   .plan--dark { margin-top: 11px; }
