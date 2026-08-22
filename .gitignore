@@ -26,6 +26,10 @@ motion/
 steps_block/
 hero_fit/
 
+# ТЗ на первый экран с полным видео и на плеер длинного видео:
+# эталоны в HTML, кадр интерфейса, рантайм для их просмотра
+design_handoff_hero_video_player/
+
 # Заявки с персональными данными и метки антифлуда
 api/logs/*.log
 api/logs/throttle-*.txt

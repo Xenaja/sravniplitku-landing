@@ -160,8 +160,8 @@
   }
 
   /* M8: единственная подсказка «кадр кликабелен» — курсора мало */
-  .video-frame__play { transition: opacity 160ms linear, transform 160ms var(--ease); }
-  .video-frame__toggle:hover .video-frame__play { transform: scale(1.06); }
+  .player__play { transition: opacity 160ms linear, transform 160ms var(--ease); }
+  .player__hit:hover .player__play { transform: scale(1.06); }
 }
 
 /* ------------------------------------------------------------

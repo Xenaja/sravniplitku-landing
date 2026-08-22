@@ -125,10 +125,6 @@ main > section[data-type='hero'] {
   justify-content: flex-end;
 }
 
-/* Компенсация высоты подписи под кадром: линия идёт по нижнему краю
-   самого кадра, а не его подписи */
-.hero__text { padding-bottom: 29px; }
-
 /* Рубрика в плашке с точкой: изумруд выходит из кнопок в контент
    (ENERGY E3). Цвет тот же --c-accent, новых оттенков не появляется. */
 .hero__kicker {
@@ -628,31 +624,32 @@ main > section[data-type='hero'] {
   line-height: 1.55;
 }
 
-/* Обойма: отделяет белый интерфейс от бумаги и держит контролы вне кадра */
-.video-shell {
-  padding: 10px;
+/* Кадр без обоймы: тёмная рамка и полоса с прогрессом под кадром съедали
+   ~120px высоты, а место контролам нашлось поверх кадра на градиенте
+   (design_handoff_hero_video_player). Пропорция ровно как у файла —
+   16/9, поэтому видео видно целиком. */
+.player {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
   background: var(--c-dark);
-  border-radius: var(--r-2xl);
+  border-radius: var(--r-xl);
   box-shadow: var(--shadow-shell);
 }
 
-.video-frame {
-  position: relative;
-  aspect-ratio: 1620 / 820;
-  overflow: hidden;
-  background: var(--c-surface);
-  border-radius: var(--r-xl);
-}
-
-.video-frame__video {
+.player__video {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* contain, а не cover: кадр обязан помещаться целиком, даже если
+     пропорция файла однажды разойдётся с 16/9 — тогда появятся поля
+     на тёмной подложке, но не срез интерфейса */
+  object-fit: contain;
 }
 
-/* Кнопка на весь кадр: она же вуаль, она же цель нажатия */
-.video-frame__toggle {
+/* Кнопка на весь кадр: она же вуаль до старта, она же цель нажатия */
+.player__hit {
   position: absolute;
   inset: 0;
   display: grid;
@@ -663,18 +660,18 @@ main > section[data-type='hero'] {
   transition: background 160ms cubic-bezier(.2, .7, .3, 1);
 }
 
-.video-frame__toggle:hover { background: rgba(27, 33, 29, .06); }
+.player__hit:hover { background: rgba(27, 33, 29, .06); }
 
 /* Пока идёт воспроизведение, кадр не закрыт ничем */
-.video-shell[data-playing] .video-frame__toggle { background: none; }
-.video-shell[data-playing] .video-frame__play { opacity: 0; }
+.player[data-playing] .player__hit { background: none; }
+.player[data-playing] .player__play { opacity: 0; }
 
-.video-frame__play {
-  width: 88px;
-  height: 88px;
+.player__play {
+  width: 104px;
+  height: 104px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, .96);
-  box-shadow: 0 6px 28px rgba(27, 33, 29, .3);
+  background: rgba(255, 255, 255, .94);
+  box-shadow: 0 10px 30px rgba(14, 18, 15, .28);
   display: grid;
   place-content: center;
   transition: opacity 160ms linear;
@@ -682,7 +679,7 @@ main > section[data-type='hero'] {
 
 /* Треугольник смещён вправо: оптический центр круга не совпадает
    с геометрическим */
-.video-frame__play::before {
+.player__play::before {
   content: '';
   width: 0;
   height: 0;
@@ -692,25 +689,45 @@ main > section[data-type='hero'] {
   border-bottom: 16px solid transparent;
 }
 
-/* Строка прогресса живёт в обойме — никогда поверх продукта */
-.video-bar {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 8px 6px;
+/* Панель управления. Градиент, а не заливка: контролам нужен контраст,
+   но продукт под ними должен просвечивать. z-index обязателен — вуаль
+   растянута на весь кадр и иначе перехватывает клики по кнопкам. */
+.player__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: 44px 22px 18px;
+  background: linear-gradient(to top, rgba(14, 18, 15, .78), rgba(14, 18, 15, 0));
+  transition: opacity 200ms ease, visibility 0s linear 0s;
+  /* Пустое место панели кликов не перехватывает. Иначе на телефоне,
+     где кадр 192px, а панель 113px, градиент накрывает середину кадра
+     вместе с большой кнопкой Play — и тап по центру видео молчит. */
+  pointer-events: none;
 }
 
-.video-bar__time {
-  flex-shrink: 0;
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
-  color: var(--c-on-dark-3);
+.player__seek,
+.player__pp,
+.player__btn { pointer-events: auto; }
+
+/* На ходу панель уходит: во время воспроизведения она нужна редко,
+   а на телефоне занимает больше половины кадра. Возвращается по
+   движению мыши, касанию, фокусу с клавиатуры и на любой паузе.
+   visibility, а не только opacity: невидимая панель не должна ловить
+   ни клики, ни табуляцию. */
+.player[data-playing][data-idle] .player__panel {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease, visibility 0s linear 200ms;
 }
 
-.video-bar__range {
-  flex: 1;
-  min-width: 0;
-  height: 20px;
+/* Перемотка — обычный input[type=range]: перетаскивание, стрелки
+   с клавиатуры и фокус достаются от браузера, а не пишутся руками */
+.player__seek {
+  display: block;
+  width: 100%;
+  height: 16px;
   margin: 0;
   background: none;
   cursor: pointer;
@@ -718,70 +735,156 @@ main > section[data-type='hero'] {
   appearance: none;
 }
 
-.video-bar__range::-webkit-slider-runnable-track {
-  height: 3px;
+.player__seek::-webkit-slider-runnable-track {
+  height: 4px;
   border-radius: 2px;
   transition: background 100ms linear;
   background: linear-gradient(to right,
-    var(--c-accent) calc(var(--played, 0) * 1%),
-    rgba(255, 255, 255, .18) calc(var(--played, 0) * 1%));
+    var(--c-accent-light) calc(var(--played, 0) * 1%),
+    rgba(255, 255, 255, .28) calc(var(--played, 0) * 1%));
 }
 
-.video-bar__range::-moz-range-track {
-  height: 3px;
+.player__seek::-moz-range-track {
+  height: 4px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, .18);
+  background: rgba(255, 255, 255, .28);
 }
 
-.video-bar__range::-moz-range-progress {
-  height: 3px;
+.player__seek::-moz-range-progress {
+  height: 4px;
   border-radius: 2px;
-  background: var(--c-accent);
+  background: var(--c-accent-light);
 }
 
 /* Бегунок появляется по наведению и с клавиатуры: в покое дорожка
    остаётся тонкой линией, как в макете */
-.video-bar__range::-webkit-slider-thumb {
+.player__seek::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 12px;
   height: 12px;
-  margin-top: -4.5px;
+  margin-top: -4px;
   border-radius: 50%;
   background: #fff;
   opacity: 0;
-  transition: opacity 140ms linear;
+  transition: opacity 120ms linear;
 }
 
-.video-bar__range::-moz-range-thumb {
+.player__seek::-moz-range-thumb {
   width: 12px;
   height: 12px;
   border: 0;
   border-radius: 50%;
   background: #fff;
   opacity: 0;
+  transition: opacity 120ms linear;
 }
 
-.video-bar__range:hover::-webkit-slider-thumb,
-.video-bar__range:focus-visible::-webkit-slider-thumb { opacity: 1; }
-.video-bar__range:hover::-moz-range-thumb,
-.video-bar__range:focus-visible::-moz-range-thumb { opacity: 1; }
+.player__seek:hover::-webkit-slider-thumb,
+.player__seek:focus-visible::-webkit-slider-thumb { opacity: 1; }
+.player__seek:hover::-moz-range-thumb,
+.player__seek:focus-visible::-moz-range-thumb { opacity: 1; }
 
-.video-bar__full {
+.player__row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 14px;
+  color: var(--c-on-dark);
+}
+
+.player__pp {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
   display: grid;
   place-content: center;
   border: 0;
-  border-radius: var(--r-lg);
-  background: none;
-  color: var(--c-on-dark-3);
-  font-size: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .16);
   cursor: pointer;
-  transition: background-color 140ms linear;
+  transition: background 150ms ease;
 }
 
-.video-bar__full:hover { background: var(--c-dark-card); }
+.player__pp:hover { background: rgba(255, 255, 255, .28); }
+
+/* Глиф собран бордерами, чтобы ради двух состояний не тянуть
+   иконочный шрифт: треугольник на паузе... */
+.player__pp span {
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  border-left: 11px solid var(--c-on-dark);
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+}
+
+/* ...и две полосы на ходу: content-box прозрачный, видны только
+   левый и правый бордеры */
+.player[data-playing] .player__pp span {
+  width: 4px;
+  height: 12px;
+  margin-left: 0;
+  border: 0;
+  border-left: 3px solid var(--c-on-dark);
+  border-right: 3px solid var(--c-on-dark);
+}
+
+.player__time {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: .04em;
+  color: var(--c-on-dark);
+}
+
+.player__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.player__btn {
+  padding: 8px 14px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: rgba(255, 255, 255, .14);
+  color: var(--c-on-dark);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.player__btn:hover { background: rgba(255, 255, 255, .26); }
+
+/* В полном экране кадр перестаёт быть карточкой: пропорция снимается,
+   иначе она спорит с пропорцией монитора и оставляет поля не там, где
+   надо. Поля по краям рисует object-fit: contain у видео — на своей
+   подложке, а не на бумаге страницы.
+
+   Отдельными правилами, а не через запятую: невалидный для браузера
+   селектор в списке гасит всё правило целиком. */
+.player:fullscreen {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0;
+  box-shadow: none;
+  background: #0B0E0C;
+}
+
+.player:-webkit-full-screen {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0;
+  box-shadow: none;
+  background: #0B0E0C;
+}
 
 /* ============================================================
    6. Возможности (тёмная секция)

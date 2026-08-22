@@ -9,9 +9,14 @@
  *
  * Большое видео тоже без родных controls: их чёрная полоса ложилась на
  * нижнюю треть кадра — ровно на ленту сцен, подсказку и кредит студии.
- * Свои контролы живут в тёмной обойме под кадром и продукт не закрывают.
+ * Свои контролы лежат поверх кадра на градиенте: тёмная обойма под кадром
+ * съедала ~120px высоты, а градиент даёт контраст, не пряча продукт.
  * Перемотка — обычный input[type=range]: перетаскивание и стрелки
  * с клавиатуры достаются от браузера, а не пишутся руками.
+ *
+ * Полный экран открывается только подписанной кнопкой панели. На кадр он
+ * не повешен намеренно: клик по кадру уже значит play/pause, и одно
+ * действие не может значить два разных.
  */
 
 import { track } from './analytics.js';
@@ -90,10 +95,11 @@ function initPlayer() {
   if (!shell) return;
 
   const video = shell.querySelector('video');
-  const toggle = shell.querySelector('[data-player-toggle]');
+  const toggles = shell.querySelectorAll('[data-player-toggle]');
   const seek = shell.querySelector('[data-player-seek]');
   const current = shell.querySelector('[data-player-current]');
   const total = shell.querySelector('[data-player-total]');
+  const mute = shell.querySelector('[data-player-mute]');
   const full = shell.querySelector('[data-player-full]');
   if (!video) return;
 
@@ -102,19 +108,21 @@ function initPlayer() {
 
   function setPlaying(playing) {
     shell.toggleAttribute('data-playing', playing);
-    if (toggle) toggle.setAttribute('aria-label', playing ? 'Поставить видео на паузу' : 'Запустить видео');
-  }
-
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      if (video.paused) {
-        const started = video.play();
-        if (started) started.catch(() => {});
-      } else {
-        video.pause();
-      }
+    toggles.forEach((el) => {
+      el.setAttribute('aria-label', playing ? 'Поставить видео на паузу' : 'Запустить видео');
     });
   }
+
+  function togglePlay() {
+    if (video.paused) {
+      const started = video.play();
+      if (started) started.catch(() => {});
+    } else {
+      video.pause();
+    }
+  }
+
+  toggles.forEach((el) => el.addEventListener('click', togglePlay));
 
   video.addEventListener('play', () => setPlaying(true));
   video.addEventListener('pause', () => setPlaying(false));
@@ -147,6 +155,63 @@ function initPlayer() {
     seek.addEventListener('input', jump);
   }
 
+  /* ---------- панель прячется на ходу ---------- */
+
+  const IDLE_MS = 2500;
+  let idleTimer = 0;
+
+  function rest() {
+    const active = document.activeElement;
+    // Панель с клавиатурным фокусом внутри не прячем: иначе обход табом
+    // теряет активную кнопку. Фокус от мыши при этом не в счёт — клик
+    // по кадру наводит фокус на кнопку-вуаль, и панель не пряталась бы
+    // никогда. Отличает их :focus-visible.
+    if (shell.contains(active)) {
+      let byKeyboard = true;
+      try { byKeyboard = active.matches(':focus-visible'); } catch { /* старый браузер */ }
+      if (byKeyboard) return;
+    }
+    shell.setAttribute('data-idle', '');
+  }
+
+  function wake() {
+    shell.removeAttribute('data-idle');
+    clearTimeout(idleTimer);
+    // На паузе прятать нечего — панель остаётся
+    if (video.paused) return;
+    idleTimer = setTimeout(rest, IDLE_MS);
+  }
+
+  shell.addEventListener('pointermove', wake);
+  shell.addEventListener('pointerdown', wake);
+  shell.addEventListener('focusin', wake);
+  shell.addEventListener('pointerleave', () => {
+    clearTimeout(idleTimer);
+    if (!video.paused) rest();
+  });
+  video.addEventListener('play', wake);
+  video.addEventListener('pause', wake);
+
+  /* ---------- звук ---------- */
+
+  if (mute) {
+    // Имя кнопки постоянное, состояние несёт aria-pressed: менять
+    // и то и другое разом — верный способ запутать скринридер
+    const syncMute = () => {
+      mute.textContent = video.muted ? 'Звук выкл' : 'Звук вкл';
+      mute.setAttribute('aria-pressed', String(!video.muted));
+    };
+
+    mute.addEventListener('click', () => {
+      video.muted = !video.muted;
+    });
+
+    video.addEventListener('volumechange', syncMute);
+    syncMute();
+  }
+
+  /* ---------- полный экран ---------- */
+
   if (full) {
     full.addEventListener('click', () => {
       // Safari на iPhone не умеет полноэкранный режим у произвольного
@@ -160,5 +225,17 @@ function initPlayer() {
         video.webkitEnterFullscreen();
       }
     });
+
+    // Выход бывает и мимо кнопки — Escape, системный жест, F11.
+    // Состояние берём у документа, а не помним своё.
+    const syncFull = () => {
+      const on = document.fullscreenElement === shell;
+      full.setAttribute('aria-pressed', String(on));
+      full.setAttribute('aria-label', on ? 'Выйти из полного экрана' : 'На весь экран');
+    };
+
+    document.addEventListener('fullscreenchange', syncFull);
+    document.addEventListener('webkitfullscreenchange', syncFull);
+    syncFull();
   }
 }
