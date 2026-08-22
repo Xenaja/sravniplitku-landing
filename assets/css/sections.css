@@ -169,10 +169,7 @@ main > section[data-type='hero'] {
   gap: 14px;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 16px;
 }
-
-.hero__micro { font-size: var(--fs-meta); }
 
 /* Кадр упирается в правый край страницы: забирает себе отступ
    контейнера, справа ни рамки, ни скругления. */
@@ -239,11 +236,6 @@ main > section[data-type='hero'] {
 .hero-media__toggle[aria-pressed='true'] .hero-media__play,
 .hero-media__toggle:focus-visible .hero-media__play { opacity: 1; }
 
-
-.hero__caption {
-  margin-top: 14px;
-  font-size: var(--fs-meta);
-}
 
 /* ============================================================
    3. Полоса метрик
@@ -636,11 +628,6 @@ main > section[data-type='hero'] {
   line-height: 1.55;
 }
 
-.video__caption {
-  margin-top: 16px;
-  font-size: var(--fs-meta);
-}
-
 /* Обойма: отделяет белый интерфейс от бумаги и держит контролы вне кадра */
 .video-shell {
   padding: 10px;
@@ -912,18 +899,6 @@ main > section[data-type='hero'] {
   line-height: 1.6;
   color: var(--c-ink-2);
 }
-
-.segment__cta { margin-bottom: 20px; }
-
-/* Не декор: без этих двух строк левая колонка на 60+px короче списка
-   справа, и под кнопкой образуется пустота. */
-.segment__meta {
-  font-size: var(--fs-meta);
-  line-height: 1.6;
-  color: var(--c-ink-3);
-}
-
-.segment__meta + .segment__meta { margin-top: 2px; }
 
 /* Список, а не карточки: белые плашки в бумажной секции давали карточку
    внутри карточки, а текст в них обрезался по правому краю. Различитель —
@@ -1510,54 +1485,9 @@ main > section[data-type='C'].cta-band { padding-block: 56px; }
    Заявка на доступ
    ============================================================ */
 
-/* Число точек — переключатель, а не список: вариантов три,
-   и выбор должен стоить одно касание */
-.points { border: 0; padding: 0; margin: 0; }
-
-.points__group {
-  display: inline-flex;
-  gap: 4px;
-  padding: 4px;
-  background: var(--c-control-bg);
-  border-radius: var(--r-2xl);
-}
-
-.points__option input {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.points__option span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 56px;
-  min-height: 44px;
-  padding: 0 16px;
-  border-radius: var(--r-xl);
-  color: var(--c-ink-3);
-  font-size: var(--fs-small);
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 140ms ease-out, color 140ms ease-out;
-}
-
-.points__option input:checked + span {
-  background: var(--c-surface);
-  color: var(--c-ink);
-  box-shadow: var(--shadow-control);
-}
-
-.points__option input:focus-visible + span {
-  outline: 2px solid var(--c-accent);
-  outline-offset: 2px;
-}
-
-/* «Куда прислать гайд» — тот же переключатель-обойма, что у точек
-   продаж, но своя пара классов: у него другой набор значений и
-   к нему привязана логика показа поля почты (lead-form.js). */
+/* «Куда прислать гайд» — переключатель, а не список: вариантов три,
+   и выбор должен стоить одно касание. К нему привязана логика показа
+   поля почты (lead-form.js). */
 .channel { border: 0; padding: 0; margin: 0; }
 
 .channel__group {
