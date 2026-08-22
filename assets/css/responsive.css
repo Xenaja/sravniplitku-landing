@@ -163,6 +163,10 @@
     --fs-letter:     22px;
   }
 
+  /* Ручная группировка строк заголовка снимается: на телефоне колонка
+     одна и строки должны течь сами */
+  .hero__line { display: inline; }
+
   /* Контрол во всю ширину, по половине на сегмент */
   .segment__tabs { display: grid; grid-template-columns: 1fr 1fr; }
   .segment__tab { padding: 10px 12px; }
