@@ -71,7 +71,14 @@
   main > section[data-type='hero'] > .container { padding-right: var(--gutter); }
 
   .hero__text { padding-top: 40px; }
-  .hero-media { border-radius: var(--r-media); }
+
+  /* В одну колонку кадр идёт во всю ширину: привязка высоты к высоте окна
+     работает только в двухколоночном режиме, иначе формула ужимает кадр
+     до 780px там, где колонка даёт 812 и 976. */
+  .hero-media {
+    width: 100%;
+    border-radius: var(--r-media);
+  }
 
   .metrics { margin-bottom: 56px; }
 
