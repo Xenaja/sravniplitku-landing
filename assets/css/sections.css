@@ -217,17 +217,18 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
      Первая строка — запасная для браузеров без svh: там остаётся прежнее
      поведение, а не сломанная вёрстка. */
   width: 100%;
-  width: min(100%, calc(clamp(464px, 46vh, 520px) * 16 / 9 + 24px));
-  width: min(100%, calc(clamp(464px, 46svh, 520px) * 16 / 9 + 24px));
+  width: min(100%, calc(clamp(464px, 46vh, 520px) * 16 / 9 + 20px));
+  width: min(100%, calc(clamp(464px, 46svh, 520px) * 16 / 9 + 20px));
   margin-left: auto;
-  /* Обойма: тёмное поле по периметру отделяет белый интерфейс сервиса
-     от бумажного фона. Пропорция живёт на самом видео, а не на обойме:
-     при aspect-ratio у обоймы поле съедало бы кадр и ломало 16/9.
-     Высоту обоймы задаёт содержимое. */
-  padding: 12px;
+  /* Корпус монитора, а не равномерная обойма: по бокам узко, сверху
+     чуть шире, снизу подбородок — так рамка читается как устройство,
+     а не как паспарту. Пропорция живёт на самом видео: при aspect-ratio
+     у корпуса поле съедало бы кадр и ломало 16/9, поэтому высоту
+     корпуса задаёт содержимое. */
+  padding: 16px 10px 28px;
   overflow: hidden;
   background: var(--c-dark);
-  border-radius: var(--r-media) 0 0 var(--r-media);
+  border-radius: var(--r-card) 0 0 var(--r-card);
   box-shadow: var(--shadow-media);
 }
 

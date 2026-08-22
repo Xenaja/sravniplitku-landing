@@ -116,7 +116,7 @@
      до 780px там, где колонка даёт 812 и 976. */
   .hero-media {
     width: 100%;
-    border-radius: var(--r-media);
+    border-radius: var(--r-card);
   }
 
   .metrics { margin-bottom: 56px; }
