@@ -1096,11 +1096,12 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
   color: inherit;
 }
 
+/* Пропорция, а не фиксированная высота: слот должен вести себя так же,
+   как поведёт себя настоящее фото (FIXES_ROUND2 3.5). */
 .work .media {
   border: 0;
   border-radius: 0;
-  height: 300px;
-  aspect-ratio: auto;
+  aspect-ratio: 4 / 3;
   flex-shrink: 0;
 }
 

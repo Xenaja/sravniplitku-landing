@@ -405,9 +405,10 @@ select.field__control {
   align-content: center;
   grid-template-columns: 20px 1fr;
   gap: 12px;
-  /* Строка согласия не тянется на всю ширину карточки: иначе «сервисе»
-     падало одно на вторую строку (LANDING_FIXES G4) */
-  max-width: 640px;
+  /* Строка согласия меряется символами, а не пикселями: так мера
+     держится при любом кегле (FIXES_ROUND2 3.4). Иначе «сервисе»
+     падало одно на вторую строку. */
+  max-width: 62ch;
   font-size: var(--fs-small);
   color: var(--c-ink-2);
   line-height: 1.5;

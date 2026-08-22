@@ -115,9 +115,6 @@
   .faq__list { grid-template-columns: 1fr; }
   .faq__col:first-child > .faq__item:last-child { border-bottom: 0; }
 
-  /* Тёмный тариф в одну колонку — бейдж не должен налезать */
-  .plan--dark { margin-top: 11px; }
-
   /* 24/9 на узком экране превращается в щель — растим кадр */
 
   .footer__top { grid-template-columns: 1fr 1fr; }
