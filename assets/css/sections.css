@@ -217,22 +217,22 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
      Первая строка — запасная для браузеров без svh: там остаётся прежнее
      поведение, а не сломанная вёрстка. */
   width: 100%;
-  width: min(100%, calc(clamp(464px, 46vh, 520px) * 16 / 9 + 20px));
-  width: min(100%, calc(clamp(464px, 46svh, 520px) * 16 / 9 + 20px));
+  width: min(100%, calc(clamp(464px, 46vh, 520px) * 16 / 9 + 24px));
+  width: min(100%, calc(clamp(464px, 46svh, 520px) * 16 / 9 + 24px));
   margin-left: auto;
   /* Корпус монитора, а не равномерная обойма: по бокам узко, сверху
      чуть шире, снизу подбородок — так рамка читается как устройство,
      а не как паспарту. Пропорция живёт на самом видео: при aspect-ratio
-     у корпуса поле съедало бы кадр и ломало 16/9, поэтому высоту
-     корпуса задаёт содержимое. */
-  padding: 16px 10px 28px;
+     у корпуса поле съедало бы кадр и ломало 16/9, поэтому высоту корпуса
+     задаёт содержимое, а боковые поля заложены в формулу ширины выше. */
+  padding: 22px 12px 44px;
   overflow: hidden;
-  background: var(--c-dark);
+  /* Корпус белый, а не тёмный: тёмный сливался с тёмной шапкой интерфейса
+     внутри кадра, и рамка читалась подложкой, а не устройством. */
+  background: var(--c-surface);
   border-radius: var(--r-card) 0 0 var(--r-card);
-  box-shadow: var(--shadow-media);
+  box-shadow: var(--shadow-monitor);
 }
-
-.hero-media__video { border-radius: var(--r-control); }
 
 /* contain, а не cover: кадр обязан показываться целиком. Раньше здесь
    стоял cover с пропорцией 737/570, и интерфейс сервиса срезался
@@ -243,6 +243,12 @@ main > section[data-type='hero'] > .container { padding-right: 0; }
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: contain;
+  border-radius: var(--r-control);
+  /* Обводка тенью, а не border: у элемента с aspect-ratio рамка входит
+     в border-box и пропорция кадра перестаёт быть ровно 16/9. Кольцо
+     в 1px отделяет светлый интерфейс на видео от белого корпуса — без
+     него край экрана теряется. */
+  box-shadow: 0 0 0 1px var(--c-dark);
 }
 
 /* Кнопка на весь кадр: и способ остановить петлю, и цель нажатия
