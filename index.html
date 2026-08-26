@@ -55,7 +55,7 @@
       <img class="header__logo-img" src="assets/img/logo-full.svg" alt="СравниПлитку"
            width="3999" height="1284" decoding="async"></a>
 
-    <nav class="header__nav" aria-label="Разделы страницы">
+    <nav class="header__nav" id="header-nav" data-nav-panel aria-label="Разделы страницы">
       <a href="#how">Как работает</a>
       <a href="#value">Возможности</a>
       <a href="#suppliers">Поставщикам</a>
@@ -67,6 +67,14 @@
       <a class="header__phone" href="tel:+79819885949"
          data-contact="phone" data-contact-text>+7 981 988-59-49</a>
       <a class="btn btn--primary btn--xs" href="#pricing" data-track="demo_click" data-track-place="header">Протестировать</a>
+
+      <!-- Кнопка меню. Показывается ниже 1100px, где пять пунктов, телефон
+           и действие перестают помещаться в один ряд. Полоски рисует CSS,
+           разметке хватает пустого span. -->
+      <button class="header__burger" type="button" data-nav-toggle
+              aria-controls="header-nav" aria-expanded="false" aria-label="Меню">
+        <span class="header__burger-lines" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
 </header>
@@ -155,6 +163,15 @@
         <div class="metrics__value"><span class="metrics__sign">+</span><span class="metrics__unit">новые коллекции</span></div>
         <div class="metrics__label">каталог плитки регулярно пополняется</div>
         </div>
+      </div>
+
+      <!-- Действие первого экрана на телефоне: там оно стоит не под
+           подводкой, а под полосой цифр — кадр сервиса и цифры успевают
+           сказать своё до того, как что-то предлагать. На широком экране
+           эта кнопка скрыта, работает та, что в первом экране. -->
+      <div class="metrics__action">
+        <a class="btn btn--primary btn--lg" href="#pricing"
+           data-track="demo_click" data-track-place="hero-mobile">Протестировать</a>
       </div>
     </div>
   </section>

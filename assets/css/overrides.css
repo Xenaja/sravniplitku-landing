@@ -493,3 +493,148 @@
     margin-top: 28px;
   }
 }
+
+
+/* ------------------------------------------------------------
+   М5. Меню-гамбургер
+
+   Пять пунктов, телефон и кнопка перестают помещаться в один ряд около
+   1100px. До этой правки ряд уезжал в горизонтальный скролл и читался
+   обрезанной вёрсткой, а ниже 600px переезжал на второй этаж и добавлял
+   шапке 32px высоты.
+
+   Мобильную раскладку включает атрибут data-nav, который ставит скрипт
+   nav.js. Без скрипта всё остаётся как было — ни один пункт не пропадает.
+   ------------------------------------------------------------ */
+
+/* Три полоски собраны бордерами: ради одной иконки не тянуть шрифт.
+   Средняя — фон самого элемента, крайние — верхний и нижний бордер. */
+.header__burger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-control);
+  background: none;
+  cursor: pointer;
+  place-content: center;
+}
+
+.header__burger-lines,
+.header__burger-lines::before,
+.header__burger-lines::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-ink);
+  transition: transform 160ms ease, opacity 120ms ease;
+}
+
+.header__burger-lines {
+  position: relative;
+}
+
+.header__burger-lines::before,
+.header__burger-lines::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.header__burger-lines::before { top: -7px; }
+.header__burger-lines::after  { top: 7px; }
+
+/* Открытое меню — крестик из тех же полосок */
+.header--nav-open .header__burger-lines { background: transparent; }
+.header--nav-open .header__burger-lines::before { top: 0; transform: rotate(45deg); }
+.header--nav-open .header__burger-lines::after  { top: 0; transform: rotate(-45deg); }
+
+.header__burger:hover .header__burger-lines,
+.header__burger:hover .header__burger-lines::before,
+.header__burger:hover .header__burger-lines::after { background: var(--c-accent); }
+
+.header--nav-open .header__burger:hover .header__burger-lines { background: transparent; }
+
+
+@media (max-width: 1100px) {
+  .header[data-nav] .header__burger { display: grid; }
+
+  /* Шапка снова в один ряд: логотип слева, телефон и кнопка меню справа */
+  .header[data-nav] .header__inner {
+    display: flex;
+    height: var(--header-h);
+    align-items: center;
+    gap: 14px;
+    padding-block: 0;
+  }
+
+  .header[data-nav] .header__actions {
+    margin-left: auto;
+    gap: 10px;
+  }
+
+  /* Меню — панель под шапкой во всю ширину. position: absolute, а не
+     fixed: панель едет вместе со своей шапкой и не переживает её. */
+  .header[data-nav] .header__nav {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    flex-direction: column;
+    gap: 0;
+    padding: 6px var(--gutter) 14px;
+    background: var(--c-bg);
+    border-bottom: 1px solid var(--c-line);
+    box-shadow: 0 18px 30px rgba(27, 33, 29, .10);
+    overflow: visible;
+  }
+
+  .header[data-nav].header--nav-open .header__nav { display: flex; }
+
+  /* Пункт — строка в полный рост: цель тапа 48px и своя линия-разделитель */
+  .header[data-nav] .header__nav a {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    font-size: var(--fs-sub);
+    color: var(--c-ink);
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .header[data-nav] .header__nav a:last-child { border-bottom: 0; }
+}
+
+/* Ниже 600px базовый адаптив делает шапку двухэтажной и поднимает
+   --header-h до 96px. С меню под кнопкой этаж не нужен — возвращаем 64px,
+   от этой же переменной считается высота первого экрана и отступ якорей. */
+@media (max-width: 600px) {
+  :root { --header-h: 64px; }
+}
+
+
+/* ------------------------------------------------------------
+   М6. Действие первого экрана уезжает под полосу цифр
+
+   На телефоне кнопка стояла между подводкой и кадром и отодвигала кадр
+   за нижний край экрана. Теперь порядок такой: заголовок, подводка, кадр,
+   цифры — и только потом предложение попробовать.
+   ------------------------------------------------------------ */
+
+.metrics__action { display: none; }
+
+@media (max-width: 768px) {
+  .hero__actions { display: none; }
+
+  .metrics__action {
+    display: block;
+    margin-top: 28px;
+  }
+
+  .metrics__action .btn {
+    display: flex;
+    width: 100%;
+  }
+}

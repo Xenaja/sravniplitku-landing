@@ -9,6 +9,7 @@
 
 import { initPreview } from './modules/preview.js';
 import { initHeader } from './modules/header.js';
+import { initNav } from './modules/nav.js';
 import { initContacts } from './modules/contacts.js';
 import { initAnalytics } from './modules/analytics.js';
 import { initUtm } from './modules/utm.js';
@@ -31,6 +32,7 @@ function safe(name, init) {
 
 safe('preview', initPreview);
 safe('header', initHeader);
+safe('nav', initNav);
 safe('contacts', initContacts);
 safe('analytics', initAnalytics);
 safe('utm', initUtm);
