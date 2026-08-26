@@ -23,11 +23,12 @@
 <meta property="og:image" content="https://sravniplitku.ru/assets/img/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- TODO: заменить на локальные шрифты (font-display: swap) — быстрее
-     и не отдаёт IP посетителей стороннему сервису. См. README, раздел «Шрифты». -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<!-- Шрифты лежат у нас: объявления в assets/css/fonts.css, файлы в
+     assets/fonts/. Заранее просим только кириллические — ими набрано всё,
+     что видно до прокрутки; латиница подтянется по мере надобности. -->
+<link rel="preload" href="assets/fonts/golos-text-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css">
 
 <!-- Стили: токены → база → компоненты → секции → адаптив → переопределения.
      Порядок важен, overrides.css обязан быть последним — см. шапку файла. -->
