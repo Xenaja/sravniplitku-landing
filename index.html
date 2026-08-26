@@ -558,6 +558,11 @@
 
   <!-- ============================================================
        5. Работы студии
+
+       Карточка — кнопка, а не ссылка: клик открывает рендер в полный
+       размер. Раньше она вела на форму заявки, но блок доказывает
+       качество сцен, и естественное продолжение здесь — рассмотреть
+       сцену, а не заполнить анкету.
        ============================================================ -->
   <section data-type="B" class="container" aria-labelledby="works-title">
     <h2 class="h2 works__title" id="works-title">Сцены и визуализации делает наша команда</h2>
@@ -565,32 +570,41 @@
     <p class="lead works__lead">Мы сами создаём интерьерные сцены сервиса и подготавливаем коллекции для корректного отображения в них.</p>
 
     <div class="works__grid">
-      <a class="work" href="#lead">
+      <button class="work" type="button"
+              data-zoom="assets/img/works/work-bath-full.jpg"
+              data-zoom-alt="Интерьерная сцена сервиса: ванная с серым камнем на стенах и полу"
+              data-zoom-caption="Ванная — интерьерная сцена сервиса">
         <div class="media">
           <img src="assets/img/works/work-bath.jpg" alt="Интерьерная сцена сервиса: ванная с серым камнем на стенах и полу"
                width="1200" height="900" loading="lazy" decoding="async">
         </div>
         <h3 class="work__title">Ванная</h3>
         <p class="work__text">Стены, экран ванны и пол размечены по отдельности: коллекцию можно применить к любой зоне</p>
-      </a>
+      </button>
 
-      <a class="work" href="#lead">
+      <button class="work" type="button"
+              data-zoom="assets/img/works/work-kitchen-full.jpg"
+              data-zoom-alt="Интерьерная сцена сервиса: кухня-гостиная с белым мрамором на полу"
+              data-zoom-caption="Кухня-гостиная — интерьерная сцена сервиса">
         <div class="media">
           <img src="assets/img/works/work-kitchen.jpg" alt="Интерьерная сцена сервиса: кухня-гостиная с белым мрамором на полу"
                width="1200" height="900" loading="lazy" decoding="async">
         </div>
         <h3 class="work__title">Кухня-гостиная</h3>
         <p class="work__text">Пол и фартук меняются отдельно друг от друга, мебель и свет остаются прежними</p>
-      </a>
+      </button>
 
-      <a class="work" href="#lead">
+      <button class="work" type="button"
+              data-zoom="assets/img/works/work-hall-full.jpg"
+              data-zoom-alt="Интерьерная сцена сервиса: холл со светлым полом крупного формата"
+              data-zoom-caption="Холл — интерьерная сцена сервиса">
         <div class="media">
           <img src="assets/img/works/work-hall.jpg" alt="Интерьерная сцена сервиса: холл со светлым полом крупного формата"
                width="1200" height="900" loading="lazy" decoding="async">
         </div>
         <h3 class="work__title">Холл</h3>
         <p class="work__text">Крупный формат в общей зоне — сцена для холлов, прихожих и коридоров</p>
-      </a>
+      </button>
     </div>
 
     <p class="works__note">Поэтому развитие визуализатора не зависит от сторонней библиотеки готовых интерьеров: новые сцены и возможности мы можем создавать внутри своей команды.</p>
