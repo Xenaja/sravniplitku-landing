@@ -1,0 +1,177 @@
+/* ============================================================
+   doc.css — страницы документов: политика, права на изображения,
+   реквизиты.
+
+   Своя вёрстка, а не секции лендинга: здесь длинный текст, который
+   читают подряд, и ему нужна одна узкая колонка, крупный интерлиньяж
+   и заметная нумерация разделов. Подключается только из docs/*.html.
+   ============================================================ */
+
+.doc-page {
+  background: var(--c-bg);
+  color: var(--c-ink);
+}
+
+/* Шапка документа — тонкая, без навигации: со страницы документа
+   возвращаются назад, а не гуляют по разделам */
+.doc-head {
+  border-bottom: 1px solid var(--c-line);
+}
+
+.doc-head__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 20px;
+}
+
+/* Логотип целиком, картинкой — как в шапке лендинга. Название внутри
+   него, поэтому набранной подписи рядом нет; имя несёт alt. */
+.doc-head__logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.doc-head__logo-img {
+  display: block;
+  height: 34px;
+  width: auto;
+}
+
+.doc-head__back {
+  font-size: var(--fs-small);
+  color: var(--c-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Мера в 72ch: документ читают подряд, и строка длиннее просто
+   теряется при переходе на следующую */
+.doc {
+  max-width: 72ch;
+  padding-block: 48px 72px;
+}
+
+.doc__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-h2);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  margin-bottom: 12px;
+}
+
+.doc__meta {
+  font-size: var(--fs-small);
+  color: var(--c-ink-3);
+  margin-bottom: 36px;
+}
+
+/* Плашка черновика. Заметная намеренно: пока в тексте остаются поля
+   в квадратных скобках, документ нельзя публиковать. Снимается вместе
+   с последним заполненным полем. */
+.doc-draft {
+  margin-bottom: 36px;
+  padding: 18px 20px;
+  border: 1px solid var(--c-accent);
+  border-radius: var(--r-card);
+  background: var(--c-accent-soft);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--c-ink);
+}
+
+.doc-draft strong { font-weight: 700; }
+
+/* Поле, которое заполняет клиент */
+.fill {
+  padding: 1px 6px;
+  border-radius: var(--r-control);
+  background: #FBE9C8;
+  color: #6B4E12;
+  font-family: var(--font-mono);
+  font-size: .9em;
+  white-space: nowrap;
+}
+
+.doc h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-sub);
+  line-height: 1.3;
+  margin-top: 40px;
+  margin-bottom: 12px;
+}
+
+.doc h3 {
+  font-weight: 700;
+  font-size: var(--fs-body);
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.doc p,
+.doc li {
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--c-ink-2);
+  text-wrap: pretty;
+}
+
+.doc p { margin-bottom: 14px; }
+
+.doc ul,
+.doc ol {
+  margin: 0 0 14px;
+  padding-left: 22px;
+}
+
+.doc li { margin-bottom: 8px; }
+
+.doc a {
+  color: var(--c-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Таблица реквизитов: две колонки, подпись слева */
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  font-size: var(--fs-body);
+}
+
+.doc-table th,
+.doc-table td {
+  padding: 12px 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--c-line);
+  line-height: 1.6;
+}
+
+.doc-table th {
+  width: 38%;
+  padding-right: 24px;
+  font-weight: 400;
+  color: var(--c-ink-3);
+}
+
+.doc-table td { color: var(--c-ink); }
+
+.doc-foot {
+  border-top: 1px solid var(--c-line);
+  padding-block: 24px 40px;
+  font-size: var(--fs-small);
+  color: var(--c-ink-3);
+}
+
+@media (max-width: 600px) {
+  .doc { padding-block: 32px 56px; }
+  .doc-table th,
+  .doc-table td { display: block; width: auto; padding-right: 0; }
+  .doc-table th { border: 0; padding-bottom: 2px; }
+}

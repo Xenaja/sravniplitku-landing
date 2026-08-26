@@ -4,18 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>СравниПлитку – сравнение плитки в одном интерьере для салонов и поставщиков</title>
+<title>СравниПлитку — сравнение плитки в одном интерьере для салонов и поставщиков</title>
 <meta name="description" content="Сравнение коллекций плитки в одной интерьерной сцене: продавец показывает варианты при клиенте и отдаёт готовое изображение. Работает в браузере, без установки.">
 <meta name="theme-color" content="#F2F3F0">
 
-<!-- TODO: заменить на настоящий знак, когда клиент утвердит логотип -->
+<!-- Знак для вкладки собран из логотипа клиента: кольцо лупы на 16px
+     не читается, поэтому осталась плитка 2×2. -->
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
 <!-- TODO: подставить боевой домен перед публикацией -->
 <link rel="canonical" href="https://sravniplitku.ru/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="СравниПлитку">
-<meta property="og:title" content="СравниПлитку – плитка в готовых интерьерных сценах">
+<meta property="og:title" content="СравниПлитку — плитка в готовых интерьерных сценах">
 <meta property="og:description" content="Клиент выбирает плитку за одну консультацию: готовые сцены, каталог коллекций и изображение для клиента на руки.">
 <meta property="og:url" content="https://sravniplitku.ru/">
 <!-- TODO: положить обложку 1200×630 в assets/img/og-cover.jpg -->
@@ -28,13 +29,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 
-<!-- Стили: токены → база → компоненты → секции → адаптив (порядок важен) -->
+<!-- Стили: токены → база → компоненты → секции → адаптив → переопределения.
+     Порядок важен, overrides.css обязан быть последним — см. шапку файла. -->
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/components.css">
 <link rel="stylesheet" href="assets/css/sections.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
 <link rel="stylesheet" href="assets/css/motion.css">
+<link rel="stylesheet" href="assets/css/overrides.css">
 
 <script type="module" src="assets/js/main.js"></script>
 </head>
@@ -48,7 +51,9 @@
      ============================================================ -->
 <header class="header">
   <div class="header__inner container">
-    <a class="header__logo" href="#top">СравниПлитку</a>
+    <a class="header__logo" href="#top">
+      <img class="header__logo-img" src="assets/img/logo-full.svg" alt="СравниПлитку"
+           width="3999" height="1284" decoding="async"></a>
 
     <nav class="header__nav" aria-label="Разделы страницы">
       <a href="#how">Как работает</a>
@@ -86,11 +91,11 @@
              работает только там, где у браузера есть русский словарь. -->
         <h1 class="h1 hero__title" id="hero-title">
           <span class="hero__line hero__line--lead">Клиент</span>
-          <span class="hero__line">выбирает</span>
+          <span class="hero__line hero__line--sub">выбирает</span>
           <span class="hero__line">плитку <span class="hero__accent">за одну</span></span>
           <span class="hero__line hero__accent">кон&shy;суль&shy;та&shy;цию</span>
         </h1>
-        <p class="lead hero__lead">Продавец открывает готовую сцену, применяет коллекции и отдаёт клиенту изображение.</p>
+        <p class="lead hero__lead">Выберите готовую сцену, меняйте плитку на стенах и полу и сразу показывайте клиенту несколько вариантов.</p>
 
         <div class="hero__actions">
           <a class="btn btn--primary btn--xl" href="#pricing" data-track="demo_click" data-track-place="hero">Протестировать</a>
@@ -107,7 +112,7 @@
                  poster="assets/img/hero-poster.jpg" width="1396" height="1080"
                  muted loop playsinline autoplay preload="metadata">
             <source src="assets/video/hero-demo.mp4" type="video/mp4">
-            Браузер не проигрывает видео –
+            Браузер не проигрывает видео —
             <a href="assets/video/hero-demo.mp4">скачайте файл</a>.
           </video>
 
@@ -135,20 +140,20 @@
     <div class="container">
       <div class="metrics">
       <div class="metrics__cell">
-        <div class="metrics__value">5+</div>
-        <div class="metrics__label">интерьерных сцен в каталоге</div>
+        <div class="metrics__value">5<span class="metrics__unit">интерьерных сцен</span></div>
+        <div class="metrics__label">универсальные популярные сценарии</div>
       </div>
       <div class="metrics__cell">
-        <div class="metrics__value">3<span class="metrics__unit">минуты</span></div>
-        <div class="metrics__label">от открытия сцены до изображения</div>
+        <div class="metrics__value">3–6<span class="metrics__unit">зон в каждой сцене</span></div>
+        <div class="metrics__label">стены, пол и отдельные участки интерьера</div>
       </div>
       <div class="metrics__cell">
-        <div class="metrics__value">3–6</div>
-        <div class="metrics__label">зон в одной сцене</div>
+        <div class="metrics__value">1<span class="metrics__unit">минута</span></div>
+        <div class="metrics__label">от начала до готового изображения</div>
       </div>
       <div class="metrics__cell">
-        <div class="metrics__value">1<span class="metrics__unit">день</span></div>
-        <div class="metrics__label">от оплаты до коллекции в каталоге</div>
+        <div class="metrics__value"><span class="metrics__sign">+</span><span class="metrics__unit">новые коллекции</span></div>
+        <div class="metrics__label">каталог плитки регулярно пополняется</div>
         </div>
       </div>
     </div>
@@ -162,76 +167,92 @@
   <section data-type="A" aria-labelledby="contrast-title">
     <div class="container contrast">
       <span class="eyebrow eyebrow--section contrast__badge">Проблема и решение</span>
-      <h2 class="h2 contrast__title" id="contrast-title">Плитку сложно сравнивать по разным фотографиям</h2>
-      <p class="lead contrast__lead">На сайтах производителей и поставщиков изображения отличаются по свету, ракурсу и качеству. Клиент смотрит не только на плитку, но и на разницу между картинками.</p>
+      <h2 class="h2 contrast__title" id="contrast-title">Одну плитку сложно сравнить с другой, когда они показаны по-разному</h2>
+      <p class="lead contrast__lead">На сайтах, в каталогах и презентациях каждая коллекция показана в своём интерьере: другой свет, ракурс, мебель и масштаб. Поэтому клиент сравнивает не только саму плитку, но и совершенно разные изображения.</p>
 
       <div class="contrast__grid">
-        <!-- Слева схема, а не фотографии: показывать чужие неудачные снимки
-             значит спорить с поставщиками, чьи каталоги салон же и использует.
-             Разнородность источников читается по разным размерам, наклонам
-             и тонам пустых рамок. Файлы здесь не нужны — это графика. -->
+        <!-- Слева три кадра из разных источников. Рамки разного размера,
+             наклона и пропорции — это и есть довод карточки: у каждой
+             коллекции свой интерьер, ракурс и свет. Кадры наши собственные,
+             поэтому спора с поставщиками, чьи каталоги салон использует,
+             здесь нет.
+
+             Подписи лежат поверх фотографии на светлой плашке: без неё
+             моно-строка в 11px тонет в тёмных кадрах. -->
         <article class="contrast-card contrast-card--before">
           <span class="eyebrow contrast-card__label">Обычный подбор</span>
 
           <div class="sources" aria-hidden="true">
-            <span class="sources__frame sources__frame--site"><span class="sources__tag">Сайт производителя</span></span>
-            <span class="sources__frame sources__frame--catalog"><span class="sources__tag">Каталог</span></span>
-            <span class="sources__frame sources__frame--chat"><span class="sources__tag">Переписка</span></span>
+            <span class="sources__frame sources__frame--site">
+              <img src="assets/img/sources/source-site.jpg" alt=""
+                   width="760" height="434" loading="lazy" decoding="async">
+              <span class="sources__tag">Сайт производителя</span>
+            </span>
+            <span class="sources__frame sources__frame--catalog">
+              <img src="assets/img/sources/source-catalog.jpg" alt=""
+                   width="600" height="520" loading="lazy" decoding="async">
+              <span class="sources__tag">Каталог</span>
+            </span>
+            <span class="sources__frame sources__frame--chat">
+              <img src="assets/img/sources/source-chat.jpg" alt=""
+                   width="560" height="466" loading="lazy" decoding="async">
+              <span class="sources__tag">Переписка</span>
+            </span>
           </div>
 
-          <p class="contrast-card__text">Продавец показывает фото из каталогов, сайтов и переписок. У каждой картинки свой интерьер, освещение и масштаб – сравнение получается неточным.</p>
+          <p class="contrast-card__text">Продавец открывает фотографии производителей, каталоги и переписки.</p>
 
           <ul class="contrast-card__list">
           <li class="contrast-card__item">
-            <span class="contrast-card__mark" aria-hidden="true">−</span>Разные фото и ракурсы
+            <span class="contrast-card__mark" aria-hidden="true">−</span>Разные интерьеры
           </li>
           <li class="contrast-card__item">
-            <span class="contrast-card__mark" aria-hidden="true">−</span>Разный свет и масштаб
+            <span class="contrast-card__mark" aria-hidden="true">−</span>Разные ракурсы
           </li>
           <li class="contrast-card__item">
-            <span class="contrast-card__mark" aria-hidden="true">−</span>Сравнение зависит от качества картинки
+            <span class="contrast-card__mark" aria-hidden="true">−</span>Разное освещение
           </li>
           <li class="contrast-card__item">
-            <span class="contrast-card__mark" aria-hidden="true">−</span>Продавец объясняет словами
+            <span class="contrast-card__mark" aria-hidden="true">−</span>Сложно сравнить именно плитку
           </li>
           </ul>
         </article>
 
         <article class="contrast-card contrast-card--service">
-          <span class="eyebrow contrast-card__label">Подбор через СравниПлитку</span>
+          <span class="eyebrow contrast-card__label">СравниПлитку</span>
 
-          <!-- ТРЕБУЕТСЯ ФАЙЛ: правая половина сейчас — тот же рендер с цветовым
-               сдвигом, то есть мок. В прод нужен второй настоящий рендер той же
-               сцены с другой коллекцией; тогда фильтр с .split__half--b снимается,
-               а сюда подставляется свой src. -->
+          <!-- Две половины — два настоящих рендера одной сцены с разными
+               коллекциями: слева серый камень, справа белый мрамор. Прежний мок
+               (та же картинка под цветовым фильтром) снят вместе с фильтром
+               .split__half--b, он переопределён в overrides.css. -->
           <div class="split">
             <span class="split__half">
-              <img src="assets/img/compare-scene.jpg" alt="Интерьерная сцена с первой коллекцией"
-                   width="900" height="674" loading="lazy" decoding="async">
+              <img src="assets/img/compare/scene-a.jpg" alt="Интерьерная сцена сервиса с серой каменной плиткой"
+                   width="900" height="675" loading="lazy" decoding="async">
             </span>
             <span class="split__half split__half--b">
-              <img src="assets/img/compare-scene.jpg" alt="Та же сцена со второй коллекцией"
-                   width="900" height="674" loading="lazy" decoding="async">
+              <img src="assets/img/compare/scene-b.jpg" alt="Та же сцена с белым мрамором"
+                   width="900" height="675" loading="lazy" decoding="async">
             </span>
             <span class="split__seam" aria-hidden="true"></span>
             <span class="split__tag split__tag--a">Коллекция A</span>
             <span class="split__tag split__tag--b">Коллекция B</span>
           </div>
 
-          <p class="contrast-card__text">Варианты плитки подставляются в одну и ту же сцену. Клиент видит их в одинаковых условиях, а продавец получает изображение, которое можно отправить после консультации.</p>
+          <p class="contrast-card__text">Все варианты можно посмотреть в одной и той же сцене. Так клиенту проще увидеть разницу между коллекциями и выбрать подходящий вариант.</p>
 
           <ul class="contrast-card__list">
           <li class="contrast-card__item">
-            <span class="contrast-card__mark" aria-hidden="true">✓</span>Один интерьер для всех вариантов
+            <span class="contrast-card__mark" aria-hidden="true">✓</span>Одинаковый интерьер
           </li>
           <li class="contrast-card__item">
-            <span class="contrast-card__mark" aria-hidden="true">✓</span>Одинаковые свет и ракурс
+            <span class="contrast-card__mark" aria-hidden="true">✓</span>Одинаковый ракурс
           </li>
           <li class="contrast-card__item">
-            <span class="contrast-card__mark" aria-hidden="true">✓</span>Понятный визуальный результат
+            <span class="contrast-card__mark" aria-hidden="true">✓</span>Одинаковое освещение
           </li>
           <li class="contrast-card__item">
-            <span class="contrast-card__mark" aria-hidden="true">✓</span>Готовый JPG для клиента
+            <span class="contrast-card__mark" aria-hidden="true">✓</span>Меняется только выбранная плитка
           </li>
           </ul>
         </article>
@@ -243,9 +264,9 @@
        1. Пять шагов
        ============================================================ -->
   <section data-type="B" class="container" id="how" aria-labelledby="how-title">
-    <span class="eyebrow eyebrow--section steps__eyebrow">Как это работает</span>
-    <h2 class="h2 steps__title" id="how-title">Пять действий до готового изображения</h2>
-    <p class="lead steps__lead">Сцены отрисованы заранее, поэтому результат появляется сразу.</p>
+    <span class="eyebrow eyebrow--section steps__eyebrow">Как работает</span>
+    <h2 class="h2 steps__title" id="how-title">От выбора интерьера до готового изображения — несколько действий</h2>
+    <p class="lead steps__lead">Все интерьерные сцены подготовлены заранее, поэтому не нужно ждать отдельной визуализации.</p>
 
     <!-- Рельс из пяти: пять отрезков линии подряд сами читаются как шкала
          процесса, направление задаёт порядок слева направо — стрелки не
@@ -259,28 +280,28 @@
     <ol class="steps">
       <li class="step">
         <span class="step__num">01</span>
-        <h3 class="step__title">Выберите сцену</h3>
-        <p class="step__text">Пять готовых интерьеров: ванные в разных ракурсах, зал, кухня-гостиная. Каталог сцен пополняется</p>
+        <h3 class="step__title">Выберите<br class="step__break"> интерьер</h3>
+        <p class="step__text">Откройте подходящую ванную, кухню, гостиную или другую готовую сцену</p>
       </li>
       <li class="step">
         <span class="step__num">02</span>
-        <h3 class="step__title">Укажите зону</h3>
-        <p class="step__text">В каждой сцене три-шесть размеченных зон</p>
+        <h3 class="step__title">Выберите<br class="step__break"> поверхность</h3>
+        <p class="step__text">Укажите стену, пол или отдельную зону, которую хотите изменить</p>
       </li>
       <li class="step">
         <span class="step__num">03</span>
-        <h3 class="step__title">Примените плитку</h3>
-        <p class="step__text">Каталог с поиском по цвету, формату и фактуре; варианты можно сохранить в избранное</p>
+        <h3 class="step__title">Выберите<br class="step__break"> плитку</h3>
+        <p class="step__text">Найдите коллекцию в каталоге и примените её к выбранной поверхности</p>
       </li>
       <li class="step">
         <span class="step__num">04</span>
-        <h3 class="step__title">Настройте свет</h3>
-        <p class="step__text">Тёплый или холодный свет, ярче или темнее</p>
+        <h3 class="step__title">Сравните<br class="step__break"> варианты</h3>
+        <p class="step__text">Переключайтесь между коллекциями, не меняя сам интерьер</p>
       </li>
       <li class="step step--final">
         <span class="step__num">05</span>
-        <h3 class="step__title">Отдайте файл</h3>
-        <p class="step__text">Готовое изображение уходит клиенту в переписку</p>
+        <h3 class="step__title">Сохраните<br class="step__break"> результат</h3>
+        <p class="step__text">Скачайте изображение и отправьте его клиенту</p>
       </li>
     </ol>
 
@@ -301,38 +322,43 @@
         <article class="value-card">
           <div>
             <span class="eyebrow eyebrow--light value-card__role">Владельцу</span>
-            <h3 class="h3 value-card__title">Больше сделок за консультацию</h3>
-            <p class="value-card__text">Клиент реже уходит думать и чаще берёт комплект целиком. Плитку выбирали в интерьере, поэтому возвратов меньше.</p>
+            <h3 class="h3 value-card__title">Ещё один инструмент, который помогает продавать плитку</h3>
+            <p class="value-card__text">Сервис дополняет образцы, каталоги и фотографии. Продавец может не только показать плитку отдельно, но и сразу продемонстрировать несколько вариантов в одинаковом интерьере.</p>
+            <p class="value-card__text">Клиенту проще сравнить коллекции, а салон получает дополнительный визуальный инструмент для консультации.</p>
           </div>
         </article>
 
         <article class="value-card">
           <div>
             <span class="eyebrow eyebrow--light value-card__role">Управляющему</span>
-            <h3 class="h3 value-card__title">Одинаковый показ во всех точках</h3>
-            <p class="value-card__text">Результат не зависит от опыта конкретного продавца. Новичок работает так же, как старший. Внедрять нечего: открывается в браузере.</p>
+            <h3 class="h3 value-card__title">Единый способ показа плитки для всей команды</h3>
+            <p class="value-card__text">Сервис работает одинаково на каждом компьютере и не требует специальных программ.</p>
+            <p class="value-card__text">Продавцам не нужно самостоятельно искать подходящие интерьеры и фотографии. Они выбирают готовую сцену, коллекцию и показывают результат клиенту.</p>
           </div>
         </article>
 
         <article class="value-card">
           <div>
             <span class="eyebrow eyebrow--light value-card__role">Продавцу</span>
-            <h3 class="h3 value-card__title">Есть чем ответить клиенту сразу</h3>
-            <p class="value-card__text">Пять действий, осваивается за смену. Клиент просит показать, как будет выглядеть, и продавец собирает вариант при нём и сразу отправляет файл.</p>
+            <h3 class="h3 value-card__title">Проще показать то, что сложно объяснить словами</h3>
+            <p class="value-card__text value-card__text--ask">Как будет выглядеть тёмная плитка? Что лучше смотрится на полу? Подойдёт ли эта коллекция к другой?</p>
+            <p class="value-card__text">Вместо долгих объяснений можно открыть одну сцену и последовательно показать клиенту несколько вариантов.</p>
+            <p class="value-card__text">После консультации готовое изображение можно сохранить и отправить ему.</p>
           </div>
         </article>
 
         <article class="value-card">
           <div>
-            <span class="eyebrow eyebrow--light value-card__role">Клиенту салона</span>
-            <h3 class="h3 value-card__title">Уходит с изображением, а не с сомнением</h3>
-            <p class="value-card__text">Файл, который можно показать семье и мастеру. Легче принять решение сразу в салоне или вернуться к вам за покупкой.</p>
+            <span class="eyebrow eyebrow--light value-card__role">Клиенту</span>
+            <h3 class="h3 value-card__title">Можно сравнить варианты в одинаковых условиях</h3>
+            <p class="value-card__text">Клиент видит не две совершенно разные фотографии из каталогов, а один интерьер, в котором меняется плитка.</p>
+            <p class="value-card__text">Так проще заметить разницу между цветами, форматами и коллекциями и сохранить понравившийся вариант для дальнейшего обсуждения.</p>
           </div>
         </article>
       </div>
 
       <a class="btn btn--primary btn--lg value__cta" href="#pricing"
-         data-track="demo_click" data-track-place="value">Протестировать</a>
+         data-track="demo_click" data-track-place="value">Протестировать сервис</a>
     </div>
   </section>
 
@@ -342,7 +368,7 @@
   <section data-type="A" class="band" id="demo" aria-labelledby="video-title">
     <div class="container">
       <h2 class="h2 video__title" id="video-title">Посмотрите, как проходит консультация</h2>
-      <p class="video__lead">Возможности сервиса: как собрать вариант при клиенте, сменить коллекции в одной сцене и отправить готовый файл.</p>
+      <p class="video__lead">За несколько минут показываем весь процесс: выбор интерьерной сцены, замена плитки на отдельных поверхностях, сравнение коллекций и сохранение готового изображения.</p>
 
       <!-- Кадр 16:9 — ровно пропорция файла (1600×900), поэтому видео
            видно целиком. Прежняя обойма задавала кадру 1620/820, и
@@ -359,7 +385,7 @@
                poster="assets/img/video-poster.jpg" width="1600" height="900"
                playsinline preload="none">
           <source src="assets/video/promo.mp4" type="video/mp4">
-          Браузер не проигрывает видео –
+          Браузер не проигрывает видео —
           <a href="assets/video/promo.mp4">скачайте файл</a>.
         </video>
 
@@ -419,8 +445,9 @@
     <!-- Салонам -->
     <div class="segment__panel" id="panel-salon" role="tabpanel" aria-labelledby="tab-salon" data-seg-panel="salon">
       <div class="segment__intro">
-        <h2 class="h2 segment__title" id="segment-title-salon">Салону – показать разницу за одну встречу</h2>
-        <p class="segment__lead">Подписка на сервис: готовые сцены, каталог коллекций и изображения для клиентов. Начинаете с тестового доступа, дальше месяц или год.</p>
+        <h2 class="h2 segment__title" id="segment-title-salon">Салону — использовать сервис во время консультаций</h2>
+        <p class="segment__lead">Получаете доступ к готовым интерьерным сценам и каталогу плитки.</p>
+        <p class="segment__lead">Сервис открывается прямо в браузере. Его можно использовать на компьютере продавца во время разговора с клиентом или для дистанционной консультации.</p>
         <a class="btn btn--primary btn--xl segment__cta" href="#pricing"
            data-track="demo_click" data-track-place="segment">Протестировать</a>
       </div>
@@ -429,32 +456,32 @@
         <li class="segment-step">
           <span class="segment-step__num">01</span>
           <div>
-            <h3 class="segment-step__title">Тестовый доступ</h3>
-            <!-- Цена живёт в config.pricing.trial и подставляется скриптом во все
-                 [data-price] на странице. В разметке — запасной текст без скриптов. -->
-            <p class="segment-step__text">Оформляете на юрлицо по карточке компании –
-              <span data-price="trial">490 ₽</span> разово, доступ открывается после оплаты</p>
+            <h3 class="segment-step__title">Попробуйте сервис</h3>
+            <!-- Цена тестового доступа теперь названа только в тарифах: в этом шаге
+                 клиент убрал сумму. Скрипт цен работает по [data-price] и лишнего
+                 узла не требует. -->
+            <p class="segment-step__text">Оформите тестовый доступ и самостоятельно пройдите весь процесс — от выбора сцены до сохранения изображения</p>
           </div>
         </li>
         <li class="segment-step">
           <span class="segment-step__num">02</span>
           <div>
-            <h3 class="segment-step__title">Показ на консультации</h3>
-            <p class="segment-step__text">Продавец собирает вариант при клиенте и отдаёт изображение</p>
+            <h3 class="segment-step__title">Используйте с клиентами</h3>
+            <p class="segment-step__text">Откройте подходящий интерьер, выберите нужные поверхности и сравните несколько коллекций прямо во время консультации</p>
           </div>
         </li>
         <li class="segment-step">
           <span class="segment-step__num">03</span>
           <div>
-            <h3 class="segment-step__title">Подписка</h3>
-            <p class="segment-step__text">Помесячно или на год со скидкой 45 %</p>
+            <h3 class="segment-step__title">Выберите подписку</h3>
+            <p class="segment-step__text">Если сервис подходит для работы салона, подключите доступ на месяц или сразу на год</p>
           </div>
         </li>
         <li class="segment-step">
           <span class="segment-step__num">04</span>
           <div>
-            <h3 class="segment-step__title">Нужные коллекции</h3>
-            <p class="segment-step__text">Не хватает позиции в каталоге? Добавим по вашей заявке</p>
+            <h3 class="segment-step__title">Запрашивайте нужные коллекции</h3>
+            <p class="segment-step__text">Не нашли нужную плитку в каталоге — отправьте заявку. Мы постепенно добавляем востребованные коллекции и производителей</p>
           </div>
         </li>
       </ol>
@@ -464,8 +491,10 @@
          поставщику нужно размещение, а не демо сервиса. -->
     <div class="segment__panel" id="panel-supplier" role="tabpanel" aria-labelledby="tab-supplier" data-seg-panel="supplier" hidden>
       <div class="segment__intro">
-        <h2 class="h2 segment__title">Поставщику – показать коллекции там, где их выбирают</h2>
-        <p class="segment__lead">Ваша плитка в сценах, которыми пользуются салоны сервиса. Начинаете с бесплатного теста, дальше – размещение в каталоге.</p>
+        <h2 class="h2 segment__title">Поставщику — покажите плитку там, где её выбирают</h2>
+        <p class="segment__lead">Добавьте свои коллекции в каталог «СравниПлитку».</p>
+        <p class="segment__lead">Продавцы салонов смогут использовать их во время консультаций и показывать вашу плитку в тех же интерьерных сценах, что и другие варианты.</p>
+        <p class="segment__lead">Это дополнительный способ представить коллекцию не отдельной фотографией, а непосредственно в интерьере.</p>
         <a class="btn btn--primary btn--xl segment__cta" href="#lead"
            data-lead-source="segment-supplier" data-track="supplier_request" data-track-place="segment">Разместить коллекции</a>
       </div>
@@ -474,29 +503,29 @@
         <li class="segment-step">
           <span class="segment-step__num">01</span>
           <div>
-            <h3 class="segment-step__title">Заявка на коллекции</h3>
-            <p class="segment-step__text">До пяти коллекций, которые хотите видеть в сценах</p>
+            <h3 class="segment-step__title">Отправьте коллекции</h3>
+            <p class="segment-step__text">Выберите позиции, которые хотите добавить в сервис. Для начала достаточно нескольких основных или новых коллекций</p>
           </div>
         </li>
         <li class="segment-step">
           <span class="segment-step__num">02</span>
           <div>
-            <h3 class="segment-step__title">Бесплатный тест</h3>
-            <p class="segment-step__text">Смотрите, как ваша плитка выглядит в интерьерных сценах сервиса</p>
+            <h3 class="segment-step__title">Посмотрите тестовые варианты</h3>
+            <p class="segment-step__text">Мы подготовим плитку для интерьерных сцен, чтобы вы могли оценить, как коллекции выглядят внутри сервиса</p>
           </div>
         </li>
         <li class="segment-step">
           <span class="segment-step__num">03</span>
           <div>
-            <h3 class="segment-step__title">Оплата размещения</h3>
-            <p class="segment-step__text">Размещение платное. Есть бесплатный путь: салоны голосуют за бренды, и победитель месяца попадает в каталог без оплаты</p>
+            <h3 class="segment-step__title">Подключите размещение</h3>
+            <p class="segment-step__text">После согласования коллекции добавляются в общий каталог. Также часть поставщиков может попадать в сервис через голосование салонов</p>
           </div>
         </li>
         <li class="segment-step">
           <span class="segment-step__num">04</span>
           <div>
-            <h3 class="segment-step__title">Коллекции в каталоге</h3>
-            <p class="segment-step__text">От одного рабочего дня после оплаты. Их видят все салоны сервиса, а готовые кадры можно использовать на сайте, в презентациях и материалах для дилеров</p>
+            <h3 class="segment-step__title">Коллекции становятся доступны пользователям</h3>
+            <p class="segment-step__text">Салоны смогут находить плитку в каталоге и применять её в интерьерных сценах во время работы с клиентами. Подготовленные изображения можно также использовать в собственных материалах в рамках условий сервиса</p>
           </div>
         </li>
       </ol>
@@ -507,34 +536,40 @@
        5. Работы студии
        ============================================================ -->
   <section data-type="B" class="container" aria-labelledby="works-title">
-    <h2 class="h2 works__title" id="works-title">Сцены и проекты нашей команды</h2>
-    <p class="lead works__lead">Интерьерные сцены сервиса и визуал для брендов плитки – рендерит та же команда.</p>
+    <h2 class="h2 works__title" id="works-title">Сцены и визуализации делает наша команда</h2>
+    <p class="lead works__lead">«СравниПлитку» создан командой Vilray Studio, которая специализируется на визуальном контенте для керамической плитки и строительных материалов.</p>
+    <p class="lead works__lead">Мы сами создаём интерьерные сцены сервиса и подготавливаем коллекции для корректного отображения в них.</p>
 
     <div class="works__grid">
       <a class="work" href="#lead">
-        <div class="media media--3x2" data-slot="v2-work-1">
-          <div class="media__placeholder"></div>
+        <div class="media">
+          <img src="assets/img/works/work-bath.jpg" alt="Интерьерная сцена сервиса: ванная с серым камнем на стенах и полу"
+               width="1200" height="900" loading="lazy" decoding="async">
         </div>
-        <h3 class="work__title">Интерьерные сцены сервиса</h3>
-        <p class="work__text">Каталог готовых интерьеров, в которых работают салоны</p>
+        <h3 class="work__title">Ванная</h3>
+        <p class="work__text">Стены, экран ванны и пол размечены по отдельности: коллекцию можно применить к любой зоне</p>
       </a>
 
       <a class="work" href="#lead">
-        <div class="media media--3x2" data-slot="v2-work-2">
-          <div class="media__placeholder"></div>
+        <div class="media">
+          <img src="assets/img/works/work-kitchen.jpg" alt="Интерьерная сцена сервиса: кухня-гостиная с белым мрамором на полу"
+               width="1200" height="900" loading="lazy" decoding="async">
         </div>
-        <h3 class="work__title">Реализация фасадов</h3>
-        <p class="work__text">Проект облицовки – та же команда визуализации</p>
+        <h3 class="work__title">Кухня-гостиная</h3>
+        <p class="work__text">Пол и фартук меняются отдельно друг от друга, мебель и свет остаются прежними</p>
       </a>
 
       <a class="work" href="#lead">
-        <div class="media media--3x2" data-slot="v2-work-3">
-          <div class="media__placeholder"></div>
+        <div class="media">
+          <img src="assets/img/works/work-hall.jpg" alt="Интерьерная сцена сервиса: холл со светлым полом крупного формата"
+               width="1200" height="900" loading="lazy" decoding="async">
         </div>
-        <h3 class="work__title">Предметные сцены коллекций</h3>
-        <p class="work__text">Кадры для каталогов и презентаций производителей</p>
+        <h3 class="work__title">Холл</h3>
+        <p class="work__text">Крупный формат в общей зоне — сцена для холлов, прихожих и коридоров</p>
       </a>
     </div>
+
+    <p class="works__note">Поэтому развитие визуализатора не зависит от сторонней библиотеки готовых интерьеров: новые сцены и возможности мы можем создавать внутри своей команды.</p>
   </section>
 
   <!-- ============================================================
@@ -553,17 +588,18 @@
 
       <div class="founder__body">
 
-        <h2 class="founder__lead" id="founder-title">Клиент не видит разницы между коллекциями, пока не увидит их в одном интерьере. Мы сделали сервис, который делает это за минуту.</h2>
+        <h2 class="founder__lead" id="founder-title">Плитку действительно проще сравнивать, когда меняется плитка, а не весь интерьер</h2>
 
         <div class="founder__text">
-          <p>Десять лет я работаю с керамической плиткой: продажи, маркетинг, визуал для брендов. Эту проблему я видел в каждом салоне.</p>
-          <p>СравниПлитку – сервис студии Vilray Studio. Мы рендерим интерьеры и предметные сцены для производителей плитки, поэтому сцены в каталоге – наши, а коллекцию по заявке добавляем от одного рабочего дня. Если что-то не работает или не хватает позиции – пишите мне напрямую.</p>
+          <p>Много лет мы работаем с керамической плиткой, создаём визуализации, сайты и цифровые сервисы для производителей и поставщиков. Постоянно сталкиваемся с одной и той же проблемой: у продавца много хороших фотографий, но сравнить две коллекции между собой по ним сложно.</p>
+          <p>На одной фотографии светлая ванная, на другой — тёмная кухня. Разный свет, мебель, ракурс и масштаб. Так появилась идея «СравниПлитку»: оставить интерьер неизменным и менять только плитку.</p>
+          <p>Сервис создаётся и развивается командой Vilray Studio. Если в каталоге не хватает нужной коллекции или есть предложение по развитию сервиса — можно написать нам напрямую.</p>
         </div>
 
         <div class="founder__sign">
           <div class="founder__who">
             <span class="founder__name">Артём Иванченко</span>
-            <span class="founder__role">основатель СравниПлитку</span>
+            <span class="founder__role">основатель «СравниПлитку»</span>
           </div>
           <a class="btn btn--outline btn--lg founder__cta" href="https://t.me/emmiatrey" rel="noopener"
              data-contact="telegram" data-track="founder_contact">Задать вопрос</a>
@@ -573,18 +609,22 @@
   </section>
 
   <!-- ============================================================
-       7. Отзывы
-       Тексты — рыба до получения реальных отзывов пилотных салонов.
-       Отключается флагом sections.testimonials в assets/js/config.js
-       (надёжнее — удалить секцию целиком до появления настоящих цитат).
+       7. Отзывы — СКРЫТЫ до реальных цитат пилотных салонов
+       (решение клиента от 26.08.2026: убрать сейчас, добавить позже).
+
+       Секция закомментирована, а не выключена флагом sections.testimonials:
+       флаг живёт в общем config.js и удаляет блок уже в браузере — рыба
+       всё равно уезжает в исходник страницы и в индекс поисковика.
+       Вернуть — снять маркеры комментария ниже и вписать настоящие цитаты.
        ============================================================ -->
+  <!--
   <section data-type="A" aria-labelledby="testimonials-title" data-section="testimonials">
     <div class="container">
       <h2 class="h2 testimonials__title" id="testimonials-title">Отзывы салонов</h2>
 
       <div class="testimonials__grid">
         <figure class="testimonial">
-          <blockquote class="testimonial__quote">«Клиент перестал уходить думать – решение принимаем при нём»</blockquote>
+          <blockquote class="testimonial__quote">«Клиент перестал уходить думать — решение принимаем при нём»</blockquote>
           <figcaption class="testimonial__author">Управляющий салоном</figcaption>
         </figure>
         <figure class="testimonial">
@@ -592,12 +632,13 @@
           <figcaption class="testimonial__author">Владелец сети</figcaption>
         </figure>
         <figure class="testimonial">
-          <blockquote class="testimonial__quote">«Отправляем картинку в переписку – возвращаются с готовым решением»</blockquote>
+          <blockquote class="testimonial__quote">«Отправляем картинку в переписку — возвращаются с готовым решением»</blockquote>
           <figcaption class="testimonial__author">Продавец-консультант</figcaption>
         </figure>
       </div>
     </div>
   </section>
+  -->
 
   <!-- ============================================================
        8. Лид-магнит
@@ -605,12 +646,14 @@
   <section data-type="B" class="container band" id="lead" aria-labelledby="lead-title">
     <div class="lead-magnet">
       <div>
-        <span class="badge lead-magnet__label">Руководство в подарок</span>
-        <h2 class="h2 lead-magnet__title" id="lead-title">Семь приёмов визуальных продаж плитки</h2>
-        <p class="lead-magnet__text">Короткий разбор приёмов, которые закрывают сделку на консультации: как показывать варианты, что отдавать клиенту на руки и какие вопросы задавать до подбора. Пришлём гайд в Telegram, WhatsApp или на почту. Выберите, куда удобнее.</p>
+        <span class="badge lead-magnet__label">Полезные материалы для продавцов плитки</span>
+        <h2 class="h2 lead-magnet__title" id="lead-title">7 приёмов визуальной работы с клиентом</h2>
+        <p class="lead-magnet__text">Короткое руководство о том, как понятнее показывать плитку во время консультации: как сравнивать варианты, какие изображения сохранять клиенту и как использовать визуальные материалы после встречи.</p>
+        <p class="lead-magnet__text">Получить руководство можно в Telegram, WhatsApp или по электронной почте.</p>
         <div class="lead-magnet__points">
-          <p class="lead-magnet__point"><span class="lead-magnet__check" aria-hidden="true">✓</span>Практика салонов, а не теория</p>
-          <p class="lead-magnet__point"><span class="lead-magnet__check" aria-hidden="true">✓</span>Читается за десять минут</p>
+          <p class="lead-magnet__point"><span class="lead-magnet__check" aria-hidden="true">✓</span>Практические примеры</p>
+          <p class="lead-magnet__point"><span class="lead-magnet__check" aria-hidden="true">✓</span>Без длинной теории</p>
+          <p class="lead-magnet__point"><span class="lead-magnet__check" aria-hidden="true">✓</span>Можно прочитать за 10 минут</p>
         </div>
       </div>
 
@@ -641,7 +684,7 @@
               <span class="field__error" data-field-error hidden></span>
             </label>
             <fieldset class="field channel" data-field>
-              <legend class="field__label">Куда прислать гайд</legend>
+              <legend class="field__label">Куда прислать руководство</legend>
               <div class="channel__group">
                 <label class="channel__option"><input type="radio" name="channel" value="telegram" checked data-channel-input><span>Telegram</span></label>
                 <label class="channel__option"><input type="radio" name="channel" value="whatsapp" data-channel-input><span>WhatsApp</span></label>
@@ -658,19 +701,26 @@
             </label>
           </div>
 
-          <!-- TODO: тексты и ссылки согласий от клиента.
-               Оставлен один чекбокс, а не мелкая строка: по ФЗ-152 согласие
-               должно быть активным действием, подразумеваемое рискованно.
-               Решение за юристом клиента. -->
+          <!-- Два согласия, а не одно: обработка персональных данных нужна,
+               чтобы выполнить саму просьбу (прислать руководство), а рекламная
+               рассылка по ч.1 ст.18 ФЗ-38 требует отдельного предварительного
+               согласия и не может быть условием получения файла. Поэтому первый
+               чекбокс обязательный, второй — нет.
+
+               Тексты — рабочая редакция, финальные формулировки за юристом клиента. -->
           <div class="lead-form__consents">
             <label class="consent" data-consent>
               <input class="consent__box" type="checkbox" name="consent" required>
-              <span>Согласен на обработку <a href="#privacy">персональных данных</a> и получение сообщений о сервисе</span>
+              <span>Согласен на обработку персональных данных на условиях <a href="docs/privacy.html">Политики</a></span>
+            </label>
+            <label class="consent" data-consent>
+              <input class="consent__box" type="checkbox" name="consent_ads">
+              <span>Хочу получать новости и предложения сервиса. Не обязательно — отписаться можно в любой момент</span>
             </label>
           </div>
 
           <button class="btn btn--primary btn--xl lead-form__submit" type="submit" data-submit>
-            <span data-submit-label>Получить файл</span>
+            <span data-submit-label>Получить руководство</span>
           </button>
 
           <p class="form-status" role="status" data-form-status hidden></p>
@@ -690,18 +740,20 @@
     <div>
       <span class="eyebrow eyebrow--section pricing__eyebrow">Стоимость</span>
       <h2 class="h2 pricing__title" id="pricing-title">Тарифы</h2>
-      <p class="lead pricing__lead">Начать можно с тестового доступа за минимальную сумму.</p>
+      <p class="lead pricing__lead">Начать можно с недорогого тестового доступа и проверить сервис непосредственно в работе.</p>
 
       <div class="pricing__grid" data-pricing>
         <article class="plan">
           <span class="badge badge--pinned" aria-hidden="true" data-badge-slot></span>
           <div class="plan__head"><h3 class="plan__name">Тест</h3></div>
-          <div class="plan__price" data-price="trial">490&nbsp;₽</div>
-          <div class="plan__period">разовый платёж</div>
+          <div class="plan__price" data-price="trial">100&nbsp;₽</div>
+          <div class="plan__period">разовый доступ</div>
           <ul class="plan__list">
-            <li>Все сцены и каталог целиком</li>
+            <li>Доступ ко всем доступным сценам</li>
+            <li>Полный каталог коллекций</li>
             <li>Один пользователь</li>
-            <li>Только для новых юрлиц, по карточке компании</li>
+            <li>Ограниченное количество выгрузок</li>
+            <li>Возможность самостоятельно проверить весь процесс работы</li>
           </ul>
           <a class="btn btn--outline btn--lg btn--block plan__cta" href="#lead"
              data-lead-source="pricing-trial" data-track="trial_request" data-track-place="pricing">Протестировать</a>
@@ -710,38 +762,37 @@
         <article class="plan plan--dark">
           <span class="badge badge--pinned">Чаще выбирают</span>
           <div class="plan__head"><h3 class="plan__name">Месяц</h3></div>
-          <div class="plan__price" data-price="monthly">3&nbsp;000&nbsp;₽</div>
+          <div class="plan__price" data-price="monthly">2&nbsp;000&nbsp;₽</div>
           <div class="plan__period">в месяц</div>
           <ul class="plan__list">
-            <li>Все сцены и коллекции каталога</li>
-            <li>До пяти пользователей салона</li>
-            <li>Скачивание без водяного знака</li>
-            <li>Добавление нужной коллекции вне очереди</li>
+            <li>Все интерьерные сцены</li>
+            <li>Весь каталог плитки</li>
+            <li>До пяти пользователей</li>
+            <li>Возможность запрашивать необходимые коллекции</li>
           </ul>
           <a class="btn btn--primary btn--lg btn--block plan__cta" href="#lead"
-             data-lead-source="pricing-monthly" data-track="trial_request" data-track-place="pricing">Оплатить месяц</a>
+             data-lead-source="pricing-monthly" data-track="trial_request" data-track-place="pricing">Подключить на месяц</a>
         </article>
 
         <article class="plan">
           <span class="badge badge--pinned" aria-hidden="true" data-badge-slot></span>
           <div class="plan__head">
             <h3 class="plan__name">Год</h3>
-            <span class="badge badge--sm badge--warm" data-price="discount">выгода 45&nbsp;%</span>
+            <span class="badge badge--sm badge--warm" data-price="discount">выгода 18&nbsp;%</span>
           </div>
           <div class="plan__price" data-price="annual">19&nbsp;800&nbsp;₽</div>
-          <div class="plan__period">в год · вместо <span data-price="annual-full">36&nbsp;000&nbsp;₽</span></div>
+          <div class="plan__period">в год</div>
+          <p class="plan__note">Вместо <span data-price="annual-full">24&nbsp;000&nbsp;₽</span> при помесячной оплате.</p>
           <ul class="plan__list">
-            <li>Всё из месячного тарифа</li>
-            <li>Фиксированная цена на год</li>
-            <li>Приоритет в добавлении коллекций</li>
+            <li>Всё, что входит в месячный тариф</li>
+            <li>Доступ на весь год</li>
+            <li>Фиксированная стоимость</li>
+            <li>Специальные условия на другие сервисы студии Vilray</li>
           </ul>
           <a class="btn btn--outline btn--lg btn--block plan__cta" href="#lead"
-             data-lead-source="pricing-annual" data-track="trial_request" data-track-place="pricing">Оплатить год</a>
+             data-lead-source="pricing-annual" data-track="trial_request" data-track-place="pricing">Подключить на год</a>
         </article>
       </div>
-      <p class="pricing__note">Для сети от шести точек – условия по запросу –
-        <a href="https://t.me/emmiatrey" rel="noopener" data-contact="telegram">Telegram</a>
-        или <a href="mailto:info@vilraystudio.ru" data-contact="email" data-contact-text>info@vilraystudio.ru</a></p>
     </div>
     </div>
   </section>
@@ -761,100 +812,115 @@
         <details class="faq__item" open>
           <summary class="faq__q">Это полноценная 3D-визуализация помещения?</summary>
           <div class="faq__body">
-            <p class="faq__a">Нет. Вы выбираете из готовых сцен, не собираете свою – поэтому картинка появляется сразу. И это не визуализация под заказ: продавец за пару кликов подставляет коллекции из каталога и отдаёт клиенту готовый кадр.</p>
+            <p class="faq__a">Нет.</p>
+            <p class="faq__a">Сервис специально устроен проще. Вы выбираете уже подготовленный интерьер и меняете плитку на размеченных поверхностях.</p>
+            <p class="faq__a">Благодаря этому результат появляется сразу и не нужно ждать, пока визуализатор построит отдельный проект.</p>
           </div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Можно самостоятельно загрузить свою плитку или планировку?</summary>
+          <summary class="faq__q">Можно загрузить собственное помещение?</summary>
           <div class="faq__body">
-            <p class="faq__a">Нет, иначе пришлось бы ждать рендера. Нужную коллекцию добавим сами, от одного рабочего дня.</p>
+            <p class="faq__a">На текущем этапе — нет.</p>
+            <p class="faq__a">Главная идея сервиса заключается именно в сравнении разных коллекций в одинаковых заранее подготовленных интерьерах.</p>
           </div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Нужно ли что-то устанавливать?</summary>
+          <summary class="faq__q">Можно самостоятельно загрузить свою плитку?</summary>
           <div class="faq__body">
-            <p class="faq__a">Нет, сервис открывается в браузере на компьютере салона.</p>
+            <p class="faq__a">Сейчас коллекции подготавливает наша команда.</p>
+            <p class="faq__a">Это позволяет контролировать качество отображения и не заставлять продавца самостоятельно настраивать изображения и материалы.</p>
+            <p class="faq__a">Если нужной коллекции нет, её можно запросить.</p>
           </div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Продавцы разберутся?</summary>
+          <summary class="faq__q">Нужно что-нибудь устанавливать?</summary>
           <div class="faq__body">
-            <p class="faq__a">Пять действий, обучение не требуется: осваивается за смену.</p>
+            <p class="faq__a">Нет.</p>
+            <p class="faq__a">Сервис работает через обычный браузер на компьютере.</p>
           </div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Сколько сцен и будут ли новые?</summary>
+          <summary class="faq__q">Сложно ли продавцу научиться им пользоваться?</summary>
           <div class="faq__body">
-            <p class="faq__a">Сейчас пять интерьеров: ванные в разных ракурсах, зал, кухня-гостиная. Каталог сцен пополняется.</p>
+            <p class="faq__a">Нет.</p>
+            <p class="faq__a">Работа состоит из нескольких простых действий: выбрать интерьер, поверхность и плитку, сравнить варианты и сохранить результат.</p>
           </div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Подойдёт интернет-магазину или дизайнеру?</summary>
+          <summary class="faq__q">Сколько сейчас интерьерных сцен?</summary>
           <div class="faq__body">
-            <p class="faq__a">Да. Интернет-магазин отдаёт клиенту изображение в переписке или карточке товара, дизайнер собирает несколько вариантов для обсуждения. Тариф тот же.</p>
+            <p class="faq__a">На старте доступно несколько готовых сцен для разных помещений.</p>
+            <p class="faq__a">Каталог будет постепенно расширяться.</p>
+          </div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Будут появляться новые коллекции плитки?</summary>
+          <div class="faq__body">
+            <p class="faq__a">Да.</p>
+            <p class="faq__a">Мы будем добавлять коллекции самостоятельно, по заявкам пользователей, через сотрудничество с поставщиками и по результатам голосования салонов.</p>
           </div>
         </details>
       </div>
       <div class="faq__col">
         <details class="faq__item">
-          <summary class="faq__q">Есть ли бесплатный доступ для салонов?</summary>
+          <summary class="faq__q">Можно пользоваться сервисом интернет-магазину?</summary>
           <div class="faq__body">
-            <p class="faq__a">Нет, тест стоит 490&nbsp;₽, чтобы в сервис приходили те, кому он нужен в работе. Для поставщиков тест коллекций бесплатный.</p>
+            <p class="faq__a">Да.</p>
+            <p class="faq__a">Менеджер интернет-магазина может собрать несколько вариантов и отправить изображения клиенту в переписке.</p>
           </div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Можно добавить свою коллекцию в каталог?</summary>
+          <summary class="faq__q">Подойдёт ли сервис дизайнеру?</summary>
           <div class="faq__body">
-            <p class="faq__a">Да, размещение платное. Бесплатно попадает победитель ежемесячного голосования салонов: на это идёт часть подписок.</p>
+            <p class="faq__a">Да, если задача — быстро показать несколько вариантов плитки в готовом интерьере.</p>
+            <p class="faq__a">Для полноценного проекта конкретного помещения сервис не предназначен.</p>
           </div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Как выбираются новые поставщики?</summary>
+          <summary class="faq__q">Есть бесплатная версия?</summary>
           <div class="faq__body">
-            <p class="faq__a">Внутри сервиса можно голосовать за нужный бренд. Победитель месяца попадает в каталог следующим.</p>
+            <p class="faq__a">Для салонов предусмотрен тестовый доступ за 100 ₽.</p>
+            <p class="faq__a">Для поставщиков возможен отдельный тест размещения коллекций.</p>
           </div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Есть ли тариф для сети?</summary>
+          <summary class="faq__q">Как добавить коллекции своего бренда?</summary>
           <div class="faq__body">
-            <p class="faq__a">Да, от шести точек – условия по запросу.</p>
+            <p class="faq__a">Оставьте заявку поставщика.</p>
+            <p class="faq__a">Мы обсудим коллекции, подготовим их для сервиса и согласуем условия размещения.</p>
           </div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Можно сделать визуализатор под бренд поставщика?</summary>
+          <summary class="faq__q">Как выбираются новые бренды для каталога?</summary>
           <div class="faq__body">
-            <p class="faq__a">Да. Отдельная версия сервиса с вашим логотипом и только вашими коллекциями, для сайта и дилерской сети. Обсуждаем отдельно.</p>
+            <p class="faq__a">Помимо платного размещения, пользователи сервиса смогут голосовать за производителей, которых им не хватает.</p>
+            <p class="faq__a">По результатам голосования отдельные бренды будут добавляться в каталог.</p>
+          </div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Можно сделать такой сервис только с коллекциями одного производителя?</summary>
+          <div class="faq__body">
+            <p class="faq__a">Да.</p>
+            <p class="faq__a">Vilray Studio может создать отдельную версию визуализатора под конкретного производителя или поставщика: со своим оформлением, ассортиментом и размещением на собственном сайте.</p>
+            <p class="faq__a">Это отдельная услуга.</p>
           </div>
         </details>
         <details class="faq__item">
           <summary class="faq__q">Что с водяными знаками?</summary>
           <div class="faq__body">
-            <p class="faq__a">Изображения сервиса содержат встроенные водяные знаки. В подписке файл для клиента выгружается чистым.</p>
+            <p class="faq__a">В тестовом режиме изображения могут содержать обозначение сервиса.</p>
+            <p class="faq__a">В платной подписке готовое изображение для клиента можно сохранять без водяного знака.</p>
           </div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Как быстро отвечаете?</summary>
+          <summary class="faq__q">Как связаться с нами?</summary>
           <div class="faq__body">
-            <p class="faq__a">В течение рабочего дня, Пн–Пт с 10:00 до 19:00 МСК.</p>
+            <p class="faq__a">Напишите в Telegram, WhatsApp или на электронную почту.</p>
+            <p class="faq__a">По рабочим вопросам отвечаем в течение рабочего дня.</p>
           </div>
         </details>
       </div>
     </div>
-    <!-- Контакт стоит после последнего вопроса — там, где вопрос
-         действительно мог остаться. В правом верхнем углу секции он спорил
-         с заголовком за внимание и сжимал список в узкую колонку (G3). -->
-    <aside class="faq-aside">
-      <p class="faq-aside__lead">
-        <span class="faq-aside__title">Остались вопросы?</span>
-        <span class="faq-aside__hours">Отвечаем в течение рабочего дня.</span>
-      </p>
-      <div class="faq-aside__actions">
-        <a class="btn btn--outline btn--md" href="https://t.me/emmiatrey" rel="noopener"
-           data-contact="telegram">Задать вопрос</a>
-        <a class="faq-aside__mail" href="mailto:info@vilraystudio.ru"
-           data-contact="email" data-contact-text>info@vilraystudio.ru</a>
-      </div>
-    </aside>
   </section>
 
   <!-- ============================================================
@@ -866,11 +932,13 @@
        ============================================================ -->
   <section data-type="C" class="band band--dark cta-band" aria-labelledby="cta-title">
     <div class="container cta-strip">
-      <h2 class="h2 cta-strip__title" id="cta-title">Покажите плитку в интерьере
-        уже на следующей консультации</h2>
+      <div class="cta-strip__text">
+        <h2 class="h2 cta-strip__title" id="cta-title">Попробуйте сравнить плитку сами</h2>
+        <p class="cta-strip__lead">Откройте готовую интерьерную сцену, выберите несколько коллекций и посмотрите, насколько проще сравнивать их, когда интерьер остаётся одинаковым.</p>
+      </div>
       <div class="cta-strip__actions">
         <a class="btn btn--primary btn--lg" href="#lead"
-           data-lead-source="cta" data-track="trial_request" data-track-place="cta">Протестировать</a>
+           data-lead-source="cta" data-track="trial_request" data-track-place="cta">Протестировать сервис</a>
         <a class="btn btn--ghost-dark btn--lg" href="https://t.me/emmiatrey" rel="noopener"
            data-contact="telegram">Задать вопрос</a>
       </div>
@@ -886,7 +954,8 @@
   <div class="footer__top container">
     <div>
       <div class="footer__brand">СравниПлитку</div>
-      <p class="footer__about">СравниПлитку – сервис показа плитки в готовых интерьерных сценах для салонов и поставщиков. Сделан студией Vilray Studio.</p>
+      <p class="footer__about">Сервис для сравнения керамической плитки в готовых интерьерных сценах. Для салонов, интернет-магазинов, производителей и поставщиков.</p>
+      <p class="footer__studio">Проект <a href="https://vilraystudio.ru/" rel="noopener">Vilray Studio</a>.</p>
     </div>
 
     <div class="footer__col">
@@ -901,9 +970,9 @@
     <div class="footer__col">
       <span class="eyebrow eyebrow--dim">Документы</span>
       <!-- TODO: тексты клиента; вёрстка отдельных страниц — наша -->
-      <a href="#privacy">Политика обработки данных</a>
-      <a href="#terms">Права использования изображений</a>
-      <a href="#requisites">Реквизиты</a>
+      <a href="docs/privacy.html">Политика обработки персональных данных</a>
+      <a href="docs/terms.html">Права использования изображений</a>
+      <a href="docs/requisites.html">Реквизиты</a>
     </div>
   </div>
 
@@ -929,87 +998,103 @@
       "name": "Это полноценная 3D-визуализация помещения?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Нет. Вы выбираете из готовых сцен, не собираете свою – поэтому картинка появляется сразу. И это не визуализация под заказ: продавец за пару кликов подставляет коллекции из каталога и отдаёт клиенту готовый кадр."
+        "text": "Нет. Сервис специально устроен проще. Вы выбираете уже подготовленный интерьер и меняете плитку на размеченных поверхностях. Благодаря этому результат появляется сразу и не нужно ждать, пока визуализатор построит отдельный проект."
       }
     },
     {
       "@type": "Question",
-      "name": "Можно самостоятельно загрузить свою плитку или планировку?",
+      "name": "Можно загрузить собственное помещение?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Нет, иначе пришлось бы ждать рендера. Нужную коллекцию добавим сами, от одного рабочего дня."
+        "text": "На текущем этапе — нет. Главная идея сервиса заключается именно в сравнении разных коллекций в одинаковых заранее подготовленных интерьерах."
       }
     },
     {
       "@type": "Question",
-      "name": "Нужно ли что-то устанавливать?",
+      "name": "Можно самостоятельно загрузить свою плитку?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Нет, сервис открывается в браузере на компьютере салона."
+        "text": "Сейчас коллекции подготавливает наша команда. Это позволяет контролировать качество отображения и не заставлять продавца самостоятельно настраивать изображения и материалы. Если нужной коллекции нет, её можно запросить."
       }
     },
     {
       "@type": "Question",
-      "name": "Продавцы разберутся?",
+      "name": "Нужно что-нибудь устанавливать?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Пять действий, обучение не требуется: осваивается за смену."
+        "text": "Нет. Сервис работает через обычный браузер на компьютере."
       }
     },
     {
       "@type": "Question",
-      "name": "Сколько сцен и будут ли новые?",
+      "name": "Сложно ли продавцу научиться им пользоваться?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Сейчас пять интерьеров: ванные в разных ракурсах, зал, кухня-гостиная. Каталог сцен пополняется."
+        "text": "Нет. Работа состоит из нескольких простых действий: выбрать интерьер, поверхность и плитку, сравнить варианты и сохранить результат."
       }
     },
     {
       "@type": "Question",
-      "name": "Подойдёт интернет-магазину или дизайнеру?",
+      "name": "Сколько сейчас интерьерных сцен?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Да. Интернет-магазин отдаёт клиенту изображение в переписке или карточке товара, дизайнер собирает несколько вариантов для обсуждения. Тариф тот же."
+        "text": "На старте доступно несколько готовых сцен для разных помещений. Каталог будет постепенно расширяться."
       }
     },
     {
       "@type": "Question",
-      "name": "Есть ли бесплатный доступ для салонов?",
+      "name": "Будут появляться новые коллекции плитки?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Нет, тест стоит 490 ₽, чтобы в сервис приходили те, кому он нужен в работе. Для поставщиков тест коллекций бесплатный."
+        "text": "Да. Мы будем добавлять коллекции самостоятельно, по заявкам пользователей, через сотрудничество с поставщиками и по результатам голосования салонов."
       }
     },
     {
       "@type": "Question",
-      "name": "Можно добавить свою коллекцию в каталог?",
+      "name": "Можно пользоваться сервисом интернет-магазину?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Да, размещение платное. Бесплатно попадает победитель ежемесячного голосования салонов: на это идёт часть подписок."
+        "text": "Да. Менеджер интернет-магазина может собрать несколько вариантов и отправить изображения клиенту в переписке."
       }
     },
     {
       "@type": "Question",
-      "name": "Как выбираются новые поставщики?",
+      "name": "Подойдёт ли сервис дизайнеру?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Внутри сервиса можно голосовать за нужный бренд. Победитель месяца попадает в каталог следующим."
+        "text": "Да, если задача — быстро показать несколько вариантов плитки в готовом интерьере. Для полноценного проекта конкретного помещения сервис не предназначен."
       }
     },
     {
       "@type": "Question",
-      "name": "Есть ли тариф для сети?",
+      "name": "Есть бесплатная версия?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Да, от шести точек – условия по запросу."
+        "text": "Для салонов предусмотрен тестовый доступ за 100 ₽. Для поставщиков возможен отдельный тест размещения коллекций."
       }
     },
     {
       "@type": "Question",
-      "name": "Можно сделать визуализатор под бренд поставщика?",
+      "name": "Как добавить коллекции своего бренда?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Да. Отдельная версия сервиса с вашим логотипом и только вашими коллекциями, для сайта и дилерской сети. Обсуждаем отдельно."
+        "text": "Оставьте заявку поставщика. Мы обсудим коллекции, подготовим их для сервиса и согласуем условия размещения."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как выбираются новые бренды для каталога?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Помимо платного размещения, пользователи сервиса смогут голосовать за производителей, которых им не хватает. По результатам голосования отдельные бренды будут добавляться в каталог."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Можно сделать такой сервис только с коллекциями одного производителя?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Да. Vilray Studio может создать отдельную версию визуализатора под конкретного производителя или поставщика: со своим оформлением, ассортиментом и размещением на собственном сайте. Это отдельная услуга."
       }
     },
     {
@@ -1017,15 +1102,15 @@
       "name": "Что с водяными знаками?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Изображения сервиса содержат встроенные водяные знаки. В подписке файл для клиента выгружается чистым."
+        "text": "В тестовом режиме изображения могут содержать обозначение сервиса. В платной подписке готовое изображение для клиента можно сохранять без водяного знака."
       }
     },
     {
       "@type": "Question",
-      "name": "Как быстро отвечаете?",
+      "name": "Как связаться с нами?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "В течение рабочего дня, Пн–Пт с 10:00 до 19:00 МСК."
+        "text": "Напишите в Telegram, WhatsApp или на электронную почту. По рабочим вопросам отвечаем в течение рабочего дня."
       }
     }
   ]

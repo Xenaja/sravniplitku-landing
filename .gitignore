@@ -54,3 +54,10 @@ desktop.ini
 node_modules/
 .vscode/
 .idea/
+
+# Исходники рендеров от клиента (74 МБ): в репозиторий идут пережатые
+# копии в assets/img/compare, assets/img/sources и assets/img/works
+visual/
+
+# Правки текста от клиента — входной материал, как и пакеты ТЗ выше
+*.docx
