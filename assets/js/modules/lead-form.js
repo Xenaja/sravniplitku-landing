@@ -64,7 +64,10 @@ export function initLeadForm() {
 }
 
 /**
- * Клик по кнопке с data-lead-source запоминает, откуда пришла заявка.
+ * Клик по кнопке с data-lead-source запоминает, откуда пришла заявка,
+ * и подстраивает под неё сам блок: из тарифов человек ждёт доступ,
+ * а не руководство по продажам.
+ *
  * Источник пишется в форму, на которую ведёт ссылка, а не в первую
  * попавшуюся: форм на странице может стать больше одной.
  */
@@ -79,7 +82,93 @@ function bindSourceLinks() {
       || document.querySelector('[data-lead-form]');
     const field = form && form.querySelector('[data-lead-source-field]');
     if (field) field.value = trigger.dataset.leadSource;
+
+    applyLeadMode(trigger.dataset.leadSource, target || sectionOf(form));
   });
+}
+
+/** Секция, в которой живёт форма: тексты лежат рядом с ней, а не внутри */
+function sectionOf(form) {
+  return form ? form.closest('section') : null;
+}
+
+/**
+ * Исходные тексты блока — это и есть вариант по умолчанию (лид-магнит).
+ * Снимаем их с разметки один раз при первом переключении, чтобы не
+ * дублировать те же строки ещё и в конфиге.
+ */
+let defaultMode = null;
+
+function readMode(root) {
+  const points = [...root.querySelectorAll('[data-lead-points] .lead-magnet__point')];
+  const texts = [...root.querySelectorAll('[data-lead-text] p')];
+  const formId = root.querySelector('input[name="form_id"]');
+  const channel = root.querySelector('[data-lead-channel-label]');
+  const submit = root.querySelector('[data-submit-label]');
+  const badge = root.querySelector('[data-lead-badge]');
+  const title = root.querySelector('[data-lead-title]');
+
+  return {
+    badge: badge ? badge.textContent : '',
+    title: title ? title.textContent : '',
+    text: texts.map((p) => p.textContent),
+    // Галочка — не текст пункта, поэтому берём только последний узел
+    points: points.map((p) => p.lastChild.textContent.trim()),
+    channelLabel: channel ? channel.textContent : '',
+    submit: submit ? submit.textContent : '',
+    formId: formId ? formId.value : '',
+  };
+}
+
+function applyLeadMode(source, root) {
+  if (!root) return;
+
+  const name = (config.lead && config.lead.sources && config.lead.sources[source]) || null;
+  const modes = (config.lead && config.lead.modes) || {};
+
+  if (!defaultMode) defaultMode = readMode(root);
+  const mode = name ? modes[name] : defaultMode;
+  if (!mode) return;
+
+  const badge = root.querySelector('[data-lead-badge]');
+  if (badge) badge.textContent = mode.badge;
+
+  const title = root.querySelector('[data-lead-title]');
+  if (title) title.textContent = mode.title;
+
+  const textBox = root.querySelector('[data-lead-text]');
+  if (textBox) {
+    textBox.replaceChildren(...mode.text.map((line) => {
+      const p = document.createElement('p');
+      p.className = 'lead-magnet__text';
+      p.textContent = line;
+      return p;
+    }));
+  }
+
+  const pointsBox = root.querySelector('[data-lead-points]');
+  if (pointsBox) {
+    pointsBox.replaceChildren(...mode.points.map((line) => {
+      const p = document.createElement('p');
+      p.className = 'lead-magnet__point';
+      const check = document.createElement('span');
+      check.className = 'lead-magnet__check';
+      check.setAttribute('aria-hidden', 'true');
+      check.textContent = '✓';
+      p.append(check, line);
+      return p;
+    }));
+  }
+
+  const channel = root.querySelector('[data-lead-channel-label]');
+  if (channel) channel.textContent = mode.channelLabel;
+
+  const submit = root.querySelector('[data-submit-label]');
+  if (submit) submit.textContent = mode.submit;
+
+  // От form_id зависит тема письма в api/lead.php
+  const formId = root.querySelector('input[name="form_id"]');
+  if (formId) formId.value = mode.formId;
 }
 
 function setupForm(form) {
@@ -89,7 +178,9 @@ function setupForm(form) {
   const sourceField = form.querySelector('[data-lead-source-field]');
   const pageUrlField = form.querySelector('[data-page-url-field]');
   const phoneInput = form.querySelector('[data-validate="phone"]');
-  const submitLabelText = submitLabel ? submitLabel.textContent : '';
+  // Подпись кнопки не запоминаем при старте: блок умеет переключаться
+  // на «Отправить заявку», и запомненный текст вернул бы прежний вариант.
+  let submitLabelText = submitLabel ? submitLabel.textContent : '';
 
   if (pageUrlField) pageUrlField.value = window.location.href.slice(0, 500);
 
@@ -154,6 +245,7 @@ function setupForm(form) {
 
   function setLoading(loading) {
     if (submitButton) submitButton.disabled = loading;
+    if (submitLabel && loading) submitLabelText = submitLabel.textContent;
     if (submitLabel) submitLabel.textContent = loading ? config.form.messages.sending : submitLabelText;
     form.setAttribute('aria-busy', String(loading));
   }

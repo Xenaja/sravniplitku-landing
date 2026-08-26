@@ -664,11 +664,13 @@
   <section data-type="B" class="container band" id="lead" aria-labelledby="lead-title">
     <div class="lead-magnet">
       <div>
-        <span class="badge lead-magnet__label">Полезные материалы для продавцов плитки</span>
-        <h2 class="h2 lead-magnet__title" id="lead-title">7 приёмов визуальной работы с клиентом</h2>
-        <p class="lead-magnet__text">Короткое руководство о том, как понятнее показывать плитку во время консультации: как сравнивать варианты, какие изображения сохранять клиенту и как использовать визуальные материалы после встречи.</p>
-        <p class="lead-magnet__text">Получить руководство можно в Telegram, WhatsApp или по электронной почте.</p>
-        <div class="lead-magnet__points">
+        <span class="badge lead-magnet__label" data-lead-badge>Полезные материалы для продавцов плитки</span>
+        <h2 class="h2 lead-magnet__title" id="lead-title" data-lead-title>7 приёмов визуальной работы с клиентом</h2>
+        <div data-lead-text>
+          <p class="lead-magnet__text">Короткое руководство о том, как понятнее показывать плитку во время консультации: как сравнивать варианты, какие изображения сохранять клиенту и как использовать визуальные материалы после встречи.</p>
+          <p class="lead-magnet__text">Получить руководство можно в Telegram, WhatsApp или по электронной почте.</p>
+        </div>
+        <div class="lead-magnet__points" data-lead-points>
           <p class="lead-magnet__point"><span class="lead-magnet__check" aria-hidden="true">✓</span>Практические примеры</p>
           <p class="lead-magnet__point"><span class="lead-magnet__check" aria-hidden="true">✓</span>Без длинной теории</p>
           <p class="lead-magnet__point"><span class="lead-magnet__check" aria-hidden="true">✓</span>Можно прочитать за 10 минут</p>
@@ -702,7 +704,7 @@
               <span class="field__error" data-field-error hidden></span>
             </label>
             <fieldset class="field channel" data-field>
-              <legend class="field__label">Куда прислать руководство</legend>
+              <legend class="field__label" data-lead-channel-label>Куда прислать руководство</legend>
               <div class="channel__group">
                 <label class="channel__option"><input type="radio" name="channel" value="telegram" checked data-channel-input><span>Telegram</span></label>
                 <label class="channel__option"><input type="radio" name="channel" value="whatsapp" data-channel-input><span>WhatsApp</span></label>
