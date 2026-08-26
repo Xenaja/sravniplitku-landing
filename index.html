@@ -1021,6 +1021,100 @@
   </div>
 </footer>
 
+<!-- Кто стоит за сервисом и почём он стоит. Отдельным блоком от вопросов:
+     это разные сущности, и поисковик читает их независимо.
+
+     ВНИМАНИЕ: цены здесь продублированы из assets/js/config.js. Меняете
+     цену — меняйте в обоих местах, иначе поисковик покажет старую.
+     Собирать разметку скриптом не стали: статические данные надёжнее,
+     их читают и те роботы, которые не выполняют JavaScript. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://sravniplitku.ru/#organization",
+      "name": "СравниПлитку",
+      "url": "https://sravniplitku.ru/",
+      "logo": "https://sravniplitku.ru/assets/img/logo-full.svg",
+      "image": "https://sravniplitku.ru/assets/img/og-cover.jpg",
+      "email": "info@vilraystudio.ru",
+      "telephone": "+7 981 988-59-49",
+      "description": "Сервис сравнения керамической плитки в готовых интерьерных сценах для салонов, интернет-магазинов, производителей и поставщиков.",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Vilray Studio",
+        "url": "https://vilraystudio.ru/"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "telephone": "+7 981 988-59-49",
+          "email": "info@vilraystudio.ru",
+          "availableLanguage": [
+            "ru"
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://sravniplitku.ru/#website",
+      "url": "https://sravniplitku.ru/",
+      "name": "СравниПлитку",
+      "inLanguage": "ru-RU",
+      "publisher": {
+        "@id": "https://sravniplitku.ru/#organization"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://sravniplitku.ru/#service",
+      "name": "СравниПлитку",
+      "url": "https://sravniplitku.ru/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Веб-браузер",
+      "inLanguage": "ru-RU",
+      "publisher": {
+        "@id": "https://sravniplitku.ru/#organization"
+      },
+      "description": "Продавец салона открывает готовую интерьерную сцену, меняет плитку на стенах и полу и показывает клиенту несколько коллекций в одинаковых условиях.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Тест",
+          "description": "Разовый доступ ко всем сценам и каталогу коллекций",
+          "price": "100",
+          "priceCurrency": "RUB",
+          "url": "https://sravniplitku.ru/#pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Месяц",
+          "description": "Подписка на месяц, до пяти пользователей салона",
+          "price": "2000",
+          "priceCurrency": "RUB",
+          "url": "https://sravniplitku.ru/#pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Год",
+          "description": "Подписка на год с фиксированной стоимостью",
+          "price": "19800",
+          "priceCurrency": "RUB",
+          "url": "https://sravniplitku.ru/#pricing",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
 <!-- Вопросы и ответы дублируют секцию #faq выше. При правке текста
      менять оба места. -->
 <script type="application/ld+json">
