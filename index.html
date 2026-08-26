@@ -9,8 +9,10 @@
 <meta name="theme-color" content="#F2F3F0">
 
 <!-- Знак для вкладки собран из логотипа клиента: кольцо лупы на 16px
-     не читается, поэтому осталась плитка 2×2. -->
+     не читается, поэтому осталась плитка 2×2. PNG рядом — для iOS:
+     Safari не берёт SVG для «добавить на экран». -->
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
 <!-- TODO: подставить боевой домен перед публикацией -->
 <link rel="canonical" href="https://sravniplitku.ru/">
@@ -19,8 +21,12 @@
 <meta property="og:title" content="СравниПлитку — плитка в готовых интерьерных сценах">
 <meta property="og:description" content="Клиент выбирает плитку за одну консультацию: готовые сцены, каталог коллекций и изображение для клиента на руки.">
 <meta property="og:url" content="https://sravniplitku.ru/">
-<!-- TODO: положить обложку 1200×630 в assets/img/og-cover.jpg -->
+<!-- Обложка собрана из блока сравнения: одна сцена, две коллекции.
+     Абсолютный адрес обязателен — соцсети не понимают относительных. -->
 <meta property="og:image" content="https://sravniplitku.ru/assets/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Одна интерьерная сцена с двумя разными коллекциями плитки">
 <meta name="twitter:card" content="summary_large_image">
 
 <!-- Шрифты лежат у нас: объявления в assets/css/fonts.css, файлы в
